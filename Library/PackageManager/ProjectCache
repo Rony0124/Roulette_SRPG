@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638563880805428466
-    m_Hash: 3180487116
+      ticks: 638563886805808257
+    m_Hash: 2086951786
   m_LockFileStatus:
     m_FilePath: "C:/Users/\uAE40\uCC2C/Desktop/Unity/BT_AI/Packages/packages-lock.json"
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638563881660178660
-    m_Hash: 760152267
+      ticks: 638563886805808257
+    m_Hash: 950973702
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
