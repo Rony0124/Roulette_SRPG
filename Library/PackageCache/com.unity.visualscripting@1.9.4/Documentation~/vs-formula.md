@@ -1,12 +1,16 @@
 # Formula node
 
-> [!NOTE] 
-> For versions 2019/2020 LTS, download the Visual Scripting package from the [Unity Asset Store](https://assetstore.unity.com/packages/tools/visual-bolt-163802).
+> [!NOTE]
+> For versions 2019/2020 LTS, download the Visual Scripting package from
+> the [Unity Asset Store](https://assetstore.unity.com/packages/tools/visual-bolt-163802).
 
-Formula is a powerful node that evaluates logical and mathematical expressions directly via a textual Formula and a list of Arguments.
+Formula is a powerful node that evaluates logical and mathematical expressions directly via a textual Formula and a list
+of Arguments.
 
 > [!IMPORTANT]
-> Due to the binary tree traversal overhead (despite caching attempts), performance in using the formula node is significantly slower than using the operator nodes individually. It is preferable to avoid using this node at every frame.
+> Due to the binary tree traversal overhead (despite caching attempts), performance in using the formula node is
+> significantly slower than using the operator nodes individually. It is preferable to avoid using this node at every
+> frame.
 
 Although a formula can return either a boolean for logic, or a number for math, formulas can return any type of value.
 
@@ -14,11 +18,13 @@ Although a formula can return either a boolean for logic, or a number for math, 
 
 The first text field in the header is the formula itself.
 
-The second text field is the number of arguments. It's set to 2 by default, giving us A and B as inputs. Formulas can have up to 10 arguments, which are always ordered alphabetically. If more are required,  they are called B, C, D, E, and so forth.
+The second text field is the number of arguments. It's set to 2 by default, giving us A and B as inputs. Formulas can
+have up to 10 arguments, which are always ordered alphabetically. If more are required, they are called B, C, D, E, and
+so forth.
 
 For example, this formula returns a boolean indicating:
 
-- whether, at a minimum, 10 seconds have elapsed since the start of the game and 
+- whether, at a minimum, 10 seconds have elapsed since the start of the game and
 - the current object's name is Player.
 
 ![](images/vs-formula-node-example.png)
@@ -27,20 +33,24 @@ For example, this formula returns a boolean indicating:
 
 ### Variable Names
 
-Variable names can be directly used in the formula. For example, a graph variable named health can return a boolean just by typing the formula health &gt; 50. The argument names are evaluated in the following order of priority:
+Variable names can be directly used in the formula. For example, a graph variable named health can return a boolean just
+by typing the formula health &gt; 50. The argument names are evaluated in the following order of priority:
 
-1.  Alphabetical argument names (a - z)
-2.  Graph variable names
-3.  Object variable names
-4.  Scene variable names
-5.  Application variable names
-6.  Saved variable names
+1. Alphabetical argument names (a - z)
+2. Graph variable names
+3. Object variable names
+4. Scene variable names
+5. Application variable names
+6. Saved variable names
 
 ### Properties and Methods
 
-Retrieve the value of a property on an argument or variable by using the \[arg.prop\] notation. For example, if position is a Vector 3 object variable, check if it is equal to zero with: \[position.x\] = 0. Get the return value of parameterless methods with the \[arg.Method()\] notation.
+Retrieve the value of a property on an argument or variable by using the \[arg.prop\] notation. For example, if position
+is a Vector 3 object variable, check if it is equal to zero with: \[position.x\] = 0. Get the return value of
+parameterless methods with the \[arg.Method()\] notation.
 
-Note: Accessing properties and methods is not guaranteed to be compatible with AOT platforms, because the AOT pre-build cannot generate stubs for members that are only accessed by name.
+Note: Accessing properties and methods is not guaranteed to be compatible with AOT platforms, because the AOT pre-build
+cannot generate stubs for members that are only accessed by name.
 
 ### Literals
 
@@ -57,8 +67,8 @@ Use the following literals for assigning fixed values.
 
 ### Operators
 
-
-Every common logical and mathematical operator can be used in formulas, as well as the ones defined through custom operator overloading in script.
+Every common logical and mathematical operator can be used in formulas, as well as the ones defined through custom
+operator overloading in script.
 
 | Operator         | Operation          | Rank    | Result                                                                  | Example                          |
 |------------------|--------------------|---------|-------------------------------------------------------------------------|----------------------------------|

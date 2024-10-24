@@ -1,6 +1,7 @@
 # Interaction Components
 
-The [interaction components](UIInteractionComponents.md) in the UI system handle interaction, such as mouse or touch events and interaction using a keyboard or controller.
+The [interaction components](UIInteractionComponents.md) in the UI system handle interaction, such as mouse or touch
+events and interaction using a keyboard or controller.
 
 * [Selectable Base Class](script-Selectable.md)
 * [Button](script-Button.md)

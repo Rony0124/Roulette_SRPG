@@ -3,23 +3,25 @@
 > [!NOTE]
 > The On Mouse Enter [!include[nodes-note-manual](./snippets/input-manager/nodes-note-manual.md)]
 
-The On Mouse Enter node listens for the user's mouse pointer location to enter the Collider of a specified GameObject. When the mouse enters the Collider or GUI element, the node triggers the next node connected to it. It doesn't send or receive any other data. 
+The On Mouse Enter node listens for the user's mouse pointer location to enter the Collider of a specified GameObject.
+When the mouse enters the Collider or GUI element, the node triggers the next node connected to it. It doesn't send or
+receive any other data.
 
 ![An image of the Graph window. An On Mouse Enter node displays with its details in the Graph Inspector.](images/vs-nodes-events-on-mouse-enter-node.png)
 
-## Fuzzy finder category 
+## Fuzzy finder category
 
 The On Mouse Enter node is in the **Events** &gt; **Input** category in the fuzzy finder.
 
-## Inputs 
+## Inputs
 
-The On Mouse Enter [!include[nodes-single-input](./snippets/nodes-single-input.md)] 
+The On Mouse Enter [!include[nodes-single-input](./snippets/nodes-single-input.md)]
 
-| **Name**   | **Type**    | **Description** |
-| :------    | :---------- | :-------------  |
-| **Target** |  GameObject | The GameObject with the Collider that triggers the On Mouse Enter node. |
+| **Name**   | **Type**   | **Description**                                                         |
+|:-----------|:-----------|:------------------------------------------------------------------------|
+| **Target** | GameObject | The GameObject with the Collider that triggers the On Mouse Enter node. |
 
-## Additional node settings 
+## Additional node settings
 
 The On Mouse Enter [!include[nodes-additional-settings](./snippets/nodes-additional-settings.md)]
 
@@ -38,7 +40,7 @@ The On Mouse Enter [!include[nodes-additional-settings](./snippets/nodes-additio
 
 ## Outputs
 
-The On Mouse Enter [!include[nodes-single-output](./snippets/nodes-single-output.md)] 
+The On Mouse Enter [!include[nodes-single-output](./snippets/nodes-single-output.md)]
 
 <table>
 <thead>
@@ -53,17 +55,21 @@ The On Mouse Enter [!include[nodes-single-output](./snippets/nodes-single-output
 </tbody>
 </table>
 
-## Example graph usage 
+## Example graph usage
 
-In the following example, the On Mouse Enter node triggers the Instantiate GameObject node when the user's mouse enters the Collider on the Script Machine's GameObject. The Instantiate node creates an instance of the **Light** Prefab, at the Prefab's **Position** and with the Prefab's **Rotation**. The graph saves the new instance of the GameObject to a Scene variable, **Spotlight**, so it can interact with the GameObject again later. 
+In the following example, the On Mouse Enter node triggers the Instantiate GameObject node when the user's mouse enters
+the Collider on the Script Machine's GameObject. The Instantiate node creates an instance of the **Light** Prefab, at
+the Prefab's **Position** and with the Prefab's **Rotation**. The graph saves the new instance of the GameObject to a
+Scene variable, **Spotlight**, so it can interact with the GameObject again later.
 
 ![An image of the Graph window. An On Mouse Enter node's Trigger output port connects to the Invoke input port on an Instantiate GameObject node. The Instantiate GameObject's Original uses an inline value of the project's Light Prefab. A GameObject Literal node also uses the Light Prefab as an inline value. The GameObject Literal connects to a Transform Get Position node and a Transform Get Rotation node, which provide the Position and Rotation inputs for the Instantiate GameObject node. The Instantiate GameObject node's Exit port triggers the Assign input port on the Set Variable node, and assigns the new GameObject as the value of the Spotlight Scene variable.](images/vs-nodes-events-on-mouse-enter-example.png)
 
-The result is a spotlight that appears over the On Mouse Enter node's **Target** GameObject, when the user's mouse enters the Collider. 
+The result is a spotlight that appears over the On Mouse Enter node's **Target** GameObject, when the user's mouse
+enters the Collider.
 
 ![An image of the Game view, that displays a simple scene with a plane and a cube GameObject. The cube is lit by a spotlight from above.](images/vs-nodes-events-on-mouse-enter-example-2.png)
 
-## Related nodes 
+## Related nodes
 
 [!include[nodes-related](./snippets/nodes-related.md)] On Mouse Enter node:
 

@@ -14,7 +14,6 @@ Project generation:
 - Add Unity capability to SDK-Style projects.
 - Prevent circular dependency errors with SDK-Style projects.
 
-
 ## [2.0.21] - 2023-09-05
 
 Integration:
@@ -48,7 +47,7 @@ Project generation:
 Integration:
 
 - Performance improvements with `EditorApplication.update` callbacks.
- 
+
 Project generation:
 
 - Add extra compiler options for analyzers and source generators.
@@ -71,7 +70,7 @@ Project generation:
 Integration:
 
 - Prevent ADB Refresh while being in safe-mode with a URP project
-- Fixed an issue keeping the progress bar visible even after opening a script with Visual Studio. 
+- Fixed an issue keeping the progress bar visible even after opening a script with Visual Studio.
 
 ## [2.0.15] - 2022-03-21
 
@@ -209,7 +208,6 @@ Integration:
 - When the user disabled auto-refresh in Unity, do not try to force refresh the Asset database.
 - Fix Visual Studio detection issues with languages using special characters.
 
-
 ## [2.0.2] - 2020-05-27
 
 - Added support for solution folders.
@@ -218,10 +216,10 @@ Integration:
 - Fixed an initialization issue triggering legacy code generation.
 - Allow package source in assembly to be generated when referenced from asmref.
 
-
 ## [2.0.1] - 2020-03-19
 
-- When Visual Studio installation is compatible with C# 8.0, setup the language version to not prompt the user with unsupported constructs. (So far Unity only supports C# 7.3).
+- When Visual Studio installation is compatible with C# 8.0, setup the language version to not prompt the user with
+  unsupported constructs. (So far Unity only supports C# 7.3).
 - Use Unity's `TypeCache` to improve project generation speed.
 - Properly check for a managed assembly before displaying a warning regarding legacy PDB usage.
 - Add support for selective project generation (embedded, local, registry, git, builtin, player).

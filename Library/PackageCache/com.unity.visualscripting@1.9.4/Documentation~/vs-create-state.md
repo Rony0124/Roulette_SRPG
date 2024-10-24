@@ -1,12 +1,15 @@
-# Create a new state 
+# Create a new state
 
-You can create three types of State nodes in a State Graph: [Script States](#create-a-script-state), [Any States](#create-an-any-state), and [Super States](#create-a-super-state). For more information on the types of State nodes, see State Graphs in [Graphs](vs-graph-types.md#state-graphs).
+You can create three types of State nodes in a State
+Graph: [Script States](#create-a-script-state), [Any States](#create-an-any-state),
+and [Super States](#create-a-super-state). For more information on the types of State nodes, see State Graphs
+in [Graphs](vs-graph-types.md#state-graphs).
 
 You can also add a [Sticky Note](vs-sticky-notes.md) to add comments to a graph.
 
 ## Create a Script State
 
-To create a new blank Script State: 
+To create a new blank Script State:
 
 <ol>
 <li><p>[!include[open-state-menu](./snippets/vs-open-state-menu.md)]</p></li>
@@ -29,8 +32,7 @@ To create a new blank Script State:
 
 ![An image of a State Graph with a new blank Script State node.](images/vs-blank-graph-script-state-example.png)
 
-
-To create a Script State from an existing Script Graph: 
+To create a Script State from an existing Script Graph:
 
 <ol>
 <li><p>[!include[open-state-menu](./snippets/vs-open-state-menu.md)]</p></li>
@@ -47,23 +49,22 @@ To create a Script State from an existing Script Graph:
 ![An image of a State Graph with a Script State node with an existing Script Graph.](images/vs-existing-graph-example-script-state.png)
 
 > [!TIP]
-> Click and drag the Script Graph from your Project window into the Graph Editor to automatically create a Script State node. 
+> Click and drag the Script Graph from your Project window into the Graph Editor to automatically create a Script State
+> node.
 
+## Create an Any State
 
-## Create an Any State 
+To create a new Any State node:
 
-To create a new Any State node: 
+1. [!include[open-state-menu](./snippets/vs-open-state-menu.md)]
 
-1. [!include[open-state-menu](./snippets/vs-open-state-menu.md)] 
-
-2. Select **Create Any State**. 
+2. Select **Create Any State**.
 
 ![An image of a State Graph with a new Any State node](images/vs-states-any-state-node.png)
 
+## Create a Super State
 
-## Create a Super State 
-
-To create a new blank Super State: 
+To create a new blank Super State:
 
 <ol>
 <li><p>[!include[open-state-menu](./snippets/vs-open-state-menu.md)]</p></li>
@@ -86,7 +87,7 @@ To create a new blank Super State:
 
 ![An image of a State Graph with a new blank Super State node.](images/vs-blank-graph-super-state-example.png)
 
-To create a Super State from an existing State Graph: 
+To create a Super State from an existing State Graph:
 
 <ol>
 <li><p>[!include[open-state-menu](./snippets/vs-open-state-menu.md)]</p></li>
@@ -103,4 +104,5 @@ To create a Super State from an existing State Graph:
 ![An image of a State Graph with a Super State node with an existing State Graph.](images/vs-existing-graph-example-super-state.png)
 
 > [!TIP]
-> Click and drag the State Graph from your Project window into the Graph Editor to automatically create a Super State node. 
+> Click and drag the State Graph from your Project window into the Graph Editor to automatically create a Super State
+> node. 

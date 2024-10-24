@@ -1,9 +1,10 @@
-# On Keyboard Input node 
+# On Keyboard Input node
 
 > [!NOTE]
 > The On Keyboard Input [!include[nodes-note-manual](./snippets/input-manager/nodes-note-manual.md)]
 
-The On Keyboard Input node listens for a specified action on a keyboard key. [!include[nodes-desc-end](./snippets/input-manager/nodes-desc-end.md)]
+The On Keyboard Input node listens for a specified action on a keyboard
+key. [!include[nodes-desc-end](./snippets/input-manager/nodes-desc-end.md)]
 
 ![An image of the Graph window. An On Keyboard Input node displays with its details in the Graph Inspector.](images/vs-nodes-events-on-keyboard-input-node.png)
 
@@ -11,9 +12,9 @@ The On Keyboard Input node listens for a specified action on a keyboard key. [!i
 
 The On Keyboard Input node is in the **Events** &gt; **Input** category in the fuzzy finder.
 
-## Inputs 
+## Inputs
 
-The On Keyboard Input [!include[nodes-inputs](./snippets/nodes-inputs.md)] 
+The On Keyboard Input [!include[nodes-inputs](./snippets/nodes-inputs.md)]
 
 <table>
 <thead>
@@ -49,8 +50,7 @@ The On Keyboard Input [!include[nodes-inputs](./snippets/nodes-inputs.md)]
 </tbody>
 </table>
 
-
-## Additional node settings 
+## Additional node settings
 
 The On Keyboard Input [!include[nodes-additional-settings](./snippets/nodes-additional-settings.md)]
 
@@ -69,7 +69,7 @@ The On Keyboard Input [!include[nodes-additional-settings](./snippets/nodes-addi
 
 ## Outputs
 
-The On Keyboard Input [!include[nodes-single-output](./snippets/nodes-single-output.md)] 
+The On Keyboard Input [!include[nodes-single-output](./snippets/nodes-single-output.md)]
 
 <table>
 <thead>
@@ -84,15 +84,17 @@ The On Keyboard Input [!include[nodes-single-output](./snippets/nodes-single-out
 </tbody>
 </table>
 
-## Example graph usage 
+## Example graph usage
 
-In the following example, the On Keyboard Input node listens for when the user presses the **Space** key. When the user presses **Space**, the On Keyboard Input triggers the Transform Translate node and lifts the GameObject along its `Y` coordinate by `5` units. This makes the GameObject jump. 
+In the following example, the On Keyboard Input node listens for when the user presses the **Space** key. When the user
+presses **Space**, the On Keyboard Input triggers the Transform Translate node and lifts the GameObject along its `Y`
+coordinate by `5` units. This makes the GameObject jump.
 
 ![An image of the Graph window. An On Keyboard Input node uses inline values to assign its Key as Space and its Action as Down. Its Trigger output port connects to the Invoke input port on a Transform Translate node. The Translate node uses an inline value of This for its Target, and an inline value of 5 for its Y input.](images/vs-nodes-events-on-keyboard-input-example.png)
 
 ![An image of the Game view. A cylinder and square sit on a plane, with a sphere lifted into the air between them.](images/vs-nodes-events-on-keyboard-input-example-2.png)
 
-## Related nodes 
+## Related nodes
 
 [!include[nodes-related](./snippets/nodes-related.md)] the On Keyboard Input node:
 

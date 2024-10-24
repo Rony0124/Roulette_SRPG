@@ -1,10 +1,11 @@
 # Events API
 
 > [!NOTE]
-> For versions 2019/2020 LTS, download the Visual Scripting package from the [Unity Asset Store](https://assetstore.unity.com/packages/tools/visual-bolt-163802).
+> For versions 2019/2020 LTS, download the Visual Scripting package from
+> the [Unity Asset Store](https://assetstore.unity.com/packages/tools/visual-bolt-163802).
 
 
-Visual scripting provides a simple API to trigger custom events from C# script. 
+Visual scripting provides a simple API to trigger custom events from C# script.
 
 ## Usings
 
@@ -24,9 +25,7 @@ CustomEvent.Trigger(targetGameObject, argument1, argument2, ...)
 
 For example, this custom event node:
 
-
 ![](images/vs-events-custom-event-node.png)
-
 
 Can be triggered with this line of code.
 

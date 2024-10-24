@@ -1,16 +1,19 @@
 # Configure project settings
 
 > [!NOTE]
-> To use Visual Scripting in a project for the first time, you must [initialize it](#Initialize) from the Editor's [Project Settings](https://docs.unity3d.com/Manual/comp-ManagerGroup.html) window. 
+> To use Visual Scripting in a project for the first time, you must [initialize it](#Initialize) from the
+> Editor's [Project Settings](https://docs.unity3d.com/Manual/comp-ManagerGroup.html) window.
 
-Use the Project Settings window with Visual Scripting to manage backups, node assemblies, type options, and regenerate your Node Library.
+Use the Project Settings window with Visual Scripting to manage backups, node assemblies, type options, and regenerate
+your Node Library.
 
-To open your Project Settings: 
+To open your Project Settings:
 
 1. [!include[open-project-settings](./snippets/vs-open-project-settings.md)]
-1. Select **Visual Scripting**.  
+1. Select **Visual Scripting**.
 
-You can find the following configuration options in your Visual Scripting Project Settings. To use Visual Scripting in a project for the first time, you must [regenerate your Node Library](#Regen), as described in the table below. 
+You can find the following configuration options in your Visual Scripting Project Settings. To use Visual Scripting in a
+project for the first time, you must [regenerate your Node Library](#Regen), as described in the table below.
 
 <table>
 <thead>
@@ -66,5 +69,6 @@ You can find the following configuration options in your Visual Scripting Projec
 </tbody>
 </table>
 
->[!NOTE] 
-> If your settings don't apply after you make a change, [report a bug through the Unity Editor](https://unity3d.com/unity/qa/bug-reporting).
+> [!NOTE]
+> If your settings don't apply after you make a
+> change, [report a bug through the Unity Editor](https://unity3d.com/unity/qa/bug-reporting).

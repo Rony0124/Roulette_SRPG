@@ -1,21 +1,24 @@
-# Add ports to a Custom C# node 
+# Add ports to a Custom C# node
 
 > [!NOTE]
-> To add ports to your node, you must create the C# file for the node. [!include[vs-tasks-note-end](./snippets/custom-c-nodes/vs-tasks-note-end.md)]
+> To add ports to your node, you must create the C# file for the
+> node. [!include[vs-tasks-note-end](./snippets/custom-c-nodes/vs-tasks-note-end.md)]
 
-After you create a Custom C# node, add ports to allow the node to send and receive data or trigger other nodes in a Script Graph. 
+After you create a Custom C# node, add ports to allow the node to send and receive data or trigger other nodes in a
+Script Graph.
 
-To add ports to a node: 
+To add ports to a node:
 
 1. [!include[open-project-window](./snippets/vs-open-project-window.md)]
 
 2. [!include[open-existing-external-code](./snippets/vs-open-existing-external-code.md)]
 
-## Add control ports 
+## Add control ports
 
-3. In your external editor, under the class definition for the node, add two public variables: one with a **ControlInput** type and one with a **ControlOutput** type. 
+3. In your external editor, under the class definition for the node, add two public variables: one with a **ControlInput
+   ** type and one with a **ControlOutput** type.
 
-4. In the `Definition` method for the node, use the variables to define the control ports, as shown below: 
+4. In the `Definition` method for the node, use the variables to define the control ports, as shown below:
 
     ```C#
     using System;
@@ -44,24 +47,27 @@ To add ports to a node:
 
 1. [!include[return-unity](./snippets/vs-return-unity.md)]
 
-6. Do one of the following: 
+6. Do one of the following:
     - [!include[open-graph-w-node](./snippets/custom-c-nodes/vs-open-graph-w-node.md)].
     - [!include[ff-add-node](./snippets/custom-c-nodes/vs-ff-add-node.md)]
 
-    If you used the previous code sample, Visual Scripting adds input and output control ports to the node. 
+   If you used the previous code sample, Visual Scripting adds input and output control ports to the node.
 
-    ![An image of the Graph window. The Custom C# node, My Node, now appears with an Input Trigger port and an Output Trigger port.](images/vs-my-node-custom-node-control-input-output.png)
+   ![An image of the Graph window. The Custom C# node, My Node, now appears with an Input Trigger port and an Output Trigger port.](images/vs-my-node-custom-node-control-input-output.png)
 
-## Add value ports 
+## Add value ports
 
-8. In your external editor, under the class definition for the node, add any number of variables with either a **Generic** or specific type value: 
+8. In your external editor, under the class definition for the node, add any number of variables with either a **Generic
+   ** or specific type value:
 
-    - **Generic**: The port can receive or output any data type. Corresponds to Unity's **Object** type. 
-    - **Specific Type Value**: The port can only receive or output a specific data type. For example, `string`, `float`, or `integer`. 
+    - **Generic**: The port can receive or output any data type. Corresponds to Unity's **Object** type.
+    - **Specific Type Value**: The port can only receive or output a specific data type. For example, `string`, `float`,
+      or `integer`.
 
-    For more information on types in Visual Scripting, see [Object types](vs-types.md).
+   For more information on types in Visual Scripting, see [Object types](vs-types.md).
 
-9. In the `Definition` method for the node, use the variables to define the value ports. In the example below, there are two input ports with a type value of `string`, and one `string` output port: 
+9. In the `Definition` method for the node, use the variables to define the value ports. In the example below, there are
+   two input ports with a type value of `string`, and one `string` output port:
 
     ```C#
     using System;
@@ -105,14 +111,16 @@ To add ports to a node:
 
 1. [!include[return-unity](./snippets/vs-return-unity.md)]
 
-11. Do one of the following: 
+11. Do one of the following:
     - [!include[open-graph-w-node](./snippets/custom-c-nodes/vs-open-graph-w-node.md)].
     - [!include[ff-add-node](./snippets/custom-c-nodes/vs-ff-add-node.md)]
 
-    If you used the previous code sample, Visual Scripting adds two input ports, **My Value A** and **My Value B**, and one output port, **Result** to the node. 
+    If you used the previous code sample, Visual Scripting adds two input ports, **My Value A** and **My Value B**, and
+    one output port, **Result** to the node.
 
     ![An image of the Graph window. The Graph Inspector displays with information about all of the ports on the Custom C# node, My Node. The node has been added to the Script Graph and now has an Input Trigger port, an Output Trigger port, two data input ports, and a data output port. The data ports have been assigned the string data type. ](images/vs-my-node-custom-node-data-input-output.png)
 
 ## Next steps
 
-After you add ports to a node, [add logic](vs-create-custom-node-add-logic.md) to tell the node what to do with the data it receives.
+After you add ports to a node, [add logic](vs-create-custom-node-add-logic.md) to tell the node what to do with the data
+it receives.

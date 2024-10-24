@@ -1,32 +1,43 @@
 # Version control systems
 
-To avoid any problems with automatically generated files, exclude some Visual Scripting files from your version control solution. 
+To avoid any problems with automatically generated files, exclude some Visual Scripting files from your version control
+solution.
 
-To exclude files from version control, include a file or configure your settings to specify which files and folders to exclude:
+To exclude files from version control, include a file or configure your settings to specify which files and folders to
+exclude:
 
-1. Create a new file at the root of your project directory. 
+1. Create a new file at the root of your project directory.
 
-    >[!TIP]
-    > The root of your project directory is at the level above your **Assets** folder.
+   > [!TIP]
+   > The root of your project directory is at the level above your **Assets** folder.
 
 2. Name the file based on your chosen version control system:
 
-    - **Git**: `.gitignore`. For more information, see [Git's documentation on gitignore](https://git-scm.com/docs/gitignore).
+    - **Git**: `.gitignore`. For more information,
+      see [Git's documentation on gitignore](https://git-scm.com/docs/gitignore).
 
-    - **Unity Collab**: `.collabignore`. For more information, see the [Unity User Manual](https://docs.unity3d.com/Manual/UnityCollaborateIgnoreFiles.html).
+    - **Unity Collab**: `.collabignore`. For more information, see
+      the [Unity User Manual](https://docs.unity3d.com/Manual/UnityCollaborateIgnoreFiles.html).
 
-    - **Subversion**: Ignore the files from your `svn:ignore` property or runtime configuration options. For more information, see Subversion's documentation on [Ignoring Unversioned Items](https://svnbook.red-bean.com/en/1.7/svn.advanced.props.special.ignore.html).
+    - **Subversion**: Ignore the files from your `svn:ignore` property or runtime configuration options. For more
+      information, see Subversion's documentation
+      on [Ignoring Unversioned Items](https://svnbook.red-bean.com/en/1.7/svn.advanced.props.special.ignore.html).
 
-3. Open the file in a text editor. 
+3. Open the file in a text editor.
 
-4. Add the appropriate files or file patterns to your ignore file or configuration. For an example and more information, see [Ignore file template](#ignore-file-template).
+4. Add the appropriate files or file patterns to your ignore file or configuration. For an example and more information,
+   see [Ignore file template](#ignore-file-template).
 
 > [!NOTE]
-> If you have an issue when you try to create a `.gitignore` file on Windows, refer to Microsoft's documentation on [how to create a .gitignore file from the command line](https://docs.microsoft.com/en-us/azure/devops/repos/git/ignore-files?view=azure-devops&tabs=command-line#create-a-gitignore).
+> If you have an issue when you try to create a `.gitignore` file on Windows, refer to Microsoft's documentation
+> on [how to create a .gitignore file from the command line](https://docs.microsoft.com/en-us/azure/devops/repos/git/ignore-files?view=azure-devops&tabs=command-line#create-a-gitignore).
 
 ## Ignore file template
 
-The following template ignores all core Visual Scripting files, but preserves your project settings and variables. It also includes the standard Unity ignore directives for files that you can exclude from version control. For more information, see the `Unity.gitignore` file included in [GitHub's gitignore template repository](https://github.com/github/gitignore/blob/master/Unity.gitignore).
+The following template ignores all core Visual Scripting files, but preserves your project settings and variables. It
+also includes the standard Unity ignore directives for files that you can exclude from version control. For more
+information, see the `Unity.gitignore` file included
+in [GitHub's gitignore template repository](https://github.com/github/gitignore/blob/master/Unity.gitignore).
 
 Refer to the comments in the template for which lines to comment or remove.
 
@@ -112,7 +123,9 @@ Refer to the comments in the template for which lines to comment or remove.
 ```
 
 ## Remove previously committed files
+
 If you committed any files to a version control solution that you want to exclude:
 
 - See Git's documentation on [the `git-rm` command](https://git-scm.com/docs/git-rm).
-- See Subversion's documentation on [the `svn delete` command](https://svnbook.red-bean.com/en/1.6/svn.ref.svn.c.delete.html).
+- See Subversion's documentation
+  on [the `svn delete` command](https://svnbook.red-bean.com/en/1.6/svn.ref.svn.c.delete.html).

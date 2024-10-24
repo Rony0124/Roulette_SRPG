@@ -1,9 +1,11 @@
 # Variables API
 
 > [!NOTE]
-> For versions 2019/2020 LTS, download the Visual Scripting package from the [Unity Asset Store](https://assetstore.unity.com/packages/tools/visual-bolt-163802).
+> For versions 2019/2020 LTS, download the Visual Scripting package from
+> the [Unity Asset Store](https://assetstore.unity.com/packages/tools/visual-bolt-163802).
 
-Visual scripting provides an easy API to handle variables, to get or set their value and verify if they are defined. All these operations are available from the Variables class.
+Visual scripting provides an easy API to handle variables, to get or set their value and verify if they are defined. All
+these operations are available from the Variables class.
 
 For example:
 
@@ -27,7 +29,8 @@ using Unity.VisualScripting;
 
 ### Graph
 
-To access variables on a graph, create a graph reference. This is basically a path to the nested graph from its root machine.
+To access variables on a graph, create a graph reference. This is basically a path to the nested graph from its root
+machine.
 
 To get the root graph on a machine:
 
@@ -125,7 +128,8 @@ For example:
 Variables.Object(player).Set("health", 100);
 ```
 
-Because variables are not strongly typed, pass any value to the second parameter, even if the variable currently is of a different type.
+Because variables are not strongly typed, pass any value to the second parameter, even if the variable currently is of a
+different type.
 
 > [!NOTE]
 > Using the set method with a variable name that does not yet exist defines a new variable.
