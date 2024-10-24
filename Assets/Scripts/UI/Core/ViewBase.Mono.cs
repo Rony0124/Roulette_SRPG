@@ -22,6 +22,7 @@ namespace TSoft.UI.Core
 
         private void Awake() {
             viewCanvas = GetComponent<Canvas>();
+            Init();
         }
 
         private void OnEnable() {
@@ -32,7 +33,9 @@ namespace TSoft.UI.Core
             OnDeactivated();
         }
 
+        protected abstract void Init();
         protected abstract void OnActivated();
         protected abstract void OnDeactivated();
+        
     }
 }

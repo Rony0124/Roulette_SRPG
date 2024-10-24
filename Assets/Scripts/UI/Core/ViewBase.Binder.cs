@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using TSoft.Utils;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 
@@ -27,6 +28,23 @@ namespace TSoft.UI.Core
 
                 if (objects[i] == null)
                     Debug.Log($"Failed to bind({names[i]})");
+            }
+        }
+        
+        public static void BindEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
+        {
+            var evt = UIUtil.GetOrAddComponent<ViewEventHandler>(go);
+
+            switch (type)
+            {
+                case Define.UIEvent.Click:
+                    evt.OnClickHandler -= action;
+                    evt.OnClickHandler += action;
+                    break;
+                case Define.UIEvent.Drag:
+                    evt.OnDragHandler -= action;
+                    evt.OnDragHandler += action;
+                    break;
             }
         }
         
