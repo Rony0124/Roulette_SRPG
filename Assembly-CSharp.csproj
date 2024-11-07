@@ -45,9 +45,30 @@
     <Analyzer Include="C:\Program Files\Unity 2022.3.42f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\InGame\RouletteController.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\RouletteSlotRange.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\Gamble.cs" />
     <Compile Include="Assets\Scripts\UI\Core\ViewBase.Binder.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\RouletteSlotOdd.cs" />
     <Compile Include="Assets\Scripts\UI\Core\ViewBase.Mono.cs" />
+    <Compile Include="Assets\Scripts\InGame\InGameEnums.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\RouletteChipSet.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\RouletteSlotLine.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\RouletteSlotNumber.cs" />
+    <Compile Include="Assets\Scripts\Utils\MonoUtil.cs" />
+    <Compile Include="Assets\Scripts\Utils\ObservableList.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\RouletteSlotColor.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\IRouletteSlotHandler.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\RouletteSlotSection.cs" />
+    <Compile Include="Assets\Scripts\Core\Singleton.cs" />
+    <Compile Include="Assets\Scripts\Utils\Define.cs" />
+    <Compile Include="Assets\Scripts\UI\Views\RouletteView.cs" />
+    <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Utils\UIUtil.cs" />
+    <Compile Include="Assets\Scripts\Utils\UIExtension.cs" />
+    <Compile Include="Assets\Scripts\InGame\RouletteChip.cs" />
+    <Compile Include="Assets\Scripts\InGame\Roulette\RouletteSlotBase.cs" />
+    <Compile Include="Assets\Scripts\UI\Core\ViewEventHandler.cs" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

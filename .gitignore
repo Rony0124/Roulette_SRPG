@@ -77,3 +77,8 @@ Library/Bee/fullprofile.json
 *.state
 Library/StateCache
 Library/Bee
+Library/Search
+Library/ArtifactDB
+Library/SourceAssetDB
+Logs
+ProjectSettings
