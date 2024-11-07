@@ -4,26 +4,8 @@ namespace TSoft.UI.Core
 {
     public abstract partial class ViewBase : MonoBehaviour
     {
-        private bool isActive = false;
-        private Canvas viewCanvas;
-
-        public bool IsActive {
-            get => isActive;
-            set {
-                isActive = value;
-
-                if (viewCanvas == null) {
-                    viewCanvas = GetComponent<Canvas>();
-                }
-
-                viewCanvas.enabled = isActive;
-            }
-        }
-
-        private void Awake() {
-            viewCanvas = GetComponent<Canvas>();
-            Init();
-        }
+        public bool IsActive => gameObject.activeSelf;
+        
 
         private void OnEnable() {
             OnActivated();
@@ -32,8 +14,7 @@ namespace TSoft.UI.Core
         private void OnDisable() {
             OnDeactivated();
         }
-
-        protected abstract void Init();
+        
         protected abstract void OnActivated();
         protected abstract void OnDeactivated();
         
