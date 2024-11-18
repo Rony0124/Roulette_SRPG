@@ -1,5 +1,4 @@
 using System;
-using InGame.CardSystem;
 using TCGStarter.Tweening;
 using TMPro;
 using UnityEngine;
@@ -8,8 +7,6 @@ using UnityEngine.UI;
 
 namespace TSoft.InGame.CardSystem
 {
-    // Responsible for viewing the cards on the canvas
-    // Fired user interactions events
     public class CardViewer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
     {
@@ -22,14 +19,8 @@ namespace TSoft.InGame.CardSystem
         [Header("Card Details")]
         [SerializeField] private TextMeshProUGUI txtTitle;
         [SerializeField] private TextMeshProUGUI txtDescription;
-        [SerializeField] private TextMeshProUGUI txtCost;
         [SerializeField] private Image imgBG;
-
-        [Header("Effects")]
-        [SerializeField] private Image glow;
-        [SerializeField] private Image extraGlow;
-        [SerializeField] private Image line;
-
+        
         [Header("System Helpers")]
         [SerializeField] private GameObject Visuals;
         [SerializeField] private GameObject HitBox;
@@ -39,74 +30,28 @@ namespace TSoft.InGame.CardSystem
         private bool isFloating = false;
         private Vector3 basePosition = Vector3.zero;
 
-        private void Awake()
-        {
-            extraGlow.gameObject.SetActive(false);
-        }
-        private void Start()
-        {
-        }
-
         private void Update()
         {
             if (isFloating)
             {
-                handleFloating();
+                HandleFloating();
             }
-
         }
 
         public void SetData(CardData card)
         {
-            this.cardData = card;
+            cardData = card;
             txtTitle.text = card.Title;
             txtDescription.text = card.Description;
-            txtCost.text = card.Cost.ToString();
             imgBG.sprite = card.Image;
-        }
-
-        public void SetBasicGlow(bool isEnable)
-        {
-            if (isEnable)
-            {
-                glow.color = new Color(1, 1, 1, 1f);
-                glow.TweenFade(0.3f, 1f, true);
-            }
-            else
-            {
-                glow.TweenKill();
-                glow.color = new Color(1, 1, 1, 0);
-            }
-        }
-        public void SetGlowExtra(bool isEnable)
-        {
-            if (isEnable)
-            {
-                extraGlow.gameObject.SetActive(true);
-                line.gameObject.SetActive(true);
-
-                extraGlow.transform.localScale = Vector3.one;
-                extraGlow.transform.TweenScale(new Vector3(0.97f, 1, 1), 1.4f, true);
-                extraGlow.transform.TweenScale(new Vector3(1, 0.97f, 1), 1f, true);
-                line.transform.TweenMoveY(8, 1.2f, true);
-            }
-            else
-            {
-                extraGlow.transform.TweenKillAll();
-                extraGlow.gameObject.SetActive(false);
-                line.transform.TweenKillAll();
-                line.gameObject.SetActive(false);
-            }
         }
 
         public void Dissolve(float animationSpeed)
         {
             HitBox.SetActive(false);
-            SetBasicGlow(false);
 
             txtTitle.TweenFade(0f, animationSpeed / 4, false);
             txtDescription.TweenFade(0f, animationSpeed / 4, false);
-            txtCost.TweenFade(0f, animationSpeed / 4, false);
             imgBG.TweenFade(0f, animationSpeed, false);
             imgBG.transform.TweenScale(Vector3.one * 1.2f, animationSpeed, false);
 
@@ -122,7 +67,7 @@ namespace TSoft.InGame.CardSystem
             }
         }
 
-        private void handleFloating()
+        private void HandleFloating()
         {
             Visuals.transform.localPosition = Vector3.Lerp(
                 basePosition, basePosition + Vector3.up * 7,
@@ -190,10 +135,7 @@ namespace TSoft.InGame.CardSystem
         private void OnDestroy()
         {
             imgBG.TweenKill();
-            glow.TweenKill();
-            extraGlow.TweenKill();
             gameObject.transform.TweenKillAll();
-            line.transform.TweenKillAll();
             Visuals.transform.TweenKillAll();
         }
     }

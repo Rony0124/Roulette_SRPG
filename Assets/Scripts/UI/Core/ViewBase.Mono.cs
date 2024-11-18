@@ -5,7 +5,6 @@ namespace TSoft.UI.Core
     public abstract partial class ViewBase : MonoBehaviour
     {
         public bool IsActive => gameObject.activeSelf;
-        
 
         private void OnEnable() {
             OnActivated();

@@ -82,3 +82,7 @@ Library/ArtifactDB
 Library/SourceAssetDB
 Logs
 ProjectSettings
+Library/Bee
+Library/Search
+Library
+Assembly-CSharp.csproj
