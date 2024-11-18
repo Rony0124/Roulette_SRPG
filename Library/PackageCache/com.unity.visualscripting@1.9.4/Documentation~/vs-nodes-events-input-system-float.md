@@ -3,19 +3,18 @@
 > [!NOTE]
 > The On Input System Event Float node [!include[nodes-note-package](./snippets/input-system/nodes-note-package.md)]
 
-The On Input System Event Float node lists for a specific Input Action from a Player Input component. The node can
-output a single float value.
+The On Input System Event Float node lists for a specific Input Action from a Player Input component. The node can output a single float value. 
 
-Use this node when you want to read user input and return a single value, such as an axis value or input from a trigger
-on a controller.
+Use this node when you want to read user input and return a single value, such as an axis value or input from a trigger on a controller.
 
-![An image of the Graph window. An On Input System Event Float node displays with its details in the Graph Inspector.](images/vs-on-input-system-event-float-node.png)
+![An image of the Graph window. An On Input System Event Float node displays with its details in the Graph Inspector.](images/vs-on-input-system-event-float-node.png) 
 
-## Fuzzy finder category
+## Fuzzy finder category 
 
 The On Input System Event Float node is in the **Events** &gt; **Input** category in the fuzzy finder.
 
-## Inputs
+
+## Inputs 
 
 The On Input System Event Float [!include[nodes-inputs](./snippets/nodes-inputs.md)]
 
@@ -29,7 +28,7 @@ The On Input System Event Float [!include[nodes-controls](./snippets/nodes-contr
 
 You can also set this control from the [Graph Inspector](vs-interface-overview.md#the-graph-inspector).
 
-## Additional node settings
+## Additional node settings 
 
 The On Input System Event Float [!include[nodes-additional-settings](./snippets/nodes-additional-settings.md)]
 
@@ -46,7 +45,7 @@ The On Input System Event Float [!include[nodes-additional-settings](./snippets/
 </tbody>
 </table>
 
-## Outputs
+## Outputs 
 
 The On Input System Event Float [!include[nodes-outputs](./snippets/nodes-outputs.md)]
 
@@ -68,20 +67,16 @@ The On Input System Event Float [!include[nodes-outputs](./snippets/nodes-output
 </tbody>
 </table>
 
-## Example graph usage
+## Example graph usage 
 
-In the following example, an On Input System Event Float node uses the bindings assigned to the **Lift** Input Action.
-When a user presses any key from the **Lift** binding, Visual Scripting takes the float value it receives from the Input
-System and sends it as an input to the Vector 3 Create node's **Y** input port. At the same time, Visual Scripting
-triggers the Transform Set Position node and uses the output from the Vector 3 Create node to set a new position for the
-Script Machine's GameObject.
+In the following example, an On Input System Event Float node uses the bindings assigned to the **Lift** Input Action. When a user presses any key from the **Lift** binding, Visual Scripting takes the float value it receives from the Input System and sends it as an input to the Vector 3 Create node's **Y** input port. At the same time, Visual Scripting triggers the Transform Set Position node and uses the output from the Vector 3 Create node to set a new position for the Script Machine's GameObject.
 
 ![An image that displays the Graph Editor. An On Input System Event Float node has its float output port connected to a Vector 3 Create node, and its output control port connected to a Transform Set Position node.](images/vs-on-input-system-event-float-node-example.png)
 
-For this example, **Lift** uses a Right Trigger from a Gamepad input device as a binding. When a user presses the Right
-Trigger, the **Y** value of the GameObject's transform increases, which makes the GameObject move upwards in the scene.
+For this example, **Lift** uses a Right Trigger from a Gamepad input device as a binding. When a user presses the Right Trigger, the **Y** value of the GameObject's transform increases, which makes the GameObject move upwards in the scene. 
 
-## Related nodes
+
+## Related nodes 
 
 [!include[vs-nodes-related](./snippets/nodes-related.md)] On Input System Event Float node:
 

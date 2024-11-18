@@ -1,7 +1,6 @@
 # VideoTrack sample
 
-The Video Track sample provides a track capable of playing video clips in Timeline. It demonstrates how to do the
-following:
+The Video Track sample provides a track capable of playing video clips in Timeline. It demonstrates how to do the following:
 
 * Using built-in blending, speed and clip-in capabilities in custom clips.
 * Using `ClipEditor`s to customize clip drawing.
@@ -11,12 +10,9 @@ following:
 
 ## Usage
 
-Drag and drop an imported video from the project window onto a timeline. The video track and clip will be created. The
-video clip has several playback options, including the option to specify the camera to render to video to, and an audio
-source to redirect the audio.
+Drag and drop an imported video from the project window onto a timeline. The video track and clip will be created. The video clip has several playback options, including the option to specify the camera to render to video to, and an audio source to redirect the audio.
 
-If no camera is specified, the main camera in the scene will be used. If no audio source is specified, the audio will
-play directly (i.e. no 3D audio).
+If no camera is specified, the main camera in the scene will be used. If no audio source is specified, the audio will play directly (i.e. no 3D audio).
 
 ## Known Issues
 

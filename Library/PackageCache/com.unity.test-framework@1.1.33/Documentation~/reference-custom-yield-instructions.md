@@ -4,8 +4,7 @@ By implementing this interface below, you can define custom yield instructions i
 
 ## IEditModeTestYieldInstruction
 
-In an Edit Mode test, you can use `IEditModeTestYieldInstruction` interface to implement your own instruction. There are
-also a couple of commonly used implementations available:
+In an Edit Mode test, you can use `IEditModeTestYieldInstruction` interface to implement your own instruction. There are also a couple of commonly used implementations available:
 
 - [EnterPlayMode](#enterplaymode)
 - [ExitPlayMode](#exitplaymode)
@@ -38,23 +37,22 @@ public IEnumerator PlayOnAwakeDisabled_DoesntPlayWhenEnteringPlayMode()
 
 ## Properties
 
-| Syntax                       | Description                                                                        |
-|------------------------------|------------------------------------------------------------------------------------|
-| `bool ExpectDomainReload`    | Returns `true` if the instruction expects a domain reload to occur.                |
+| Syntax                       | Description                                                  |
+| ---------------------------- | ------------------------------------------------------------ |
+| `bool ExpectDomainReload`    | Returns `true` if the instruction expects a domain reload to occur. |
 | `bool ExpectedPlaymodeState` | Returns `true` if the instruction expects the Unity Editor to be in **Play Mode**. |
 
 ## Methods
 
-| Syntax                  | Description                                                                             |
-|-------------------------|-----------------------------------------------------------------------------------------|
+| Syntax                  | Description                                                  |
+| ----------------------- | ------------------------------------------------------------ |
 | `IEnumerator Perform()` | Used to define multi-frame operations performed when instantiating a yield instruction. |
 
 ## EnterPlayMode
 
 * Implements `IEditModeTestYieldInstruction`. Creates a yield instruction to enter Play Mode.
-* When creating an Editor test that uses the `UnityTest` attribute, use this to trigger the Editor to enter Play Mode.
-* Throws an exception if the Editor is already in Play Mode or if there is
-  a [script compilation error](https://support.unity3d.com/hc/en-us/articles/205930539-How-do-I-interpret-a-compiler-error-).
+* When creating an Editor test that uses the `UnityTest` attribute, use this to trigger the Editor to enter Play Mode. 
+* Throws an exception if the Editor is already in Play Mode or if there is a [script compilation error](https://support.unity3d.com/hc/en-us/articles/205930539-How-do-I-interpret-a-compiler-error-).
 
 ## ExitPlayMode
 

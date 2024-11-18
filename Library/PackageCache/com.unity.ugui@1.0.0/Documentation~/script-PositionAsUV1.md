@@ -6,6 +6,6 @@ This adds a simple Position as UV1 effect to text and image graphics.
 
 ![](images/UI_PositionAsUV1Inspector.png)
 
-| **Property:** | **Function:** |
-|:--------------|:--------------|
-| **Script**    |               |
+|**Property:** |**Function:** |
+|:---|:---|
+|**Script** |  |

@@ -1,27 +1,20 @@
 # Variables
 
-Variables act as a container for a piece of information that might change as an application runs. To define a variable,
-you need to provide:
+Variables act as a container for a piece of information that might change as an application runs. To define a variable, you need to provide: 
 
 - A name for the variable, such as `MyVariable`.
 - The type of data the variable holds, such as `int` or `string` .
-- A value for the variable, such as `1` or `cat`.
+- A value for the variable, such as `1` or `cat`. 
 
-In Visual Scripting, you can give a node the name of a variable, instead of a fixed value or text. Your Script Graph
-uses the variable's name to access its value. For example, you can use a variable called `Count`, with an `int` type and
-a value of `1`. You can use an Add node in Visual Scripting to add 1 to the value of `Count`, and save the new value
-in `Count` to use again in another part of your Script Graph, or a different Script Graph.
+In Visual Scripting, you can give a node the name of a variable, instead of a fixed value or text. Your Script Graph uses the variable's name to access its value. For example, you can use a variable called `Count`, with an `int` type and a value of `1`. You can use an Add node in Visual Scripting to add 1 to the value of `Count`, and save the new value in `Count` to use again in another part of your Script Graph, or a different Script Graph. 
 
-Variables also have scopes. A variable's scope determines what parts of your Script Graph can access which variables to
-read or modify their values. The scope can also decide whether another Script Graph can access a variable.
+Variables also have scopes. A variable's scope determines what parts of your Script Graph can access which variables to read or modify their values. The scope can also decide whether another Script Graph can access a variable. 
 
-You can create and manage variables in a graph from the Blackboard. For more information on the Blackboard,
-see [The Blackboard](vs-interface-overview.md#the-blackboard). For more information on how to use variables,
-see [Create and add a variable to a Script Graph](vs-add-variable-graph.md).
+You can create and manage variables in a graph from the Blackboard. For more information on the Blackboard, see [The Blackboard](vs-interface-overview.md#the-blackboard). For more information on how to use variables, see [Create and add a variable to a Script Graph](vs-add-variable-graph.md).
 
 ## Variable scopes
 
-Each variable scope has its own tab on the Blackboard, except Flow variables. Visual Scripting has six variable scopes.
+Each variable scope has its own tab on the Blackboard, except Flow variables. Visual Scripting has six variable scopes. 
 
 <table>
 <thead>
@@ -65,16 +58,13 @@ You can't create a Flow variable from the Blackboard - you can create one with a
 </table>
 
 > [!NOTE]
-> You can still access the Blackboard and create new variables with a State Graph open in the Graph window, but you
-> can't add a variable node and use it inside a State Graph.
+> You can still access the Blackboard and create new variables with a State Graph open in the Graph window, but you can't add a variable node and use it inside a State Graph. 
 
-For Saved variables, there are two additional tabs on the Blackboard: **Initial** and **Saved**:
+For Saved variables, there are two additional tabs on the Blackboard: **Initial** and **Saved**: 
 
-- Values defined in the **Initial** tab apply to all new instances of your application as default values.
+- Values defined in the **Initial** tab apply to all new instances of your application as default values. 
 
-- Values defined in the **Saved** tab are the last modified values for those variables, based on when you last ran your
-  application. You can edit them manually, or delete the values to reset them to the values defined in the **Initial**
-  tab.
+- Values defined in the **Saved** tab are the last modified values for those variables, based on when you last ran your application. You can edit them manually, or delete the values to reset them to the values defined in the **Initial** tab. 
 
 ![An image that displays a comparison between the Initial and Saved tabs for a set of defined Saved variables. The values for the Saved variables are different across the Initial and Saved tabs.](images/vs-saved-variables.png)
 

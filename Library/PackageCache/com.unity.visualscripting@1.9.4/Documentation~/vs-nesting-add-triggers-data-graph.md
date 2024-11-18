@@ -1,7 +1,6 @@
 # Add a Trigger or Data port to a Script Graph
 
-A Script Graph used as a Subgraph can receive data and logic from its parent graph. Add and define ports on a graph to
-choose what data graphs can send and receive.
+A Script Graph used as a Subgraph can receive data and logic from its parent graph. Add and define ports on a graph to choose what data graphs can send and receive. 
 
 For more information about Subgraphs, see [Subgraphs and State Units](vs-nesting-subgraphs-state-units.md).
 
@@ -46,8 +45,7 @@ To add a Trigger Input, Trigger Output, Data Input, or Data Output port to a Scr
 
 ## Add ports with Input and Output nodes
 
-You can also use an [Input node](vs-nesting-input-node.md) or an [Output node](vs-nesting-output-node.md) to define
-ports on a Script Graph:
+You can also use an [Input node](vs-nesting-input-node.md) or an [Output node](vs-nesting-output-node.md) to define ports on a Script Graph:
 
 <ol>
 <li><p><a href="vs-open-graph-edit.md">Open the Script Graph</a> you want to edit in the Graph window.</p></li>
@@ -86,10 +84,8 @@ ports on a Script Graph:
 
 ## Next steps
 
-Add the Script Graph as a Subgraph in another Script Graph. For more information on how to add a Script Graph as a
-Subgraph, see [Add a Subgraph to a Script Graph](vs-nesting-add-subgraph.md).
+Add the Script Graph as a Subgraph in another Script Graph. For more information on how to add a Script Graph as a Subgraph, see [Add a Subgraph to a Script Graph](vs-nesting-add-subgraph.md). 
 
-For more information on the port types on a Script Graph, see [Subgraph node](vs-nesting-subgraph-node.md).
+For more information on the port types on a Script Graph, see [Subgraph node](vs-nesting-subgraph-node.md). 
 
-The defined Trigger and Data ports affect the ports on the Input and Output nodes in a Script Graph. For more
-information, see [Input node](vs-nesting-input-node.md) and [Output node](vs-nesting-output-node.md).
+The defined Trigger and Data ports affect the ports on the Input and Output nodes in a Script Graph. For more information, see [Input node](vs-nesting-input-node.md) and [Output node](vs-nesting-output-node.md).

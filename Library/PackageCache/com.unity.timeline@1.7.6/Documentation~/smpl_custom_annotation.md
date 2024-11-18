@@ -47,21 +47,17 @@ public class AnnotationMarker : Marker
 }
 ```
 
-The annotation marker itself is now complete. But the customization work is not done yet. Timeline offers many
-customization abilities.
+The annotation marker itself is now complete. But the customization work is not done yet. Timeline offers many customization abilities.
 
 ## 2. Customize the marker's appearance
 
-A marker's appearance can be customized using a USS style or with `MarkerEditor`. Both paths have their advantages and
-drawbacks.
+A marker's appearance can be customized using a USS style or with `MarkerEditor`. Both paths have their advantages and drawbacks.
 
 ### Custom USS style
 
-A marker can use a USS style to specify its appearance. For more information on how to create custom USS styles,
-see [how to define custom USS styles](uss_styles.md).
+A marker can use a USS style to specify its appearance. For more information on how to create custom USS styles, see [how to define custom USS styles](uss_styles.md).
 
-The [CustomStyle](xref:UnityEngine.Timeline.CustomStyleAttribute) attribute can be used to specify a style for a given
-marker:
+The [CustomStyle](xref:UnityEngine.Timeline.CustomStyleAttribute) attribute can be used to specify a style for a given marker:
 
 ``` c#
 [CustomStyle("AnnotationStyle")]
@@ -75,15 +71,11 @@ public class AnnotationMarker : Marker
 
 ![Custom style](images/smpl_annotation_customStyle.png)
 
-USS styles are useful if the desired appearance is simple (i.e. when only using a texture icon). For more complex
-stuff (i.e. dynamically changing a marker's color), a `MarkerEditor` will be needed.
+USS styles are useful if the desired appearance is simple (i.e. when only using a texture icon). For more complex stuff (i.e. dynamically changing a marker's color), a `MarkerEditor` will be needed.
 
 ### Custom editor
 
-`MarkerEditor` can be used to augment the capabilities of a marker in the editor. It works like a
-custom [Inspector](https://docs.unity3d.com/ScriptReference/CustomEditor.html);
-the [CustomTimelineEditor attribute](xref:UnityEditor.Timeline.CustomTimelineEditorAttribute) is used to tell Timeline
-that a [MarkerEditor](xref:UnityEditor.Timeline.MarkerEditor) class should be associated to a given marker.
+`MarkerEditor` can be used to augment the capabilities of a marker in the editor. It works like a custom [Inspector](https://docs.unity3d.com/ScriptReference/CustomEditor.html); the [CustomTimelineEditor attribute](xref:UnityEditor.Timeline.CustomTimelineEditorAttribute) is used to tell Timeline that a [MarkerEditor](xref:UnityEditor.Timeline.MarkerEditor) class should be associated to a given marker.
 
 ``` c#
 [CustomTimelineEditor(typeof(AnnotationMarker))]
@@ -95,9 +87,7 @@ public class AnnotationMarkerEditor : MarkerEditor
 
 #### Marker information
 
-`MarkerEditor` lets us provide information about the marker by overriding
-the [GetMarkerOptions](xref:UnityEditor.Timeline.MarkerEditor#UnityEditor_Timeline_MarkerEditor_GetMarkerOptions_UnityEngine_Timeline_IMarker_)
-method.
+`MarkerEditor` lets us provide information about the marker by overriding the [GetMarkerOptions](xref:UnityEditor.Timeline.MarkerEditor#UnityEditor_Timeline_MarkerEditor_GetMarkerOptions_UnityEngine_Timeline_IMarker_) method.
 
 ``` c#
 public override MarkerDrawOptions GetMarkerOptions(IMarker marker)
@@ -115,14 +105,11 @@ Here the tooltip of an `Annotation` has been set to use the annotation's `title`
 
 ![Marker tooltip](images/smpl_annotation_markerTooltip.png)
 
-[MarkerDrawOptions](xref:UnityEditor.Timeline.MarkerDrawOptions) can also set the error text on a marker, which can be
-useful if a variable has been incorrectly set and needs attention.
+[MarkerDrawOptions](xref:UnityEditor.Timeline.MarkerDrawOptions) can also set the error text on a marker, which can be useful if a variable has been incorrectly set and needs attention.
 
 #### Overlay
 
-An overlay can be drawn on top of a marker by overriding
-the [DrawOverlay](xref:UnityEditor.Timeline.MarkerEditor#UnityEditor_Timeline_MarkerEditor_DrawOverlay_UnityEngine_Timeline_IMarker_UnityEditor_Timeline_MarkerUIStates_UnityEditor_Timeline_MarkerOverlayRegion_)
-method:
+An overlay can be drawn on top of a marker by overriding the [DrawOverlay](xref:UnityEditor.Timeline.MarkerEditor#UnityEditor_Timeline_MarkerEditor_DrawOverlay_UnityEngine_Timeline_IMarker_UnityEditor_Timeline_MarkerUIStates_UnityEditor_Timeline_MarkerOverlayRegion_) method:
 
 ``` c#
 public override void DrawOverlay(IMarker marker, MarkerUIStates uiState, MarkerOverlayRegion region)
@@ -135,23 +122,17 @@ public override void DrawOverlay(IMarker marker, MarkerUIStates uiState, MarkerO
 }
 ```
 
-An overlay is drawn on top of the marker; the [USS style](uss_styles.md) is drawn first and `DrawOverlay` is called
-afterwards. For an `Annotation`, we can use `DrawOverlay` to change the color of the marker and to draw a line that
-spans the full Timeline window's height. To do this, we can use the information given in `region`. Along with the
-visible time range, [MarkerOverlayRegion](xref:UnityEditor.Timeline.MarkerOverlayRegion) provides two rectangles that
-can be used to know where to draw:
+An overlay is drawn on top of the marker; the [USS style](uss_styles.md) is drawn first and `DrawOverlay` is called afterwards. For an `Annotation`, we can use `DrawOverlay` to change the color of the marker and to draw a line that spans the full Timeline window's height. To do this, we can use the information given in `region`. Along with the visible time range, [MarkerOverlayRegion](xref:UnityEditor.Timeline.MarkerOverlayRegion) provides two rectangles that can be used to know where to draw:
 
 * `markerRegion`
 
-`markerRegion` is the rectangle that encompasses the marker. This is useful to draw something directly on the marker
-itself. For `Annotation`, this rectangle is used to draw the color overlay.
+`markerRegion` is the rectangle that encompasses the marker. This is useful to draw something directly on the marker itself. For `Annotation`, this rectangle is used to draw the color overlay.
 
 ![marker region](images/smpl_annotation_markerOverlayRegion.png)
 
 * `timelineRegion`
 
-`timelineRegion` is the rectangle that encompasses the clips and markers region of the timeline window. This is useful
-to draw something out of the marker's region, like the `Annotation`'s line overlay.
+`timelineRegion` is the rectangle that encompasses the clips and markers region of the timeline window. This is useful to draw something out of the marker's region, like the `Annotation`'s line overlay.
 
 ![timeline region](images/smpl_annotation_timelineOverlayRegion.png)
 
@@ -168,10 +149,7 @@ Rect lineRect = new Rect(markerRegionCenter,
 
 ### Timeline Action
 
-Actions can be used to add new menu entries in Timeline's context menus. For an Annotation, we want to add a menu item
-available in all context menus to create an `Annotation` with the clipboard's contents. To do this,
-a [TimelineAction](xref:UnityEditor.Timeline.Actions.TimelineAction) is needed, along with
-the [MenuEntry attribute](xref:UnityEditor.Timeline.Actions.MenuEntryAttribute).
+Actions can be used to add new menu entries in Timeline's context menus. For an Annotation, we want to add a menu item available in all context menus to create an `Annotation` with the clipboard's contents. To do this, a [TimelineAction](xref:UnityEditor.Timeline.Actions.TimelineAction) is needed, along with the [MenuEntry attribute](xref:UnityEditor.Timeline.Actions.MenuEntryAttribute).
 
 ``` c#
 [MenuEntry("Create Annotation from clipboard contents")]
@@ -181,14 +159,11 @@ public class CreateAnnotationFromClipboardContents : TimelineAction
 }
 ```
 
-`MenuEntry` lets Timeline know that this action can be added in context menus. Classes inheriting from `TimelineAction`
-need to override two methods: `Execute` and `Validate`.
+`MenuEntry` lets Timeline know that this action can be added in context menus. Classes inheriting from `TimelineAction` need to override two methods: `Execute` and `Validate`.
 
 #### Validate
 
-`Validate` is used to specify that the action's prerequisites are fulfilled. In the case
-of `CreateAnnotationFromClipboardContents`, the action is only valid if there actually is contents in the
-clipboard. `ActionValidity` is used to describe the validity state of an action:
+`Validate` is used to specify that the action's prerequisites are fulfilled. In the case of `CreateAnnotationFromClipboardContents`, the action is only valid if there actually is contents in the clipboard. `ActionValidity` is used to describe the validity state of an action:
 
 ``` c#
 public override ActionValidity Validate(ActionContext context)
@@ -202,8 +177,7 @@ public override ActionValidity Validate(ActionContext context)
 ```
 
 * `ActionValidity.Valid` : The action can be executed.
-* `ActionValidity.Invalid` : The action cannot be executed given the current context and will appear grayed out in
-  context menus.
+* `ActionValidity.Invalid` : The action cannot be executed given the current context and will appear grayed out in context menus.
 * `ActionValidity.NotApplicable` : The action does not apply to the current context and will not show up in menus.
 
 #### Execute
@@ -231,12 +205,9 @@ The return value should specify if the execution succeeded or not.
 
 ### Marker Action
 
-It is also possible to write custom actions that apply only to markers, instead of all Timeline items. This is the
-purpose of the `MarkerEditor` class. It works just like `TimelineAction`, except that action applies to a list of
-markers.
+It is also possible to write custom actions that apply only to markers, instead of all Timeline items. This is the purpose of the `MarkerEditor` class. It works just like `TimelineAction`, except that action applies to a list of markers.
 
-A shortcut can also be assigned to an action. A static method with the `TimelineShortcut` attribute is needed. `Invoker`
-can be used to easily execute a given action:
+A shortcut can also be assigned to an action. A static method with the `TimelineShortcut` attribute is needed. `Invoker` can be used to easily execute a given action:
 
 ``` c#
 [TimelineShortcut("Replace annotation description with clipboard", KeyCode.G)]
@@ -250,6 +221,4 @@ public static void InvokeAction()
 
 ## Runtime considerations
 
-`AnnotationMarker` is available at runtime; it can be queried using, for example, `TrackAsset.GetMarkers()`.
-However, `AnnotationMarkerEditor` and custom actions are not available at runtime, since it depends on classes that are
-not part of the runtime assembly.
+`AnnotationMarker` is available at runtime; it can be queried using, for example, `TrackAsset.GetMarkers()`. However, `AnnotationMarkerEditor` and custom actions are not available at runtime, since it depends on classes that are not part of the runtime assembly.

@@ -1,41 +1,36 @@
 # Create a custom PropertyDrawer for a custom type
 
-If you want to use a custom type from a custom class in Visual Scripting, and you don't have access to its source code,
-you must create a custom PropertyDrawer.
+If you want to use a custom type from a custom class in Visual Scripting, and you don't have access to its source code, you must create a custom PropertyDrawer. 
 
-You can't assign a value to a custom type inside the Editor or initialize the value for a variable with a custom type if
-it doesn't have a PropertyDrawer.
+You can't assign a value to a custom type inside the Editor or initialize the value for a variable with a custom type if it doesn't have a PropertyDrawer. 
 
 > [!NOTE]
-> The class for your custom type must have the `[Serializable]` tag in its source code to create a custom
-> PropertyDrawer.
+> The class for your custom type must have the `[Serializable]` tag in its source code to create a custom PropertyDrawer.
 
-To create a custom PropertyDrawer:
+To create a custom PropertyDrawer: 
 
 1. [!include[open-project-window](./snippets/vs-open-project-window.md)]
 
 2. [!include[create-c-script-project](./snippets/vs-create-c-script-project.md)]
 
-3. Enter a name, such as `CounterDrawer`, for the new script file.
+3. Enter a name, such as `CounterDrawer`, for the new script file. 
 
 4. Press Enter.
 
 5. [!include[open-new-external-code](./snippets/vs-open-new-external-code.md)]
 
-6. Remove the `Start` and `Update` functions and their comments from the script file.
+6. Remove the `Start` and `Update` functions and their comments from the script file. 
 
 7. Above the line that defines your new `public class`, add a `[CustomPropertyDrawer]` attribute.
 
-8. In the parameters for the `[CustomPropertyDrawer]` attribute, specify a `type of` parameter with the name of the type
-   you want to assign to this PropertyDrawer, exactly as it appears in Unity.
+8. In the parameters for the `[CustomPropertyDrawer]` attribute, specify a `type of` parameter with the name of the type you want to assign to this PropertyDrawer, exactly as it appears in Unity. 
 
 9. Change the `MonoBehaviour` class at the end of your `public class` definition to `PropertyDrawer`.
 
 > [!NOTE]
-> After you create a custom PropertyDrawer, you must generate the required property provider scripts from your Visual
-> Scripting Project Settings. For more information, see [Configure project settings](vs-configuration.md).
+> After you create a custom PropertyDrawer, you must generate the required property provider scripts from your Visual Scripting Project Settings. For more information, see [Configure project settings](vs-configuration.md).
 
-The following is an example of a finished PropertyDrawer script:
+The following is an example of a finished PropertyDrawer script: 
 
 ```csharp
     using UnityEditor;
@@ -75,11 +70,7 @@ The following is an example of a finished PropertyDrawer script:
     }
  ```
 
-To create the rest of your custom PropertyDrawer, you must decide what fields you must display, and how you want them to
-display in the Editor's interface. For example, you might want to use the UIElements module to create your
-PropertyDrawer, or decide to use Unity's IMGUI module.
+To create the rest of your custom PropertyDrawer, you must decide what fields you must display, and how you want them to display in the Editor's interface. For example, you might want to use the UIElements module to create your PropertyDrawer, or decide to use Unity's IMGUI module.
 
-For more information on how to create and design a custom PropertyDrawer, see
-the [PropertyDrawer class](https://docs.unity3d.com/ScriptReference/PropertyDrawer.html) in the main Unity Scripting API
-and its related methods.
+For more information on how to create and design a custom PropertyDrawer, see the [PropertyDrawer class](https://docs.unity3d.com/ScriptReference/PropertyDrawer.html) in the main Unity Scripting API and its related methods.
 

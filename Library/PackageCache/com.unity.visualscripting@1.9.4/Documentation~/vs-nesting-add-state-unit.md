@@ -1,14 +1,12 @@
-# Add a State Unit to a Script Graph
+# Add a State Unit to a Script Graph 
 
-Add a State Unit to a Script Graph to trigger a change of state. A state is any set of behaviors that you want a
-GameObject to perform. For more information on state in Visual Scripting, see [Graphs](vs-graph-types.md).
+Add a State Unit to a Script Graph to trigger a change of state. A state is any set of behaviors that you want a GameObject to perform. For more information on state in Visual Scripting, see [Graphs](vs-graph-types.md).
 
-You can add a new State Graph to a State Unit node, or use an existing State Graph from the project. For more
-information on the State Unit node, see [State Unit node](vs-nesting-state-unit-node.md).
+You can add a new State Graph to a State Unit node, or use an existing State Graph from the project. For more information on the State Unit node, see [State Unit node](vs-nesting-state-unit-node.md).
 
-## Add a new State Graph as a State Unit node
+## Add a new State Graph as a State Unit node 
 
-To add a new blank State Graph as a State Unit node to a Script Graph:
+To add a new blank State Graph as a State Unit node to a Script Graph: 
 
 <ol>
 <li><p>[!include[with-graph-open-ff](./snippets/vs-with-graph-open-ff.md)]</p></li>
@@ -35,34 +33,32 @@ To add a new blank State Graph as a State Unit node to a Script Graph:
 
 ## Add an existing State Graph as a State Unit node
 
-To add an existing State Graph file as a State Unit node in a Script Graph:
+To add an existing State Graph file as a State Unit node in a Script Graph: 
 
-1. [!include[with-graph-open-ff](./snippets/vs-with-graph-open-ff.md)]
+1. [!include[with-graph-open-ff](./snippets/vs-with-graph-open-ff.md)] 
 
 2. Go to **Nesting**.
 
-1. Select **State Unit** to add a State Unit node to the graph.
+1. Select **State Unit** to add a State Unit node to the graph. 
 
 3. Open the [Graph Inspector](vs-interface-overview.md#the-graph-inspector).
 
-1. In the Graph Inspector, set the **Source** to **Graph**.
+1. In the Graph Inspector, set the **Source** to **Graph**. 
 
-4. Do one of the following:
-    - In the **Graph** field, select the object picker (circle icon) and choose a compatible State Graph from the
-      project.
-    - Click and drag a State Graph file from the Project window and release on the **Graph** field.
+4. Do one of the following: 
+    - In the **Graph** field, select the object picker (circle icon) and choose a compatible State Graph from the project. 
+    - Click and drag a State Graph file from the Project window and release on the **Graph** field. 
 
-> [!TIP]
+> [!TIP] 
 > For a faster way to add a State Graph as a State Unit node:
-> - Click and drag a State Graph asset from the Project window into the Graph Editor to automatically create a State
-    Unit node.
+> - Click and drag a State Graph asset from the Project window into the Graph Editor to automatically create a State Unit node.
 > - Right-click to open the fuzzy finder. Go to **Graphs** and select a graph file.
 
 ![An image of the Graph window, with a new Super Unit node created from an existing State Graph added to a Script Graph.](images/vs-existing-graph-example-state-unit.png)
 
-## Next steps
 
-Select **Edit Graph** in the Graph Inspector to edit the graph. For more information on how to create a State Graph,
-see [Develop logic transitions with State Graphs](vs-state-graphs-intro.md).
+## Next steps 
+
+Select **Edit Graph** in the Graph Inspector to edit the graph. For more information on how to create a State Graph, see [Develop logic transitions with State Graphs](vs-state-graphs-intro.md).
 
 

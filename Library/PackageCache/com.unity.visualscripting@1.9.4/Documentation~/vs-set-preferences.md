@@ -1,16 +1,15 @@
 # Configure your preferences
 
-You can configure specific preferences in Visual Scripting to control the behavior of
-the [Graph window](vs-interface-overview.md) and your nodes.
+You can configure specific preferences in Visual Scripting to control the behavior of the [Graph window](vs-interface-overview.md) and your nodes. 
 
-To configure your preferences for Visual Scripting:
+To configure your preferences for Visual Scripting: 
 
-1. Go to **Edit** &gt; **Preferences**.
-1. Select **Visual Scripting**.
+1. Go to **Edit** &gt; **Preferences**. 
+1. Select **Visual Scripting**. 
 
 ## Core preferences
 
-The following preferences control general behaviors across all graph types in Visual Scripting.
+The following preferences control general behaviors across all graph types in Visual Scripting. 
 
 <table>
 <thead>
@@ -107,7 +106,8 @@ The following preferences control general behaviors across all graph types in Vi
 </tbody>
 </table>
 
-## Script Graphs preferences
+
+## Script Graphs preferences 
 
 The following preferences change the behavior of Script Graphs in the Graph window.
 
@@ -158,9 +158,10 @@ The following preferences change the behavior of Script Graphs in the Graph wind
 </tbody>
 </table>
 
+
 ## State Graphs preferences
 
-The following preferences change the behavior of State Graphs in the Graph window.
+The following preferences change the behavior of State Graphs in the Graph window. 
 <table>
 <thead>
 <tr>
@@ -248,14 +249,12 @@ If you have many transitions in a State Graph, you might want to change this set
 ## Additional Developer Mode preferences
 
 > [!NOTE]
-> You can only access the following preferences after you have enabled **Developer Mode* in
-> your [Core preferences](#core-preferences).
+> You can only access the following preferences after you have enabled **Developer Mode* in your [Core preferences](#core-preferences).
 
-These Developer Mode preferences provide help with developing extensions or custom nodes for Visual Scripting. Their
-continued support in the Visual Scripting package isn't guaranteed.
+These Developer Mode preferences provide help with developing extensions or custom nodes for Visual Scripting. Their continued support in the Visual Scripting package isn't guaranteed. 
 
-| **Preference**           | **Description**                                                                                                                                                                                                                                                                                                                                                 |
-|:-------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Debug**                | Enable **Debug** to add additional logging and visual overlays to help you debug element rendering in the Graph window. For example, if you created a custom node, use this setting to help debug your UI. <br/>Disable **Debug** to disable the logging and hide these overlays.                                                                               |
-| **Track Metadata State** | Enable **Track Metadata State** to add more information to logging. This can assist in debugging. <br/>Disable **Track Metadata State** to hide this additional information.                                                                                                                                                                                    |
-| **Debug Inspector UI**   | Enable **Debug Inspector UI** to add more overlays and additional details. The information available is greater than what Visual Scripting provides with the **Debug** setting, and affects more areas of the Editor's UI. Only enable this setting if you need more in-depth debugging feedback. <br/>Disable **Debug Inspector UI** to hide this information. |
+|**Preference** |**Description** |
+|:---|:---|
+|**Debug** | Enable **Debug** to add additional logging and visual overlays to help you debug element rendering in the Graph window. For example, if you created a custom node, use this setting to help debug your UI. <br/>Disable **Debug** to disable the logging and hide these overlays.|
+|**Track Metadata State** | Enable **Track Metadata State** to add more information to logging. This can assist in debugging. <br/>Disable **Track Metadata State** to hide this additional information.|
+|**Debug Inspector UI** | Enable **Debug Inspector UI** to add more overlays and additional details. The information available is greater than what Visual Scripting provides with the **Debug** setting, and affects more areas of the Editor's UI. Only enable this setting if you need more in-depth debugging feedback. <br/>Disable **Debug Inspector UI** to hide this information.|

@@ -3,18 +3,18 @@
 > [!NOTE]
 > The On Input System Event Vector 2 node [!include[nodes-note-package](./snippets/input-system/nodes-note-package.md)]
 
-The On Input System Event Vector 2 node listens for a specific Input Action from a Player Input component. The node can
-output two values as a Vector 2.
+The On Input System Event Vector 2 node listens for a specific Input Action from a Player Input component. The node can output two values as a Vector 2.
 
-Use this node when you want to read input and return two values, such as a joystick or mouse position.
+Use this node when you want to read input and return two values, such as a joystick or mouse position. 
 
 ![An image of the Graph window. An On Input System Event Vector 2 node displays with its details in the Graph Inspector.](images/vs-on-input-system-event-vector2-node.png)
 
-## Fuzzy finder category
+## Fuzzy finder category 
 
 The On Input System Event Vector 2 node is in the **Events** &gt; **Input** category in the fuzzy finder.
 
-## Inputs
+
+## Inputs 
 
 The On Input System Event Vector 2 [!include[nodes-inputs](./snippets/nodes-inputs.md)]
 
@@ -28,7 +28,7 @@ The On Input System Event Vector 2 [!include[nodes-controls](./snippets/nodes-co
 
 You can also set this control from the [Graph Inspector](vs-interface-overview.md#the-graph-inspector).
 
-## Additional node settings
+## Additional node settings 
 
 The On Input System Event Vector 2 [!include[nodes-additional-settings](./snippets/nodes-additional-settings.md)]
 
@@ -45,7 +45,7 @@ The On Input System Event Vector 2 [!include[nodes-additional-settings](./snippe
 </tbody>
 </table>
 
-## Outputs
+## Outputs 
 
 The On Input System Event Vector 2 [!include[nodes-outputs](./snippets/nodes-outputs.md)]
 
@@ -67,19 +67,15 @@ The On Input System Event Vector 2 [!include[nodes-outputs](./snippets/nodes-out
 </tbody>
 </table>
 
-## Example graph usage
+## Example graph usage 
 
-In the following example, an On Input System Event Vector 2 node uses the bindings assigned to the **Move** Input
-Action. When a user presses a button from the **Move** binding, Visual Scripting takes the Vector 2 value it receives
-from the Input System and sends it as an input to the Transform Set Position node's **Value** input port. The Vector 2
-value changes the position of the GameObject associated with the **Target** transform.
+In the following example, an On Input System Event Vector 2 node uses the bindings assigned to the **Move** Input Action. When a user presses a button from the **Move** binding, Visual Scripting takes the Vector 2 value it receives from the Input System and sends it as an input to the Transform Set Position node's **Value** input port. The Vector 2 value changes the position of the GameObject associated with the **Target** transform. 
 
 ![An image of the Graph Editor, that displays the Script Graph described above. An On Input System Event Vector 2 node sends a Vector 2 value to the Value input port on a Transform Set Position node.](images/vs-on-input-system-event-vector2-node-example.png)
 
-For this example, **Move** uses the W, A, S, and D keys. The GameObject moves up in the scene when the user presses W,
-moves down when the user presses S, and moves left or right when the user presses A or D.
+For this example, **Move** uses the W, A, S, and D keys. The GameObject moves up in the scene when the user presses W, moves down when the user presses S, and moves left or right when the user presses A or D. 
 
-## Related nodes
+## Related nodes 
 
 [!include[vs-nodes-related](./snippets/nodes-related.md)] On Input System Event Vector 2 node:
 

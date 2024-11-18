@@ -1,8 +1,6 @@
 # Add the RenamedFrom attribute to a C# script
 
-To use nodes generated from a custom C# script in a project after you rename a member, class, struct, type, or enum, add
-the `[RenamedFrom]` attribute to the relevant API element in the script file. For more information on
-the `[RenamedFrom]` attribute, see [Refactor a C# script with Visual Scripting](vs-refactoring.md).
+To use nodes generated from a custom C# script in a project after you rename a member, class, struct, type, or enum, add the `[RenamedFrom]` attribute to the relevant API element in the script file. For more information on the `[RenamedFrom]` attribute, see [Refactor a C# script with Visual Scripting](vs-refactoring.md).
 
 To add the attribute to a C# script:
 
@@ -22,11 +20,11 @@ using Unity.VisualScripting;
 [RenamedFrom(&quot;Character&quot;)]
 public class Player : MonoBehaviour
 {
-[RenamedFrom(&quot;InflictDamage&quot;)]
-public void TakeDamage(int damage)
-{
-//...
-}
+    [RenamedFrom(&quot;InflictDamage&quot;)]
+    public void TakeDamage(int damage)
+    {
+        //...
+    }
 }
 </code></pre>
 </ol></li>
@@ -36,13 +34,11 @@ public void TakeDamage(int damage)
 </ol>
 
 > [!NOTE]
-> If you change the namespace or namespaces used in your script, you must include the old namespace or namespaces to use
-> the `[RenamedFrom]` attribute.
+> If you change the namespace or namespaces used in your script, you must include the old namespace or namespaces to use the `[RenamedFrom]` attribute. 
 
 ## Next steps
 
-Unity recommends that you leave the attribute in the script file, even after a successful recompile. Nodes that use your
-C# script no longer have errors related to a missing member, class, struct, type, or enum.
+Unity recommends that you leave the attribute in the script file, even after a successful recompile. Nodes that use your C# script no longer have errors related to a missing member, class, struct, type, or enum.
 
 ## Additional resources
 

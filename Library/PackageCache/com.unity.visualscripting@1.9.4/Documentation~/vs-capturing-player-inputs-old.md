@@ -1,10 +1,9 @@
 # Capture input with the Input Manager
 
 > [!NOTE]
-> You must configure your Project Settings to use the Input Manager with Visual Scripting. For more information,
-> see [Input Manager prerequisites](vs-capture-player-input.md#input-manager-prerequisites).
+> You must configure your Project Settings to use the Input Manager with Visual Scripting. For more information, see [Input Manager prerequisites](vs-capture-player-input.md#input-manager-prerequisites).
 
-To create a basic Script Graph that uses the Input Manager to capture input:
+To create a basic Script Graph that uses the Input Manager to capture input: 
 
 <ol>
 <li><p><a href="vs-open-graph-edit.md">Open</a> or <a href="vs-create-graph.md">create</a> a Script Graph attached to the GameObject that you want your users to move.</p></li>
@@ -35,8 +34,7 @@ To create a basic Script Graph that uses the Input Manager to capture input:
 <li><p>While in the <a href="https://docs.unity3d.com/Manual/GameView.html">Game view</a>, press a key mapped as a <strong>Negative Button</strong> or <strong>Positive Button</strong> from the <a href="https://docs.unity3d.com/Documentation/Manual/class-InputManager.html">Input Manager's virtual axes</a>.</p></li>
 </ol>
 
-The GameObject moves along the X or Z axis in the Game view, based on the key pressed and
-the [Input Manager Project Settings](https://docs.unity3d.com/Documentation/Manual/class-InputManager.html).
+The GameObject moves along the X or Z axis in the Game view, based on the key pressed and the [Input Manager Project Settings](https://docs.unity3d.com/Documentation/Manual/class-InputManager.html). 
 
 ## Additional resources
 
