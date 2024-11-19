@@ -1,22 +1,43 @@
-using System.Collections.Generic;
 using TSoft.InGame.CardSystem;
-using TSoft.Managers;
 using TSoft.UI.Core;
+using TSoft.Utils;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace TSoft.UI.Views
 {
     public class ControlView : ViewBase
     {
-        [SerializeField] private CardViewer cardPrefab;
+        private enum ControlText
+        {
+            EnergyAmount
+        }
+        
+        private enum ControlButton
+        {
+            ButtonDraw,
+            ButtonDiscard,
+        }
+        
+        [SerializeField] private PokerCard pokerCardPrefab;
         [SerializeField] private CardsHolder cardHolder;
-        [SerializeField] private TMPro.TextMeshProUGUI txtEnergy;
+        private TMPro.TextMeshProUGUI txtEnergy;
         
         private int cardIdx = 1;
 
         private void Start()
         {
+            Bind<Button>(typeof(ControlButton));
+            Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));
+            
+            Get<Button>((int)ControlButton.ButtonDraw).gameObject.BindEvent(OnDrawCard);
+            Get<Button>((int)ControlButton.ButtonDiscard).gameObject.BindEvent(OnDiscardCard);
+
+            txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
+            
             UpdateEnergy();
+            DrawCards();
         }
 
         protected override void OnActivated()
@@ -31,49 +52,61 @@ namespace TSoft.UI.Views
 
         private void OnCardUsed(CardData card)
         {
-            UpdateEnergy();
+            
         }
+        
         private void UpdateEnergy()
         {
-            txtEnergy.text = cardHolder.GetEnergy() + "/" + cardHolder.energy;
+            txtEnergy.text = cardHolder.CurrentEnergy + "/" + CardsHolder.DefaultEnergy;
         }
 
-        public void OnDrawCard()
+        private void OnDrawCard(PointerEventData data)
         {
-            CardViewer card = Instantiate(cardPrefab);
-            card.name = "Card " + cardIdx;
-
-            var cardData = CreateRandomCard();
-            if(cardData == null)
-                return;
-            
-            card.SetData(cardData);
-
-            cardHolder.AddCard(card);
-            cardIdx++;
+            DrawCards();
         }
-        public void OnDraw5Cards()
+
+        private void DrawCards()
         {
-            for (int i = 0; i < 5; i++)
+            var cardVoids = CardsHolder.DefaultCapacity - cardHolder.CardsOnHand.Count;
+            Debug.Log($"current card capacity : {CardsHolder.DefaultCapacity}");
+            Debug.Log($"current remaining card capacity : {cardVoids}");
+
+            if (cardVoids < 1)
             {
-                OnDrawCard();
+                Debug.Log($"no space on hand left!");
+                return;
+            }
+            
+            for (var i = 0; i < cardVoids; i++)
+            {
+                PokerCard pokerCard = Instantiate(pokerCardPrefab);
+                pokerCard.name = "Card " + cardIdx;
+
+                var cardData = CreateRandomCard();
+                if(cardData == null)
+                    return;
+            
+                pokerCard.SetData(cardData);  
+
+                cardHolder.AddCard(pokerCard);
+                cardIdx++;
             }
         }
-
-        public void DiscardHand()
+        
+        private void OnDiscardCard(PointerEventData data)
         {
-            cardHolder.DiscardAll();
+            cardHolder.DiscardSelectedCard();
+            UpdateEnergy();
+        }
+
+        private void OnHandCardOnHold()
+        {
+            cardHolder.UseCardsOnHand();
         }
 
         private CardData CreateRandomCard()
         {
-            return CardManager.Instance.TryDrawCard(out var card) ? card.Data.Clone() : null;
-        }
-
-        public void AddEnergy()
-        {
-            cardHolder.AddEnergy(1);
-            UpdateEnergy();
+            return cardHolder.TryDrawCard(out var card) ? card.Data.Clone() : null;
         }
     }
 }

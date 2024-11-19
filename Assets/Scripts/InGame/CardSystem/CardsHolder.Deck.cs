@@ -1,36 +1,22 @@
-using System;
 using System.Collections.Generic;
-using TSoft.Core;
-using TSoft.InGame.CardSystem;
 using TSoft.Utils;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
-namespace TSoft.Managers
+namespace TSoft.InGame.CardSystem
 {
-    public class CardManager : Singleton<CardManager>
+    public partial class CardsHolder
     {
+        [Header("Deck")]
         [SerializeField] private List<CardSO> defaultCardDB;
 
         private List<CardSO> currentDeck;
-        public List<CardSO> CurrentDeck => currentDeck; 
-        
         private Queue<CardSO> cardsOnDeck;
-        private List<CardSO> cardsOnHand;
-        private List<CardSO> discardedCards;
-        
-        private void Awake()
+
+        private void InitializeDeck()
         {
             currentDeck = new();
             cardsOnDeck = new();
-            cardsOnHand = new();
-            discardedCards = new();
             
-            InitializeCards();
-        }
-
-        private void InitializeCards()
-        {
             foreach (var card in defaultCardDB)
             {
                 currentDeck.Add(card);
@@ -48,9 +34,16 @@ namespace TSoft.Managers
                 return false;
 
             card = cardsOnDeck.Dequeue();
-            cardsOnHand.Add(card);
+            
+            Debug.Log($"current remaining card on deck : {cardsOnDeck.Count}");
             
             return true;
+        }
+
+        public void ResetDeck()
+        {
+            currentDeck = new();
+            cardsOnDeck = new();
         }
     }
 }

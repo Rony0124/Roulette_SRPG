@@ -12,7 +12,7 @@ namespace TSoft.Utils
             return ret;
         }
         
-        public static IList ShuffleList(this IList list)
+        public static void ShuffleList(this IList list)
         {
             var random = new Random();
             for (var i = list.Count - 1; i > 0; i--)
@@ -21,7 +21,6 @@ namespace TSoft.Utils
                 
                 (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
             }
-            return list;
         }
     }
 }

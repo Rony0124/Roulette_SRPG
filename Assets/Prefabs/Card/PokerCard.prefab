@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 7158525431829142901}
   - component: {fileID: 4752335947013342086}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Info
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2810301634734430791
 RectTransform:
   m_ObjectHideFlags: 0
@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   txtTitle: {fileID: 7463274162638778564}
   txtDescription: {fileID: 8714926052761662403}
+  cardInfoObj: {fileID: 626632681278409558}
   imgBG: {fileID: 1508116142251715085}
   Visuals: {fileID: 7484354149988837323}
   HitBox: {fileID: 3388862083880449325}
@@ -158,7 +159,7 @@ GameObject:
   - component: {fileID: 386057792850491944}
   - component: {fileID: 1508116142251715085}
   m_Layer: 5
-  m_Name: picture
+  m_Name: Picture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

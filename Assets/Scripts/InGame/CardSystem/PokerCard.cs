@@ -7,18 +7,19 @@ using UnityEngine.UI;
 
 namespace TSoft.InGame.CardSystem
 {
-    public class CardViewer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
+    public class PokerCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
     IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
     {
-        public event Action<CardViewer> OnHover;
-        public event Action<CardViewer> OnStopHover;
-        public event Action<CardViewer> OnClick;
-        public event Action<CardViewer> OnHold;
-        public event Action<CardViewer> OnRelease;
+        public event Action<PokerCard> OnHover;
+        public event Action<PokerCard> OnStopHover;
+        public event Action<PokerCard> OnClick;
+        public event Action<PokerCard> OnHold;
+        public event Action<PokerCard> OnRelease;
 
         [Header("Card Details")]
         [SerializeField] private TextMeshProUGUI txtTitle;
         [SerializeField] private TextMeshProUGUI txtDescription;
+        [SerializeField] private GameObject cardInfoObj;
         [SerializeField] private Image imgBG;
         
         [Header("System Helpers")]
@@ -29,6 +30,9 @@ namespace TSoft.InGame.CardSystem
         private bool isHeld = false;
         private bool isFloating = false;
         private Vector3 basePosition = Vector3.zero;
+        
+        public bool IsFloating => isFloating;
+        public bool IsHeld => isHeld;
 
         private void Update()
         {
@@ -67,6 +71,11 @@ namespace TSoft.InGame.CardSystem
             }
         }
 
+        public void SetCardDetails(bool isEnable)
+        {
+            cardInfoObj.SetActive(isEnable);
+        }
+
         private void HandleFloating()
         {
             Visuals.transform.localPosition = Vector3.Lerp(
@@ -87,15 +96,11 @@ namespace TSoft.InGame.CardSystem
             basePosition = newPos;
         }
 
-        public void HideVisuals()
-        {
-            Visuals.SetActive(false);
-        }
-
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (isHeld)
                 return;
+            
             OnHover?.Invoke(this);
         }
 
@@ -103,6 +108,7 @@ namespace TSoft.InGame.CardSystem
         {
             if (isHeld)
                 return;
+            
             OnStopHover?.Invoke(this);
         }
 
@@ -137,6 +143,15 @@ namespace TSoft.InGame.CardSystem
             imgBG.TweenKill();
             gameObject.transform.TweenKillAll();
             Visuals.transform.TweenKillAll();
+        }
+        
+        public void PositionCard(float x, float y, float duration)
+        {
+            transform.TweenMove(new Vector3(x, y, 0), duration);
+        }
+        public void RotateCard(float angle, float duration)
+        {
+            transform.TweenRotate(new Vector3(0, 0, angle), duration);
         }
     }
 }
