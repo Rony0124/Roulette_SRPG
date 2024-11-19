@@ -67,12 +67,34 @@ namespace TSoft.InGame.CardSystem
             }
         }
         
+        public void UseCardsOnHand()
+        {
+            foreach (var selectedCard in currentPokerCardSelected)
+            {
+                OnCardUsed?.Invoke(selectedCard.cardData);
+            
+                selectedCard.Dissolve(animationSpeed);
+                
+                Discard(selectedCard);
+            }
+            
+            if(currentHeart > 0)
+                currentHeart--;
+            
+            currentPokerCardSelected = new();
+        }
+        
         public void DiscardSelectedCard()
         {
             foreach (var card in currentPokerCardSelected)
             {
                 Discard(card);
             }
+            
+            if(currentEnergy > 0)
+                currentEnergy--;
+            
+            currentPokerCardSelected = new();
         }
 
         private void Discard(PokerCard pokerCard)
@@ -103,23 +125,6 @@ namespace TSoft.InGame.CardSystem
 
             ArrangeHand(animationSpeed);
             StartCoroutine(ListenCardEvents(pokerCard));
-        }
-        
-        public void AddEnergy(int amount)
-        {
-            currentEnergy += amount;
-            currentEnergy = Math.Min(currentEnergy, DefaultEnergy);
-        }
-        
-        public void UseCardsOnHand()
-        {
-            foreach (var selectedCard in currentPokerCardSelected)
-            {
-                OnCardUsed?.Invoke(selectedCard.cardData);
-            
-                selectedCard.Dissolve(animationSpeed);
-                Destroy(selectedCard.gameObject, 2);    
-            }
         }
 
         private void ArrangeHand(float duration)

@@ -11,18 +11,22 @@ namespace TSoft.UI.Views
     {
         private enum ControlText
         {
-            EnergyAmount
+            EnergyAmount,
+            HeartAmount
         }
         
         private enum ControlButton
         {
             ButtonDraw,
             ButtonDiscard,
+            ButtonHand,
         }
         
         [SerializeField] private PokerCard pokerCardPrefab;
         [SerializeField] private CardsHolder cardHolder;
+        
         private TMPro.TextMeshProUGUI txtEnergy;
+        private TMPro.TextMeshProUGUI txtHeart;
         
         private int cardIdx = 1;
 
@@ -33,10 +37,13 @@ namespace TSoft.UI.Views
             
             Get<Button>((int)ControlButton.ButtonDraw).gameObject.BindEvent(OnDrawCard);
             Get<Button>((int)ControlButton.ButtonDiscard).gameObject.BindEvent(OnDiscardCard);
+            Get<Button>((int)ControlButton.ButtonHand).gameObject.BindEvent(OnHandCardOnHold);
 
             txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
+            txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
             
             UpdateEnergy();
+            UpdateHeart();
             DrawCards();
         }
 
@@ -53,11 +60,6 @@ namespace TSoft.UI.Views
         private void OnCardUsed(CardData card)
         {
             
-        }
-        
-        private void UpdateEnergy()
-        {
-            txtEnergy.text = cardHolder.CurrentEnergy + "/" + CardsHolder.DefaultEnergy;
         }
 
         private void OnDrawCard(PointerEventData data)
@@ -99,14 +101,25 @@ namespace TSoft.UI.Views
             UpdateEnergy();
         }
 
-        private void OnHandCardOnHold()
+        private void OnHandCardOnHold(PointerEventData data)
         {
             cardHolder.UseCardsOnHand();
+            UpdateHeart();
         }
 
         private CardData CreateRandomCard()
         {
             return cardHolder.TryDrawCard(out var card) ? card.Data.Clone() : null;
+        }
+        
+        private void UpdateEnergy()
+        {
+            txtEnergy.text = cardHolder.CurrentEnergy + "/" + CardsHolder.DefaultEnergy;
+        }
+        
+        private void UpdateHeart()
+        {
+            txtHeart.text = cardHolder.CurrentHeart + "/" + CardsHolder.DefaultHeart;
         }
     }
 }
