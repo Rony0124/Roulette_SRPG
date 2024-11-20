@@ -17,9 +17,8 @@ namespace TSoft.UI.Views
         
         private enum ControlButton
         {
-            ButtonDraw,
             ButtonDiscard,
-            ButtonHand,
+            ButtonUse,
         }
         
         [SerializeField] private PokerCard pokerCardPrefab;
@@ -35,9 +34,8 @@ namespace TSoft.UI.Views
             Bind<Button>(typeof(ControlButton));
             Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));
             
-            Get<Button>((int)ControlButton.ButtonDraw).gameObject.BindEvent(OnDrawCard);
             Get<Button>((int)ControlButton.ButtonDiscard).gameObject.BindEvent(OnDiscardCard);
-            Get<Button>((int)ControlButton.ButtonHand).gameObject.BindEvent(OnHandCardOnHold);
+            Get<Button>((int)ControlButton.ButtonUse).gameObject.BindEvent(OnUseCard);
 
             txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
             txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
@@ -61,16 +59,29 @@ namespace TSoft.UI.Views
         {
             
         }
-
-        private void OnDrawCard(PointerEventData data)
+        
+        private void OnDiscardCard(PointerEventData data)
         {
+            if(!cardHolder.TryDiscardSelectedCard())
+                return;
+            
+            UpdateEnergy();
             DrawCards();
         }
 
+        private void OnUseCard(PointerEventData data)
+        {
+            if (!cardHolder.TryUseCardsOnHand()) 
+                return;
+            
+            UpdateHeart();
+            DrawCards();
+        }
+        
         private void DrawCards()
         {
-            var cardVoids = CardsHolder.DefaultCapacity - cardHolder.CardsOnHand.Count;
-            Debug.Log($"current card capacity : {CardsHolder.DefaultCapacity}");
+            var cardVoids = cardHolder.CurrentCapacity - cardHolder.CardsOnHand.Count;
+            Debug.Log($"current card capacity : {cardHolder.CurrentCapacity}");
             Debug.Log($"current remaining card capacity : {cardVoids}");
 
             if (cardVoids < 1)
@@ -95,18 +106,6 @@ namespace TSoft.UI.Views
             }
         }
         
-        private void OnDiscardCard(PointerEventData data)
-        {
-            cardHolder.DiscardSelectedCard();
-            UpdateEnergy();
-        }
-
-        private void OnHandCardOnHold(PointerEventData data)
-        {
-            cardHolder.UseCardsOnHand();
-            UpdateHeart();
-        }
-
         private CardData CreateRandomCard()
         {
             return cardHolder.TryDrawCard(out var card) ? card.Data.Clone() : null;

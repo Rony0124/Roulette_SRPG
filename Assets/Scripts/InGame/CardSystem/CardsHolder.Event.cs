@@ -7,7 +7,6 @@ namespace TSoft.InGame.CardSystem
     public partial class CardsHolder
     {
         [Header("Visuals")]
-        [SerializeField] private bool isLiveVisualsUpdate = false;
         [SerializeField] private float cardY;
         [SerializeField] private float cardXSpacing;
         [SerializeField] private float cardYSpacing;
@@ -70,17 +69,6 @@ namespace TSoft.InGame.CardSystem
             currentPokerCardPreview = pokerCard;
             currentCardPreviewIdx = cardsOnHand.IndexOf(currentPokerCardPreview);
             pokerCard.SetCardDetails(true);
-            
-            if (currentCardPreviewIdx < cardsOnHand.Count - 1)
-            {
-                Vector3 p1 = cardPositions[currentCardPreviewIdx + 1];
-                cardsOnHand[currentCardPreviewIdx + 1].PositionCard(p1.x + cardXSpacing / 3, cardY + p1.y, animationSpeed / 5f);
-            }
-            if (currentCardPreviewIdx > 0)
-            {
-                Vector3 p1 = cardPositions[currentCardPreviewIdx - 1];
-                cardsOnHand[currentCardPreviewIdx - 1].PositionCard(p1.x - cardXSpacing / 3, cardY + p1.y, animationSpeed / 5f);
-            }
 
             pokerCard.transform.SetParent(cardPreview);
         }
@@ -93,17 +81,6 @@ namespace TSoft.InGame.CardSystem
             pokerCard.transform.SetParent(hand);
             pokerCard.transform.SetSiblingIndex(currentCardPreviewIdx);
             pokerCard.SetCardDetails(false);
-            
-            if (currentCardPreviewIdx < cardsOnHand.Count - 1)
-            {
-                Vector3 p1 = cardPositions[currentCardPreviewIdx + 1];
-                cardsOnHand[currentCardPreviewIdx + 1].PositionCard(p1.x, cardY + p1.y, animationSpeed / 10f);
-            }
-            if (currentCardPreviewIdx > 0)
-            {
-                Vector3 p1 = cardPositions[currentCardPreviewIdx - 1];
-                cardsOnHand[currentCardPreviewIdx - 1].PositionCard(p1.x, cardY + p1.y, animationSpeed / 10f);
-            }
             
             currentPokerCardPreview = null;
             currentCardPreviewIdx = -1;

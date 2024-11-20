@@ -15,5 +15,5 @@ MonoBehaviour:
   Data:
     Title: card
     Description: Dmg 1
-    IsTargetable: 0
     Image: {fileID: 21300000, guid: 3555e813e8cf67545908b0ac5a5834af, type: 3}
+    Damage: 10

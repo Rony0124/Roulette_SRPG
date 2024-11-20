@@ -37,8 +37,6 @@ namespace TCGStarter.Tweening
             }
         }
 
-
-
         private void KillTransformTween(Transform t, List<TweenData<Transform, Vector3>> list, Dictionary<Transform, TweenData<Transform, Vector3>> dict)
         {
             if (dict.ContainsKey(t))
@@ -227,9 +225,7 @@ namespace TCGStarter.Tweening
                     if (mT[i].isYoyoLoop)
                     {
                         mT[i].current = 0;
-                        Vector3 end = mT[i].endValue;
-                        mT[i].endValue = mT[i].startValue;
-                        mT[i].startValue = end;
+                        (mT[i].endValue, mT[i].startValue) = (mT[i].startValue, mT[i].endValue);
                         continue;
                     }
 
@@ -256,9 +252,7 @@ namespace TCGStarter.Tweening
                     if (scaleT[i].isYoyoLoop)
                     {
                         scaleT[i].current = 0;
-                        Vector3 end = scaleT[i].endValue;
-                        scaleT[i].endValue = scaleT[i].startValue;
-                        scaleT[i].startValue = end;
+                        (scaleT[i].endValue, scaleT[i].startValue) = (scaleT[i].startValue, scaleT[i].endValue);
                         continue;
                     }
                     scaleT[i].obj.localPosition = scaleT[i].endValue;
@@ -284,9 +278,7 @@ namespace TCGStarter.Tweening
                     if (fadeT[i].isYoyoLoop)
                     {
                         fadeT[i].current = 0;
-                        Color end = fadeT[i].endValue;
-                        fadeT[i].endValue = fadeT[i].startValue;
-                        fadeT[i].startValue = end;
+                        (fadeT[i].endValue, fadeT[i].startValue) = (fadeT[i].startValue, fadeT[i].endValue);
                         continue;
                     }
                     fadeT[i].obj.color = fadeT[i].endValue;
@@ -311,9 +303,7 @@ namespace TCGStarter.Tweening
                     if (textFadeT[i].isYoyoLoop)
                     {
                         textFadeT[i].current = 0;
-                        Color end = textFadeT[i].endValue;
-                        textFadeT[i].endValue = textFadeT[i].startValue;
-                        textFadeT[i].startValue = end;
+                        (textFadeT[i].endValue, textFadeT[i].startValue) = (textFadeT[i].startValue, textFadeT[i].endValue);
                         continue;
                     }
                     textFadeT[i].obj.color = textFadeT[i].endValue;
@@ -339,9 +329,7 @@ namespace TCGStarter.Tweening
                     if (rotateT[i].isYoyoLoop)
                     {
                         rotateT[i].current = 0;
-                        Vector3 end = rotateT[i].endValue;
-                        rotateT[i].endValue = rotateT[i].startValue;
-                        rotateT[i].startValue = end;
+                        (rotateT[i].endValue, rotateT[i].startValue) = (rotateT[i].startValue, rotateT[i].endValue);
                         continue;
                     }
 

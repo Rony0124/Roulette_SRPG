@@ -9,12 +9,11 @@ namespace TSoft.InGame.CardSystem
         [Header("Deck")]
         [SerializeField] private List<CardSO> defaultCardDB;
 
-        private List<CardSO> currentDeck;
         private Queue<CardSO> cardsOnDeck;
 
         private void InitializeDeck()
         {
-            currentDeck = new();
+            List<CardSO> currentDeck = new();
             cardsOnDeck = new();
             
             foreach (var card in defaultCardDB)
@@ -42,7 +41,6 @@ namespace TSoft.InGame.CardSystem
 
         public void ResetDeck()
         {
-            currentDeck = new();
             cardsOnDeck = new();
         }
     }

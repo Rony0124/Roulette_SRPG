@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TSoft.Managers;
 using UnityEngine;
 
 namespace TSoft.InGame.CardSystem
@@ -13,7 +14,6 @@ namespace TSoft.InGame.CardSystem
         [SerializeField] private Transform hand;
         [SerializeField] private Transform cardPreview;
         [SerializeField] private Transform deck;
-        [SerializeField] private Transform cardHold;
         
         private List<PokerCard> cardsOnHand;
         private Vector3[] cardPositions;
@@ -45,56 +45,45 @@ namespace TSoft.InGame.CardSystem
             currentCapacity = DefaultCapacity;
         }
         
-        void Update()
+        public bool TryUseCardsOnHand()
         {
-            if (currentPokerCardHold != null)
-            {
-                if (!currentPokerCardHold.cardData.IsTargetable)
-                {
-                    Vector3 mousePosition = Input.mousePosition;
-                    currentPokerCardHold.transform.position = mousePosition;
-                }
-            }
-            
-            if (isLiveVisualsUpdate)
-            {
-                liveUpdateTime += Time.deltaTime;
-                if (liveUpdateTime > 0.5f)
-                {
-                    ArrangeHand(animationSpeed / 10f);
-                    liveUpdateTime = 0;
-                }
-            }
-        }
-        
-        public void UseCardsOnHand()
-        {
+            if (currentHeart <= 0)
+                return false;
+
+            var damage = 0;
             foreach (var selectedCard in currentPokerCardSelected)
             {
                 OnCardUsed?.Invoke(selectedCard.cardData);
+
+                damage += selectedCard.cardData.Damage;
             
                 selectedCard.Dissolve(animationSpeed);
                 
                 Discard(selectedCard);
             }
+
+            CombatManager.Instance.Combat(damage);
             
-            if(currentHeart > 0)
-                currentHeart--;
-            
+            currentHeart--;
             currentPokerCardSelected = new();
+            
+            return true;
         }
         
-        public void DiscardSelectedCard()
+        public bool TryDiscardSelectedCard()
         {
+            if(currentEnergy <= 0)
+                return false;
+            
             foreach (var card in currentPokerCardSelected)
             {
                 Discard(card);
             }
             
-            if(currentEnergy > 0)
-                currentEnergy--;
-            
+            currentEnergy--;
             currentPokerCardSelected = new();
+            
+            return true;
         }
 
         private void Discard(PokerCard pokerCard)

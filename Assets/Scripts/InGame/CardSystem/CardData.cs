@@ -8,20 +8,20 @@ namespace TSoft.InGame.CardSystem
     {
         public string Title;
         public string Description;
-        public bool IsTargetable;
         public Sprite Image;
+        public int Damage;
 
-        public CardData(string title, string description, Sprite image, bool isTargetable)
+        public CardData(string title, string description, Sprite image, int damage)
         {
             Title = title;
             Description = description;
             Image = image;
-            IsTargetable = isTargetable;
+            Damage = damage;
         }
 
         public CardData Clone()
         {
-            return new CardData(Title, Description, Image, IsTargetable);
+            return new CardData(Title, Description, Image, Damage);
         }
     }
 }
