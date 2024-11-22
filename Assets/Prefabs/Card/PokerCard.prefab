@@ -114,7 +114,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 210, y: 300}
+  m_SizeDelta: {x: 210, y: 21}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7077379988836161706
 MonoBehaviour:
@@ -137,8 +137,8 @@ MonoBehaviour:
   cardData:
     Title: 
     Description: 
-    IsTargetable: 0
     Image: {fileID: 0}
+    Damage: 0
 --- !u!222 &3298381349320101068
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -87,3 +87,4 @@ Library/Search
 Library
 Assembly-CSharp.csproj
 Logs
+obj/Debug

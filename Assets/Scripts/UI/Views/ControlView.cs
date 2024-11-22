@@ -113,12 +113,12 @@ namespace TSoft.UI.Views
         
         private void UpdateEnergy()
         {
-            txtEnergy.text = cardHolder.CurrentEnergy + "/" + CardsHolder.DefaultEnergy;
+            txtEnergy.text = cardHolder.CurrentEnergy + "";
         }
         
         private void UpdateHeart()
         {
-            txtHeart.text = cardHolder.CurrentHeart + "/" + CardsHolder.DefaultHeart;
+            txtHeart.text = cardHolder.CurrentHeart + "";
         }
     }
 }
