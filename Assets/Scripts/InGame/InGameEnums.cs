@@ -1,10 +1,11 @@
 namespace TSoft.InGame
 {
-    public enum SectionType
+    public enum CardType
     {
         None,
-        Monster,
-        Equipment,
-        Quest
+        Diamond,
+        Club,
+        Spade,
+        Heart
     }
 }

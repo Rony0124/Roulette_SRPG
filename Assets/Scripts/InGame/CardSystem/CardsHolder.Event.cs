@@ -51,14 +51,11 @@ namespace TSoft.InGame.CardSystem
                 
                 currentPokerCardSelected.Add(pokerCard);
             }
+            
+            Debug.Log($"selected card {pokerCard.cardData.Image.name}");
+            
 
-            if (currentPokerCardSelected.Count > 0)
-            {
-                foreach (var card in currentPokerCardSelected)
-                {
-                    Debug.Log($"selected card {card.cardData.Image.name}");
-                }
-            }
+            CheckCardPatternOnHand();
         }
         
         private void Card_OnHover(PokerCard pokerCard)

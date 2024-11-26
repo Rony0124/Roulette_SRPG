@@ -16,4 +16,6 @@ MonoBehaviour:
     Title: card
     Description: Dmg 1
     Image: {fileID: 21300000, guid: 8423e4f3a72eff947aaffe2339fe204e, type: 3}
+    Number: 8
     Damage: 10
+    Type: 1
