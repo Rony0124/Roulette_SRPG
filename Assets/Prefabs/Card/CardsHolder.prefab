@@ -60,6 +60,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726abe02b78b87547acf83a6cf262879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultAttributes:
+  - attrType: 1000
+    value: 5
+  - attrType: 1001
+    value: 5
+  - attrType: 1002
+    value: 5
+  - attrType: 1003
+    value: 5
+  - attrType: 1004
+    value: 8
+  - attrType: 1005
+    value: 8
   hand: {fileID: 3122676890776071293}
   cardPreview: {fileID: 3122676890898093814}
   deck: {fileID: 3122676890870476789}

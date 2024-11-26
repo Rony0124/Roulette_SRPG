@@ -16,38 +16,32 @@ namespace TSoft.InGame.CardSystem
         [SerializeField] private Transform cardPreview;
         [SerializeField] private Transform deck;
         
-        private List<PokerCard> cardsOnHand;
+        //animation
         private Vector3[] cardPositions;
+        private int currentCardPreviewIdx;
         
-        private float liveUpdateTime;
-        private int currentEnergy;
-        private int currentHeart;
-        private int currentCapacity;
+        private List<PokerCard> cardsOnHand;
+        private List<PokerCard> currentPokerCardSelected;
         
-        public int CurrentHeart => currentHeart;
-        public int CurrentEnergy => currentEnergy;
-        public int CurrentCapacity => currentCapacity;
+        private PokerCard currentPokerCardPreview;
+        private PokerCard currentPokerCardHold;
+       
         public List<PokerCard> CardsOnHand => cardsOnHand;
         
-        public const int DefaultEnergy = 5;
-        public const int DefaultHeart = 5;
-        public const int DefaultCapacity = 8;
+        private const int HandCountMax = 5;
         
         private void Awake()
         {
-            holderRect = GetComponent<RectTransform>();
-            currentPokerCardSelected = new();
-            cardsOnHand = new();
+            currentPokerCardSelected = new List<PokerCard>();
+            cardsOnHand = new List<PokerCard>();
             
             InitializeDeck();
-            
-            currentEnergy = DefaultEnergy;
-            currentHeart = DefaultHeart;
-            currentCapacity = DefaultCapacity;
+            InitializeAttributes();
         }
         
         public bool TryUseCardsOnHand()
         {
+            var currentHeart = GetAttr(CardAttr.Heart);
             if (currentHeart <= 0)
                 return false;
 
@@ -64,15 +58,17 @@ namespace TSoft.InGame.CardSystem
             }
 
             CombatManager.Instance.Combat(damage);
-            
-            currentHeart--;
-            currentPokerCardSelected = new();
+
+            --currentHeart;
+            SetAttr(CardAttr.Heart, currentHeart);
+            currentPokerCardSelected = new List<PokerCard>();
             
             return true;
         }
         
         public bool TryDiscardSelectedCard()
         {
+            var currentEnergy = GetAttr(CardAttr.Energy);
             if(currentEnergy <= 0)
                 return false;
             
@@ -81,7 +77,8 @@ namespace TSoft.InGame.CardSystem
                 Discard(card);
             }
             
-            currentEnergy--;
+            --currentEnergy;
+            SetAttr(CardAttr.Energy, currentEnergy);
             currentPokerCardSelected = new();
             
             return true;
@@ -172,7 +169,6 @@ namespace TSoft.InGame.CardSystem
                 .OrderBy(rank => rank)
                 .ToList();
             
-            // Pattern priority
             string detectedPattern = null;
 
             if (CheckForStraightFlush(currentPokerCardSelected))
@@ -228,7 +224,7 @@ namespace TSoft.InGame.CardSystem
                     .ToList();
 
                 if (CheckForStraight(sortedRanks))
-                    return true; // Straight flush detected
+                    return true;
             }
 
             return false;

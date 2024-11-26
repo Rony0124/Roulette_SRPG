@@ -1,3 +1,4 @@
+using TSoft.InGame;
 using TSoft.InGame.CardSystem;
 using TSoft.UI.Core;
 using TSoft.Utils;
@@ -80,8 +81,7 @@ namespace TSoft.UI.Views
         
         private void DrawCards()
         {
-            var cardVoids = cardHolder.CurrentCapacity - cardHolder.CardsOnHand.Count;
-            Debug.Log($"current card capacity : {cardHolder.CurrentCapacity}");
+            var cardVoids = cardHolder.GetAttr(CardAttr.Capacity) - cardHolder.CardsOnHand.Count;
             Debug.Log($"current remaining card capacity : {cardVoids}");
 
             if (cardVoids < 1)
@@ -113,12 +113,12 @@ namespace TSoft.UI.Views
         
         private void UpdateEnergy()
         {
-            txtEnergy.text = cardHolder.CurrentEnergy + "";
+            txtEnergy.text = cardHolder.GetAttr(CardAttr.Energy) + "";
         }
         
         private void UpdateHeart()
         {
-            txtHeart.text = cardHolder.CurrentHeart + "";
+            txtHeart.text = cardHolder.GetAttr(CardAttr.Heart) + "";
         }
     }
 }

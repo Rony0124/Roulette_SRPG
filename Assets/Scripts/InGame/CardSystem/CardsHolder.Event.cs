@@ -13,17 +13,6 @@ namespace TSoft.InGame.CardSystem
         [Range(0.2f, 2f)]
         [SerializeField] private float animationSpeed;
         
-        private PokerCard currentPokerCardPreview;
-        private PokerCard currentPokerCardHold;
-
-        private List<PokerCard> currentPokerCardSelected;
-        
-        private int currentCardPreviewIdx;
-
-        private const int HandCountMax = 5;
-        
-        private RectTransform holderRect;
-        
         IEnumerator ListenCardEvents(PokerCard pokerCard)
         {
             yield return new WaitForSeconds(animationSpeed);
