@@ -9,7 +9,7 @@ namespace TSoft.InGame
         Heart
     }
     
-    public enum CardAttr
+    public enum GameplayAttr
     {
         None = 0,
         

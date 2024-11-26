@@ -3,26 +3,32 @@ using System;
 namespace TSoft.InGame.CardSystem
 {
     [Serializable]
-    public struct DefaultCardAttribute
+    public struct DefaultGamePlayAttribute
     {
-        public CardAttr attrType;
+        public GameplayAttr attrType;
         public float value;
+    }
+    
+    public struct AppliedAttributeModifier
+    {
+        public GameplayAttr attrType;
+        public GameplayAttributeModifier modifier;
     }
     
     [Serializable]
     public struct AttributeState
     {
-        public CardAttr attrType;
-        public CardAttributeValue value;
-        public CardAttributeModifier modifier;
+        public GameplayAttr attrType;
+        public GameplayAttributeValue value;
+        public GameplayAttributeModifier modifier;
     }
     
-    public struct CardAttributeValue
+    public struct GameplayAttributeValue
     {
         public float BaseValue;
         public float CurrentValue;
         
-        public void UpdateCurrent(CardAttributeModifier modifier)
+        public void UpdateCurrent(GameplayAttributeModifier modifier)
         {
             if (float.IsNaN(modifier.Override))
                 CurrentValue = (BaseValue + modifier.Add) * modifier.Multiply;
@@ -31,7 +37,7 @@ namespace TSoft.InGame.CardSystem
         }
     }
     
-    public struct CardAttributeModifier
+    public struct GameplayAttributeModifier
     {
         public float Add;
         public float Multiply;
@@ -44,7 +50,7 @@ namespace TSoft.InGame.CardSystem
             Override = float.NaN;
         }
 
-        public void Combine(in CardAttributeModifier modifier)
+        public void Combine(in GameplayAttributeModifier modifier)
         {
             Add += modifier.Add;
             Multiply *= modifier.Multiply;

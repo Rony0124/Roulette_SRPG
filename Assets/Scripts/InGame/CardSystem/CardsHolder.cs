@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TSoft.InGame.GamePlaySystem;
 using TSoft.Managers;
 using UnityEngine;
 
@@ -16,6 +17,9 @@ namespace TSoft.InGame.CardSystem
         [SerializeField] private Transform cardPreview;
         [SerializeField] private Transform deck;
         
+        [Header("GamePlay")]
+        private Gameplay gameplay;
+        
         //animation
         private Vector3[] cardPositions;
         private int currentCardPreviewIdx;
@@ -27,6 +31,7 @@ namespace TSoft.InGame.CardSystem
         private PokerCard currentPokerCardHold;
        
         public List<PokerCard> CardsOnHand => cardsOnHand;
+        public Gameplay Gameplay =>  gameplay;
         
         private const int HandCountMax = 5;
         
@@ -34,14 +39,15 @@ namespace TSoft.InGame.CardSystem
         {
             currentPokerCardSelected = new List<PokerCard>();
             cardsOnHand = new List<PokerCard>();
+
+            gameplay = GetComponent<Gameplay>();
             
             InitializeDeck();
-            InitializeAttributes();
         }
         
         public bool TryUseCardsOnHand()
         {
-            var currentHeart = GetAttr(CardAttr.Heart);
+            var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
             if (currentHeart <= 0)
                 return false;
 
@@ -60,7 +66,7 @@ namespace TSoft.InGame.CardSystem
             CombatManager.Instance.Combat(damage);
 
             --currentHeart;
-            SetAttr(CardAttr.Heart, currentHeart);
+            gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
             currentPokerCardSelected = new List<PokerCard>();
             
             return true;
@@ -68,7 +74,7 @@ namespace TSoft.InGame.CardSystem
         
         public bool TryDiscardSelectedCard()
         {
-            var currentEnergy = GetAttr(CardAttr.Energy);
+            var currentEnergy = gameplay.GetAttr(GameplayAttr.Energy);
             if(currentEnergy <= 0)
                 return false;
             
@@ -78,7 +84,7 @@ namespace TSoft.InGame.CardSystem
             }
             
             --currentEnergy;
-            SetAttr(CardAttr.Energy, currentEnergy);
+            gameplay.SetAttr(GameplayAttr.Energy, currentEnergy);
             currentPokerCardSelected = new();
             
             return true;

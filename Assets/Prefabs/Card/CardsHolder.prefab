@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3122676890704628375}
   - component: {fileID: 3122676890704628374}
   - component: {fileID: 3122676890704628361}
+  - component: {fileID: 792589974655902186}
   m_Layer: 5
   m_Name: CardsHolder
   m_TagString: Untagged
@@ -60,19 +61,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726abe02b78b87547acf83a6cf262879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultAttributes:
-  - attrType: 1000
-    value: 5
-  - attrType: 1001
-    value: 5
-  - attrType: 1002
-    value: 5
-  - attrType: 1003
-    value: 5
-  - attrType: 1004
-    value: 8
-  - attrType: 1005
-    value: 8
   hand: {fileID: 3122676890776071293}
   cardPreview: {fileID: 3122676890898093814}
   deck: {fileID: 3122676890870476789}
@@ -133,6 +121,32 @@ MonoBehaviour:
   cardXSpacing: 120
   cardYSpacing: 10
   animationSpeed: 0.3
+--- !u!114 &792589974655902186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3122676890704628372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09c555e2418d69d4a807d6b4484640ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultAttributes:
+  - attrType: 1000
+    value: 5
+  - attrType: 1001
+    value: 5
+  - attrType: 1002
+    value: 5
+  - attrType: 1003
+    value: 5
+  - attrType: 1004
+    value: 8
+  - attrType: 1005
+    value: 8
+  Attributes: []
 --- !u!1 &3122676890776071290
 GameObject:
   m_ObjectHideFlags: 0
