@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 5875955778865895480}
   - component: {fileID: 4456834316796216194}
   m_Layer: 5
-  m_Name: CardHolderCanvas
+  m_Name: CardHolderUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

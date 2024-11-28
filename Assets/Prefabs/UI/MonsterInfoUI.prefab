@@ -52,7 +52,7 @@ GameObject:
   - component: {fileID: 2797768425622085859}
   - component: {fileID: 7334458940032973530}
   m_Layer: 5
-  m_Name: MonsterInfoCanvas
+  m_Name: MonsterInfoUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

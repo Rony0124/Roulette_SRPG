@@ -26,7 +26,7 @@ namespace TSoft.Managers
         [TableList] 
         public List<Popup> popups;
         
-        private int order = 0; 
+        private int order = 10; 
         
         Stack<ViewPopup> popupStack = new Stack<ViewPopup>();
         
@@ -34,9 +34,9 @@ namespace TSoft.Managers
         {
             get
             {
-                GameObject root = GameObject.Find("PopupGroup");
+                GameObject root = GameObject.Find("UI_Root");
                 if (root == null)
-                    root = new GameObject { name = "PopupGroup" };
+                    root = new GameObject { name = "UI_Root" };
                 return root;
             }
         }
