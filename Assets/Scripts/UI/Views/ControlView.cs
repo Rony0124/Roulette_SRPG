@@ -64,20 +64,9 @@ namespace TSoft.UI.Views
             DrawCards();
         }
 
-        protected override void OnActivated()
-        {
-            CardsHolder.OnCardUsed += OnCardUsed;
-        }
+        protected override void OnActivated() { }
 
-        protected override void OnDeactivated()
-        {
-            CardsHolder.OnCardUsed -= OnCardUsed;
-        }
-
-        private void OnCardUsed(CardData card)
-        {
-            
-        }
+        protected override void OnDeactivated() { }
         
         private void OnDiscardCard(PointerEventData data)
         {

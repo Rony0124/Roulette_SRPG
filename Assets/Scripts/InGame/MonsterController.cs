@@ -1,4 +1,5 @@
 using System;
+using TSoft.Managers;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -19,6 +20,8 @@ namespace TSoft.InGame
         [SerializeField] private float hp;
 
         private MonsterInfo info;
+        
+        public MonsterInfo Info => info;
 
         public UnityEvent<float> onDamage;
         public UnityEvent onDead;
@@ -40,28 +43,29 @@ namespace TSoft.InGame
 
         public void TakeDamage(float damage)
         {
-            hp = Mathf.Max(0, hp - damage);
+            var currentHp = info.Hp;
+            currentHp = Mathf.Max(0, currentHp - damage);
             
-            if (hp > 0)
-            {
-                onDamage?.Invoke(hp);
-            }
-            else
+            onDamage?.Invoke(currentHp);
+            
+            if (currentHp <= 0)
             {
                 onDead?.Invoke();
             }
+            
+            info.Hp = currentHp;
         }
         
         //test
-        private void OnDamage(float hp)
+        private void OnDamage(float health)
         {
             Debug.Log("damaged");
-            Debug.Log("remaining hp is " + hp);
+            Debug.Log("remaining hp is " + health);
         }
 
         private void OnDead()
         {
-            Debug.Log("dead");
+            PopupManager.Instance.OpenPopup(PopupManager.PopupType.Win);
         }
     }
 }

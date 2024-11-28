@@ -170,6 +170,7 @@ GameObject:
   - component: {fileID: 4981733366053777898}
   - component: {fileID: 3059278274483667002}
   - component: {fileID: 1421279485697344085}
+  - component: {fileID: 4930706998548472228}
   m_Layer: 5
   m_Name: ControlCanvas
   m_TagString: Untagged
@@ -260,6 +261,25 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!114 &4930706998548472228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1100120036796068703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a69f62518d90de94aaf5647ad69d327b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01,
+    type: 3}
+  heartPrefab: {fileID: 7213977535378464001, guid: 7739e62321c533a4b9b2afa3b4afa3b5,
+    type: 3}
+  energyPrefab: {fileID: 4474858859746613511, guid: c2a088a4d235f5144ae9f96a63408168,
+    type: 3}
+  cardHolder: {fileID: 0}
 --- !u!1 &1142930139998403381
 GameObject:
   m_ObjectHideFlags: 0
@@ -2273,7 +2293,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4141598597072591979}
   - component: {fileID: 3983100053150132815}
-  - component: {fileID: 7645544396066492658}
   - component: {fileID: 6035306388623079178}
   m_Layer: 5
   m_Name: ControlPanel
@@ -2314,25 +2333,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8690371063825646537}
   m_CullTransparentMesh: 1
---- !u!114 &7645544396066492658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8690371063825646537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a69f62518d90de94aaf5647ad69d327b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01,
-    type: 3}
-  heartPrefab: {fileID: 7213977535378464001, guid: 7739e62321c533a4b9b2afa3b4afa3b5,
-    type: 3}
-  energyPrefab: {fileID: 4474858859746613511, guid: c2a088a4d235f5144ae9f96a63408168,
-    type: 3}
-  cardHolder: {fileID: 0}
 --- !u!114 &6035306388623079178
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.Utilities;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Managers;
 using UnityEngine;
@@ -10,8 +11,6 @@ namespace TSoft.InGame.CardSystem
 {
     public partial class CardsHolder : MonoBehaviour
     {
-        public static event Action<CardData> OnCardUsed;
-        
         [Header("Positions")]
         [SerializeField] private Transform hand;
         [SerializeField] private Transform cardPreview;
@@ -51,14 +50,19 @@ namespace TSoft.InGame.CardSystem
             if (currentHeart <= 0)
                 return false;
 
+            if (currentPokerCardSelected.IsNullOrEmpty())
+                return false;
+            
+            --currentHeart;
+            
+            gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
+
             //현재 데미지 상태
             var damage = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
             Debug.Log(damage);
             
             foreach (var selectedCard in currentPokerCardSelected)
             {
-                OnCardUsed?.Invoke(selectedCard.cardData);
-            
                 selectedCard.Dissolve(animationSpeed);
                 
                 Discard(selectedCard);
@@ -69,9 +73,12 @@ namespace TSoft.InGame.CardSystem
 
             CombatManager.Instance.Combat(damage);
 
-            --currentHeart;
-            gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
-            currentPokerCardSelected = new List<PokerCard>();
+            if (currentHeart <= 0 && CombatManager.Instance.CurrentMonster.Info.Hp > 0)
+            {
+                PopupManager.Instance.OpenPopup(PopupManager.PopupType.GameOver);
+            }
+            
+            currentPokerCardSelected.Clear();
             
             return true;
         }
