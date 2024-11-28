@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem;
 using TSoft.UI.Core;
@@ -22,24 +23,41 @@ namespace TSoft.UI.Views
             ButtonUse,
         }
         
+        private enum ControlParent
+        {
+            HeartGroup,
+            EnergyGroup
+        }
+        
         [SerializeField] private PokerCard pokerCardPrefab;
+        [SerializeField] private GameObject heartPrefab;
+        [SerializeField] private GameObject energyPrefab;
         [SerializeField] private CardsHolder cardHolder;
         
         private TMPro.TextMeshProUGUI txtEnergy;
         private TMPro.TextMeshProUGUI txtHeart;
-        
-        private int cardIdx = 1;
+        private Transform trHeartGroup;
+        private Transform trEnergyGroup;
+
+        private List<GameObject> hearts;
+        private List<GameObject> energies;
 
         private void Start()
         {
             Bind<Button>(typeof(ControlButton));
             Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));
+            Bind<Transform>(typeof(ControlParent));
             
             Get<Button>((int)ControlButton.ButtonDiscard).gameObject.BindEvent(OnDiscardCard);
             Get<Button>((int)ControlButton.ButtonUse).gameObject.BindEvent(OnUseCard);
 
             txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
             txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
+            trHeartGroup = Get<Transform>((int)ControlParent.HeartGroup);
+            trEnergyGroup = Get<Transform>((int)ControlParent.EnergyGroup);
+
+            hearts = new();
+            energies = new();
             
             UpdateEnergy();
             UpdateHeart();
@@ -93,7 +111,6 @@ namespace TSoft.UI.Views
             for (var i = 0; i < cardVoids; i++)
             {
                 PokerCard pokerCard = Instantiate(pokerCardPrefab);
-                pokerCard.name = "Card " + cardIdx;
 
                 var cardData = CreateRandomCard();
                 if(cardData == null)
@@ -102,7 +119,6 @@ namespace TSoft.UI.Views
                 pokerCard.SetData(cardData);  
 
                 cardHolder.AddCard(pokerCard);
-                cardIdx++;
             }
         }
         
@@ -113,12 +129,46 @@ namespace TSoft.UI.Views
         
         private void UpdateEnergy()
         {
-            txtEnergy.text = cardHolder.Gameplay.GetAttr(GameplayAttr.Energy) + "";
+            var energyCount = cardHolder.Gameplay.GetAttr(GameplayAttr.Energy);
+            txtHeart.text = energyCount + "";
+
+            if (energies.Count > 0)
+            {
+                for (int i = 0; i < energies.Count; i++)
+                {
+                    Destroy(energies[i]);
+                }
+            
+                energies.Clear();    
+            }
+
+            for (int i = 0; i < energyCount; i++)
+            {
+                var obj = Instantiate(energyPrefab, trEnergyGroup);
+                energies.Add(obj);
+            }
         }
         
         private void UpdateHeart()
         {
-            txtHeart.text = cardHolder.Gameplay.GetAttr(GameplayAttr.Heart) + "";
+            var heartCount = cardHolder.Gameplay.GetAttr(GameplayAttr.Heart);
+            txtHeart.text = heartCount + "";
+
+            if (hearts.Count > 0)
+            {
+                for (int i = 0; i < hearts.Count; i++)
+                {
+                    Destroy(hearts[i]);
+                }
+            
+                hearts.Clear();
+            }
+            
+            for (int i = 0; i < heartCount; i++)
+            {
+                var obj = Instantiate(heartPrefab, trHeartGroup);
+                hearts.Add(obj);
+            }
         }
     }
 }

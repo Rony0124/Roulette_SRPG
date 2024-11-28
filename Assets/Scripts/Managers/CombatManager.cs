@@ -12,7 +12,7 @@ namespace TSoft.Managers
         
         public MonsterController CurrentMonster => currentMonster.GetComponent<MonsterController>();
        
-        void Start()
+        void Awake()
         {
             currentMonster = Instantiate(monsterPrefab);
         }

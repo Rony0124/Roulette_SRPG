@@ -1,5 +1,4 @@
 using System;
-using TSoft.Core;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,15 +6,36 @@ namespace TSoft.InGame
 {
     public class MonsterController : MonoBehaviour
     {
+        public struct MonsterInfo
+        {
+            public string Name;
+            public float Hp;
+        }
+        
+        public static event Action<float> OnMonsterDamaged;
+        public static event Action<MonsterInfo> OnMonsterSpawn;
+        
+        [SerializeField] private string monsterName;
         [SerializeField] private float hp;
 
-        public UnityEvent onDamage;
+        private MonsterInfo info;
+
+        public UnityEvent<float> onDamage;
         public UnityEvent onDead;
 
         private void Awake()
         {
+            onDamage.AddListener((p) => OnMonsterDamaged?.Invoke(p));
             onDamage.AddListener(OnDamage);
             onDead.AddListener(OnDead);
+
+            info.Name = monsterName;
+            info.Hp = hp;
+        }
+
+        private void Start()
+        {
+            OnMonsterSpawn?.Invoke(info);
         }
 
         public void TakeDamage(float damage)
@@ -24,7 +44,7 @@ namespace TSoft.InGame
             
             if (hp > 0)
             {
-                onDamage?.Invoke();
+                onDamage?.Invoke(hp);
             }
             else
             {
@@ -33,7 +53,7 @@ namespace TSoft.InGame
         }
         
         //test
-        private void OnDamage()
+        private void OnDamage(float hp)
         {
             Debug.Log("damaged");
             Debug.Log("remaining hp is " + hp);
