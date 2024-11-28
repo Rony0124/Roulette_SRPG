@@ -34,8 +34,6 @@ namespace TSoft.InGame.CardSystem
 
             card = cardsOnDeck.Dequeue();
             
-            Debug.Log($"current remaining card on deck : {cardsOnDeck.Count}");
-            
             return true;
         }
 

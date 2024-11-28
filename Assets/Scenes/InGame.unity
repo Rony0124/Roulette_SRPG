@@ -198,6 +198,37 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 696295322}
     m_Modifications:
+    - target: {fileID: 792589974655902186, guid: 635c1d0d68788e941b4a076c5a59c603,
+        type: 3}
+      propertyPath: Attributes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 792589974655902186, guid: 635c1d0d68788e941b4a076c5a59c603,
+        type: 3}
+      propertyPath: defaultEffects.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 792589974655902186, guid: 635c1d0d68788e941b4a076c5a59c603,
+        type: 3}
+      propertyPath: defaultAttributes.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 792589974655902186, guid: 635c1d0d68788e941b4a076c5a59c603,
+        type: 3}
+      propertyPath: defaultEffects.Array.data[0].effect
+      value: 
+      objectReference: {fileID: 11400000, guid: f96b589330ef0174cac4e1be69a73ef0,
+        type: 2}
+    - target: {fileID: 792589974655902186, guid: 635c1d0d68788e941b4a076c5a59c603,
+        type: 3}
+      propertyPath: defaultAttributes.Array.data[6].value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 792589974655902186, guid: 635c1d0d68788e941b4a076c5a59c603,
+        type: 3}
+      propertyPath: defaultAttributes.Array.data[6].attrType
+      value: 2000
+      objectReference: {fileID: 0}
     - target: {fileID: 3122676890704628372, guid: 635c1d0d68788e941b4a076c5a59c603,
         type: 3}
       propertyPath: m_Name
@@ -305,8 +336,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3122676890704628375, guid: 635c1d0d68788e941b4a076c5a59c603,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 472216593}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3122676890704628372, guid: 635c1d0d68788e941b4a076c5a59c603,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1010159879}
   m_SourcePrefab: {fileID: 100100000, guid: 635c1d0d68788e941b4a076c5a59c603, type: 3}
 --- !u!224 &7591427 stripped
 RectTransform:
@@ -320,7 +359,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7591426}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1010159876}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 726abe02b78b87547acf83a6cf262879, type: 3}
@@ -372,6 +411,91 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monsterPrefab: {fileID: 7547287029773294281, guid: e33039d24a8e3544b9895649bb28f747,
     type: 3}
+--- !u!1 &373257769
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 373257770}
+  m_Layer: 0
+  m_Name: SpecialCardManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &373257770
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 373257769}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1436983472}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &472216592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 472216593}
+  - component: {fileID: 472216594}
+  m_Layer: 5
+  m_Name: SpecialCard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &472216593
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472216592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7591427}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &472216594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472216592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3a56377c549fb14b9495b3c28598928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cardData:
+    Title: aa
+    Description: asdasd
+    Image: {fileID: 0}
+    Type: 1
+    Effect: {fileID: 11400000, guid: f96b589330ef0174cac4e1be69a73ef0, type: 2}
 --- !u!1 &696295318
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +959,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 22.046, y: -17.919, z: -1.615}
+--- !u!1 &1010159876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3122676890704628372, guid: 635c1d0d68788e941b4a076c5a59c603,
+    type: 3}
+  m_PrefabInstance: {fileID: 7591426}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1010159879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010159876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42e7c1b60d7b2974db3c02999c27977d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpecialCards:
+  - {fileID: 472216594}
 --- !u!1001 &1224638701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1305,6 +1449,7 @@ Transform:
   m_Children:
   - {fileID: 1783942957}
   - {fileID: 50597092}
+  - {fileID: 373257770}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1752417617

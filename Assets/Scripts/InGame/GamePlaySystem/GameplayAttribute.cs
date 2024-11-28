@@ -1,6 +1,6 @@
 using System;
 
-namespace TSoft.InGame.CardSystem
+namespace TSoft.InGame.GamePlaySystem
 {
     [Serializable]
     public struct DefaultGamePlayAttribute

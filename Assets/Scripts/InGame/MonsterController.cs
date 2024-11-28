@@ -1,4 +1,5 @@
 using System;
+using TSoft.Core;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,7 +7,7 @@ namespace TSoft.InGame
 {
     public class MonsterController : MonoBehaviour
     {
-        [SerializeField] private int hp;
+        [SerializeField] private float hp;
 
         public UnityEvent onDamage;
         public UnityEvent onDead;
@@ -17,7 +18,7 @@ namespace TSoft.InGame
             onDead.AddListener(OnDead);
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             hp = Mathf.Max(0, hp - damage);
             

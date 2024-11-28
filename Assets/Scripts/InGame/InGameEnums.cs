@@ -8,6 +8,19 @@ namespace TSoft.InGame
         Spade,
         Heart
     }
+
+    public enum CardPatternType
+    {
+        StraightFlush,
+        FourOfKind,
+        FullHouse,
+        Flush,
+        Straight,
+        ThreeOfKind,
+        TwoPair,
+        OnePair,
+        HighCard
+    }
     
     public enum GameplayAttr
     {

@@ -1,7 +1,9 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using TSoft.InGame.CardSystem;
+using UnityEngine;
 
 namespace TSoft.InGame.GamePlaySystem
 {
@@ -55,10 +57,13 @@ namespace TSoft.InGame.GamePlaySystem
         }
         
         public List<DefaultEffect> defaultEffects;
+        [HideInInspector] 
         public List<AppliedGameplayEffect> appliedEffects;
         
         private void InitializeEffect()
         {
+            appliedEffects = new List<AppliedGameplayEffect>();
+            
             foreach (var defaultEffect in defaultEffects)
             {
                 ApplyEffect(defaultEffect.effect, this);
@@ -81,6 +86,11 @@ namespace TSoft.InGame.GamePlaySystem
             appliedEffects.Add(appliedEffect);
             
             UpdateAttributes();
+        }
+        
+        public void ApplyEffectSelf(GameplayEffectSO effect, float level = 0)
+        {
+            ApplyEffect(effect, this);
         }
     }
 }

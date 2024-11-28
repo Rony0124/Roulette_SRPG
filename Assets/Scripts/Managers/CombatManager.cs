@@ -17,7 +17,7 @@ namespace TSoft.Managers
             currentMonster = Instantiate(monsterPrefab);
         }
 
-        public void Combat(int damage)
+        public void Combat(float damage)
         {
             CurrentMonster.TakeDamage(damage);
         }

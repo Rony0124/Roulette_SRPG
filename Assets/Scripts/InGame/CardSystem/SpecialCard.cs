@@ -2,8 +2,13 @@ using UnityEngine;
 
 namespace TSoft.InGame.CardSystem
 {
-    public abstract class SpecialCard : MonoBehaviour
+    public class SpecialCard : MonoBehaviour
     {
-        public abstract void ApplyCard();
+        public SpecialCardData cardData;
+        
+        public void SetData(SpecialCardData card)
+        {
+            cardData = card;
+        }
     }
 }

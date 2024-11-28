@@ -51,17 +51,21 @@ namespace TSoft.InGame.CardSystem
             if (currentHeart <= 0)
                 return false;
 
-            var damage = 0;
+            //현재 데미지 상태
+            var damage = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
+            Debug.Log(damage);
+            
             foreach (var selectedCard in currentPokerCardSelected)
             {
                 OnCardUsed?.Invoke(selectedCard.cardData);
-
-                damage += selectedCard.cardData.Damage;
             
                 selectedCard.Dissolve(animationSpeed);
                 
                 Discard(selectedCard);
             }
+            
+            //카드 패턴에 의한 데미지 추가
+            damage *= CurrentPattern.Modifier;
 
             CombatManager.Instance.Combat(damage);
 
@@ -153,108 +157,5 @@ namespace TSoft.InGame.CardSystem
                 xSpacing += cardXSpacing;
             }
         }
-
-        private void CheckCardPatternOnHand()
-        {
-            if (currentPokerCardSelected is not { Count: > 0 })
-                return;
-            
-            var rankGroups = currentPokerCardSelected
-                .GroupBy(card => card.cardData.Number)
-                .OrderByDescending(group => group.Count())
-                .ToList();
-            
-            var suitGroups = currentPokerCardSelected
-                .GroupBy(card => card.cardData.Type)
-                .OrderByDescending(group => group.Count())
-                .ToList();
-            
-            var sortedRanks = currentPokerCardSelected
-                .Select(card => card.cardData.Number)
-                .Distinct()
-                .OrderBy(rank => rank)
-                .ToList();
-            
-            string detectedPattern = null;
-
-            if (CheckForStraightFlush(currentPokerCardSelected))
-            {
-                detectedPattern = "Straight Flush";
-            }
-            else if (rankGroups.Any(g => g.Count() == 4))
-            {
-                detectedPattern = "Four of a Kind";
-            }
-            else if (rankGroups.Any(g => g.Count() == 3) && rankGroups.Any(g => g.Count() == 2))
-            {
-                detectedPattern = "Full House";
-            }
-            else if (suitGroups.Any(g => g.Count() >= 5))
-            {
-                detectedPattern = "Flush";
-            }
-            else if (CheckForStraight(sortedRanks))
-            {
-                detectedPattern = "Straight";
-            }
-            else if (rankGroups.Any(g => g.Count() == 3))
-            {
-                detectedPattern = "Three of a Kind";
-            }
-            else if (rankGroups.Count(g => g.Count() == 2) >= 2)
-            {
-                detectedPattern = "Two Pair";
-            }
-            else if (rankGroups.Any(g => g.Count() == 2))
-            {
-                detectedPattern = "One Pair";
-            }
-            else
-            {
-                detectedPattern = "High Card";
-            }
-
-            Debug.Log($"Highest Pattern Detected: {detectedPattern}");
-        }
-        
-        private bool CheckForStraightFlush(List<PokerCard> cards)
-        {
-            var suitGroups = cards.GroupBy(card => card.cardData.Type);
-
-            foreach (var suitGroup in suitGroups)
-            {
-                var sortedRanks = suitGroup
-                    .Select(card => card.cardData.Number)
-                    .Distinct()
-                    .OrderBy(rank => rank)
-                    .ToList();
-
-                if (CheckForStraight(sortedRanks))
-                    return true;
-            }
-
-            return false;
-        }
-        
-        private bool CheckForStraight(List<int> sortedRanks)
-        {
-            int consecutiveCount = 1;
-            for (int i = 1; i < sortedRanks.Count; i++)
-            {
-                if (sortedRanks[i] == sortedRanks[i - 1] + 1)
-                {
-                    consecutiveCount++;
-                    if (consecutiveCount >= 5)
-                        return true;
-                }
-                else
-                {
-                    consecutiveCount = 1;
-                }
-            }
-            return false;
-        }
-        
-
     }
 }
