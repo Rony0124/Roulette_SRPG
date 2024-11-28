@@ -1,3 +1,4 @@
+using System;
 using TSoft.Core;
 using TSoft.InGame;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace TSoft.Managers
         
         public MonsterController CurrentMonster => currentMonster.GetComponent<MonsterController>();
        
-        void Awake()
+        protected override void  Init()
         {
             currentMonster = Instantiate(monsterPrefab);
         }

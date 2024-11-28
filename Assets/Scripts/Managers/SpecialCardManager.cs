@@ -8,7 +8,7 @@ namespace TSoft.Managers
     {
         public List<SpecialCard> specialCards;
 
-        private void Awake()
+        protected override void Init()
         {
             specialCards = new List<SpecialCard>();
         }

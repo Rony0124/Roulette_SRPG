@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57f77ccbffd61f48932f51e5a28785f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
   monsterPrefab: {fileID: 7547287029773294281, guid: e33039d24a8e3544b9895649bb28f747,
     type: 3}
 --- !u!1 &54510827
@@ -346,6 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7d03451436e5dd46912a64347e0cf7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 0
   popups:
   - type: 0
     popupObj: {fileID: 795714890}
@@ -959,6 +961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a828ae06bf941be46bfd02fe74e8d1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroyOnLoad: 1
 --- !u!223 &672429351057105959
 Canvas:
   m_ObjectHideFlags: 0

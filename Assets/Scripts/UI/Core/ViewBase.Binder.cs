@@ -55,11 +55,5 @@ namespace TSoft.UI.Core
 
             return objects[idx] as T;
         }
-
-        protected GameObject GetObject(int idx)  => Get<GameObject>(idx); 
-        protected TextMeshProUGUI GetText(int idx) => Get<TextMeshProUGUI>(idx);
-        protected Button GetButton(int idx) => Get<Button>(idx);
-        protected Image GetImage(int idx) => Get<Image>(idx);
-        protected Slider GetSlider(int idx) => Get<Slider>(idx);
     }
 }

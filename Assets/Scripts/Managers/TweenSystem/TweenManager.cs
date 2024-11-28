@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
+using TCGStarter.Tweening;
+using TSoft.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-namespace TCGStarter.Tweening
+namespace TSoft.Managers.TweenSystem
 {
-    public class TweenManager : MonoBehaviour
+    public class TweenManager : Singleton<TweenManager>
     {
         private List<TweenData<Transform, Vector3>> mT = new List<TweenData<Transform, Vector3>>();
         private Dictionary<Transform, TweenData<Transform, Vector3>> mH = new Dictionary<Transform, TweenData<Transform, Vector3>>();
@@ -57,20 +57,7 @@ namespace TCGStarter.Tweening
         {
             KillTransformTween(transformObj, rotateT, rotateH);
         }
-
-        public static TweenManager Instance { get; private set; }
-
-
-        private void Awake()
-        {
-            if (Instance != null && Instance != this)
-            {
-                Destroy(this);
-                return;
-            }
-            Instance = this;
-        }
-
+        
         public void AddMoveTween(Transform transformObj, Vector3 target, float duration, bool isLoopYoyo)
         {
             TweenData<Transform, Vector3> t = new TweenData<Transform, Vector3>();
