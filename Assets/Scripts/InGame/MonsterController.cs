@@ -65,7 +65,7 @@ namespace TSoft.InGame
 
         private void OnDead()
         {
-            PopupManager.Instance.OpenPopup(PopupManager.PopupType.Win);
+            UIManager.Instance.ShowPopupUI(UIManager.PopupType.Win);
         }
     }
 }

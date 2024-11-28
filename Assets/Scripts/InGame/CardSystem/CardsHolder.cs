@@ -75,7 +75,7 @@ namespace TSoft.InGame.CardSystem
 
             if (currentHeart <= 0 && CombatManager.Instance.CurrentMonster.Info.Hp > 0)
             {
-                PopupManager.Instance.OpenPopup(PopupManager.PopupType.GameOver);
+                UIManager.Instance.ShowPopupUI(UIManager.PopupType.GameOver);
             }
             
             currentPokerCardSelected.Clear();
