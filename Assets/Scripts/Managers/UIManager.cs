@@ -30,17 +30,6 @@ namespace TSoft.Managers
         
         Stack<ViewPopup> popupStack = new Stack<ViewPopup>();
         
-        public GameObject Root
-        {
-            get
-            {
-                GameObject root = GameObject.Find("UI_Root");
-                if (root == null)
-                    root = new GameObject { name = "UI_Root" };
-                return root;
-            }
-        }
-        
         public void SetCanvas(GameObject go, bool sort = true)
         {
             Canvas canvas = UIUtil.GetOrAddComponent<Canvas>(go);
@@ -65,8 +54,6 @@ namespace TSoft.Managers
             
             var popup = UIUtil.GetOrAddComponent<ViewPopup>(go);
             popupStack.Push(popup);
-
-            go.transform.SetParent(Root.transform);
         }
         
         public void ClosePopupUI(ViewPopup popup)
