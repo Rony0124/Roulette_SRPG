@@ -11,10 +11,10 @@ namespace TSoft.InGame.CardSystem
 {
     public class AbilityContainer : MonoBehaviour
     {
+        private Gameplay gameplay;
+        
         public List<SpecialCard> SpecialCards;
         public ObservableList<SpecialCardData> CurrentSpecialCards;
-
-        private Gameplay gameplay;
         
         private void Awake()
         {

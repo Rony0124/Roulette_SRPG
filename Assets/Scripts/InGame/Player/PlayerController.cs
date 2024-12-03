@@ -9,20 +9,21 @@ using UnityEngine;
 
 namespace TSoft.InGame.CardSystem
 {
-    public partial class CardsHolder : MonoBehaviour
+    public partial class PlayerController : MonoBehaviour
     {
         [Header("Positions")]
         [SerializeField] private Transform hand;
         [SerializeField] private Transform cardPreview;
         [SerializeField] private Transform deck;
         
-        [Header("GamePlay")]
         private Gameplay gameplay;
+        private InGameDirector director;
         
         //animation
         private Vector3[] cardPositions;
         private int currentCardPreviewIdx;
         
+        //cards
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
         
@@ -40,6 +41,7 @@ namespace TSoft.InGame.CardSystem
             cardsOnHand = new List<PokerCard>();
 
             gameplay = GetComponent<Gameplay>();
+            director = FindObjectOfType<DirectorBase>() as InGameDirector;
             
             InitializeDeck();
         }
@@ -71,9 +73,9 @@ namespace TSoft.InGame.CardSystem
             //카드 패턴에 의한 데미지 추가
             damage *= CurrentPattern.Modifier;
 
-            CombatManager.Instance.Combat(damage);
+            director.CurrentMonster.TakeDamage(damage);
 
-            if (currentHeart <= 0 && CombatManager.Instance.CurrentMonster.Info.Hp > 0)
+            if (currentHeart <= 0 && director.CurrentMonster.Data.Hp > 0)
             {
                 UIManager.Instance.ShowPopupUI(UIManager.PopupType.GameOver);
             }

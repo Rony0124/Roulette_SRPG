@@ -32,7 +32,7 @@ namespace TSoft.UI.Views
         [SerializeField] private PokerCard pokerCardPrefab;
         [SerializeField] private GameObject heartPrefab;
         [SerializeField] private GameObject energyPrefab;
-        [SerializeField] private CardsHolder cardHolder;
+        [SerializeField] private PlayerController cardHolder;
         
         private TMPro.TextMeshProUGUI txtEnergy;
         private TMPro.TextMeshProUGUI txtHeart;

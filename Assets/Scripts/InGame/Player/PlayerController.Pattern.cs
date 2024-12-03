@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace TSoft.InGame.CardSystem
 {
-    public partial class CardsHolder
+    public partial class PlayerController
     {
         public struct CardPattern
         {
