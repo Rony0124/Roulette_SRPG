@@ -39,6 +39,9 @@ namespace TSoft.InGame.CardSystem
 
         private void OnSpecialCardsChanged(object sender, ListChangedEventArgs args)
         {
+            if(CurrentSpecialCards.Count < 1)
+                return;
+            
             switch (args.ListChangedType)
             {
                 case ListChangedType.ItemAdded :
