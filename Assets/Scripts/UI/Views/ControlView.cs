@@ -32,6 +32,7 @@ namespace TSoft.UI.Views
         [SerializeField] private PokerCard pokerCardPrefab;
         [SerializeField] private GameObject heartPrefab;
         [SerializeField] private GameObject energyPrefab;
+        [SerializeField] private CardsHolder cardHolder;
         
         private TMPro.TextMeshProUGUI txtEnergy;
         private TMPro.TextMeshProUGUI txtHeart;
@@ -40,12 +41,9 @@ namespace TSoft.UI.Views
 
         private List<GameObject> hearts;
         private List<GameObject> energies;
-        private CardsHolder cardHolder;
 
         private void Start()
         {
-            cardHolder = GetComponentInChildren<CardsHolder>();
-            
             Bind<Button>(typeof(ControlButton));
             Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));
             Bind<Transform>(typeof(ControlParent));

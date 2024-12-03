@@ -30,6 +30,9 @@ namespace TSoft.InGame.CardSystem
             {
                 foreach (var card in SpecialCards)
                 {
+                    if(card == null)
+                        continue;
+                    
                     //gameplay.ApplyEffectSelf(card.cardData.Effect);
                     CurrentSpecialCards.Add(card.cardData);
                 }    
