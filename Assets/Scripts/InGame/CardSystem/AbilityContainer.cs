@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Utils;
 using UnityEngine;
@@ -25,10 +26,13 @@ namespace TSoft.InGame.CardSystem
 
         private void Start()
         {
-            foreach (var card in SpecialCards)
+            if (!SpecialCards.IsNullOrEmpty())
             {
-                //gameplay.ApplyEffectSelf(card.cardData.Effect);
-                CurrentSpecialCards.Add(card.cardData);
+                foreach (var card in SpecialCards)
+                {
+                    //gameplay.ApplyEffectSelf(card.cardData.Effect);
+                    CurrentSpecialCards.Add(card.cardData);
+                }    
             }
             
             /*foreach (var specialCard in CurrentSpecialCards)
