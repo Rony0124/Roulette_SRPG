@@ -1,10 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using Sirenix.OdinInspector;
+using TSoft.InGame.CardSystem;
 using UnityEngine;
 
-namespace TSoft.InGame.CardSystem
+namespace TSoft.InGame.Player
 {
     public partial class PlayerController
     {

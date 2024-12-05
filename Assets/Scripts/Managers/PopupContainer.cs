@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace TSoft.Managers
 {
-    public class UIManager : Singleton<UIManager>
+    public class PopupContainer : Singleton<PopupContainer>
     {
         public enum PopupType
         {

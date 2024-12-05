@@ -1,13 +1,12 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Sirenix.Utilities;
+using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Managers;
 using UnityEngine;
 
-namespace TSoft.InGame.CardSystem
+namespace TSoft.InGame.Player
 {
     public partial class PlayerController : MonoBehaviour
     {
@@ -77,7 +76,7 @@ namespace TSoft.InGame.CardSystem
 
             if (currentHeart <= 0 && director.CurrentMonster.Data.Hp > 0)
             {
-                UIManager.Instance.ShowPopupUI(UIManager.PopupType.GameOver);
+                PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
             }
             
             currentPokerCardSelected.Clear();
@@ -130,7 +129,7 @@ namespace TSoft.InGame.CardSystem
             pokerCard.transform.localScale = Vector3.one;
 
             ArrangeHand(animationSpeed);
-            StartCoroutine(ListenCardEvents(pokerCard));
+            StartCoroutine((IEnumerator)ListenCardEvents(pokerCard));
         }
 
         private void ArrangeHand(float duration)

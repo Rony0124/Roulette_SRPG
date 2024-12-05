@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using TSoft.InGame.CardSystem;
 using TSoft.Utils;
 using UnityEngine;
 
-namespace TSoft.InGame.CardSystem
+namespace TSoft.InGame.Player
 {
     public partial class PlayerController
     {

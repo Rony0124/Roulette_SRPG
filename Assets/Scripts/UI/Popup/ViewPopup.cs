@@ -8,7 +8,7 @@ namespace TSoft.UI.Popup
 
         protected override void OnActivated()
         {
-            UIManager.Instance.SetCanvas(gameObject);
+            PopupContainer.Instance.SetCanvas(gameObject);
         }
 
         protected override void OnDeactivated()
@@ -17,7 +17,7 @@ namespace TSoft.UI.Popup
 
         public virtual void ClosePopupUI()
         {
-            UIManager.Instance.ClosePopupUI(this);
+            PopupContainer.Instance.ClosePopupUI(this);
         }
     }
 }

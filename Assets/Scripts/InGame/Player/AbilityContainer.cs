@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Utils;
 using UnityEngine;
 
-namespace TSoft.InGame.CardSystem
+namespace TSoft.InGame.Player
 {
     public class AbilityContainer : MonoBehaviour
     {
