@@ -1,3 +1,4 @@
+using TSoft.Data.Monster;
 using TSoft.InGame;
 using TSoft.UI.Core;
 
@@ -33,10 +34,10 @@ namespace TSoft.UI.Views
         {
         }
 
-        private void UpdateOnMonsterSpawn(MonsterController.MonsterInfo info)
+        private void UpdateOnMonsterSpawn(MonsterData data)
         {
-            txtName.text = info.Name;
-            txtHp.text = (int)info.Hp + "";
+            txtName.text = data.Name;
+            txtHp.text = (int)data.Hp + "";
         }
 
         private void UpdateMonsterHp(float hp)

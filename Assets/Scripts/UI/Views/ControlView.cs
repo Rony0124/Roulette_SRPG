@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem;
@@ -5,7 +6,9 @@ using TSoft.UI.Core;
 using TSoft.Utils;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
+using PlayerController = TSoft.InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views
 {
@@ -29,19 +32,23 @@ namespace TSoft.UI.Views
             EnergyGroup
         }
         
+        [Header("Game Object")]
         [SerializeField] private PokerCard pokerCardPrefab;
         [SerializeField] private GameObject heartPrefab;
         [SerializeField] private GameObject energyPrefab;
-        [SerializeField] private CardsHolder cardHolder;
         
+        //UI
         private TMPro.TextMeshProUGUI txtEnergy;
         private TMPro.TextMeshProUGUI txtHeart;
         private Transform trHeartGroup;
         private Transform trEnergyGroup;
+        //Play
+        private PlayerController player;
+        private InGameDirector director;
 
         private List<GameObject> hearts;
         private List<GameObject> energies;
-
+        
         private void Start()
         {
             Bind<Button>(typeof(ControlButton));
@@ -56,21 +63,48 @@ namespace TSoft.UI.Views
             trHeartGroup = Get<Transform>((int)ControlParent.HeartGroup);
             trEnergyGroup = Get<Transform>((int)ControlParent.EnergyGroup);
 
+            player = FindObjectOfType<PlayerController>();
+            
             hearts = new();
             energies = new();
-            
+        }
+
+        protected override void OnActivated()
+        {
+            //director 참조 타이밍 개선 필요
+            if (director == null)
+            {
+                director = GameContext.Instance.CurrentDirector as InGameDirector;
+                if (director == null)
+                {
+                    director = FindObjectOfType<InGameDirector>();
+                }
+            }
+
+            if (director != null)
+            {
+                director.OnPrePlay += UpdateCardOnPrePlay;
+            }
+        }
+
+        protected override void OnDeactivated()
+        {
+            if (director != null)
+            {
+                director.OnPrePlay -= UpdateCardOnPrePlay;
+            }
+        }
+
+        private void UpdateCardOnPrePlay()
+        {
             UpdateEnergy();
             UpdateHeart();
             DrawCards();
         }
-
-        protected override void OnActivated() { }
-
-        protected override void OnDeactivated() { }
         
         private void OnDiscardCard(PointerEventData data)
         {
-            if(!cardHolder.TryDiscardSelectedCard())
+            if(!player.TryDiscardSelectedCard())
                 return;
             
             UpdateEnergy();
@@ -79,7 +113,7 @@ namespace TSoft.UI.Views
 
         private void OnUseCard(PointerEventData data)
         {
-            if (!cardHolder.TryUseCardsOnHand()) 
+            if (!player.TryUseCardsOnHand()) 
                 return;
             
             UpdateHeart();
@@ -88,7 +122,7 @@ namespace TSoft.UI.Views
         
         private void DrawCards()
         {
-            var cardVoids = cardHolder.Gameplay.GetAttr(GameplayAttr.Capacity) - cardHolder.CardsOnHand.Count;
+            var cardVoids = player.Gameplay.GetAttr(GameplayAttr.Capacity) - player.CardsOnHand.Count;
             Debug.Log($"current remaining card capacity : {cardVoids}");
 
             if (cardVoids < 1)
@@ -107,18 +141,18 @@ namespace TSoft.UI.Views
             
                 pokerCard.SetData(cardData);  
 
-                cardHolder.AddCard(pokerCard);
+                player.AddCard(pokerCard);
             }
         }
         
         private CardData CreateRandomCard()
         {
-            return cardHolder.TryDrawCard(out var card) ? card.Data.Clone() : null;
+            return player.TryDrawCard(out var card) ? card.Data.Clone() : null;
         }
         
         private void UpdateEnergy()
         {
-            var energyCount = cardHolder.Gameplay.GetAttr(GameplayAttr.Energy);
+            var energyCount = player.Gameplay.GetAttr(GameplayAttr.Energy);
             txtHeart.text = energyCount + "";
 
             if (energies.Count > 0)
@@ -140,7 +174,7 @@ namespace TSoft.UI.Views
         
         private void UpdateHeart()
         {
-            var heartCount = cardHolder.Gameplay.GetAttr(GameplayAttr.Heart);
+            var heartCount = player.Gameplay.GetAttr(GameplayAttr.Heart);
             txtHeart.text = heartCount + "";
 
             if (hearts.Count > 0)
