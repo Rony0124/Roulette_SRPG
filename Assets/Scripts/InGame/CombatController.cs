@@ -60,7 +60,9 @@ namespace TSoft.InGame
         private async UniTask OnPrePlay()
         {
             Debug.Log("prepping play from combat");
-            Instantiate(fieldPrefab, transform);
+            var field = Instantiate(fieldPrefab, transform).GetComponent<FieldController>();
+            field.SpawnField();
+            
             await UniTask.WaitForSeconds(1);
         }
     }
