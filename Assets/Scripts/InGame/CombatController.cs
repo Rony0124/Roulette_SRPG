@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace TSoft.InGame
@@ -10,7 +11,10 @@ namespace TSoft.InGame
         private GameState currentGameState;
         private StageState currentStageState;
         
-        public void OnGameStateChanged(GameState oldVal, GameState newVal)
+        public GameState CurrentGameState => currentGameState;
+        public StageState CurrentStageState => currentStageState;
+        
+        public async UniTaskVoid OnGameStateChanged(GameState oldVal, GameState newVal)
         {
             switch (newVal)
             {
@@ -23,15 +27,18 @@ namespace TSoft.InGame
                 case GameState.FinishFailed:
                     break;
             }
+
+            currentGameState = newVal;
         }
         
-        private void OnStageStateChanged(StageState oldVal, StageState newVal)
+        public async UniTaskVoid OnStageStateChanged(StageState oldVal, StageState newVal)
         {
             switch (newVal)
             {
                 case StageState.Intro:
                     break;
                 case StageState.PrePlaying:
+                    await OnPrePlay();
                     break;
                 case StageState.Playing:
                     break;
@@ -46,7 +53,15 @@ namespace TSoft.InGame
                 case StageState.Exit:
                     break;
             }
+
+            currentStageState = newVal;
         }
 
+        private async UniTask OnPrePlay()
+        {
+            Debug.Log("prepping play from combat");
+            Instantiate(fieldPrefab, transform);
+            await UniTask.WaitForSeconds(1);
+        }
     }
 }

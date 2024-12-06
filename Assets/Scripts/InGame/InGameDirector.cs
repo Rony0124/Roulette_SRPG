@@ -58,7 +58,7 @@ namespace TSoft.InGame
                     break;
             }
 
-            combatController.OnGameStateChanged(oldVal, newVal);
+            combatController.OnGameStateChanged(oldVal, newVal).Forget();
         }
 
         private void OnStageStateChanged(StageState oldVal, StageState newVal)
@@ -89,6 +89,8 @@ namespace TSoft.InGame
                 case StageState.Exit:
                     break;
             }
+            
+            combatController.OnStageStateChanged(oldVal, newVal).Forget();
         }
         
         private async UniTaskVoid StartIntro()
@@ -101,7 +103,8 @@ namespace TSoft.InGame
         private async UniTaskVoid StartPrePlaying()
         {
             OnPrePlay?.Invoke();
-            
+
+            await UniTask.WaitUntil(() => combatController.CurrentStageState == currentStageState.Value);
             await UniTask.WaitForSeconds(1);
             
             currentStageState.Value = StageState.Playing;

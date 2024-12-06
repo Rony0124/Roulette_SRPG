@@ -71,6 +71,7 @@ namespace TSoft.UI.Views
 
         protected override void OnActivated()
         {
+            //director 참조 타이밍 개선 필요
             if (director == null)
             {
                 director = GameContext.Instance.CurrentDirector as InGameDirector;
@@ -82,12 +83,7 @@ namespace TSoft.UI.Views
 
             if (director != null)
             {
-                director.OnPrePlay += () =>
-                {
-                    UpdateEnergy();
-                    UpdateHeart();
-                    DrawCards();
-                };
+                director.OnPrePlay += UpdateCardOnPrePlay;
             }
         }
 
@@ -95,13 +91,15 @@ namespace TSoft.UI.Views
         {
             if (director != null)
             {
-                director.OnPrePlay -= () =>
-                {
-                    UpdateEnergy();
-                    UpdateHeart();
-                    DrawCards();
-                };
+                director.OnPrePlay -= UpdateCardOnPrePlay;
             }
+        }
+
+        private void UpdateCardOnPrePlay()
+        {
+            UpdateEnergy();
+            UpdateHeart();
+            DrawCards();
         }
         
         private void OnDiscardCard(PointerEventData data)
