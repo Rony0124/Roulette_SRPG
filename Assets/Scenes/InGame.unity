@@ -5367,6 +5367,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameContext
       objectReference: {fileID: 0}
+    - target: {fileID: 6764001566360725084, guid: 5b3b850d5ca25fa42869676289fe0d27,
+        type: 3}
+      propertyPath: monsterRegistry
+      value: 
+      objectReference: {fileID: 11400000, guid: a2129c9d39361bb4ca15b1a5287b78e7,
+        type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

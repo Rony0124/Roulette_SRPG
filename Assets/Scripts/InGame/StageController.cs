@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 
 namespace TSoft.InGame
 {
-    public class FieldController : MonoBehaviour
+    public class StageController : MonoBehaviour
     {
         [Serializable]
         public class FieldSlot
@@ -34,7 +34,7 @@ namespace TSoft.InGame
         public void SpawnField()
         {
             //몬스터 소환
-            for (var i = 0; i < MonsterSlotMax; i++)
+            for (var i = 0; i <= MonsterSlotMax; i++)
             {
                 var ranSlotIndex = Random.Range(0, monsterIds.Count);
                 var ranSlotPosIndex = 1;
@@ -45,16 +45,12 @@ namespace TSoft.InGame
 
                 for (var j = 0; j < ranSlotPosIndex; j++)
                 {
-                    if(DataRegistry.instance == null)
-                        return;
-                    
-                    if (DataRegistry.instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
+                    if (GameContext.Instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
                     {
-                        Vector3 pos = slots[i].slotPositions[j].position;
-                        
-                        if (ranSlotIndex == 1)
+                        Vector3 pos = Vector3.zero;
+                        if (ranSlotIndex > 1)
                         {
-                            pos = Vector3.zero;
+                            pos = slots[i].slotPositions[j].position;
                         }
                         
                         monsterDataSo.SpawnMonster(slots[i].self, pos);
@@ -68,7 +64,7 @@ namespace TSoft.InGame
             if (bossId != null)
             {
                 //보스 소환
-                if (DataRegistry.instance.MonsterRegistry.TryGetValue(bossId, out var bossDataSo))
+                if (GameContext.Instance.MonsterRegistry.TryGetValue(bossId, out var bossDataSo))
                 {
                     bossDataSo.SpawnMonster(slots[BossSlot].self, Vector3.zero);
                 }        

@@ -19,7 +19,7 @@ namespace TSoft.Data.Monster
             monsterController.Data = monsterData;
             
             var transform = monsterObj.transform;
-            transform.position = position;
+            transform.localPosition = position;
 
             return monsterController;
         }

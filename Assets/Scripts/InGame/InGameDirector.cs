@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using TSoft.Data.Registry;
 using TSoft.Utils;
 using UnityEngine;
 using PlayerController = TSoft.InGame.Player.PlayerController;
