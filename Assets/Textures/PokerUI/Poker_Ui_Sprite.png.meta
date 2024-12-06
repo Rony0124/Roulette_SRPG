@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 34
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -179,7 +179,7 @@ TextureImporter:
         x: 199
         y: 235
         width: 36
-        height: 32
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -308,7 +308,7 @@ TextureImporter:
         height: 152
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 9, z: 0, w: 9}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -428,10 +428,10 @@ TextureImporter:
       name: Poker_Ui_Sprite_15
       rect:
         serializedVersion: 2
-        x: 88
-        y: 134
-        width: 107
-        height: 50
+        x: 89
+        y: 151
+        width: 62
+        height: 43
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,10 +449,10 @@ TextureImporter:
       name: Poker_Ui_Sprite_16
       rect:
         serializedVersion: 2
-        x: 202
-        y: 105
-        width: 55
-        height: 59
+        x: 154
+        y: 163
+        width: 29
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -470,7 +470,7 @@ TextureImporter:
       name: Poker_Ui_Sprite_17
       rect:
         serializedVersion: 2
-        x: 260
+        x: 202
         y: 105
         width: 55
         height: 59
@@ -491,10 +491,10 @@ TextureImporter:
       name: Poker_Ui_Sprite_18
       rect:
         serializedVersion: 2
-        x: 50
-        y: 108
-        width: 33
-        height: 38
+        x: 260
+        y: 105
+        width: 55
+        height: 59
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -512,10 +512,10 @@ TextureImporter:
       name: Poker_Ui_Sprite_19
       rect:
         serializedVersion: 2
-        x: 92
-        y: 100
-        width: 42
-        height: 30
+        x: 50
+        y: 108
+        width: 33
+        height: 38
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -533,10 +533,10 @@ TextureImporter:
       name: Poker_Ui_Sprite_20
       rect:
         serializedVersion: 2
-        x: 149
-        y: 100
-        width: 42
-        height: 30
+        x: 89
+        y: 124
+        width: 107
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -555,9 +555,9 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 89
-        y: 76
-        width: 107
-        height: 22
+        y: 110
+        width: 7
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -575,10 +575,10 @@ TextureImporter:
       name: Poker_Ui_Sprite_22
       rect:
         serializedVersion: 2
-        x: 203
-        y: 79
-        width: 68
-        height: 14
+        x: 55
+        y: 80
+        width: 107
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -596,10 +596,10 @@ TextureImporter:
       name: Poker_Ui_Sprite_23
       rect:
         serializedVersion: 2
-        x: 58
-        y: 4
-        width: 246
-        height: 67
+        x: 166
+        y: 73
+        width: 34
+        height: 33
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -617,6 +617,90 @@ TextureImporter:
       name: Poker_Ui_Sprite_24
       rect:
         serializedVersion: 2
+        x: 233
+        y: 89
+        width: 68
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6c3ad7ab010c89469ae96fe7463aaed
+      internalID: 105748082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poker_Ui_Sprite_25
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 73
+        width: 68
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c2b94db385a4ce4196e0907f6020869
+      internalID: -161679988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poker_Ui_Sprite_26
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 15
+        width: 42
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6af1991cc8f1b6b40b87db19b29d8127
+      internalID: 726078313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poker_Ui_Sprite_27
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 4
+        width: 246
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1fc0bae00d52eb42920f28b50987682
+      internalID: 854485284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Poker_Ui_Sprite_28
+      rect:
+        serializedVersion: 2
         x: 101
         y: 240
         width: 85
@@ -628,8 +712,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b6c3ad7ab010c89469ae96fe7463aaed
-      internalID: 105748082
+      spriteID: 1480a4b94d49b62418076e0a0c4f83d3
+      internalID: 1810697776
       vertices: []
       indices: 
       edges: []
@@ -663,6 +747,10 @@ TextureImporter:
       Poker_Ui_Sprite_22: -133293903
       Poker_Ui_Sprite_23: 241706543
       Poker_Ui_Sprite_24: 105748082
+      Poker_Ui_Sprite_25: -161679988
+      Poker_Ui_Sprite_26: 726078313
+      Poker_Ui_Sprite_27: 854485284
+      Poker_Ui_Sprite_28: 1810697776
       Poker_Ui_Sprite_3: -1825381146
       Poker_Ui_Sprite_4: 905971125
       Poker_Ui_Sprite_5: -649862625
