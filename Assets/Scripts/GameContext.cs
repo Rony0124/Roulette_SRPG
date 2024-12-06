@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TSoft.Core;
 using TSoft.InGame;
 using UnityEngine;

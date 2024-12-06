@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem;
@@ -36,17 +37,18 @@ namespace TSoft.UI.Views
         [SerializeField] private GameObject heartPrefab;
         [SerializeField] private GameObject energyPrefab;
         
-        [Header("Player")]
-        [SerializeField] private PlayerController player;
-        
+        //UI
         private TMPro.TextMeshProUGUI txtEnergy;
         private TMPro.TextMeshProUGUI txtHeart;
         private Transform trHeartGroup;
         private Transform trEnergyGroup;
+        //Play
+        private PlayerController player;
+        private InGameDirector director;
 
         private List<GameObject> hearts;
         private List<GameObject> energies;
-
+        
         private void Start()
         {
             Bind<Button>(typeof(ControlButton));
@@ -61,17 +63,46 @@ namespace TSoft.UI.Views
             trHeartGroup = Get<Transform>((int)ControlParent.HeartGroup);
             trEnergyGroup = Get<Transform>((int)ControlParent.EnergyGroup);
 
+            player = FindObjectOfType<PlayerController>();
+            
             hearts = new();
             energies = new();
-            
-            UpdateEnergy();
-            UpdateHeart();
-            DrawCards();
         }
 
-        protected override void OnActivated() { }
+        protected override void OnActivated()
+        {
+            if (director == null)
+            {
+                director = GameContext.Instance.CurrentDirector as InGameDirector;
+                if (director == null)
+                {
+                    director = FindObjectOfType<InGameDirector>();
+                }
+            }
 
-        protected override void OnDeactivated() { }
+            if (director != null)
+            {
+                director.OnPrePlay += () =>
+                {
+                    UpdateEnergy();
+                    UpdateHeart();
+                    DrawCards();
+                };
+            }
+        }
+
+        protected override void OnDeactivated()
+        {
+            if (director != null)
+            {
+                director.OnPrePlay -= () =>
+                {
+                    UpdateEnergy();
+                    UpdateHeart();
+                    DrawCards();
+                };
+            }
+        }
         
         private void OnDiscardCard(PointerEventData data)
         {
