@@ -5,20 +5,49 @@ namespace TSoft.InGame
 {
     public class CombatController : MonoBehaviour
     {
+        public struct CycleInfo
+        {
+            public int Round;
+            public int Stage;
+            public bool IsRoundMax => Round >= 5;
+            
+            public void Reset()
+            {
+                Round = 0;
+                Stage = 0;
+            }
+        }
+        
         //life cycle 동기화 flag
         private GameState currentGameState;
         private StageState currentStageState;
         //field
         private FieldController currentField;
-        //round
-        private int round;
+        //cycle
+        private CycleInfo currentCycleInfo;
+
+        private InGameDirector director; 
         
         public GameState CurrentGameState => currentGameState;
         public StageState CurrentStageState => currentStageState;
         public FieldController CurrentField => currentField;
+        public CycleInfo CurrentCycleInfo => currentCycleInfo;
         
-        public InGameDirector Director { get; set; }
-        
+        public InGameDirector Director
+        {
+            get => director;
+            set
+            {
+                ResetOnDirectorChanged();
+                director = value;
+            }
+        }
+
+        private void ResetOnDirectorChanged()
+        {
+            currentCycleInfo.Reset();
+        }
+
         public async UniTaskVoid OnGameStateChanged(GameState oldVal, GameState newVal)
         {
             switch (newVal)
@@ -49,13 +78,11 @@ namespace TSoft.InGame
                     break;
                 case StageState.Playing:
                     break;
-                case StageState.PostPlaying:
+                case StageState.PostPlayingSuccess:
                     break;
-                case StageState.OutroSuccess:
+                case StageState.PostPlayingFailed:
                     break;
-                case StageState.OutroFailed:
-                    break;
-                case StageState.OutroReset:
+                case StageState.Outro:
                     break;
                 case StageState.Exit:
                     break;
@@ -68,7 +95,11 @@ namespace TSoft.InGame
         
         private async UniTask OnPrePlay()
         {
-            currentField = GameContext.Instance.StageRegistry.SpawnNextStage(transform);
+            currentCycleInfo.Round = 0;
+            currentCycleInfo.Stage++;
+            
+            currentField = GameContext.Instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
+            currentField.SetFieldData(currentCycleInfo);
             
             await UniTask.WaitForSeconds(1);
         }
@@ -79,12 +110,12 @@ namespace TSoft.InGame
 
         private async UniTask OnGameReady()
         {
-            round++;
+            currentCycleInfo.Round++;
             
-            var mIndex = currentField.CurrentSlotIndex;
-            Director.CurrentMonsters = currentField.Slots[mIndex].monsters;
+            var mIndex = currentCycleInfo.Round;
+            currentField.CurrentSlotIndex = mIndex;
             
-            Debug.Log("current round" + round);
+            Debug.Log("current round" + currentCycleInfo.Round);
             
             await UniTask.WaitForSeconds(1);
         }

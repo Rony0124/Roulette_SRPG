@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Sirenix.Utilities;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
-using TSoft.Managers;
 using UnityEngine;
 
 namespace TSoft.InGame.Player
@@ -55,12 +54,13 @@ namespace TSoft.InGame.Player
                 return false;
             
             --currentHeart;
+            Debug.Log("remaining heart : " + currentHeart);
             
             gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
 
             //현재 데미지 상태
             var damage = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
-            Debug.Log(damage);
+            Debug.Log("damage dealt : " + damage);
             
             foreach (var selectedCard in currentPokerCardSelected)
             {
@@ -72,26 +72,24 @@ namespace TSoft.InGame.Player
             //카드 패턴에 의한 데미지 추가
             damage *= CurrentPattern.Modifier;
 
-            foreach (var monster in director.CurrentMonsters)
-            {
-                monster.TakeDamage(damage);    
-            }
+            var isDead = director.CurrentField.TakeDamage((int)damage);
             
-            if (currentHeart <= 0)
+            if (isDead)
             {
-                //TODO monster hp를 모아서 계산 하는것이 아니라 각 필드의 인덱스에 해당하는 data를 기준으로 판단하자
-                bool isGameOver = false;
-                foreach (var monster in director.CurrentMonsters)
+                if (currentHeart > 0)
                 {
-                    isGameOver |= monster.Data.Hp > 0;
+                    director.GameOver(true);
                 }
-
-                if (isGameOver)
+            }
+            else
+            {
+                if (currentHeart <= 0)
                 {
                     director.GameOver(false);
-                }
                     //PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
+                }
             }
+           
             
             currentPokerCardSelected.Clear();
             

@@ -15,16 +15,17 @@ namespace TSoft.InGame
             public List<Transform> slotPositions;
             [NonSerialized]
             public List<MonsterController> monsters;
+            public int hp;
         }
         
         [Header("Slots")]
         [SerializeField] 
         private FieldSlot[] slots;
-
-        private int currentSlotIndex;
-
         public FieldSlot[] Slots => slots;
-        public int CurrentSlotIndex => currentSlotIndex;
+        
+        public int CurrentSlotIndex { get; set; }
+
+        public FieldSlot CurrentSlot => slots[CurrentSlotIndex];
 
         private const int MonsterSlotMax = 3;
         private const int RewardSlot = 4;
@@ -71,10 +72,37 @@ namespace TSoft.InGame
                 //보스 소환
                 if (GameContext.Instance.MonsterRegistry.TryGetValue(bossId, out var bossDataSo))
                 {
-                    bossDataSo.SpawnMonster(slots[BossSlot].self, Vector3.zero);
+                    var boss = bossDataSo.SpawnMonster(slots[BossSlot].self, Vector3.zero);
+                    slots[BossSlot].monsters.Add(boss); 
                 }        
             }
-            
         }
+
+        public void SetFieldData(CombatController.CycleInfo cycle)
+        {
+            for (var i = 0; i < slots.Length; i++)
+            {
+                var slot = slots[i];
+
+                if (i == BossSlot)
+                {
+                    slot.hp *= (int)(cycle.Stage * 1.5);
+                }
+                else
+                {
+                    slot.hp *= cycle.Stage;
+                }
+            }
+        }
+
+        public bool TakeDamage(int damage)
+        {
+            CurrentSlot.hp -= damage;
+            Debug.Log("remaining hp : " +CurrentSlot.hp );
+
+            return CurrentSlot.hp < 0;
+        }
+
+     
     }
 }

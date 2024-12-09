@@ -406,22 +406,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c4bbbc4b025044d9fc63b712f64d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterIds:
-  - {fileID: 11400000, guid: b233d01d59e19804795422f599092797, type: 2}
-  bossId: {fileID: 0}
   slots:
   - self: {fileID: 0}
     slotPositions: []
+    hp: 0
   - self: {fileID: 0}
     slotPositions: []
+    hp: 0
   - self: {fileID: 0}
     slotPositions: []
+    hp: 0
   - self: {fileID: 0}
     slotPositions: []
+    hp: 0
   - self: {fileID: 0}
     slotPositions: []
+    hp: 0
   - self: {fileID: 0}
     slotPositions: []
+    hp: 0
 --- !u!1 &7342785775223112833
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,22 +545,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0c4bbbc4b025044d9fc63b712f64d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  monsterIds:
-  - {fileID: 11400000, guid: b233d01d59e19804795422f599092797, type: 2}
-  bossId: {fileID: 0}
   slots:
   - self: {fileID: 7356878411346638651}
     slotPositions: []
+    hp: 1
   - self: {fileID: 1036923630786666009}
     slotPositions: []
+    hp: 2
   - self: {fileID: 2166262653992169093}
     slotPositions: []
+    hp: 3
   - self: {fileID: 8445721454000198735}
     slotPositions: []
+    hp: 4
   - self: {fileID: 1275964075332611341}
     slotPositions: []
+    hp: 0
   - self: {fileID: 8830169988442864116}
     slotPositions: []
+    hp: 450
 --- !u!1 &8988752515923617994
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,9 +19,9 @@ namespace TSoft.InGame
         //life cycle
         private ObservableVar<GameState> currentGameState;
         private ObservableVar<StageState> currentStageState;
-
-        public List<MonsterController> CurrentMonsters { get; set; }
+        
         public PlayerController CurrentPlayer => currentPlayer;
+        public FieldController CurrentField => combatController.CurrentField;
 
         public GameState CurrentGameState => currentGameState.Value;
         public StageState CurrentStageState => currentStageState.Value;
@@ -84,13 +84,13 @@ namespace TSoft.InGame
                     break;
                 case StageState.Playing:
                     break;
-                case StageState.PostPlaying:
+                case StageState.PostPlayingSuccess:
+                    StartPostPlayingSuccess().Forget();
                     break;
-                case StageState.OutroSuccess:
+                case StageState.PostPlayingFailed:
+                    StartPostPlayingFailed().Forget();
                     break;
-                case StageState.OutroFailed:
-                    break;
-                case StageState.OutroReset:
+                case StageState.Outro:
                     break;
                 case StageState.Exit:
                     break;
@@ -115,10 +115,10 @@ namespace TSoft.InGame
 
             if (isSuccess)
             {
-                ChangeGameState(GameState.FinishFailed);
+                ChangeGameState(GameState.FinishSuccess);
             }else
             {
-                ChangeGameState(GameState.FinishSuccess);
+                ChangeGameState(GameState.FinishFailed);
             }
         }
 
@@ -143,6 +143,24 @@ namespace TSoft.InGame
             ChangeStageState(StageState.Playing);
             ChangeGameState(GameState.Ready);
         }
+        
+        //스테이지 마무리 준비 (성공)
+        private async UniTaskVoid StartPostPlayingSuccess()
+        {
+            await UniTask.WaitUntil(() => combatController.CurrentStageState == currentStageState.Value);
+            await UniTask.WaitForSeconds(1);
+            
+            ChangeStageState(StageState.PrePlaying);
+        }
+        
+        //스테이지 마무리 준비 (실패)
+        private async UniTaskVoid StartPostPlayingFailed()
+        {
+            await UniTask.WaitUntil(() => combatController.CurrentStageState == currentStageState.Value);
+            await UniTask.WaitForSeconds(1);
+            
+            ChangeStageState(StageState.Outro);
+        }
 
         #endregion
 
@@ -166,8 +184,16 @@ namespace TSoft.InGame
         {
             await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
             await UniTask.WaitForSeconds(1);
-            
-            ChangeGameState(GameState.Ready);
+
+            if (combatController.CurrentCycleInfo.IsRoundMax)
+            {
+                ChangeStageState(StageState.PostPlayingSuccess);
+            }
+            else
+            {
+                ChangeGameState(GameState.Ready);
+            }
+                
         }
         
         private async UniTaskVoid StartGameFinishFailure()
@@ -175,7 +201,7 @@ namespace TSoft.InGame
             await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
             await UniTask.WaitForSeconds(1);
             
-            ChangeStageState(StageState.PostPlaying);
+            ChangeStageState(StageState.PostPlayingFailed);
         }
 
         #endregion
