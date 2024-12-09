@@ -29,7 +29,7 @@ namespace TSoft.InGame
         private const int MonsterSlotMax = 3;
         private const int RewardSlot = 4;
         private const int BossSlot = 5;
-
+        
         public void SpawnField(Data.Stage.StageData stageData)
         {
             var monsterIds = stageData.monsterIds;
@@ -38,6 +38,8 @@ namespace TSoft.InGame
             //몬스터 소환
             for (var i = 0; i <= MonsterSlotMax; i++)
             {
+                slots[i].monsters = new List<MonsterController>();
+                
                 var ranSlotIndex = Random.Range(0, monsterIds.Length);
                 var ranSlotPosIndex = 1;
                 if (slots[i].slotPositions.Count > 0)
