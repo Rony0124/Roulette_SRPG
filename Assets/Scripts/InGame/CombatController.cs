@@ -5,20 +5,27 @@ namespace TSoft.InGame
 {
     public class CombatController : MonoBehaviour
     {
-        [SerializeField] private GameObject fieldPrefab;
-        
         //life cycle 동기화 flag
         private GameState currentGameState;
         private StageState currentStageState;
+        //field
+        private FieldController currentField;
+        //round
+        private int round;
         
         public GameState CurrentGameState => currentGameState;
         public StageState CurrentStageState => currentStageState;
+        public FieldController CurrentField => currentField;
+        
+        public InGameDirector Director { get; set; }
         
         public async UniTaskVoid OnGameStateChanged(GameState oldVal, GameState newVal)
         {
             switch (newVal)
             {
                 case GameState.Ready:
+                    await OnGameReady();
+                   
                     break;
                 case GameState.Play:
                     break;
@@ -57,13 +64,33 @@ namespace TSoft.InGame
             currentStageState = newVal;
         }
 
+        #region Stage
+        
         private async UniTask OnPrePlay()
         {
-            Debug.Log("prepping play from combat");
-            var field = Instantiate(fieldPrefab, transform).GetComponent<StageController>();
-            field.SpawnField();
+            currentField = GameContext.Instance.StageRegistry.SpawnNextStage(transform);
             
             await UniTask.WaitForSeconds(1);
         }
+        
+        #endregion
+        
+        #region
+
+        private async UniTask OnGameReady()
+        {
+            round++;
+            
+            var mIndex = currentField.CurrentSlotIndex;
+            Director.CurrentMonsters = currentField.Slots[mIndex].monsters;
+            
+            Debug.Log("current round" + round);
+            
+            await UniTask.WaitForSeconds(1);
+        }
+        
+        #endregion
+
+
     }
 }

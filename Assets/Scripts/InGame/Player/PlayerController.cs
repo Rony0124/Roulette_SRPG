@@ -72,11 +72,25 @@ namespace TSoft.InGame.Player
             //카드 패턴에 의한 데미지 추가
             damage *= CurrentPattern.Modifier;
 
-            director.CurrentMonster.TakeDamage(damage);
-
-            if (currentHeart <= 0 && director.CurrentMonster.Data.Hp > 0)
+            foreach (var monster in director.CurrentMonsters)
             {
-                PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
+                monster.TakeDamage(damage);    
+            }
+            
+            if (currentHeart <= 0)
+            {
+                //TODO monster hp를 모아서 계산 하는것이 아니라 각 필드의 인덱스에 해당하는 data를 기준으로 판단하자
+                bool isGameOver = false;
+                foreach (var monster in director.CurrentMonsters)
+                {
+                    isGameOver |= monster.Data.Hp > 0;
+                }
+
+                if (isGameOver)
+                {
+                    director.GameOver(false);
+                }
+                    //PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
             }
             
             currentPokerCardSelected.Clear();

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -9,14 +11,21 @@ namespace TSoft.Data.Registry
         [SerializeField]
         public SerializedDictionary<DataRegistryIdSO, TData> assetDictionary;
 
-        public TData Get(DataRegistryIdSO idSo)
+        public TData Get(DataRegistryIdSO key)
         {
-            return assetDictionary.TryGetValue(idSo, out var data) ? data : null;
+            return assetDictionary.TryGetValue(key, out var data) ? data : null;
         }
 
-        public bool TryGetValue(DataRegistryIdSO idSo, out TData data)
+        public bool TryGetValue(DataRegistryIdSO key, out TData data)
         {
-            return assetDictionary.TryGetValue(idSo, out data);
+            return assetDictionary.TryGetValue(key, out data);
+        }
+
+        public bool TryGetByIndex(int index, out TData data)
+        {
+            var list = assetDictionary.Keys.ToList();
+            var key = list[index];
+            return assetDictionary.TryGetValue(key, out data);
         }
     }
 }

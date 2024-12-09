@@ -1,42 +1,44 @@
 using System;
 using System.Collections.Generic;
 using TSoft.Data;
-using TSoft.Data.Registry;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace TSoft.InGame
 {
-    public class StageController : MonoBehaviour
+    public class FieldController : MonoBehaviour
     {
         [Serializable]
         public class FieldSlot
         {
             public Transform self;
             public List<Transform> slotPositions;
+            [NonSerialized]
+            public List<MonsterController> monsters;
         }
         
-        [Header("Monster")]
-        [SerializeField] private List<DataRegistryIdSO> monsterIds;
-        
-        [Header("Boss")]
-        [SerializeField] private DataRegistryIdSO bossId;
-        
         [Header("Slots")]
-        [SerializeField] private FieldSlot[] slots;
+        [SerializeField] 
+        private FieldSlot[] slots;
 
         private int currentSlotIndex;
+
+        public FieldSlot[] Slots => slots;
+        public int CurrentSlotIndex => currentSlotIndex;
 
         private const int MonsterSlotMax = 3;
         private const int RewardSlot = 4;
         private const int BossSlot = 5;
 
-        public void SpawnField()
+        public void SpawnField(Data.Stage.StageData stageData)
         {
+            var monsterIds = stageData.monsterIds;
+            var bossId = stageData.bossId;
+            
             //몬스터 소환
             for (var i = 0; i <= MonsterSlotMax; i++)
             {
-                var ranSlotIndex = Random.Range(0, monsterIds.Count);
+                var ranSlotIndex = Random.Range(0, monsterIds.Length);
                 var ranSlotPosIndex = 1;
                 if (slots[i].slotPositions.Count > 0)
                 {
@@ -47,13 +49,14 @@ namespace TSoft.InGame
                 {
                     if (GameContext.Instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
                     {
-                        Vector3 pos = Vector3.zero;
+                        var pos = Vector3.zero;
                         if (ranSlotIndex > 1)
                         {
                             pos = slots[i].slotPositions[j].position;
                         }
                         
-                        monsterDataSo.SpawnMonster(slots[i].self, pos);
+                        var monster = monsterDataSo.SpawnMonster(slots[i].self, pos);
+                        slots[i].monsters.Add(monster); 
                     }    
                 }
             }

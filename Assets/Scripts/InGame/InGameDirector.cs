@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TSoft.Data.Registry;
 using TSoft.Utils;
@@ -12,7 +13,6 @@ namespace TSoft.InGame
         public Action OnPrePlay;
         
         //game play
-        private MonsterController currentMonster;
         private PlayerController currentPlayer;
         private CombatController combatController;
         
@@ -20,7 +20,7 @@ namespace TSoft.InGame
         private ObservableVar<GameState> currentGameState;
         private ObservableVar<StageState> currentStageState;
 
-        public MonsterController CurrentMonster => currentMonster;
+        public List<MonsterController> CurrentMonsters { get; set; }
         public PlayerController CurrentPlayer => currentPlayer;
 
         public GameState CurrentGameState => currentGameState.Value;
@@ -38,6 +38,8 @@ namespace TSoft.InGame
             currentStageState.OnValueChanged += OnStageStateChanged;
             
             currentStageState.Value = StageState.Intro;
+
+            combatController.Director = this;
         }
         
         private void OnGameStateChanged(GameState oldVal, GameState newVal)
@@ -50,12 +52,15 @@ namespace TSoft.InGame
             switch (newVal)
             {
                 case GameState.Ready:
+                    StartGameReady().Forget();
                     break;
                 case GameState.Play:
                     break;
                 case GameState.FinishSuccess:
+                    StartGameFinishSuccess().Forget();
                     break;
                 case GameState.FinishFailed:
+                    StartGameFinishFailure().Forget();
                     break;
             }
 
@@ -93,14 +98,41 @@ namespace TSoft.InGame
             
             combatController.OnStageStateChanged(oldVal, newVal).Forget();
         }
+
+        public void ChangeStageState(StageState stageState)
+        {
+            currentStageState.Value = stageState;
+        }
         
+        public void ChangeGameState(GameState gameState)
+        {
+            currentGameState.Value = gameState;
+        }
+
+        public void GameOver(bool isSuccess)
+        {
+            Debug.Log("GameOver");
+
+            if (isSuccess)
+            {
+                ChangeGameState(GameState.FinishFailed);
+            }else
+            {
+                ChangeGameState(GameState.FinishSuccess);
+            }
+        }
+
+        #region Stage
+
+        //입장 인트로
         private async UniTaskVoid StartIntro()
         {
             await UniTask.WaitForSeconds(3);
             
-            currentStageState.Value = StageState.PrePlaying;
+            ChangeStageState(StageState.PrePlaying);
         }
 
+        //스테이지 준비
         private async UniTaskVoid StartPrePlaying()
         {
             OnPrePlay?.Invoke();
@@ -108,7 +140,44 @@ namespace TSoft.InGame
             await UniTask.WaitUntil(() => combatController.CurrentStageState == currentStageState.Value);
             await UniTask.WaitForSeconds(1);
             
-            currentStageState.Value = StageState.Playing;
+            ChangeStageState(StageState.Playing);
+            ChangeGameState(GameState.Ready);
         }
+
+        #endregion
+
+        #region Game
+
+        private async UniTaskVoid StartGameReady()
+        {
+            await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
+            await UniTask.WaitForSeconds(1);
+            
+            ChangeGameState(GameState.Play);
+        }
+
+        //스테이지 준비
+        private async UniTaskVoid StartGamePlay()
+        {
+            await UniTask.WaitForSeconds(1);
+        }
+        
+        private async UniTaskVoid StartGameFinishSuccess()
+        {
+            await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
+            await UniTask.WaitForSeconds(1);
+            
+            ChangeGameState(GameState.Ready);
+        }
+        
+        private async UniTaskVoid StartGameFinishFailure()
+        {
+            await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
+            await UniTask.WaitForSeconds(1);
+            
+            ChangeStageState(StageState.PostPlaying);
+        }
+
+        #endregion
     }
 }

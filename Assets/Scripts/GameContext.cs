@@ -12,6 +12,9 @@ namespace TSoft
         private MonsterRegistry monsterRegistry; 
         public MonsterRegistry MonsterRegistry => monsterRegistry;
         
+        [SerializeField]
+        private StageRegistry stageRegistry; 
+        public StageRegistry StageRegistry => stageRegistry;
         
         private DirectorBase currentDirector;
 
