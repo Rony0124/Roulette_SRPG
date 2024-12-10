@@ -65,7 +65,7 @@ namespace TSoft.UI.Views
 
             if (director != null)
             {
-                director.OnPrePlay += UpdateCardOnPrePlay;
+                director.OnGameReady += UpdateCardOnPrePlay;
             }
         }
 
@@ -73,7 +73,7 @@ namespace TSoft.UI.Views
         {
             if (director != null)
             {
-                director.OnPrePlay -= UpdateCardOnPrePlay;
+                director.OnGameReady -= UpdateCardOnPrePlay;
             }
         }
 

@@ -1,27 +1,29 @@
-using System;
 using Cysharp.Threading.Tasks;
-using UnityEditor;
+using TSoft.Core;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
 namespace TSoft.Data.Registry
 {
     [CreateAssetMenu(fileName = "DataRegistry")]
-    public class DataRegistry : ScriptableSingleton<DataRegistry>
+    public class DataRegistry : SingletonScriptable<DataRegistry>
     {
-        [SerializeField] private AssetReference monsterRegistryRef;
-        [SerializeField] private AssetReference stageRegistryRef;
+        //TODO 현재 모든 에셋이 다 올라가있는 상태인듯 하다. 프로파일러로 확인해보자
+        /*[SerializeField] private AssetReference monsterRegistryRef;
+        [SerializeField] private AssetReference stageRegistryRef;*/
         
+        [SerializeField]
         private StageRegistry stageRegistry;
+        [SerializeField]
         private MonsterRegistry monsterRegistry;
         
         public StageRegistry StageRegistry => stageRegistry;
         public MonsterRegistry MonsterRegistry => monsterRegistry;
 
-        public async UniTask Load()
+        /*public async UniTask Load()
         {
             monsterRegistry  = await monsterRegistryRef.LoadAssetAsync<MonsterRegistry>();
-            stageRegistry  = await monsterRegistryRef.LoadAssetAsync<StageRegistry>();
-        }
+            stageRegistry  = await stageRegistryRef.LoadAssetAsync<StageRegistry>();
+        }*/
     }
 }

@@ -31,7 +31,7 @@ namespace TSoft.InGame
         protected override void OnDirectorChanged(DirectorBase oldValue, DirectorBase newValue)
         {
             //TODO 로드 타이밍 수정!!
-            DataRegistry.instance.Load().Forget();
+            //DataRegistry.instance.Load().Forget();
             
             currentPlayer = FindObjectOfType<PlayerController>();
             combatController = FindObjectOfType<CombatController>();
@@ -173,6 +173,8 @@ namespace TSoft.InGame
 
         private async UniTaskVoid StartGameReady()
         {
+            OnGameReady?.Invoke();
+            
             await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
             await UniTask.WaitForSeconds(1);
             

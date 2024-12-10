@@ -51,7 +51,7 @@ namespace TSoft.InGame
 
                 for (var j = 0; j < ranSlotPosIndex; j++)
                 {
-                    if (DataRegistry.instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
+                    if (DataRegistry.Instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
                     {
                         var pos = Vector3.zero;
                         if (ranSlotIndex > 1)
@@ -71,7 +71,7 @@ namespace TSoft.InGame
             if (bossId != null)
             {
                 //보스 소환
-                if (GameContext.Instance.MonsterRegistry.TryGetValue(bossId, out var bossDataSo))
+                if (DataRegistry.Instance.MonsterRegistry.TryGetValue(bossId, out var bossDataSo))
                 {
                     var boss = bossDataSo.SpawnMonster(slots[BossSlot].self, Vector3.zero);
                     slots[BossSlot].monsters.Add(boss); 

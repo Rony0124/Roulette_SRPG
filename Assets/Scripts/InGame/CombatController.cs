@@ -99,7 +99,7 @@ namespace TSoft.InGame
             currentCycleInfo.Round = 0;
             currentCycleInfo.Stage++;
             
-            currentField = DataRegistry.instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
+            currentField = DataRegistry.Instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
             currentField.SetFieldData(currentCycleInfo);
             
             await UniTask.WaitForSeconds(1);
