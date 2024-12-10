@@ -9,6 +9,9 @@ namespace TSoft.InGame
 {
     public class FieldController : MonoBehaviour
     {
+        public static event Action<float> OnDamaged;
+        public static event Action<FieldSlot> OnFieldSpawn;
+        
         [Serializable]
         public class FieldSlot
         {
@@ -22,11 +25,22 @@ namespace TSoft.InGame
         [Header("Slots")]
         [SerializeField] 
         private FieldSlot[] slots;
+
+        private int currentSlotIndex;
+        private FieldSlot currentSlot;
         public FieldSlot[] Slots => slots;
         
-        public int CurrentSlotIndex { get; set; }
-
-        public FieldSlot CurrentSlot => slots[CurrentSlotIndex];
+        public FieldSlot CurrentSlot => currentSlot;
+        
+        public int CurrentSlotIndex
+        {
+            get => currentSlotIndex;
+            set
+            {
+                currentSlot = slots[value];
+                OnFieldSpawn?.Invoke(currentSlot);
+            } 
+        }
 
         private const int MonsterSlotMax = 3;
         private const int RewardSlot = 4;
@@ -98,10 +112,11 @@ namespace TSoft.InGame
 
         public bool TakeDamage(int damage)
         {
-            CurrentSlot.hp -= damage;
-            Debug.Log("remaining hp : " +CurrentSlot.hp );
+            currentSlot.hp = Math.Max(0, currentSlot.hp - damage);
+            Debug.Log("remaining hp : " + currentSlot.hp );
+            OnDamaged?.Invoke(currentSlot.hp);
 
-            return CurrentSlot.hp < 0;
+            return currentSlot.hp <= 0;
         }
 
      

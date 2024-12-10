@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using MoreMountains.Feedbacks;
-using TSoft.Data.Registry;
 using TSoft.Utils;
 using UnityEngine;
 using PlayerController = TSoft.InGame.Player.PlayerController;
@@ -15,15 +12,15 @@ namespace TSoft.InGame
         public Action OnGameReady;
         
         //game play
-        private PlayerController currentPlayer;
-        private CombatController combatController;
+        private PlayerController player;
+        private CombatController combat;
         
         //life cycle
         private ObservableVar<GameState> currentGameState;
         private ObservableVar<StageState> currentStageState;
         
-        public PlayerController CurrentPlayer => currentPlayer;
-        public FieldController CurrentField => combatController.CurrentField;
+        public PlayerController Player => player;
+        public FieldController CurrentField => combat.CurrentField;
 
         public GameState CurrentGameState => currentGameState.Value;
         public StageState CurrentStageState => currentStageState.Value;
@@ -33,51 +30,34 @@ namespace TSoft.InGame
             //TODO 로드 타이밍 수정!!
             //DataRegistry.instance.Load().Forget();
             
-            currentPlayer = FindObjectOfType<PlayerController>();
-            combatController = FindObjectOfType<CombatController>();
+            player = FindObjectOfType<PlayerController>();
+            combat = FindObjectOfType<CombatController>();
 
             currentGameState = new ObservableVar<GameState>();
             currentStageState = new ObservableVar<StageState>();
             
-            currentGameState.OnValueChanged += OnGameStateChanged;
-            currentStageState.OnValueChanged += OnStageStateChanged;
+            currentGameState.OnValueChanged += (o, n) => OnGameStateChanged(o, n).Forget();
+            currentStageState.OnValueChanged += (o, n) => OnStageStateChanged(o, n).Forget();;
             
             currentStageState.Value = StageState.Intro;
 
-            combatController.Director = this;
+            combat.Director = this;
+            player.Director = this;
         }
         
-        private void OnGameStateChanged(GameState oldVal, GameState newVal)
-        {
-            if (oldVal == newVal)
-                return;
-
-            Debug.Log($"Current Game State [{newVal}]");
-            
-            switch (newVal)
-            {
-                case GameState.Ready:
-                    StartGameReady().Forget();
-                    break;
-                case GameState.Play:
-                    break;
-                case GameState.FinishSuccess:
-                    StartGameFinishSuccess().Forget();
-                    break;
-                case GameState.FinishFailed:
-                    StartGameFinishFailure().Forget();
-                    break;
-            }
-
-            combatController.OnGameStateChanged(oldVal, newVal).Forget();
-        }
-
-        private void OnStageStateChanged(StageState oldVal, StageState newVal)
+        private async UniTaskVoid OnStageStateChanged(StageState oldVal, StageState newVal)
         {
             if (oldVal == newVal)
                 return;
 
             Debug.Log($"Current Stage State [{newVal}]");
+
+            if (oldVal != StageState.None)
+            {
+                //controller cycle 동기화
+                await UniTask.WaitUntil(() => combat.CurrentStageState == oldVal);
+                await UniTask.WaitUntil(() => player.CurrentStageState == oldVal);    
+            }
             
             switch (newVal)
             {
@@ -101,7 +81,40 @@ namespace TSoft.InGame
                     break;
             }
             
-            combatController.OnStageStateChanged(oldVal, newVal).Forget();
+            player.OnStageStateChanged(oldVal, newVal).Forget();
+            combat.OnStageStateChanged(oldVal, newVal).Forget();
+        }
+        
+        private async UniTaskVoid OnGameStateChanged(GameState oldVal, GameState newVal)
+        {
+            if (oldVal == newVal)
+                return;
+
+            if (oldVal != GameState.None)
+            {
+                await UniTask.WaitUntil(() => combat.CurrentGameState == currentGameState.Value);
+                await UniTask.WaitUntil(() => player.CurrentGameState == currentGameState.Value);
+            }
+            
+            Debug.Log($"Current Game State [{newVal}]");
+            
+            switch (newVal)
+            {
+                case GameState.Ready:
+                    StartGameReady().Forget();
+                    break;
+                case GameState.Play:
+                    break;
+                case GameState.FinishSuccess:
+                    StartGameFinishSuccess().Forget();
+                    break;
+                case GameState.FinishFailed:
+                    StartGameFinishFailure().Forget();
+                    break;
+            }
+            
+            player.OnGameStateChanged(oldVal, newVal).Forget();
+            combat.OnGameStateChanged(oldVal, newVal).Forget();
         }
 
         public void ChangeStageState(StageState stageState)
@@ -141,8 +154,7 @@ namespace TSoft.InGame
         private async UniTaskVoid StartPrePlaying()
         {
             OnPrePlay?.Invoke();
-
-            await UniTask.WaitUntil(() => combatController.CurrentStageState == currentStageState.Value);
+            
             await UniTask.WaitForSeconds(1);
             
             ChangeStageState(StageState.Playing);
@@ -152,7 +164,6 @@ namespace TSoft.InGame
         //스테이지 마무리 준비 (성공)
         private async UniTaskVoid StartPostPlayingSuccess()
         {
-            await UniTask.WaitUntil(() => combatController.CurrentStageState == currentStageState.Value);
             await UniTask.WaitForSeconds(1);
             
             ChangeStageState(StageState.PrePlaying);
@@ -161,7 +172,6 @@ namespace TSoft.InGame
         //스테이지 마무리 준비 (실패)
         private async UniTaskVoid StartPostPlayingFailed()
         {
-            await UniTask.WaitUntil(() => combatController.CurrentStageState == currentStageState.Value);
             await UniTask.WaitForSeconds(1);
             
             ChangeStageState(StageState.Outro);
@@ -175,7 +185,6 @@ namespace TSoft.InGame
         {
             OnGameReady?.Invoke();
             
-            await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
             await UniTask.WaitForSeconds(1);
             
             ChangeGameState(GameState.Play);
@@ -189,10 +198,9 @@ namespace TSoft.InGame
         
         private async UniTaskVoid StartGameFinishSuccess()
         {
-            await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
             await UniTask.WaitForSeconds(1);
 
-            if (combatController.CurrentCycleInfo.IsRoundMax)
+            if (combat.CurrentCycleInfo.IsRoundMax)
             {
                 ChangeStageState(StageState.PostPlayingSuccess);
             }
@@ -205,7 +213,6 @@ namespace TSoft.InGame
         
         private async UniTaskVoid StartGameFinishFailure()
         {
-            await UniTask.WaitUntil(() => combatController.CurrentGameState == currentGameState.Value);
             await UniTask.WaitForSeconds(1);
             
             ChangeStageState(StageState.PostPlayingFailed);

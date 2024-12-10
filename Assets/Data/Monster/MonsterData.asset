@@ -16,5 +16,4 @@ MonoBehaviour:
   monsterPrefab: {fileID: 704978731055960363, guid: e33039d24a8e3544b9895649bb28f747,
     type: 3}
   monsterData:
-    Name: 
-    Hp: 0
+    Name: Orc

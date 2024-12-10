@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace TSoft.InGame.Player
 {
-    public partial class PlayerController : MonoBehaviour
+    public partial class PlayerController : ControllerBase
     {
         [Header("Positions")]
         [SerializeField] private Transform hand;
@@ -15,7 +16,6 @@ namespace TSoft.InGame.Player
         [SerializeField] private Transform deck;
         
         private Gameplay gameplay;
-        private InGameDirector director;
         
         //animation
         private Vector3[] cardPositions;
@@ -29,19 +29,24 @@ namespace TSoft.InGame.Player
         private PokerCard currentPokerCardHold;
        
         public List<PokerCard> CardsOnHand => cardsOnHand;
+        
         public Gameplay Gameplay =>  gameplay;
         
         private const int HandCountMax = 5;
         
-        private void Awake()
+        protected override void InitOnDirectorChanged()
         {
             currentPokerCardSelected = new List<PokerCard>();
             cardsOnHand = new List<PokerCard>();
 
             gameplay = GetComponent<Gameplay>();
-            director = FindObjectOfType<DirectorBase>() as InGameDirector;
-            
+        }
+
+        protected override async UniTask OnGameReady()
+        {
             InitializeDeck();
+            
+            await UniTask.WaitForSeconds(1);
         }
         
         public bool TryUseCardsOnHand()

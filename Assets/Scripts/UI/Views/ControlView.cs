@@ -65,7 +65,7 @@ namespace TSoft.UI.Views
 
             if (director != null)
             {
-                director.OnGameReady += UpdateCardOnPrePlay;
+                director.OnGameReady += UpdateCardOnGameReady;
             }
         }
 
@@ -73,11 +73,11 @@ namespace TSoft.UI.Views
         {
             if (director != null)
             {
-                director.OnGameReady -= UpdateCardOnPrePlay;
+                director.OnGameReady -= UpdateCardOnGameReady;
             }
         }
 
-        private void UpdateCardOnPrePlay()
+        private void UpdateCardOnGameReady()
         {
             UpdateEnergy();
             UpdateHeart();

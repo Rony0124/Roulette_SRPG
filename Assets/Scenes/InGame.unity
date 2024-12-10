@@ -1995,6 +1995,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MonsterInfoUI
       objectReference: {fileID: 0}
+    - target: {fileID: 7411881715895803042, guid: 76694f5b57b53204e9b9236b224e86b1,
+        type: 3}
+      propertyPath: m_Name
+      value: FieldHpTxt
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
