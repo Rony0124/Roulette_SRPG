@@ -5,14 +5,13 @@ namespace TSoft.Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        private static object _lock = new object();
-        private static bool applicationIsQuitting = false;
+        private static object @lock = new();
         
         private static T instance;
         public static T Instance {
             get {
                 if (instance == null && Time.timeScale != 0) {
-                    lock (_lock)
+                    lock (@lock)
                     {
                         instance = FindObjectOfType(typeof(T)) as T;
 
