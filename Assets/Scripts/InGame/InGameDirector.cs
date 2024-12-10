@@ -199,16 +199,15 @@ namespace TSoft.InGame
         private async UniTaskVoid StartGameFinishSuccess()
         {
             await UniTask.WaitForSeconds(1);
-
+            
             if (combat.CurrentCycleInfo.IsRoundMax)
             {
-                ChangeStageState(StageState.PostPlayingSuccess);
+                ChangeStageState(StageState.PostPlayingSuccess);   
             }
             else
             {
                 ChangeGameState(GameState.Ready);
             }
-                
         }
         
         private async UniTaskVoid StartGameFinishFailure()

@@ -39,6 +39,11 @@ namespace TSoft.InGame
         {
             currentCycleInfo.Round = 0;
             currentCycleInfo.Stage++;
+
+            if (currentField != null)
+            {
+                Destroy(currentField.gameObject);
+            }
             
             currentField = DataRegistry.Instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
             currentField.SetFieldData(currentCycleInfo);
