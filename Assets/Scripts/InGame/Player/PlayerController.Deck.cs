@@ -35,12 +35,9 @@ namespace TSoft.InGame.Player
 
             card = cardsOnDeck.Dequeue();
             
+            Debug.Log($"current remaining card deck : {cardsOnDeck.Count}");
+            
             return true;
-        }
-
-        public void ResetDeck()
-        {
-            cardsOnDeck = new();
         }
     }
 }

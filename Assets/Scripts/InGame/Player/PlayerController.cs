@@ -25,6 +25,7 @@ namespace TSoft.InGame.Player
         private int currentCardPreviewIdx;
         
         //cards
+        [SerializeField]
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
         
@@ -55,6 +56,12 @@ namespace TSoft.InGame.Player
             await UniTask.WaitForSeconds(1);
         }
         
+        protected override async UniTask OnGameFinishSuccess()
+        {
+            DiscardAll();
+            await UniTask.WaitForSeconds(3);
+        }
+        
         public bool TryUseCardsOnHand()
         {
             var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
@@ -80,6 +87,8 @@ namespace TSoft.InGame.Player
                 Discard(selectedCard);
             }
             
+            currentPokerCardSelected.Clear();
+            
             //카드 패턴에 의한 데미지 추가
             damage *= CurrentPattern.Modifier;
 
@@ -102,9 +111,6 @@ namespace TSoft.InGame.Player
                     //PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
                 }
             }
-           
-            
-            currentPokerCardSelected.Clear();
             
             return true;
         }
@@ -120,9 +126,10 @@ namespace TSoft.InGame.Player
                 Discard(card);
             }
             
+            currentPokerCardSelected.Clear();
+            
             --currentEnergy;
             gameplay.SetAttr(GameplayAttr.Energy, currentEnergy);
-            currentPokerCardSelected = new();
             
             return true;
         }
@@ -136,6 +143,22 @@ namespace TSoft.InGame.Player
             pokerCard.Discard(animationSpeed);
             
             Destroy(pokerCard.gameObject, 3);
+        }
+        
+        private void DiscardAll()
+        {
+            Debug.Log(cardsOnHand.IsNullOrEmpty());
+
+            List<PokerCard> cards = new(cardsOnHand);
+            foreach (var cardOnHand in cards)
+            {
+                if(cardOnHand == null)
+                    continue;
+                
+                Discard(cardOnHand);
+            }
+            
+            cardsOnHand.Clear();
         }
         
         private void RemoveCardFromHand(PokerCard pokerCard)

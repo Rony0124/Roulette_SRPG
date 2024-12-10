@@ -41,9 +41,6 @@ namespace TSoft.InGame.Player
                 currentPokerCardSelected.Add(pokerCard);
             }
             
-            Debug.Log($"selected card {pokerCard.cardData.Image.name}");
-            
-
             CheckCardPatternOnHand();
         }
         

@@ -822,6 +822,7 @@ MonoBehaviour:
   hand: {fileID: 1999925344163037218}
   cardPreview: {fileID: 1724789607}
   deck: {fileID: 1999925344163037216}
+  cardsOnHand: []
   defaultCardDB:
   - {fileID: 11400000, guid: 3ffda229b8ef3a641ba239f6771972fa, type: 2}
   - {fileID: 11400000, guid: e815372c747695d4cbc9f452a7989b95, type: 2}

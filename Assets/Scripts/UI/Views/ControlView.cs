@@ -101,8 +101,7 @@ namespace TSoft.UI.Views
         private void DrawCards()
         {
             var cardVoids = player.Gameplay.GetAttr(GameplayAttr.Capacity) - player.CardsOnHand.Count;
-            Debug.Log($"current remaining card capacity : {cardVoids}");
-
+            
             if (cardVoids < 1)
             {
                 Debug.Log($"no space on hand left!");
