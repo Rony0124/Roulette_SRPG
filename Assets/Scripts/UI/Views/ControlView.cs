@@ -26,47 +26,29 @@ namespace TSoft.UI.Views
             ButtonUse,
         }
         
-        private enum ControlParent
-        {
-            HeartGroup,
-            EnergyGroup
-        }
-        
         [Header("Game Object")]
         [SerializeField] private PokerCard pokerCardPrefab;
-        [SerializeField] private GameObject heartPrefab;
-        [SerializeField] private GameObject energyPrefab;
-        
+   
         //UI
         private TMPro.TextMeshProUGUI txtEnergy;
         private TMPro.TextMeshProUGUI txtHeart;
-        private Transform trHeartGroup;
-        private Transform trEnergyGroup;
+    
         //Play
         private PlayerController player;
         private InGameDirector director;
-
-        private List<GameObject> hearts;
-        private List<GameObject> energies;
         
         private void Start()
         {
             Bind<Button>(typeof(ControlButton));
             Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));
-            Bind<Transform>(typeof(ControlParent));
             
             Get<Button>((int)ControlButton.ButtonDiscard).gameObject.BindEvent(OnDiscardCard);
             Get<Button>((int)ControlButton.ButtonUse).gameObject.BindEvent(OnUseCard);
 
             txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
             txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
-            trHeartGroup = Get<Transform>((int)ControlParent.HeartGroup);
-            trEnergyGroup = Get<Transform>((int)ControlParent.EnergyGroup);
 
             player = FindObjectOfType<PlayerController>();
-            
-            hearts = new();
-            energies = new();
         }
 
         protected override void OnActivated()
@@ -154,44 +136,12 @@ namespace TSoft.UI.Views
         {
             var energyCount = player.Gameplay.GetAttr(GameplayAttr.Energy);
             txtHeart.text = energyCount + "";
-
-            if (energies.Count > 0)
-            {
-                for (int i = 0; i < energies.Count; i++)
-                {
-                    Destroy(energies[i]);
-                }
-            
-                energies.Clear();    
-            }
-
-            for (int i = 0; i < energyCount; i++)
-            {
-                var obj = Instantiate(energyPrefab, trEnergyGroup);
-                energies.Add(obj);
-            }
         }
         
         private void UpdateHeart()
         {
             var heartCount = player.Gameplay.GetAttr(GameplayAttr.Heart);
             txtHeart.text = heartCount + "";
-
-            if (hearts.Count > 0)
-            {
-                for (int i = 0; i < hearts.Count; i++)
-                {
-                    Destroy(hearts[i]);
-                }
-            
-                hearts.Clear();
-            }
-            
-            for (int i = 0; i < heartCount; i++)
-            {
-                var obj = Instantiate(heartPrefab, trHeartGroup);
-                hearts.Add(obj);
-            }
         }
     }
 }

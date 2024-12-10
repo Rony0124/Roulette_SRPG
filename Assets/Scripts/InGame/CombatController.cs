@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using TSoft.Data.Registry;
 using UnityEngine;
 
 namespace TSoft.InGame
@@ -98,7 +99,7 @@ namespace TSoft.InGame
             currentCycleInfo.Round = 0;
             currentCycleInfo.Stage++;
             
-            currentField = GameContext.Instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
+            currentField = DataRegistry.instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
             currentField.SetFieldData(currentCycleInfo);
             
             await UniTask.WaitForSeconds(1);

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TSoft.Data;
+using TSoft.Data.Registry;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -50,7 +51,7 @@ namespace TSoft.InGame
 
                 for (var j = 0; j < ranSlotPosIndex; j++)
                 {
-                    if (GameContext.Instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
+                    if (DataRegistry.instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
                     {
                         var pos = Vector3.zero;
                         if (ranSlotIndex > 1)

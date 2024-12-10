@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using MoreMountains.Feedbacks;
 using TSoft.Data.Registry;
 using TSoft.Utils;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace TSoft.InGame
     public class InGameDirector : DirectorBase
     {
         public Action OnPrePlay;
+        public Action OnGameReady;
         
         //game play
         private PlayerController currentPlayer;
@@ -28,6 +30,9 @@ namespace TSoft.InGame
 
         protected override void OnDirectorChanged(DirectorBase oldValue, DirectorBase newValue)
         {
+            //TODO 로드 타이밍 수정!!
+            DataRegistry.instance.Load().Forget();
+            
             currentPlayer = FindObjectOfType<PlayerController>();
             combatController = FindObjectOfType<CombatController>();
 
