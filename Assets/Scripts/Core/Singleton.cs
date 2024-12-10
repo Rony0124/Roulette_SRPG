@@ -5,22 +5,33 @@ namespace TSoft.Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
+        private static object _lock = new object();
+        private static bool applicationIsQuitting = false;
+        
         private static T instance;
         public static T Instance {
             get {
-                if (instance == null) {
-                    instance = FindObjectOfType(typeof(T)) as T;
+                if (instance == null && Time.timeScale != 0) {
+                    lock (_lock)
+                    {
+                        instance = FindObjectOfType(typeof(T)) as T;
 
-                    if (instance == null) {
-                        var singletonObject = new GameObject();
-                        instance = singletonObject.AddComponent<T>();
+                        if (instance == null) {
+                            var singletonObject = new GameObject();
+                            instance = singletonObject.AddComponent<T>();
 
-                        singletonObject.name = typeof(T).Name;
+                            singletonObject.name = typeof(T).Name;
+                        }
                     }
                 }
-
+                
                 return instance;
             }
+        }
+
+        private void OnApplicationQuit()
+        {
+            Time.timeScale = 0;
         }
     }
 }
