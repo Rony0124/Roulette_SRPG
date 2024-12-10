@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
@@ -10,6 +11,8 @@ namespace TSoft.InGame.Player
 {
     public partial class PlayerController : ControllerBase
     {
+        public Action onGameReady;
+        
         [Header("Positions")]
         [SerializeField] private Transform hand;
         [SerializeField] private Transform cardPreview;
@@ -45,6 +48,9 @@ namespace TSoft.InGame.Player
         protected override async UniTask OnGameReady()
         {
             InitializeDeck();
+            gameplay.Init();
+            
+            onGameReady?.Invoke();
             
             await UniTask.WaitForSeconds(1);
         }
@@ -84,6 +90,7 @@ namespace TSoft.InGame.Player
                 if (currentHeart > 0)
                 {
                     director.GameOver(true);
+                    return false;
                 }
             }
             else
@@ -91,6 +98,7 @@ namespace TSoft.InGame.Player
                 if (currentHeart <= 0)
                 {
                     director.GameOver(false);
+                    return false;
                     //PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
                 }
             }

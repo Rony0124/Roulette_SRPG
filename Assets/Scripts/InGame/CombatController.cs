@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using TSoft.Data.Registry;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TSoft.InGame
 {
@@ -26,6 +27,8 @@ namespace TSoft.InGame
         
         public FieldController CurrentField => currentField;
         public CycleInfo CurrentCycleInfo => currentCycleInfo;
+
+        public UnityEvent onGameFinish;
         
         protected override void InitOnDirectorChanged()
         {
@@ -45,12 +48,23 @@ namespace TSoft.InGame
 
         protected override async UniTask OnGameReady()
         {
+            if (currentCycleInfo.Round > 0)
+            {
+                onGameFinish?.Invoke();    
+            }
+            
+            await UniTask.WaitForSeconds(1);
+            
             currentCycleInfo.Round++;
             
             var mIndex = currentCycleInfo.Round;
             currentField.CurrentSlotIndex = mIndex;
             
             Debug.Log("current round" + currentCycleInfo.Round);
+        }
+        
+        protected override async UniTask OnGameFinishSuccess()
+        {
             
             await UniTask.WaitForSeconds(1);
         }

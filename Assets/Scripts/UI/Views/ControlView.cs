@@ -54,26 +54,22 @@ namespace TSoft.UI.Views
         protected override void OnActivated()
         {
             //director 참조 타이밍 개선 필요
-            if (director == null)
+            if (player == null)
             {
-                director = GameContext.Instance.CurrentDirector as InGameDirector;
-                if (director == null)
-                {
-                    director = FindObjectOfType<InGameDirector>();
-                }
+                player = FindObjectOfType<PlayerController>();
             }
 
-            if (director != null)
+            if (player != null)
             {
-                director.OnGameReady += UpdateCardOnGameReady;
+                player.onGameReady += UpdateCardOnGameReady;
             }
         }
 
         protected override void OnDeactivated()
         {
-            if (director != null)
+            if (player != null)
             {
-                director.OnGameReady -= UpdateCardOnGameReady;
+                player.onGameReady -= UpdateCardOnGameReady;
             }
         }
 

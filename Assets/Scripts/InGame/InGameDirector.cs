@@ -92,8 +92,8 @@ namespace TSoft.InGame
 
             if (oldVal != GameState.None)
             {
-                await UniTask.WaitUntil(() => combat.CurrentGameState == currentGameState.Value);
-                await UniTask.WaitUntil(() => player.CurrentGameState == currentGameState.Value);
+                await UniTask.WaitUntil(() => combat.CurrentGameState == oldVal);
+                await UniTask.WaitUntil(() => player.CurrentGameState == oldVal);
             }
             
             Debug.Log($"Current Game State [{newVal}]");
