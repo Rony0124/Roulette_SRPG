@@ -1,4 +1,5 @@
 using TSoft.Core;
+using TSoft.Data.Registry;
 using TSoft.InGame;
 using UnityEngine;
 

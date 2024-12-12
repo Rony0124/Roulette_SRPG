@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroyOnLoad: 1
+  monsterRegistry: {fileID: 11400000, guid: a2129c9d39361bb4ca15b1a5287b78e7, type: 2}
+  stageRegistry: {fileID: 11400000, guid: 3277ce9070050744b8406080b7ae20e4, type: 2}

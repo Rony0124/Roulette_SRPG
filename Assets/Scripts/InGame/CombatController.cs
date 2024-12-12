@@ -1,66 +1,76 @@
 using Cysharp.Threading.Tasks;
+using TSoft.Data.Registry;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace TSoft.InGame
 {
-    public class CombatController : MonoBehaviour
+    public class CombatController : ControllerBase
     {
-        [SerializeField] private GameObject fieldPrefab;
-        
-        //life cycle 동기화 flag
-        private GameState currentGameState;
-        private StageState currentStageState;
-        
-        public GameState CurrentGameState => currentGameState;
-        public StageState CurrentStageState => currentStageState;
-        
-        public async UniTaskVoid OnGameStateChanged(GameState oldVal, GameState newVal)
+        public struct CycleInfo
         {
-            switch (newVal)
+            public int Round;
+            public int Stage;
+            public bool IsRoundMax => Round >= 5;
+            
+            public void Reset()
             {
-                case GameState.Ready:
-                    break;
-                case GameState.Play:
-                    break;
-                case GameState.FinishSuccess:
-                    break;
-                case GameState.FinishFailed:
-                    break;
+                Round = 0;
+                Stage = 0;
             }
-
-            currentGameState = newVal;
         }
         
-        public async UniTaskVoid OnStageStateChanged(StageState oldVal, StageState newVal)
-        {
-            switch (newVal)
-            {
-                case StageState.Intro:
-                    break;
-                case StageState.PrePlaying:
-                    await OnPrePlay();
-                    break;
-                case StageState.Playing:
-                    break;
-                case StageState.PostPlaying:
-                    break;
-                case StageState.OutroSuccess:
-                    break;
-                case StageState.OutroFailed:
-                    break;
-                case StageState.OutroReset:
-                    break;
-                case StageState.Exit:
-                    break;
-            }
+        //field
+        private FieldController currentField;
+        //cycle
+        private CycleInfo currentCycleInfo;
+        
+        public FieldController CurrentField => currentField;
+        public CycleInfo CurrentCycleInfo => currentCycleInfo;
 
-            currentStageState = newVal;
+        public UnityEvent onGameFinish;
+        
+        protected override void InitOnDirectorChanged()
+        {
+            currentCycleInfo.Reset();
+        }
+        
+        protected override async UniTask OnPrePlay()
+        {
+            currentCycleInfo.Round = 0;
+            currentCycleInfo.Stage++;
+
+            if (currentField != null)
+            {
+                Destroy(currentField.gameObject);
+            }
+            
+            currentField = DataRegistry.Instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
+            currentField.SetFieldData(currentCycleInfo);
+            
+            await UniTask.WaitForSeconds(1);
         }
 
-        private async UniTask OnPrePlay()
+        protected override async UniTask OnGameReady()
         {
-            Debug.Log("prepping play from combat");
-            Instantiate(fieldPrefab, transform);
+            if (currentCycleInfo.Round > 0)
+            {
+                onGameFinish?.Invoke();    
+            }
+            
+            await UniTask.WaitForSeconds(1);
+            
+            currentCycleInfo.Round++;
+            
+            var mIndex = currentCycleInfo.Round;
+            currentField.CurrentSlotIndex = mIndex;
+            
+            Debug.Log("current round" + currentCycleInfo.Round);
+        }
+        
+        protected override async UniTask OnGameFinishSuccess()
+        {
+            
             await UniTask.WaitForSeconds(1);
         }
     }

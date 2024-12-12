@@ -1,35 +1,26 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 namespace TSoft.Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        [SerializeField] private bool dontDestroyOnLoad;
+        private static object @lock = new();
         
         private static T instance;
         public static T Instance {
             get {
-                if (instance == null) {
-                    instance = FindObjectOfType(typeof(T)) as T;
-
-                    if (instance == null) {
-                        var go = new GameObject();
-                        instance = go.AddComponent<T>();
-                        
-                        go.name = typeof(T).Name;
-                    }
-                    
-                    if (instance.dontDestroyOnLoad)
+                if (instance == null && Time.timeScale != 0) {
+                    lock (@lock)
                     {
-                        if (instance.transform.root != null)
-                        {
-                            instance.transform.SetParent(null);
+                        instance = FindObjectOfType(typeof(T)) as T;
+
+                        if (instance == null) {
+                            var singletonObject = new GameObject();
+                            instance = singletonObject.AddComponent<T>();
+
+                            singletonObject.name = typeof(T).Name;
                         }
-                
-                        DontDestroyOnLoad(instance.gameObject);
                     }
                 }
                 
@@ -37,17 +28,9 @@ namespace TSoft.Core
             }
         }
 
-        private void Awake()
+        private void OnApplicationQuit()
         {
-            if (instance != null)
-            {
-                Destroy(gameObject);
-                return;
-            }
-            
-            Init();
+            Time.timeScale = 0;
         }
-
-        protected virtual void Init() { }
     }
 }

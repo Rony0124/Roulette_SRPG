@@ -6,6 +6,5 @@ namespace TSoft.Data.Monster
     public struct MonsterData
     {
         public string Name;
-        public float Hp;
     }
 }

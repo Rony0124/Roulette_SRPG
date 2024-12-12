@@ -1,48 +1,68 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
-using TSoft.Managers;
 using UnityEngine;
 
 namespace TSoft.InGame.Player
 {
-    public partial class PlayerController : MonoBehaviour
+    public partial class PlayerController : ControllerBase
     {
+        public Action onGameReady;
+   
         [Header("Positions")]
         [SerializeField] private Transform hand;
         [SerializeField] private Transform cardPreview;
         [SerializeField] private Transform deck;
         
         private Gameplay gameplay;
-        private InGameDirector director;
         
         //animation
         private Vector3[] cardPositions;
         private int currentCardPreviewIdx;
         
         //cards
+        [SerializeField]
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
         
         private PokerCard currentPokerCardPreview;
         private PokerCard currentPokerCardHold;
+        
+        public bool CanMoveNextCycle { get; set; }
        
         public List<PokerCard> CardsOnHand => cardsOnHand;
+        
         public Gameplay Gameplay =>  gameplay;
         
         private const int HandCountMax = 5;
         
-        private void Awake()
+        protected override void InitOnDirectorChanged()
         {
             currentPokerCardSelected = new List<PokerCard>();
             cardsOnHand = new List<PokerCard>();
 
             gameplay = GetComponent<Gameplay>();
-            director = FindObjectOfType<DirectorBase>() as InGameDirector;
-            
+        }
+
+        protected override async UniTask OnGameReady()
+        {
             InitializeDeck();
+            gameplay.Init();
+            
+            onGameReady?.Invoke();
+            
+            await UniTask.WaitForSeconds(1);
+        }
+        
+        protected override async UniTask OnGameFinishSuccess()
+        {
+            await UniTask.WaitForSeconds(2);
+            await UniTask.WaitWhile(() => !CanMoveNextCycle);
+            DiscardAll();
         }
         
         public bool TryUseCardsOnHand()
@@ -55,12 +75,13 @@ namespace TSoft.InGame.Player
                 return false;
             
             --currentHeart;
+            Debug.Log("remaining heart : " + currentHeart);
             
             gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
 
             //현재 데미지 상태
             var damage = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
-            Debug.Log(damage);
+            Debug.Log("damage dealt : " + damage);
             
             foreach (var selectedCard in currentPokerCardSelected)
             {
@@ -69,17 +90,29 @@ namespace TSoft.InGame.Player
                 Discard(selectedCard);
             }
             
+            currentPokerCardSelected.Clear();
+            
             //카드 패턴에 의한 데미지 추가
             damage *= CurrentPattern.Modifier;
 
-            director.CurrentMonster.TakeDamage(damage);
-
-            if (currentHeart <= 0 && director.CurrentMonster.Data.Hp > 0)
-            {
-                PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
-            }
+            var isDead = director.CurrentField.TakeDamage((int)damage);
             
-            currentPokerCardSelected.Clear();
+            if (isDead)
+            {
+                if (currentHeart > 0)
+                {
+                    director.GameOver(true);
+                    return false;
+                }
+            }
+            else
+            {
+                if (currentHeart <= 0)
+                {
+                    director.GameOver(false);
+                    return false;
+                }
+            }
             
             return true;
         }
@@ -95,9 +128,10 @@ namespace TSoft.InGame.Player
                 Discard(card);
             }
             
+            currentPokerCardSelected.Clear();
+            
             --currentEnergy;
             gameplay.SetAttr(GameplayAttr.Energy, currentEnergy);
-            currentPokerCardSelected = new();
             
             return true;
         }
@@ -111,6 +145,20 @@ namespace TSoft.InGame.Player
             pokerCard.Discard(animationSpeed);
             
             Destroy(pokerCard.gameObject, 3);
+        }
+        
+        private void DiscardAll()
+        {
+            List<PokerCard> cards = new(cardsOnHand);
+            foreach (var cardOnHand in cards)
+            {
+                if(cardOnHand == null)
+                    continue;
+                
+                Discard(cardOnHand);
+            }
+            
+            cardsOnHand.Clear();
         }
         
         private void RemoveCardFromHand(PokerCard pokerCard)

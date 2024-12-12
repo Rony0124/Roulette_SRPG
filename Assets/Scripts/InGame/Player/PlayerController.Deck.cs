@@ -37,10 +37,5 @@ namespace TSoft.InGame.Player
             
             return true;
         }
-
-        public void ResetDeck()
-        {
-            cardsOnDeck = new();
-        }
     }
 }

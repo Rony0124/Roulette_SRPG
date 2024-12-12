@@ -5,7 +5,7 @@ namespace TSoft.InGame.GamePlaySystem
 {
     public partial class Gameplay : MonoBehaviour
     {
-        private void Awake()
+        public void Init()
         {
             InitializeAttributes();
             InitializeEffect();
