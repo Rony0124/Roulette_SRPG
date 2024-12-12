@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using TSoft.Managers;
 using TSoft.Utils;
 using UnityEngine;
 using PlayerController = TSoft.InGame.Player.PlayerController;
@@ -140,6 +141,20 @@ namespace TSoft.InGame
             }
         }
 
+        public void GameFinishSuccess()
+        {
+            if (combat.CurrentCycleInfo.IsRoundMax)
+            {
+                ChangeStageState(StageState.PostPlayingSuccess);   
+            }
+            else
+            {
+                ChangeGameState(GameState.Ready);
+            }
+            
+            PopupContainer.Instance.ClosePopupUI();
+        }
+
         #region Stage
 
         //입장 인트로
@@ -199,15 +214,7 @@ namespace TSoft.InGame
         private async UniTaskVoid StartGameFinishSuccess()
         {
             await UniTask.WaitForSeconds(1);
-            
-            if (combat.CurrentCycleInfo.IsRoundMax)
-            {
-                ChangeStageState(StageState.PostPlayingSuccess);   
-            }
-            else
-            {
-                ChangeGameState(GameState.Ready);
-            }
+            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Win);
         }
         
         private async UniTaskVoid StartGameFinishFailure()

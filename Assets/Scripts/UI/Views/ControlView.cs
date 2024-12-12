@@ -35,9 +35,8 @@ namespace TSoft.UI.Views
     
         //Play
         private PlayerController player;
-        private InGameDirector director;
         
-        private void Start()
+        private void Awake()
         {
             Bind<Button>(typeof(ControlButton));
             Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));

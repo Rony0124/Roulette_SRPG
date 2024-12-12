@@ -12,7 +12,7 @@ namespace TSoft.InGame.Player
     public partial class PlayerController : ControllerBase
     {
         public Action onGameReady;
-        
+   
         [Header("Positions")]
         [SerializeField] private Transform hand;
         [SerializeField] private Transform cardPreview;
@@ -31,6 +31,8 @@ namespace TSoft.InGame.Player
         
         private PokerCard currentPokerCardPreview;
         private PokerCard currentPokerCardHold;
+        
+        public bool CanMoveNextCycle { get; set; }
        
         public List<PokerCard> CardsOnHand => cardsOnHand;
         
@@ -58,8 +60,9 @@ namespace TSoft.InGame.Player
         
         protected override async UniTask OnGameFinishSuccess()
         {
+            await UniTask.WaitForSeconds(2);
+            await UniTask.WaitWhile(() => !CanMoveNextCycle);
             DiscardAll();
-            await UniTask.WaitForSeconds(3);
         }
         
         public bool TryUseCardsOnHand()
@@ -108,7 +111,6 @@ namespace TSoft.InGame.Player
                 {
                     director.GameOver(false);
                     return false;
-                    //PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
                 }
             }
             
@@ -147,8 +149,6 @@ namespace TSoft.InGame.Player
         
         private void DiscardAll()
         {
-            Debug.Log(cardsOnHand.IsNullOrEmpty());
-
             List<PokerCard> cards = new(cardsOnHand);
             foreach (var cardOnHand in cards)
             {

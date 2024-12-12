@@ -5,7 +5,6 @@ namespace TSoft.UI.Popup
 {
     public class ViewPopup : ViewBase
     {
-
         protected override void OnActivated()
         {
             PopupContainer.Instance.SetCanvas(gameObject);
