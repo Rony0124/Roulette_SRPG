@@ -143,7 +143,9 @@ namespace TSoft.InGame
 
         public void GameFinishSuccess()
         {
-            if (combat.CurrentCycleInfo.IsRoundMax)
+            //TODO 리워드 씬/보스 완성 되면 그떄 max사용
+            //combat.CurrentCycleInfo.IsRoundMax
+            if (combat.CurrentCycleInfo.Round == 3)
             {
                 ChangeStageState(StageState.PostPlayingSuccess);   
             }
