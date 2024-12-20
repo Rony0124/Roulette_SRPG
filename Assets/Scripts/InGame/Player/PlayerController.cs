@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks.Triggers;
 using Sirenix.Utilities;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.CardSystem.CE;
@@ -20,6 +21,7 @@ namespace TSoft.InGame.Player
         [SerializeField] private Transform deck;
         
         private Gameplay gameplay;
+        private AbilityContainer abilityContainer;
         
         //animation
         private Vector3[] cardPositions;
@@ -49,12 +51,14 @@ namespace TSoft.InGame.Player
             customEffects = new Queue<CustomEffect>();
 
             gameplay = GetComponent<Gameplay>();
+            abilityContainer = GetComponent<AbilityContainer>();
         }
 
         protected override async UniTask OnGameReady()
         {
             InitializeDeck();
             gameplay.Init();
+            abilityContainer.Init();
             
             onGameReady?.Invoke();
             
@@ -87,6 +91,8 @@ namespace TSoft.InGame.Player
             
             //카드 패턴에 의한 데미지 추가
             damage *= CurrentPattern.Modifier;
+            
+            Debug.Log("damage" + damage);
             
             //카드 
             while (customEffects.Count > 0)
