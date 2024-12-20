@@ -23,25 +23,14 @@ namespace TSoft.InGame.Player
         
         private void Card_OnClick(PokerCard pokerCard)
         {
-            if (pokerCard.IsFloating)
+            if (pokerCard.cardData.type == CardType.Joker)
             {
-                pokerCard.SetVisualsPosition(Vector3.zero);
-                pokerCard.SetFloating(false);
-                
-                currentPokerCardSelected.Remove(pokerCard);
+                OnClickJoker(pokerCard);
             }
             else
             {
-                if(currentPokerCardSelected.Count >= HandCountMax)
-                    return;
-                
-                pokerCard.SetVisualsPosition(Vector3.up * 10);
-                pokerCard.SetFloating(true);
-                
-                currentPokerCardSelected.Add(pokerCard);
+                OnClickNormal(pokerCard);    
             }
-            
-            CheckCardPatternOnHand();
         }
         
         private void Card_OnHover(PokerCard pokerCard)
@@ -67,6 +56,41 @@ namespace TSoft.InGame.Player
             
             currentPokerCardPreview = null;
             currentCardPreviewIdx = -1;
+        }
+
+        private void OnClickJoker(PokerCard pokerCard)
+        {
+            if (pokerCard.cardData.policy == CustomEffectPolicy.Instant)
+            {
+                pokerCard.cardData.effect.ApplyEffect(this);
+            }
+            else
+            {
+                customEffects.Enqueue(pokerCard.cardData.effect);
+            }
+        }
+
+        private void OnClickNormal(PokerCard pokerCard)
+        {
+            if (pokerCard.IsFloating)
+            {
+                pokerCard.SetVisualsPosition(Vector3.zero);
+                pokerCard.SetFloating(false);
+                
+                currentPokerCardSelected.Remove(pokerCard);
+            }
+            else
+            {
+                if(currentPokerCardSelected.Count >= HandCountMax)
+                    return;
+                
+                pokerCard.SetVisualsPosition(Vector3.up * 10);
+                pokerCard.SetFloating(true);
+                
+                currentPokerCardSelected.Add(pokerCard);
+            }
+            
+            CheckCardPatternOnHand();
         }
     }
 }

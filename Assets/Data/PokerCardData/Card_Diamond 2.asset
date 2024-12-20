@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Diamond 2
   m_EditorClassIdentifier: 
-  Data:
-    Title: card
-    Description: Dmg 1
-    Image: {fileID: 21300000, guid: 77202bde798ef9241a53716b210fbd4e, type: 3}
-    Number: 2
-    Damage: 10
-    Type: 1
+  title: 
+  description: 
+  image: {fileID: 21300000, guid: 77202bde798ef9241a53716b210fbd4e, type: 3}
+  number: 0
+  type: 1
+  effect:
+    rid: -2
+  policy: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

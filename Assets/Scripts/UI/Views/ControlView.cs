@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
 using TSoft.InGame;
-using TSoft.InGame.CardSystem;
 using TSoft.UI.Core;
 using TSoft.Utils;
-using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using PlayerController = TSoft.InGame.Player.PlayerController;
 
@@ -25,9 +20,6 @@ namespace TSoft.UI.Views
             ButtonDiscard,
             ButtonUse,
         }
-        
-        [Header("Game Object")]
-        [SerializeField] private PokerCard pokerCardPrefab;
    
         //UI
         private TMPro.TextMeshProUGUI txtEnergy;
@@ -76,7 +68,8 @@ namespace TSoft.UI.Views
         {
             UpdateEnergy();
             UpdateHeart();
-            DrawCards();
+            
+            player.DrawCards();
         }
         
         private void OnDiscardCard(PointerEventData data)
@@ -85,7 +78,7 @@ namespace TSoft.UI.Views
                 return;
             
             UpdateEnergy();
-            DrawCards();
+            player.DrawCards();
         }
 
         private void OnUseCard(PointerEventData data)
@@ -94,36 +87,8 @@ namespace TSoft.UI.Views
                 return;
             
             UpdateHeart();
-            DrawCards();
-        }
-        
-        private void DrawCards()
-        {
-            var cardVoids = player.Gameplay.GetAttr(GameplayAttr.Capacity) - player.CardsOnHand.Count;
             
-            if (cardVoids < 1)
-            {
-                Debug.Log($"no space on hand left!");
-                return;
-            }
-            
-            for (var i = 0; i < cardVoids; i++)
-            {
-                PokerCard pokerCard = Instantiate(pokerCardPrefab);
-
-                var cardData = CreateRandomCard();
-                if(cardData == null)
-                    return;
-            
-                pokerCard.SetData(cardData);  
-
-                player.AddCard(pokerCard);
-            }
-        }
-        
-        private CardData CreateRandomCard()
-        {
-            return player.TryDrawCard(out var card) ? card.Data.Clone() : null;
+            player.DrawCards();
         }
         
         private void UpdateEnergy()

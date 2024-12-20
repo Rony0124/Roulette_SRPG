@@ -22,17 +22,17 @@ namespace TSoft.InGame.Player
                 return;
             
             var rankGroups = currentPokerCardSelected
-                .GroupBy(card => card.cardData.Number)
+                .GroupBy(card => card.cardData.number)
                 .OrderByDescending(group => group.Count())
                 .ToList();
             
             var suitGroups = currentPokerCardSelected
-                .GroupBy(card => card.cardData.Type)
+                .GroupBy(card => card.cardData.type)
                 .OrderByDescending(group => group.Count())
                 .ToList();
             
             var sortedRanks = currentPokerCardSelected
-                .Select(card => card.cardData.Number)
+                .Select(card => card.cardData.number)
                 .Distinct()
                 .OrderBy(rank => rank)
                 .ToList();
@@ -43,55 +43,46 @@ namespace TSoft.InGame.Player
             {
                 currentPattern.PatternType = CardPatternType.StraightFlush;
                 currentPattern.Modifier = 180;
-                detectedPattern = "Straight Flush";
             }
             else if (rankGroups.Any(g => g.Count() == 4))
             {
                 currentPattern.PatternType = CardPatternType.FourOfKind;
                 currentPattern.Modifier = 120;
-                detectedPattern = "Four of a Kind";
             }
             else if (rankGroups.Any(g => g.Count() == 3) && rankGroups.Any(g => g.Count() == 2))
             {
                 currentPattern.PatternType = CardPatternType.FullHouse;
                 currentPattern.Modifier = 100;
-                detectedPattern = "Full House";
             }
             else if (suitGroups.Any(g => g.Count() >= 5))
             {
                 currentPattern.PatternType = CardPatternType.Flush;
-                detectedPattern = "Flush";
                 currentPattern.Modifier = 40;
             }
             else if (CheckForStraight(sortedRanks))
             {
                 currentPattern.PatternType = CardPatternType.Straight;
-                detectedPattern = "Straight";
                 currentPattern.Modifier = 25;
             }
             else if (rankGroups.Any(g => g.Count() == 3))
             {
                 currentPattern.PatternType = CardPatternType.ThreeOfKind;
-                detectedPattern = "Three of a Kind";
                 currentPattern.Modifier = 8;
             }
             else if (rankGroups.Count(g => g.Count() == 2) >= 2)
             {
                 currentPattern.PatternType = CardPatternType.TwoPair;
-                detectedPattern = "Two Pair";
                 currentPattern.Modifier = 4;
             }
             else if (rankGroups.Any(g => g.Count() == 2))
             {
                 currentPattern.PatternType = CardPatternType.OnePair;
                 currentPattern.Modifier = 2;
-                detectedPattern = "One Pair";
             }
             else
             {
                 currentPattern.PatternType = CardPatternType.HighCard;
                 currentPattern.Modifier = 1;
-                detectedPattern = "High Card";
             }
 
             Debug.Log($"Highest Pattern Detected: {detectedPattern}");
@@ -99,12 +90,12 @@ namespace TSoft.InGame.Player
         
         private bool CheckForStraightFlush(List<PokerCard> cards)
         {
-            var suitGroups = cards.GroupBy(card => card.cardData.Type);
+            var suitGroups = cards.GroupBy(card => card.cardData.type);
 
             foreach (var suitGroup in suitGroups)
             {
                 var sortedRanks = suitGroup
-                    .Select(card => card.cardData.Number)
+                    .Select(card => card.cardData.number)
                     .Distinct()
                     .OrderBy(rank => rank)
                     .ToList();

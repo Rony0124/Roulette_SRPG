@@ -1,6 +1,7 @@
 using System;
 using TCGStarter.Tweening;
 using TMPro;
+using TSoft.Data.Card;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ namespace TSoft.InGame.CardSystem
         [SerializeField] private GameObject Visuals;
         [SerializeField] private GameObject HitBox;
 
-        [HideInInspector] public CardData cardData;
+        [HideInInspector] public CardSO cardData;
         private bool isHeld = false;
         private bool isFloating = false;
         private Vector3 basePosition = Vector3.zero;
@@ -42,12 +43,12 @@ namespace TSoft.InGame.CardSystem
             }
         }
 
-        public void SetData(CardData card)
+        public void SetData(CardSO card)
         {
             cardData = card;
-            txtTitle.text = card.Title;
-            txtDescription.text = card.Description;
-            imgBG.sprite = card.Image;
+            txtTitle.text = card.title;
+            txtDescription.text = card.description;
+            imgBG.sprite = card.image;
         }
 
         public void Dissolve(float animationSpeed)

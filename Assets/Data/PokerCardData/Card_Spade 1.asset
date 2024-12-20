@@ -12,10 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Spade 1
   m_EditorClassIdentifier: 
-  Data:
-    Title: card
-    Description: Dmg 1
-    Image: {fileID: 21300000, guid: f068beb6338e31243afd5b1a3ed6604f, type: 3}
-    Number: 1
-    Damage: 10
-    Type: 3
+  title: 
+  description: 
+  image: {fileID: 21300000, guid: f068beb6338e31243afd5b1a3ed6604f, type: 3}
+  number: 0
+  type: 3
+  effect:
+    rid: -2
+  policy: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }

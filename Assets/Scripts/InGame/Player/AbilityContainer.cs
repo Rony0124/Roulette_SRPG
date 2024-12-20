@@ -3,7 +3,6 @@ using System.ComponentModel;
 using Sirenix.Utilities;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
-using TSoft.Utils;
 using UnityEngine;
 
 namespace TSoft.InGame.Player
@@ -12,20 +11,20 @@ namespace TSoft.InGame.Player
     {
         private Gameplay gameplay;
         
-        public List<SpecialCard> SpecialCards;
-        public ObservableList<SpecialCardData> CurrentSpecialCards;
+        /*public List<SpecialCard> SpecialCards;
+        public ObservableList<SpecialCardData> CurrentSpecialCards;*/
         
         private void Awake()
         {
             gameplay = GetComponent<Gameplay>();
 
-            CurrentSpecialCards = new();
-            CurrentSpecialCards.ListChanged += OnSpecialCardsChanged;
+            /*CurrentSpecialCards = new();
+            CurrentSpecialCards.ListChanged += OnSpecialCardsChanged;*/
         }
 
         private void Start()
         {
-            if (!SpecialCards.IsNullOrEmpty())
+            /*if (!SpecialCards.IsNullOrEmpty())
             {
                 foreach (var card in SpecialCards)
                 {
@@ -35,7 +34,7 @@ namespace TSoft.InGame.Player
                     //gameplay.ApplyEffectSelf(card.cardData.Effect);
                     CurrentSpecialCards.Add(card.cardData);
                 }    
-            }
+            }*/
             
             /*foreach (var specialCard in CurrentSpecialCards)
             {
@@ -45,7 +44,7 @@ namespace TSoft.InGame.Player
 
         private void OnSpecialCardsChanged(object sender, ListChangedEventArgs args)
         {
-            if(CurrentSpecialCards.Count < 1)
+            /*if(CurrentSpecialCards.Count < 1)
                 return;
             
             switch (args.ListChangedType)
@@ -58,7 +57,7 @@ namespace TSoft.InGame.Player
                 case ListChangedType.ItemChanged :
                     break;
                     
-            }
+            }*/
         }
 
         public void ApplyAbility(GameplayEffectSO so)

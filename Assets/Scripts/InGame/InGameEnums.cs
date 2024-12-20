@@ -1,3 +1,5 @@
+using System;
+
 namespace TSoft.InGame
 {
     public enum StageState
@@ -27,7 +29,21 @@ namespace TSoft.InGame
         Diamond,
         Club,
         Spade,
-        Heart
+        Heart,
+        Joker
+    }
+
+    public enum CustomEffectPolicy
+    {
+        Instant,
+        PostApply
+    }
+    
+    [Flags]
+    public enum TargetFlag
+    {
+        Self = 1 << 0,
+        Monster = 1 << 1,
     }
 
     public enum CardPatternType

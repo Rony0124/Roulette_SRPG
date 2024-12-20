@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using TSoft.InGame.CardSystem;
+using TSoft.InGame.CardSystem.CE;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ namespace TSoft.InGame.Player
         
         private PokerCard currentPokerCardPreview;
         private PokerCard currentPokerCardHold;
+        private Queue<CustomEffect> customEffects;
         
         public bool CanMoveNextCycle { get; set; }
        
@@ -44,6 +46,7 @@ namespace TSoft.InGame.Player
         {
             currentPokerCardSelected = new List<PokerCard>();
             cardsOnHand = new List<PokerCard>();
+            customEffects = new Queue<CustomEffect>();
 
             gameplay = GetComponent<Gameplay>();
         }
@@ -71,30 +74,36 @@ namespace TSoft.InGame.Player
             if (currentHeart <= 0)
                 return false;
 
+            //손에 들고 있는 카드가 없다면 false
             if (currentPokerCardSelected.IsNullOrEmpty())
                 return false;
             
+            //하트는 먼저 깎아준다.
             --currentHeart;
-            Debug.Log("remaining heart : " + currentHeart);
-            
             gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
-
-            //현재 데미지 상태
+            
+            //기본 데미지 적용
             var damage = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
-            Debug.Log("damage dealt : " + damage);
+            
+            //카드 패턴에 의한 데미지 추가
+            damage *= CurrentPattern.Modifier;
+            
+            //카드 
+            while (customEffects.Count > 0)
+            {
+                var ce = customEffects.Dequeue();
+                ce.ApplyEffect(this);
+            }
             
             foreach (var selectedCard in currentPokerCardSelected)
             {
                 selectedCard.Dissolve(animationSpeed);
-                
+                        
                 Discard(selectedCard);
             }
-            
+
             currentPokerCardSelected.Clear();
             
-            //카드 패턴에 의한 데미지 추가
-            damage *= CurrentPattern.Modifier;
-
             var isDead = director.CurrentField.TakeDamage((int)damage);
             
             if (isDead)
@@ -154,6 +163,22 @@ namespace TSoft.InGame.Player
             {
                 if(cardOnHand == null)
                     continue;
+                
+                Discard(cardOnHand);
+            }
+            
+            cardsOnHand.Clear();
+        }
+
+        public void RetrieveAllCards()
+        {
+            List<PokerCard> cards = new(cardsOnHand);
+            foreach (var cardOnHand in cards)
+            {
+                if(cardOnHand == null)
+                    continue;
+                
+                cardsOnDeck.Enqueue(cardOnHand.cardData);
                 
                 Discard(cardOnHand);
             }

@@ -21,7 +21,7 @@ namespace TSoft.InGame.GamePlaySystem
             public GameplayEffectSO sourceEffect;
             public AppliedAttributeModifier[] appliedModifiers;
             
-            public void CaptureModifier(Gameplay targetActor)
+            public void CaptureModifier(Gameplay target)
             {
                 if (appliedModifiers == null && sourceEffect.modifiers.Length > 0)
                     appliedModifiers = ArrayPool<AppliedAttributeModifier>.Shared.Rent(sourceEffect.modifiers.Length);
