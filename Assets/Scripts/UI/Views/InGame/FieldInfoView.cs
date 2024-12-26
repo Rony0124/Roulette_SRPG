@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using TSoft.InGame;
 using TSoft.UI.Core;
 
-namespace TSoft.UI.Views
+namespace TSoft.UI.Views.InGame
 {
     public class FieldInfoView : ViewBase
     {

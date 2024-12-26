@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.Utils;
 using UnityEngine;
@@ -28,9 +29,6 @@ namespace TSoft.InGame
 
         protected override void OnDirectorChanged(DirectorBase oldValue, DirectorBase newValue)
         {
-            //TODO 로드 타이밍 수정!!
-            //DataRegistry.instance.Load().Forget();
-            
             player = FindObjectOfType<PlayerController>();
             combat = FindObjectOfType<CombatController>();
 

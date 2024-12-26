@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using PlayerController = TSoft.InGame.Player.PlayerController;
 
-namespace TSoft.UI.Views
+namespace TSoft.UI.Views.InGame
 {
     public class ControlView : ViewBase
     {

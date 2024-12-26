@@ -1,6 +1,6 @@
 namespace TSoft.Utils
 {
-    public class Define
+    public static class Define
     {
         public enum UIEvent
         {
@@ -14,5 +14,6 @@ namespace TSoft.Utils
             Click,
         }
 
+        public static readonly string InGame = "InGame";
     }
 }

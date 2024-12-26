@@ -22,6 +22,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5b3b850d5ca25fa42869676289fe0d27
+    m_Address: GameContext
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a2129c9d39361bb4ca15b1a5287b78e7
     m_Address: Assets/Data/Registry/MonsterRegistry.asset
     m_ReadOnly: 0
