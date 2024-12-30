@@ -28,7 +28,7 @@ namespace TSoft.Managers
         
         private int order = 10; 
         
-        Stack<ViewPopup> popupStack = new Stack<ViewPopup>();
+        Stack<PopupView> popupStack = new Stack<PopupView>();
         
         public void SetCanvas(GameObject go, bool sort = true)
         {
@@ -52,11 +52,11 @@ namespace TSoft.Managers
             GameObject go = popups.Find(Popup => Popup.type == type).popupObj;
             go.SetActive(true);
             
-            var popup = UIUtil.GetOrAddComponent<ViewPopup>(go);
+            var popup = UIUtil.GetOrAddComponent<PopupView>(go);
             popupStack.Push(popup);
         }
         
-        public void ClosePopupUI(ViewPopup popup)
+        public void ClosePopupUI(PopupView popup)
         {
             if (popupStack.Count == 0)
                 return;
@@ -75,7 +75,7 @@ namespace TSoft.Managers
             if (popupStack.Count == 0)
                 return;
 
-            ViewPopup popup = popupStack.Pop();
+            PopupView popup = popupStack.Pop();
             popup.gameObject.SetActive(false);
 
             order--;

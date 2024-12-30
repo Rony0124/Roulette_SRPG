@@ -1,11 +1,17 @@
+using System;
 using System.Collections.Generic;
 using TSoft.InGame;
 using TSoft.UI.Core;
+using UnityEngine.Serialization;
 
 namespace TSoft.UI.Views.InGame
 {
     public class FieldInfoView : ViewBase
     {
+        public Action<float> OnDamaged;
+        public Action<FieldController.FieldSlot> OnMonsterSpawn;
+        public Action OnRewardSpawn;
+        
         private enum FieldInfoText
         {
             MonsterNameTxt,
@@ -21,17 +27,18 @@ namespace TSoft.UI.Views.InGame
             
             txtName = Get<TMPro.TextMeshProUGUI>((int)FieldInfoText.MonsterNameTxt);
             txtHp = Get<TMPro.TextMeshProUGUI>((int)FieldInfoText.FieldHpTxt);
-
-            FieldController.OnDamaged += UpdateMonsterHp;
-            FieldController.OnFieldSpawn += UpdateOnMonsterSpawn;
         }
         
         protected override void OnActivated()
         {
+            OnDamaged += UpdateMonsterHp;
+            OnMonsterSpawn += UpdateOnMonsterSpawn;
         }
 
         protected override void OnDeactivated()
         {
+            OnDamaged -= UpdateMonsterHp;
+            OnMonsterSpawn -= UpdateOnMonsterSpawn;
         }
 
         private void UpdateOnMonsterSpawn(FieldController.FieldSlot data)
@@ -67,6 +74,11 @@ namespace TSoft.UI.Views.InGame
             }
             
             txtHp.text = data.hp + "";
+        }
+
+        private void UpdateOnRewardSpawn()
+        {
+            
         }
 
         private void UpdateMonsterHp(float hp)

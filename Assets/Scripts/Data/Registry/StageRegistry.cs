@@ -13,6 +13,7 @@ namespace TSoft.Data.Registry
             if (!TryGetByIndex(stageIndex, out var stage))
             {
                 Debug.LogWarning($"Stage does not exist : search index - {stageIndex}");
+                return null;
             }
             
             var field = stage.SpawnStage(parent);

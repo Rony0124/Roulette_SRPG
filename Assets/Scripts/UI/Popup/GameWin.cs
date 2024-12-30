@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace TSoft.UI.Popup
 {
-    public class GameWinPopup : ViewPopup
+    public class GameWin : PopupView
     {
         private enum PopupButton
         {

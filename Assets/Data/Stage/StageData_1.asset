@@ -18,4 +18,4 @@ MonoBehaviour:
   data:
     monsterIds:
     - {fileID: 11400000, guid: b233d01d59e19804795422f599092797, type: 2}
-    bossId: {fileID: 0}
+    bossId: {fileID: 11400000, guid: 6bc88c541dc2efb469a40c7e3cfbd685, type: 2}

@@ -14,6 +14,7 @@ namespace TSoft.Utils
             Click,
         }
 
+        public static readonly string Lobby = "Lobby";
         public static readonly string InGame = "InGame";
     }
 }

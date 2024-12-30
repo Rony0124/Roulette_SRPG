@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TSoft.Data;
 using TSoft.Data.Registry;
+using TSoft.UI.Views.InGame;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,9 +10,6 @@ namespace TSoft.InGame
 {
     public class FieldController : MonoBehaviour
     {
-        public static event Action<float> OnDamaged;
-        public static event Action<FieldSlot> OnFieldSpawn;
-        
         [Serializable]
         public class FieldSlot
         {
@@ -25,11 +23,14 @@ namespace TSoft.InGame
         [Header("Slots")]
         [SerializeField] 
         private FieldSlot[] slots;
-
+        
+        [SerializeField]
+        private FieldInfoView view;
+        
         private int currentSlotIndex;
         private FieldSlot currentSlot;
-        public FieldSlot[] Slots => slots;
         
+        public FieldSlot[] Slots => slots;
         public FieldSlot CurrentSlot => currentSlot;
         
         public int CurrentSlotIndex
@@ -38,14 +39,22 @@ namespace TSoft.InGame
             set
             {
                 currentSlot = slots[value];
-                OnFieldSpawn?.Invoke(currentSlot);
+                if (value == RewardSlot)
+                {
+                  
+                }
+                else
+                {
+                    view.OnMonsterSpawn?.Invoke(currentSlot);    
+                }
+                
             } 
         }
 
         private const int MonsterSlotMax = 3;
         private const int RewardSlot = 4;
         private const int BossSlot = 5;
-        
+
         public void SpawnField(Data.Stage.StageData stageData)
         {
             var monsterIds = stageData.monsterIds;
@@ -87,8 +96,8 @@ namespace TSoft.InGame
                 //보스 소환
                 if (DataRegistry.Instance.MonsterRegistry.TryGetValue(bossId, out var bossDataSo))
                 {
-                    var boss = bossDataSo.SpawnMonster(slots[BossSlot].self, Vector3.zero);
-                    slots[BossSlot].monsters.Add(boss); 
+                    var boss = bossDataSo.SpawnMonster(slots[BossSlot].self,  Vector3.zero);
+                    slots[BossSlot].monsters = new List<MonsterController> {boss};
                 }        
             }
         }
@@ -114,11 +123,9 @@ namespace TSoft.InGame
         {
             currentSlot.hp = Math.Max(0, currentSlot.hp - damage);
             Debug.Log("remaining hp : " + currentSlot.hp );
-            OnDamaged?.Invoke(currentSlot.hp);
+            view.OnDamaged?.Invoke(currentSlot.hp);
 
             return currentSlot.hp <= 0;
         }
-
-     
     }
 }

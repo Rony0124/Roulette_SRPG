@@ -3,7 +3,7 @@ using TSoft.UI.Core;
 
 namespace TSoft.UI.Popup
 {
-    public class ViewPopup : ViewBase
+    public class PopupView : ViewBase
     {
         protected override void OnActivated()
         {
