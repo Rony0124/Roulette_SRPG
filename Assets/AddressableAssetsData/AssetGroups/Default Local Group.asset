@@ -22,8 +22,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3852b3f8a5164c64397600ec5a8ea520
+    m_Address: Assets/Data/Registry/ArtifactRegistry.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5b3b850d5ca25fa42869676289fe0d27
     m_Address: GameContext
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 98592933b566b7847ab691764ff0c2d8
+    m_Address: Assets/Data/Registry/JokerRegistry.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

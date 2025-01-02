@@ -9,8 +9,9 @@ namespace TSoft.Data.Registry
         where TData : DataSO
     {
         [SerializeField]
-        public SerializedDictionary<DataRegistryIdSO, TData> assetDictionary;
+        private SerializedDictionary<DataRegistryIdSO, TData> assetDictionary;
 
+        public int Count => assetDictionary.Count;
         public TData Get(DataRegistryIdSO key)
         {
             return assetDictionary.TryGetValue(key, out var data) ? data : null;

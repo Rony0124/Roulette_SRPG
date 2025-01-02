@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c223cf72f72bb754a88d2204484b83cc, type: 3}
+  m_Name: JokerRegistry
+  m_EditorClassIdentifier: 
+  assetDictionary:
+    m_Keys:
+    - {fileID: 11400000, guid: 260e40be1a7701b4eb3bc129216e2b23, type: 2}
+    m_Values:
+    - {fileID: 11400000, guid: c70bb5dd2ca945e4c81931c51a3c280d, type: 2}
