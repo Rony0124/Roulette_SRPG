@@ -10,7 +10,7 @@ namespace TSoft.Data.Registry
         public FieldController SpawnNextStage(Transform parent, int currentStage)
         {
             var stageIndex = currentStage % Count;
-            if (!TryGetByIndex(stageIndex, out var stage))
+            if (!TryGetDataByIndex(stageIndex, out var stage))
             {
                 Debug.LogWarning($"Stage does not exist : search index - {stageIndex}");
                 return null;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -22,11 +23,30 @@ namespace TSoft.Data.Registry
             return assetDictionary.TryGetValue(key, out data);
         }
 
-        public bool TryGetByIndex(int index, out TData data)
+        public bool TryGetDataByIndex(int index, out TData data)
         {
             var list = assetDictionary.Keys.ToList();
             var key = list[index];
             return assetDictionary.TryGetValue(key, out data);
+        }
+        
+        public bool TryGetKvpByIndex(int index, out KeyValuePair<Guid, TData> result)
+        {
+            result = default;
+            
+            var list = assetDictionary.Keys.ToList();
+            var key = list[index];
+            
+            foreach (var kvp in assetDictionary)
+            {
+                if (kvp.Key == key)
+                {
+                    result = new KeyValuePair<Guid, TData>(kvp.Key.Guid, kvp.Value);
+                    return true;
+                }  
+            }
+            
+            return false;
         }
     }
 }

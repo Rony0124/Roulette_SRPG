@@ -4,6 +4,7 @@ using TMPro;
 using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.UI.Popup.StoreElement;
+using UnityEditor;
 using UnityEngine;
 
 namespace TSoft.UI.Popup
@@ -80,13 +81,16 @@ namespace TSoft.UI.Popup
 
             for (int i = 0; i < DisplayNumber; i++)
             {
-                if (!DataRegistry.Instance.ArtifactRegistry.TryGetByIndex(artifactNums[i], out var info))
+                if (!DataRegistry.Instance.ArtifactRegistry.TryGetKvpByIndex(artifactNums[i], out var kvp))
                 {
                     continue;
                 }
                 
                 var obj = Instantiate(artifactDisplayPrefab, artifactDisplayParent);
                 var artifact = obj.GetComponent<StoreItem>();
+                var infoId = kvp.Key;
+                var info = kvp.Value;
+                
                 artifact.OnSelect = () =>
                 {
                     UpdateSelectedItem(info);
@@ -98,7 +102,7 @@ namespace TSoft.UI.Popup
             
             for (int i = 0; i < DisplayNumber; i++)
             {
-                if (!DataRegistry.Instance.JokerRegistry.TryGetByIndex(jokerNums[i], out var info))
+                if (!DataRegistry.Instance.JokerRegistry.TryGetDataByIndex(jokerNums[i], out var info))
                 {
                     continue;
                 }

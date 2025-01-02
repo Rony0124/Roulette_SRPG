@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
   m_Name: RID_Stage_1
   m_EditorClassIdentifier: 
+  guid: f538ec7472d7f4efeb7fb532542da5ae
