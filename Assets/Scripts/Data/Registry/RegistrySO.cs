@@ -13,6 +13,8 @@ namespace TSoft.Data.Registry
         private SerializedDictionary<DataRegistryIdSO, TData> assetDictionary;
 
         public int Count => assetDictionary.Count;
+        public List<DataRegistryIdSO> Ids => assetDictionary.Keys.ToList();
+        
         public TData Get(DataRegistryIdSO key)
         {
             return assetDictionary.TryGetValue(key, out var data) ? data : null;

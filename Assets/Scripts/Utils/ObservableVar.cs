@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace TSoft.Utils
 {
-    public class ObservableVar<T> : IDisposable
+    public sealed class ObservableVar<T> : IDisposable
     {
         public delegate void OnValueChangedDelegate(T oldVal, T newVal);
 
         public OnValueChangedDelegate OnValueChanged;
         
         [SerializeField]
-        private protected T internalValue;
+        private T internalValue;
 
-        private protected T previousValue;
+        private T previousValue;
 
 
         private bool hasPreviousValue;
@@ -22,7 +22,7 @@ namespace TSoft.Utils
 
         public bool IsDirty => isDirty;
         
-        public virtual T Value
+        public T Value
         {
             get => internalValue;
             set
@@ -42,7 +42,7 @@ namespace TSoft.Utils
             return ref internalValue;
         }
         
-        private protected void Set(T value)
+        private void Set(T value)
         {
             isDirty = true;
             T preValue = internalValue;

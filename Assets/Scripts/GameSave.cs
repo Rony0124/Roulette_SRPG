@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.Utilities;
 using TSoft.Core;
+using TSoft.Data.Registry;
 using UnityEngine;
 
 namespace TSoft
@@ -11,8 +12,6 @@ namespace TSoft
     public class GameSave : Singleton<GameSave>
     {
         private ES3Settings easySaveSettings;
-        
-        public Action<int, int> OnGoldChanged;
         
         //gold
         private int gold;
@@ -69,6 +68,11 @@ namespace TSoft
         private void SaveItemsRaw()
         {
             SaveRaw(ItemIdKey, possessItemIds);
+        }
+        
+        public bool HasItemsId(Guid itemGuid)
+        {
+            return possessItemIdsSet.Contains(itemGuid);
         }
 
         #endregion

@@ -44,9 +44,12 @@ namespace TSoft.UI.Popup
         private Transform artifactInventoryParent;
         private Transform jokerInventoryParent;
         private TextMeshProUGUI descriptionText;
+        
         //item
-        private List<StoreItem> artifacts = new();
-        private List<StoreItem> jokers = new();
+        private List<StoreItem> artifactsStore = new();
+        private List<StoreItem> jokersStore = new();
+        private List<InventoryItem> artifactsInventory = new();
+        private List<InventoryItem> jokersInventory = new();
             
         private const int DisplayNumber = 3;
         
@@ -67,6 +70,7 @@ namespace TSoft.UI.Popup
         protected override void OnActivated()
         {
             CreateDisplayItems();
+            CreateInventoryItems();
         }
         
         protected override void OnDeactivated()
@@ -97,7 +101,7 @@ namespace TSoft.UI.Popup
                 };
                 
                 artifact.SetElement(info.image);
-                artifacts.Add(artifact);
+                artifactsStore.Add(artifact);
             }
             
             for (int i = 0; i < DisplayNumber; i++)
@@ -115,24 +119,84 @@ namespace TSoft.UI.Popup
                 };
                 
                 joker.SetElement(info.image);
-                jokers.Add(joker);
+                jokersStore.Add(joker);
+            }
+        }
+
+        private void CreateInventoryItems()
+        {
+            var artifactIds = DataRegistry.Instance.ArtifactRegistry.Ids;
+            var jokerIds = DataRegistry.Instance.JokerRegistry.Ids;
+
+            foreach (var artifactId in artifactIds)
+            {
+                if (!GameSave.Instance.HasItemsId(artifactId.Guid))
+                {
+                    continue;
+                }
+
+                var data = DataRegistry.Instance.ArtifactRegistry.Get(artifactId);
+                   
+                var obj = Instantiate(artifactInventoryPrefab, artifactInventoryParent);
+                var artifact = obj.GetComponent<InventoryItem>();
+                
+                artifact.OnSelect = () =>
+                {
+                    UpdateSelectedItem(data);
+                };
+                
+                artifact.SetElement(data.image);
+                artifactsInventory.Add(artifact);
+            }
+            
+            foreach (var jokerId in jokerIds)
+            {
+                if (!GameSave.Instance.HasItemsId(jokerId.Guid))
+                {
+                    continue;
+                }
+
+                var data = DataRegistry.Instance.JokerRegistry.Get(jokerId);
+                   
+                var obj = Instantiate(jokerInventoryPrefab, jokerInventoryParent);
+                var joker = obj.GetComponent<InventoryItem>();
+                
+                joker.OnSelect = () =>
+                {
+                    UpdateSelectedItem(data);
+                };
+                
+                joker.SetElement(data.image);
+                jokersInventory.Add(joker);
             }
         }
 
         private void ClearAllItems()
         {
-            foreach (var artifact in artifacts)
+            foreach (var artifact in artifactsStore)
             {
                 Destroy(artifact.gameObject);
             }
             
-            foreach (var joker in jokers)
+            foreach (var joker in jokersStore)
             {
                 Destroy(joker.gameObject);   
             }
             
-            artifacts.Clear();
-            jokers.Clear();
+            foreach (var artifact in artifactsInventory)
+            {
+                Destroy(artifact.gameObject);   
+            }
+            
+            foreach (var joker in jokersInventory)
+            {
+                Destroy(joker.gameObject);   
+            }
+            
+            artifactsStore.Clear();
+            jokersStore.Clear();
+            artifactsInventory.Clear();
+            jokersInventory.Clear();
         }
 
         private List<int> GetUniqueNumbers(int count)
