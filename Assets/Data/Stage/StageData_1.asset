@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: StageData_1
   m_EditorClassIdentifier: 
   registryId: {fileID: 11400000, guid: 74ec38f5d772eff4eb7fb532542da5ae, type: 2}
-  fieldPrefab: {fileID: 7342785775223112833, guid: 6b666c65478154c499786df1fd745cbc,
-    type: 3}
+  fieldPrefab: {fileID: 3453759573050083549, guid: 69db957f5976e43b7a289dcd49804d5c, type: 3}
   data:
     monsterIds:
     - {fileID: 11400000, guid: b233d01d59e19804795422f599092797, type: 2}

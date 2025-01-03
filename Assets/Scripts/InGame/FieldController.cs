@@ -12,7 +12,7 @@ namespace TSoft.InGame
         public class FieldSlot
         {
             public Transform self;
-           // public Transform slotPosition;
+            [NonSerialized]
             public MonsterController monster;
         }
         
@@ -20,6 +20,7 @@ namespace TSoft.InGame
         [SerializeField] 
         private FieldSlot[] slots;
         
+        //refactor ui referencing
         private FieldInfoView view => FindObjectOfType<FieldInfoView>();
         
         private int currentSlotIndex;
@@ -33,10 +34,12 @@ namespace TSoft.InGame
             get => currentSlotIndex;
             set
             {
-                currentSlot = slots[value];
-                if (value == RewardSlot)
+                var slotVal = value - 1;
+                currentSlot = slots[slotVal];
+                if (slotVal == RewardSlot)
                 {
-                  //
+                    Debug.Log("fldnjem tmffhtdlfkrh???");
+                    // view.OnRewardSpawn?.Invoke();
                 }
                 else
                 {
@@ -45,9 +48,10 @@ namespace TSoft.InGame
             } 
         }
 
-        private const int MonsterSlotMax = 3;
-        private const int RewardSlot = 4;
-        private const int BossSlot = 5;
+        //test
+        private const int MonsterSlotMax = 0;
+        private const int RewardSlot = 1;
+        private const int BossSlot = 2;
 
         public void SpawnField(Data.Stage.StageData stageData)
         {
@@ -88,6 +92,9 @@ namespace TSoft.InGame
                 var slot = slots[i];
                 
                 if(i == RewardSlot)
+                    continue;
+                
+                if(slot.monster is null)
                     continue;
                 
                 var currentHp = slot.monster.GamePlay.GetAttr(GameplayAttr.Heart);

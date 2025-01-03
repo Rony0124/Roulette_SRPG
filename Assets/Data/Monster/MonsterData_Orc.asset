@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
-  m_Name: MonsterData
+  m_Name: MonsterData_Orc
   m_EditorClassIdentifier: 
   registryId: {fileID: 11400000, guid: b233d01d59e19804795422f599092797, type: 2}
-  monsterPrefab: {fileID: 704978731055960363, guid: e33039d24a8e3544b9895649bb28f747,
-    type: 3}
+  monsterPrefab: {fileID: 6014484093212867787, guid: 88655bb052df34240b56775793cac721, type: 3}
   monsterData:
     Name: Orc

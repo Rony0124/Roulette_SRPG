@@ -1,8 +1,7 @@
 using System;
-using System.Collections.Generic;
 using TSoft.InGame;
+using TSoft.Managers;
 using TSoft.UI.Core;
-using UnityEngine.Serialization;
 
 namespace TSoft.UI.Views.InGame
 {
@@ -10,7 +9,6 @@ namespace TSoft.UI.Views.InGame
     {
         public Action<float> OnDamaged;
         public Action<FieldController.FieldSlot> OnMonsterSpawn;
-        public Action OnRewardSpawn;
         
         private enum FieldInfoText
         {
@@ -44,13 +42,12 @@ namespace TSoft.UI.Views.InGame
         private void UpdateOnMonsterSpawn(FieldController.FieldSlot data)
         {
             txtName.text = data.monster.Data.Name;
-            
             txtHp.text = (int)data.monster.GamePlay.GetAttr(GameplayAttr.Heart) + "";
         }
 
         private void UpdateOnRewardSpawn()
         {
-            
+            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Store);
         }
 
         private void UpdateMonsterHp(float hp)
