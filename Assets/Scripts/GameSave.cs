@@ -19,7 +19,6 @@ namespace TSoft
         private static readonly int MaxGold = 999999999;
         private static readonly int MinGold = 0;
         
-        
         //items
         private List<Guid> possessItemIds;
         
@@ -38,6 +37,8 @@ namespace TSoft
         }
         
         #region Gold
+
+        public bool HasEnoughGold(int value) => gold >= value;
         
         public void AddGold(int addValue)
         {

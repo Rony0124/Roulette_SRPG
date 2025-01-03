@@ -14,7 +14,7 @@ namespace TSoft.InGame.Player
     {
         private Gameplay gameplay;
         
-        public List<Artifact> artifacts;
+        public List<Artifact> defaultArtifacts;
         public ObservableList<ArtifactSO> currentArtifacts;
         
         private void Awake()
@@ -22,14 +22,14 @@ namespace TSoft.InGame.Player
             gameplay = GetComponent<Gameplay>();
 
             currentArtifacts = new();
-            currentArtifacts.ListChanged += OnSpecialCardsChanged;
+            currentArtifacts.ListChanged += OnArtifactsChanged;
         }
 
         public void Init()
         {
-            if (!artifacts.IsNullOrEmpty())
+            if (!defaultArtifacts.IsNullOrEmpty())
             {
-                foreach (var artifact in artifacts)
+                foreach (var artifact in defaultArtifacts)
                 {
                     if(artifact == null)
                         continue;
@@ -39,7 +39,7 @@ namespace TSoft.InGame.Player
             }
         }
 
-        private void OnSpecialCardsChanged(object sender, ListChangedEventArgs args)
+        private void OnArtifactsChanged(object sender, ListChangedEventArgs args)
         {
             if(currentArtifacts.Count < 1)
                 return;
