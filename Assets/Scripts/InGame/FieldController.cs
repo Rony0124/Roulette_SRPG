@@ -86,6 +86,10 @@ namespace TSoft.InGame
             for (var i = 0; i < slots.Length; i++)
             {
                 var slot = slots[i];
+                
+                if(i == RewardSlot)
+                    continue;
+                
                 var currentHp = slot.monster.GamePlay.GetAttr(GameplayAttr.Heart);
                 if (i == BossSlot)
                 {

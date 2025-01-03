@@ -10,8 +10,7 @@ namespace TSoft.InGame
     public class MonsterController : MonoBehaviour
     {
         private MonsterData data;
-        private Gameplay gamePlay;
-        
+        private Gameplay gameplay;
        
         public MonsterData Data
         {
@@ -19,10 +18,15 @@ namespace TSoft.InGame
             set => data = value;
         }
         
-        public Gameplay GamePlay => gamePlay;
+        public Gameplay GamePlay => gameplay;
 
         public UnityEvent onDamage;
         public UnityEvent onDead;
+
+        private void Awake()
+        {
+            gameplay = GetComponent<Gameplay>();
+        }
 
         public void TakeDamage(bool isDead)
         {
