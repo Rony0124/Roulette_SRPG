@@ -14,7 +14,7 @@ namespace TSoft.InGame.Player
     {
         private Gameplay gameplay;
         
-        public List<Artifact> defaultArtifacts;
+        public List<ArtifactSO> defaultArtifacts;
         public ObservableList<ArtifactSO> currentArtifacts;
         
         private void Awake()
@@ -34,7 +34,7 @@ namespace TSoft.InGame.Player
                     if(artifact == null)
                         continue;
                     
-                    currentArtifacts.Add(artifact.ArtifactData);
+                    currentArtifacts.Add(artifact);
                 }    
             }
         }

@@ -51,6 +51,12 @@ namespace TSoft
             SaveRaw(GoldKey, gold);
         }
 
+        private void ResetGold()
+        {
+            gold = 0;
+            SetGold(0);
+        }
+
         #endregion
 
         #region Item
@@ -76,6 +82,13 @@ namespace TSoft
             return possessItemIdsSet.Contains(itemGuid);
         }
 
+        private void RemoveAllItemsIds()
+        {
+            possessItemIds.Clear();
+            
+            SaveItemsRaw();
+        }
+
         #endregion
         
         private void LoadFromSaveFile() 
@@ -86,6 +99,12 @@ namespace TSoft
             possessItemIdsSet = !possessItemIds.IsNullOrEmpty() ? new HashSet<Guid>(possessItemIds) : new HashSet<Guid>();
             
             Debug.Log("[GameSave] Load Finished"); 
+        }
+
+        public void ClearSaveFile()
+        {
+            ResetGold();
+            RemoveAllItemsIds();
         }
         
         static void SaveRaw<T>(string key, T value)
