@@ -20,7 +20,7 @@ namespace TSoft.InGame.GamePlaySystem
         public ModifierOpType modifierOp;
         
         public float magnitude;
-
+       
         /*public struct Tags
         {
             public List<GameplayTag> mustHaveTag;

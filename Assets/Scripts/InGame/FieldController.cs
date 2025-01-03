@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.UI.Views.InGame;
 using UnityEngine;
@@ -14,18 +12,15 @@ namespace TSoft.InGame
         public class FieldSlot
         {
             public Transform self;
-            public List<Transform> slotPositions;
-            [NonSerialized]
-            public List<MonsterController> monsters;
-            public int hp;
+           // public Transform slotPosition;
+            public MonsterController monster;
         }
         
         [Header("Slots")]
         [SerializeField] 
         private FieldSlot[] slots;
         
-        [SerializeField]
-        private FieldInfoView view;
+        private FieldInfoView view => FindObjectOfType<FieldInfoView>();
         
         private int currentSlotIndex;
         private FieldSlot currentSlot;
@@ -41,13 +36,12 @@ namespace TSoft.InGame
                 currentSlot = slots[value];
                 if (value == RewardSlot)
                 {
-                  
+                  //
                 }
                 else
                 {
                     view.OnMonsterSpawn?.Invoke(currentSlot);    
                 }
-                
             } 
         }
 
@@ -63,28 +57,13 @@ namespace TSoft.InGame
             //몬스터 소환
             for (var i = 0; i <= MonsterSlotMax; i++)
             {
-                slots[i].monsters = new List<MonsterController>();
-                
                 var ranSlotIndex = Random.Range(0, monsterIds.Length);
-                var ranSlotPosIndex = 1;
-                if (slots[i].slotPositions.Count > 0)
-                {
-                    ranSlotPosIndex = Random.Range(1, slots[i].slotPositions.Count);    
-                }
 
-                for (var j = 0; j < ranSlotPosIndex; j++)
+                if (DataRegistry.Instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
                 {
-                    if (DataRegistry.Instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
-                    {
-                        var pos = Vector3.zero;
-                        if (ranSlotIndex > 1)
-                        {
-                            pos = slots[i].slotPositions[j].position;
-                        }
-                        
-                        var monster = monsterDataSo.SpawnMonster(slots[i].self, pos);
-                        slots[i].monsters.Add(monster); 
-                    }    
+                    var pos = Vector3.zero;
+                    var monster = monsterDataSo.SpawnMonster(slots[i].self, pos);
+                    slots[i].monster = monster; 
                 }
             }
             
@@ -97,7 +76,7 @@ namespace TSoft.InGame
                 if (DataRegistry.Instance.MonsterRegistry.TryGetValue(bossId, out var bossDataSo))
                 {
                     var boss = bossDataSo.SpawnMonster(slots[BossSlot].self,  Vector3.zero);
-                    slots[BossSlot].monsters = new List<MonsterController> {boss};
+                    slots[BossSlot].monster = boss;
                 }        
             }
         }
@@ -107,25 +86,30 @@ namespace TSoft.InGame
             for (var i = 0; i < slots.Length; i++)
             {
                 var slot = slots[i];
-
+                var currentHp = slot.monster.GamePlay.GetAttr(GameplayAttr.Heart);
                 if (i == BossSlot)
                 {
-                    slot.hp *= (int)(cycle.Stage * 1.5);
+                    currentHp *= (int)(cycle.Stage * 1.5);
                 }
                 else
                 {
-                    slot.hp *= cycle.Stage;
+                    currentHp *= cycle.Stage;
                 }
+                
+                slot.monster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
             }
         }
 
         public bool TakeDamage(int damage)
         {
-            currentSlot.hp = Math.Max(0, currentSlot.hp - damage);
-            Debug.Log("remaining hp : " + currentSlot.hp );
-            view.OnDamaged?.Invoke(currentSlot.hp);
+            var currentHp = currentSlot.monster.GamePlay.GetAttr(GameplayAttr.Heart);
+            currentHp = Math.Max(0, currentHp - damage);
+            Debug.Log("remaining hp : " + currentHp );
+            
+            currentSlot.monster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
+            view.OnDamaged?.Invoke(currentHp);
 
-            return currentSlot.hp <= 0;
+            return currentHp <= 0;
         }
     }
 }

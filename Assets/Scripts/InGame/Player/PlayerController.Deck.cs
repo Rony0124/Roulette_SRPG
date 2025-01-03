@@ -11,7 +11,6 @@ namespace TSoft.InGame.Player
     {
         [Header("Deck")]
         [SerializeField] private List<CardSO> defaultCardDB;
-        //TEST
         [SerializeField] private List<CardSO> specialCardDB;
 
         [Header("Game Object")]
@@ -94,6 +93,11 @@ namespace TSoft.InGame.Player
         public void ShuffleCurrent()
         {
             cardsOnDeck.ToList().ShuffleList();
+        }
+
+        public void AddJoker(CardSO specialCard)
+        {
+            specialCardDB.Add(specialCard);
         }
     }
 }

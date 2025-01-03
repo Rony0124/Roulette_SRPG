@@ -5,9 +5,6 @@ using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.InGame.Player;
 using TSoft.UI.Popup.StoreElement;
-using TSoft.Utils;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,7 +54,7 @@ namespace TSoft.UI.Popup
         private GameObject jokerInventoryPrefab;
         
         [SerializeField] 
-        private GameObject player;
+        private PlayerController player;
         
         //ui
         private Transform artifactDisplayParent;
@@ -263,10 +260,10 @@ namespace TSoft.UI.Popup
             switch (CurrentStoreItem.Type)
             {
                 case ItemType.Artifact:
-                    var abilityContainer = player.GetComponent<AbilityContainer>();
+                    var abilityContainer = player.AbilityContainer;
 
-                    var info = DataRegistry.Instance.ArtifactRegistry.Get(CurrentStoreItem.Id);
-                    abilityContainer.currentArtifacts.Add(info);
+                    var artifactInfo = DataRegistry.Instance.ArtifactRegistry.Get(CurrentStoreItem.Id);
+                    abilityContainer.currentArtifacts.Add(artifactInfo);
                     
                     var obj = Instantiate(artifactDisplayPrefab, artifactDisplayParent);
                     var artifact = obj.GetComponent<StoreItem>();
@@ -274,13 +271,15 @@ namespace TSoft.UI.Popup
                     artifact.OnSelect = () =>
                     {
                         CurrentStoreItem = artifact;
-                        UpdateSelectedItem(info);
+                        UpdateSelectedItem(artifactInfo);
                     };
                 
-                    artifact.SetElement(info, CurrentStoreItem.Id, ItemType.Artifact);
+                    artifact.SetElement(artifactInfo, CurrentStoreItem.Id, ItemType.Artifact);
                     artifactsStore.Add(artifact);
                     break;
                 case ItemType.Joker:
+                    var jokerInfo = DataRegistry.Instance.JokerRegistry.Get(CurrentStoreItem.Id);
+                    player.AddJoker(jokerInfo);
                     break;
             }
             

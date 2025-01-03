@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
-using TSoft.InGame.CardSystem;
 
 namespace TSoft.InGame.GamePlaySystem
 {

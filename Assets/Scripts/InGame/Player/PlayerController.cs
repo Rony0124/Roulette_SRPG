@@ -40,6 +40,7 @@ namespace TSoft.InGame.Player
        
         public List<PokerCard> CardsOnHand => cardsOnHand;
         
+        public AbilityContainer AbilityContainer => abilityContainer;
         public Gameplay Gameplay =>  gameplay;
         
         private const int HandCountMax = 5;

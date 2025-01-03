@@ -43,37 +43,9 @@ namespace TSoft.UI.Views.InGame
 
         private void UpdateOnMonsterSpawn(FieldController.FieldSlot data)
         {
-            Dictionary<string, int> names = new Dictionary<string, int>();
-            foreach (var monster in data.monsters)
-            {
-                var name = monster.Data.Name;
-                if (names.ContainsKey(name))
-                {
-                    names[name]++;
-                }
-                else
-                {
-                    names.Add(name, 1);
-                }
-            }
-
-            int i = 0;
-            txtName.text = "";
+            txtName.text = data.monster.Data.Name;
             
-            foreach (var name in names.Keys)
-            {
-                txtName.text += name;
-                txtName.text += "x" + names[name];
-                
-                if (i == names.Keys.Count - 1)
-                    break;
-                
-                txtName.text += ", ";
-                
-                i++;
-            }
-            
-            txtHp.text = data.hp + "";
+            txtHp.text = (int)data.monster.GamePlay.GetAttr(GameplayAttr.Heart) + "";
         }
 
         private void UpdateOnRewardSpawn()
