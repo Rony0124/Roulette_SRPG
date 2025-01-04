@@ -12,15 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17fe9ffda9e760f40b2629b11800b593, type: 3}
   m_Name: DataRegistry
   m_EditorClassIdentifier: 
-  monsterRegistryRef:
-    m_AssetGUID: a2129c9d39361bb4ca15b1a5287b78e7
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 1
-  stageRegistryRef:
-    m_AssetGUID: 3277ce9070050744b8406080b7ae20e4
-    m_SubObjectName: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 1
+  isNotDestroyed: 0
   stageRegistry: {fileID: 11400000, guid: 3277ce9070050744b8406080b7ae20e4, type: 2}
   monsterRegistry: {fileID: 11400000, guid: a2129c9d39361bb4ca15b1a5287b78e7, type: 2}
+  artifactRegistry: {fileID: 11400000, guid: 3852b3f8a5164c64397600ec5a8ea520, type: 2}
+  jokerRegistry: {fileID: 11400000, guid: 98592933b566b7847ab691764ff0c2d8, type: 2}

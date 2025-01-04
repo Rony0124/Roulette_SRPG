@@ -18,14 +18,10 @@ namespace TSoft.UI.Popup
             Artifact
         }
         
-        private enum DisplayParent
+        private enum TransformParent
         {
             Artifacts_Display,
-            Jokers_Display
-        }
-        
-        private enum InventoryParent
-        {
+            Jokers_Display,
             Artifacts_Inventory,
             Jokers_Inventory
         }
@@ -87,15 +83,14 @@ namespace TSoft.UI.Popup
         
         private void Awake()
         {
-            Bind<Transform>(typeof(DisplayParent));
-            Bind<Transform>(typeof(InventoryParent));
-            Bind<TextMeshPro>(typeof(Text));
+            Bind<Transform>(typeof(TransformParent));
+            Bind<TextMeshProUGUI>(typeof(Text));
             Bind<Button>(typeof(StoreButton));
             
-            artifactDisplayParent = Get<Transform>((int)DisplayParent.Artifacts_Display);
-            jokerDisplayParent = Get<Transform>((int)DisplayParent.Jokers_Display);
-            artifactInventoryParent = Get<Transform>((int)InventoryParent.Artifacts_Inventory);
-            jokerInventoryParent = Get<Transform>((int)InventoryParent.Jokers_Inventory);
+            artifactDisplayParent = Get<Transform>((int)TransformParent.Artifacts_Display);
+            jokerDisplayParent = Get<Transform>((int)TransformParent.Jokers_Display);
+            artifactInventoryParent = Get<Transform>((int)TransformParent.Artifacts_Inventory);
+            jokerInventoryParent = Get<Transform>((int)TransformParent.Jokers_Inventory);
             descriptionText = Get<TextMeshProUGUI>((int)Text.DescriptionText);
             sellButton = Get<Button>((int)StoreButton.SellButton);
             
@@ -290,10 +285,14 @@ namespace TSoft.UI.Popup
 
         private List<int> GetUniqueNumbers(int count)
         {
+            if(count == 0)
+                return new List<int>();
+            
             var uniqueNumbers = new HashSet<int>();
             var random = new System.Random();
+            var min = Mathf.Min(count, DisplayNumber);
             
-            while (uniqueNumbers.Count < DisplayNumber)
+            while (uniqueNumbers.Count < min)
             {
                 int number = random.Next(0, count);
                 uniqueNumbers.Add(number);

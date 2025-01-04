@@ -45,11 +45,6 @@ namespace TSoft.UI.Views.InGame
             txtHp.text = (int)data.monster.GamePlay.GetAttr(GameplayAttr.Heart) + "";
         }
 
-        private void UpdateOnRewardSpawn()
-        {
-            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Store);
-        }
-
         private void UpdateMonsterHp(float hp)
         {
             txtHp.text = (int)hp + "";

@@ -1,5 +1,6 @@
 using System;
 using TSoft.Data.Registry;
+using TSoft.Managers;
 using TSoft.UI.Views.InGame;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -38,8 +39,7 @@ namespace TSoft.InGame
                 currentSlot = slots[slotVal];
                 if (slotVal == RewardSlot)
                 {
-                    Debug.Log("fldnjem tmffhtdlfkrh???");
-                    // view.OnRewardSpawn?.Invoke();
+                    PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Store);
                 }
                 else
                 {
