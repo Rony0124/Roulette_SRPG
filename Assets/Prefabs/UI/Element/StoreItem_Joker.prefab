@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c7d9daad36c014fac3b6400d3cdd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  button: {fileID: 1924622873671592390}
+  thumbnail: {fileID: 6513344480066265351}
 --- !u!114 &1924622873671592390
 MonoBehaviour:
   m_ObjectHideFlags: 0

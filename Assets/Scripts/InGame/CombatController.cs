@@ -11,7 +11,10 @@ namespace TSoft.InGame
         {
             public int Round;
             public int Stage;
-            public bool IsRoundMax => Round >= 5;
+            
+            //TODO TEST!!!!!
+            public bool IsRoundMax => Round >= 3;
+            //public bool IsRoundMax => Round >= 5;
             
             public void Reset()
             {
@@ -43,6 +46,7 @@ namespace TSoft.InGame
             if (currentField != null)
             {
                 Destroy(currentField.gameObject);
+                transform.rotation = new Quaternion(0,0,0,0);
             }
             
             currentField = DataRegistry.Instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);

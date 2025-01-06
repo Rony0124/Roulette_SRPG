@@ -8,8 +8,8 @@ namespace TSoft.UI.Popup.StoreElement
     {
         public Action OnSelect;
         
-        private Button button;
-        private Image thumbnail;
+        [SerializeField] private Button button;
+        [SerializeField] private Image thumbnail;
         
         private void Start()
         {

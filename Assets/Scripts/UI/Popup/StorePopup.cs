@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using TMPro;
 using TSoft.Data;
+using TSoft.Data.Card;
 using TSoft.Data.Registry;
+using TSoft.InGame;
 using TSoft.InGame.Player;
 using TSoft.UI.Popup.StoreElement;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace TSoft.UI.Popup
@@ -34,7 +38,8 @@ namespace TSoft.UI.Popup
         private enum StoreButton
         {
             BuyButton,
-            SellButton
+            SellButton,
+            ExitButton
         }
 
         [Header("Display")]
@@ -58,7 +63,7 @@ namespace TSoft.UI.Popup
         private Transform artifactInventoryParent;
         private Transform jokerInventoryParent;
         private TextMeshProUGUI descriptionText;
-        private Button sellButton;
+        private Button buyButton;
         
         //item
         private List<StoreItem> artifactsStore = new();
@@ -73,7 +78,7 @@ namespace TSoft.UI.Popup
             get => currentStoreItem;
             set
             {
-                sellButton.enabled = value != null;
+                buyButton.enabled = value != null;
                 currentStoreItem = value;
             }
         }
@@ -92,20 +97,25 @@ namespace TSoft.UI.Popup
             artifactInventoryParent = Get<Transform>((int)TransformParent.Artifacts_Inventory);
             jokerInventoryParent = Get<Transform>((int)TransformParent.Jokers_Inventory);
             descriptionText = Get<TextMeshProUGUI>((int)Text.DescriptionText);
-            sellButton = Get<Button>((int)StoreButton.SellButton);
+            buyButton = Get<Button>((int)StoreButton.BuyButton);
+            Get<Button>((int)StoreButton.ExitButton).onClick.AddListener(OnExitClicked);
             
-            sellButton.onClick.AddListener(OnBuyClicked);
+            buyButton.onClick.AddListener(OnBuyClicked);
         }
 
         protected override void OnActivated()
         {
             CreateDisplayItems();
             CreateInventoryItems();
+
+            player.AbilityContainer.currentArtifacts.ListChanged += OnArtifactsChanged;
         }
         
         protected override void OnDeactivated()
         {
             ClearAllItems();
+            
+            player.AbilityContainer.currentArtifacts.ListChanged -= OnArtifactsChanged;
         }
 
         private void CreateDisplayItems()
@@ -135,7 +145,7 @@ namespace TSoft.UI.Popup
                 artifactsStore.Add(artifact);
             }
             
-            for (int i = 0; i < DisplayNumber; i++)
+            /*for (int i = 0; i < DisplayNumber; i++)
             {
                 if (!DataRegistry.Instance.JokerRegistry.TryGetKvpByIndex(jokerNums[i], out var kvp))
                 {
@@ -155,7 +165,7 @@ namespace TSoft.UI.Popup
                 
                 joker.SetElement(info, infoId, ItemType.Joker);
                 jokersStore.Add(joker);
-            }
+            }*/
         }
 
         private void CreateInventoryItems()
@@ -171,18 +181,8 @@ namespace TSoft.UI.Popup
                 }
 
                 var data = DataRegistry.Instance.ArtifactRegistry.Get(artifactId);
-                   
-                var obj = Instantiate(artifactInventoryPrefab, artifactInventoryParent);
-                var artifact = obj.GetComponent<InventoryItem>();
-                
-                artifact.OnSelect = () =>
-                {
-                    currentInventoryItem = artifact;
-                    UpdateSelectedItem(data);
-                };
-                
-                artifact.SetElement(data.image);
-                artifactsInventory.Add(artifact);
+
+                CreateArtifactInventory(data);
             }
             
             foreach (var jokerId in jokerIds)
@@ -206,6 +206,21 @@ namespace TSoft.UI.Popup
                 joker.SetElement(data.image);
                 jokersInventory.Add(joker);
             }
+        }
+
+        private void CreateArtifactInventory(ArtifactSO data)
+        {
+            var obj = Instantiate(artifactInventoryPrefab, artifactInventoryParent);
+            var artifact = obj.GetComponent<InventoryItem>();
+                
+            artifact.OnSelect = () =>
+            {
+                currentInventoryItem = artifact;
+                UpdateSelectedItem(data);
+            };
+                
+            artifact.SetElement(data.image);
+            artifactsInventory.Add(artifact);
         }
 
         private void ClearAllItems()
@@ -243,10 +258,10 @@ namespace TSoft.UI.Popup
             
             var price = CurrentStoreItem.Price;
             //price
-            if (GameSave.Instance.HasEnoughGold(price))
-            {
-                GameSave.Instance.HasEnoughGold(-price);
-            }
+            if (!GameSave.Instance.HasEnoughGold(price))
+                return;
+            
+            GameSave.Instance.HasEnoughGold(-price);
             
             //save
             GameSave.Instance.AddPossessItem(CurrentStoreItem.Id);
@@ -260,7 +275,7 @@ namespace TSoft.UI.Popup
                     var artifactInfo = DataRegistry.Instance.ArtifactRegistry.Get(CurrentStoreItem.Id);
                     abilityContainer.currentArtifacts.Add(artifactInfo);
                     
-                    var obj = Instantiate(artifactDisplayPrefab, artifactDisplayParent);
+                    /*var obj = Instantiate(artifactDisplayPrefab, artifactDisplayParent);
                     var artifact = obj.GetComponent<StoreItem>();
                 
                     artifact.OnSelect = () =>
@@ -270,7 +285,7 @@ namespace TSoft.UI.Popup
                     };
                 
                     artifact.SetElement(artifactInfo, CurrentStoreItem.Id, ItemType.Artifact);
-                    artifactsStore.Add(artifact);
+                    artifactsStore.Add(artifact);*/
                     break;
                 case ItemType.Joker:
                     var jokerInfo = DataRegistry.Instance.JokerRegistry.Get(CurrentStoreItem.Id);
@@ -281,6 +296,28 @@ namespace TSoft.UI.Popup
             //delete
             Destroy(CurrentStoreItem.gameObject);
             CurrentStoreItem = null;
+        }
+
+        private void OnExitClicked()
+        {
+            var director = GameContext.Instance.CurrentDirector as InGameDirector;
+            if (director != null) 
+                director.GameFinishSuccess();
+        }
+        
+        private void OnArtifactsChanged(object sender, ListChangedEventArgs args)
+        {
+            switch (args.ListChangedType)
+            {
+                case ListChangedType.ItemAdded :
+                    CreateArtifactInventory(player.AbilityContainer.currentArtifacts[args.NewIndex]);
+                    break;
+                case ListChangedType.ItemDeleted :
+                    break;
+                case ListChangedType.ItemChanged :
+                    break;
+                    
+            }
         }
 
         private List<int> GetUniqueNumbers(int count)

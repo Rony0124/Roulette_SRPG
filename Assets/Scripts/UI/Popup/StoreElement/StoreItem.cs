@@ -10,8 +10,9 @@ namespace TSoft.UI.Popup.StoreElement
         public Action OnSelect;
         
         //ui
-        private Button button;
-        private Image thumbnail;
+        [SerializeField] private Button button;
+        [SerializeField] private Image thumbnail;
+        
         //info
         private ItemSO itemInfo;
         private Guid id;
@@ -31,6 +32,7 @@ namespace TSoft.UI.Popup.StoreElement
 
         public void SetElement(ItemSO item, Guid id, StorePopup.ItemType type)
         {
+            itemInfo = item;
             thumbnail.sprite = item.image;
             this.id = id;
             this.type = type;

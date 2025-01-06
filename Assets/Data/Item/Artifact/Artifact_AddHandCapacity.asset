@@ -17,4 +17,4 @@ MonoBehaviour:
   description: 
   image: {fileID: 0}
   price: 0
-  effect: {fileID: 0}
+  effect: {fileID: 11400000, guid: 4a94f910aedde429586112e65fbce113, type: 2}
