@@ -245,5 +245,21 @@ namespace TSoft.InGame.Player
                 xSpacing += cardXSpacing;
             }
         }
+        
+#if UNITY_EDITOR
+        void OnGUI()
+        {
+            var count = gameplay.Attributes.Count;
+            Rect rc = new Rect(400, 300, 400, 20);
+            GUI.Label(rc, $"Player Attribute");
+            rc.y += 25;
+        
+            for (var i = 0; i < count; i++)
+            {
+                GUI.Label(rc, $"{gameplay.Attributes[i].attrType} : {gameplay.Attributes[i].value.CurrentValue}");
+                rc.y += 25;
+            }
+        }
+#endif
     }
 }
