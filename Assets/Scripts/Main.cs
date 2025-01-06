@@ -8,6 +8,7 @@ namespace TSoft
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void MainBeforeScene()
         {
+            //GameContext
             var gameContextPrefabOp = Addressables.LoadAssetAsync<GameObject>("GameContext");
             gameContextPrefabOp.WaitForCompletion();
             
@@ -17,6 +18,7 @@ namespace TSoft
             var gameContext = Object.Instantiate(gameContextPrefab);
             Object.DontDestroyOnLoad(gameContext);
             
+            //GameSave
             var gameSavePrefabOp = Addressables.LoadAssetAsync<GameObject>("GameSave");
             gameSavePrefabOp.WaitForCompletion();
             
@@ -25,6 +27,16 @@ namespace TSoft
             var gameSavePrefab = gameSavePrefabOp.Result;
             var gameSave = Object.Instantiate(gameSavePrefab);
             Object.DontDestroyOnLoad(gameSave);
+            
+            //InGameDebugConsole
+            var consolePrefabOp = Addressables.LoadAssetAsync<GameObject>("IngameDebugConsole");
+            consolePrefabOp.WaitForCompletion();
+            
+            Debug.Log($"[Main.MainBeforeScene] InGameDebugConsole Load");
+            
+            var consolePrefab = consolePrefabOp.Result;
+            var console = Object.Instantiate(consolePrefab);
+            Object.DontDestroyOnLoad(console);
         }
     }
 }

@@ -107,6 +107,12 @@ namespace TSoft
             RemoveAllItemsIds();
         }
         
+        [IngameDebugConsole.ConsoleMethod("gamesave.clearsave", "세이브 파일 클리어")]
+        public static void ConsoleCmd_ClearSaveFile()
+        {
+            Instance.ClearSaveFile();
+        }
+        
         static void SaveRaw<T>(string key, T value)
         {
             ES3.Save(key, value, Instance.easySaveSettings);
