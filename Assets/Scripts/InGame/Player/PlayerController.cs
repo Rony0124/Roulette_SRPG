@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Triggers;
 using Sirenix.Utilities;
+using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.CardSystem.CE;
 using TSoft.InGame.GamePlaySystem;
@@ -53,14 +54,16 @@ namespace TSoft.InGame.Player
 
             gameplay = GetComponent<Gameplay>();
             abilityContainer = GetComponent<AbilityContainer>();
+
+            gameplay.Init();
+            abilityContainer.Init();
+            
+            LoadSaveItems();
         }
 
         protected override async UniTask OnGameReady()
         {
             InitializeDeck();
-            gameplay.Init();
-            abilityContainer.Init();
-            
             onGameReady?.Invoke();
             
             await UniTask.WaitForSeconds(1);
@@ -71,6 +74,34 @@ namespace TSoft.InGame.Player
             await UniTask.WaitForSeconds(2);
             await UniTask.WaitWhile(() => !CanMoveNextCycle);
             DiscardAll();
+        }
+
+        private void LoadSaveItems()
+        {
+            var artifactRegistryIds = DataRegistry.Instance.ArtifactRegistry.Ids;
+            var jokerRegistryIds = DataRegistry.Instance.JokerRegistry.Ids;
+            
+            foreach (var id in artifactRegistryIds)
+            {
+                if (!GameSave.Instance.HasItemsId(id.Guid))
+                {
+                    continue;
+                }
+
+                var artifact = DataRegistry.Instance.ArtifactRegistry.Get(id);
+                abilityContainer.currentArtifacts.Add(artifact);
+            }
+
+            foreach (var id in jokerRegistryIds)
+            {
+                if (!GameSave.Instance.HasItemsId(id.Guid))
+                {
+                    continue;
+                }
+                
+                var joker = DataRegistry.Instance.JokerRegistry.Get(id);
+                specialCardDB.Add(joker);
+            }
         }
         
         public bool TryUseCardsOnHand()

@@ -82,6 +82,17 @@ namespace TSoft
             return possessItemIdsSet.Contains(itemGuid);
         }
 
+        public void RemoveItem(Guid rid)
+        {
+            if (!possessItemIdsSet.Contains(rid))
+                return;
+            
+            possessItemIdsSet.Remove(rid);
+            possessItemIds = possessItemIdsSet.ToList();
+            
+            SaveItemsRaw();
+        }
+
         private void RemoveAllItemsIds()
         {
             possessItemIds.Clear();

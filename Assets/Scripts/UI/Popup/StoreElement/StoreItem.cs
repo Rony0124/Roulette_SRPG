@@ -30,11 +30,11 @@ namespace TSoft.UI.Popup.StoreElement
             button.onClick.AddListener(() => OnSelect?.Invoke());
         }
 
-        public void SetElement(ItemSO item, Guid id, StorePopup.ItemType type)
+        public void SetElement(ItemSO item, StorePopup.ItemType type)
         {
             itemInfo = item;
             thumbnail.sprite = item.image;
-            this.id = id;
+            id = item.RegistryId.Guid;
             this.type = type;
         }
     }

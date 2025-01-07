@@ -99,5 +99,10 @@ namespace TSoft.InGame.Player
         {
             specialCardDB.Add(specialCard);
         }
+        
+        public void RemoveJoker(CardSO specialCard)
+        {
+            specialCardDB.Remove(specialCard);
+        }
     }
 }

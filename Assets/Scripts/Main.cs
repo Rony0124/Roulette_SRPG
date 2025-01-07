@@ -28,6 +28,7 @@ namespace TSoft
             var gameSave = Object.Instantiate(gameSavePrefab);
             Object.DontDestroyOnLoad(gameSave);
             
+#if UNITY_EDITOR
             //InGameDebugConsole
             var consolePrefabOp = Addressables.LoadAssetAsync<GameObject>("IngameDebugConsole");
             consolePrefabOp.WaitForCompletion();
@@ -37,6 +38,8 @@ namespace TSoft
             var consolePrefab = consolePrefabOp.Result;
             var console = Object.Instantiate(consolePrefab);
             Object.DontDestroyOnLoad(console);
+#endif
+            
         }
     }
 }

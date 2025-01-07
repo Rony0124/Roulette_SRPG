@@ -2945,8 +2945,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 945d46152171d324ca9c0543bc1528bf, type: 2}
   - {fileID: 11400000, guid: 5b7632899c443764b87f38f4d17046db, type: 2}
   - {fileID: 11400000, guid: fad4c0acb9c75324fb67db0793e445bf, type: 2}
-  specialCardDB:
-  - {fileID: 11400000, guid: c70bb5dd2ca945e4c81931c51a3c280d, type: 2}
+  specialCardDB: []
   pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01,
     type: 3}
   cardY: 10

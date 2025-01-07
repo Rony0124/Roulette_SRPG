@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -64,6 +65,7 @@ namespace TSoft.UI.Popup
         private Transform jokerInventoryParent;
         private TextMeshProUGUI descriptionText;
         private Button buyButton;
+        private Button sellButton;
         
         //item
         private List<StoreItem> artifactsStore = new();
@@ -98,9 +100,11 @@ namespace TSoft.UI.Popup
             jokerInventoryParent = Get<Transform>((int)TransformParent.Jokers_Inventory);
             descriptionText = Get<TextMeshProUGUI>((int)Text.DescriptionText);
             buyButton = Get<Button>((int)StoreButton.BuyButton);
+            sellButton = Get<Button>((int)StoreButton.SellButton);
             Get<Button>((int)StoreButton.ExitButton).onClick.AddListener(OnExitClicked);
             
             buyButton.onClick.AddListener(OnBuyClicked);
+            sellButton.onClick.AddListener(OnSellClicked);
         }
 
         protected override void OnActivated()
@@ -141,7 +145,7 @@ namespace TSoft.UI.Popup
                     UpdateSelectedItem(info);
                 };
                 
-                artifact.SetElement(info, infoId, ItemType.Artifact);
+                artifact.SetElement(info, ItemType.Artifact);
                 artifactsStore.Add(artifact);
             }
             
@@ -193,18 +197,8 @@ namespace TSoft.UI.Popup
                 }
 
                 var data = DataRegistry.Instance.JokerRegistry.Get(jokerId);
-                   
-                var obj = Instantiate(jokerInventoryPrefab, jokerInventoryParent);
-                var joker = obj.GetComponent<InventoryItem>();
-                
-                joker.OnSelect = () =>
-                {
-                    currentInventoryItem = joker;
-                    UpdateSelectedItem(data);
-                };
-                
-                joker.SetElement(data.image);
-                jokersInventory.Add(joker);
+
+                CreateJokerInventory(data);
             }
         }
 
@@ -218,9 +212,24 @@ namespace TSoft.UI.Popup
                 currentInventoryItem = artifact;
                 UpdateSelectedItem(data);
             };
-                
-            artifact.SetElement(data.image);
+            
+            artifact.SetElement(data, ItemType.Artifact);
             artifactsInventory.Add(artifact);
+        }
+        
+        private void CreateJokerInventory(CardSO data)
+        {
+            var obj = Instantiate(jokerInventoryPrefab, jokerInventoryParent);
+            var joker = obj.GetComponent<InventoryItem>();
+                
+            joker.OnSelect = () =>
+            {
+                currentInventoryItem = joker;
+                UpdateSelectedItem(data);
+            };
+            
+            joker.SetElement(data, ItemType.Joker);
+            jokersInventory.Add(joker);
         }
 
         private void ClearAllItems()
@@ -256,14 +265,12 @@ namespace TSoft.UI.Popup
             if (!CurrentStoreItem)
                 return;
             
+            //save
             var price = CurrentStoreItem.Price;
-            //price
             if (!GameSave.Instance.HasEnoughGold(price))
                 return;
             
-            GameSave.Instance.HasEnoughGold(-price);
-            
-            //save
+            GameSave.Instance.AddGold(-price);
             GameSave.Instance.AddPossessItem(CurrentStoreItem.Id);
             
             //apply
@@ -275,17 +282,6 @@ namespace TSoft.UI.Popup
                     var artifactInfo = DataRegistry.Instance.ArtifactRegistry.Get(CurrentStoreItem.Id);
                     abilityContainer.currentArtifacts.Add(artifactInfo);
                     
-                    /*var obj = Instantiate(artifactDisplayPrefab, artifactDisplayParent);
-                    var artifact = obj.GetComponent<StoreItem>();
-                
-                    artifact.OnSelect = () =>
-                    {
-                        CurrentStoreItem = artifact;
-                        UpdateSelectedItem(artifactInfo);
-                    };
-                
-                    artifact.SetElement(artifactInfo, CurrentStoreItem.Id, ItemType.Artifact);
-                    artifactsStore.Add(artifact);*/
                     break;
                 case ItemType.Joker:
                     var jokerInfo = DataRegistry.Instance.JokerRegistry.Get(CurrentStoreItem.Id);
@@ -296,6 +292,36 @@ namespace TSoft.UI.Popup
             //delete
             Destroy(CurrentStoreItem.gameObject);
             CurrentStoreItem = null;
+        }
+
+        private void OnSellClicked()
+        {
+            if (!currentInventoryItem)
+                return;
+            
+            //save
+            GameSave.Instance.AddGold(currentInventoryItem.Price);
+            GameSave.Instance.RemoveItem(currentInventoryItem.Id);
+            
+            //apply
+            switch (currentInventoryItem.Type)
+            {
+                case ItemType.Artifact:
+                    var abilityContainer = player.AbilityContainer;
+
+                    var artifactInfo = DataRegistry.Instance.ArtifactRegistry.Get(CurrentStoreItem.Id);
+                    abilityContainer.currentArtifacts.Remove(artifactInfo);
+                    
+                    break;
+                case ItemType.Joker:
+                    var jokerInfo = DataRegistry.Instance.JokerRegistry.Get(CurrentStoreItem.Id);
+                    player.RemoveJoker(jokerInfo);
+                    break;
+            }
+            
+            //delete
+            Destroy(currentInventoryItem.gameObject);
+            currentInventoryItem = null;
         }
 
         private void OnExitClicked()
