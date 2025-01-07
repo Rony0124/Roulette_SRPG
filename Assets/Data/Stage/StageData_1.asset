@@ -19,4 +19,4 @@ MonoBehaviour:
     monsterIds:
     - {fileID: 11400000, guid: b233d01d59e19804795422f599092797, type: 2}
     bossId: {fileID: 11400000, guid: 6bc88c541dc2efb469a40c7e3cfbd685, type: 2}
-    background: {fileID: 21300000, guid: 8c1f5ab231263404e989b78b4f84fcbc, type: 3}
+    background: {fileID: 21300000, guid: 5d01f498635e4f54eacd745aeff7dea8, type: 3}
