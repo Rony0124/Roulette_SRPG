@@ -8,5 +8,6 @@ namespace TSoft.Data.Stage
     {
         public DataRegistryIdSO[] monsterIds;
         public DataRegistryIdSO bossId;
+        public Sprite background;
     }
 }

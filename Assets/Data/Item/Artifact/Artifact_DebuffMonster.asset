@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_DebuffMonster
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  registryId: {fileID: 11400000, guid: 1eaa1e39289d74057bb37ed6cc4e7f82, type: 2}
   title: 
   description: 
   image: {fileID: 0}

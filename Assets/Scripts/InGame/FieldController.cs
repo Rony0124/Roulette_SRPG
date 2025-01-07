@@ -1,7 +1,8 @@
-using System;
+using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.UI.Views.InGame;
+using TSoft.Utils;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,118 +10,116 @@ namespace TSoft.InGame
 {
     public class FieldController : MonoBehaviour
     {
-        [Serializable]
-        public class FieldSlot
+        private BackgroundView bgView;
+
+        private BackgroundView BgView
         {
-            public Transform self;
-            [NonSerialized]
-            public MonsterController monster;
-        }
+            get
+            {
+                if (bgView == null)
+                {
+                    bgView = FindObjectOfType<BackgroundView>();   
+                }
+
+                return bgView;
+            }
+        } 
         
-        [Header("Slots")]
-        [SerializeField] 
-        private FieldSlot[] slots;
-        
-        //refactor ui referencing
-        private FieldInfoView view => FindObjectOfType<FieldInfoView>();
-        
-        private int currentSlotIndex;
-        private FieldSlot currentSlot;
-        
-        public FieldSlot[] Slots => slots;
-        public FieldSlot CurrentSlot => currentSlot;
-        
-        public int CurrentSlotIndex
+        private FieldInfoView infoView;
+
+        private FieldInfoView InfoView
         {
-            get => currentSlotIndex;
+            get
+            {
+                if (infoView == null)
+                {
+                    infoView = FindObjectOfType<FieldInfoView>();   
+                }
+
+                return infoView;
+            }
+        } 
+        
+        private CombatController.CycleInfo currentCycle;
+        public CombatController.CycleInfo CurrentCycle
+        {
+            get => currentCycle;
             set
             {
-                var slotVal = value - 1;
-                currentSlot = slots[slotVal];
-                if (slotVal == RewardSlot)
-                {
-                    PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Store);
-                }
-                else
-                {
-                    view.OnMonsterSpawn?.Invoke(currentSlot);    
-                }
+                var val = value;
+
+                OnCurrentRoundChanged(currentCycle, val);
+                
+                currentCycle = val;
             } 
         }
+        
+        private MonsterController currentMonster;
 
-        //test
-        private const int MonsterSlotMax = 0;
-        private const int RewardSlot = 1;
-        private const int BossSlot = 2;
+        public MonsterController CurrentMonster
+        {
+            get => currentMonster;
+            set
+            {
+                InfoView.OnMonsterSpawn?.Invoke(currentMonster);
+                currentMonster = value;
+            }
+        }
+
+        private DataRegistryIdSO[] monsterIds;
+        private DataRegistryIdSO bossId;
 
         public void SpawnField(Data.Stage.StageData stageData)
         {
-            var monsterIds = stageData.monsterIds;
-            var bossId = stageData.bossId;
+            monsterIds = stageData.monsterIds;
+            bossId = stageData.bossId;
             
-            //몬스터 소환
-            for (var i = 0; i <= MonsterSlotMax; i++)
-            {
-                var ranSlotIndex = Random.Range(0, monsterIds.Length);
-
-                if (DataRegistry.Instance.MonsterRegistry.TryGetValue(monsterIds[ranSlotIndex], out var monsterDataSo))
-                {
-                    var pos = Vector3.zero;
-                    var monster = monsterDataSo.SpawnMonster(slots[i].self, pos);
-                    slots[i].monster = monster; 
-                }
-            }
+            infoView = FindObjectOfType<FieldInfoView>();
+            bgView = FindObjectOfType<BackgroundView>();
             
-            //리워드
-            Debug.Log("리워드 필드 소환");
-
-            if (bossId != null)
-            {
-                //보스 소환
-                if (DataRegistry.Instance.MonsterRegistry.TryGetValue(bossId, out var bossDataSo))
-                {
-                    var boss = bossDataSo.SpawnMonster(slots[BossSlot].self,  Vector3.zero);
-                    slots[BossSlot].monster = boss;
-                }        
-            }
+            bgView.SetBackground(stageData.background);
         }
 
-        public void SetFieldData(CombatController.CycleInfo cycle)
+        private void OnCurrentRoundChanged(CombatController.CycleInfo oldVal, CombatController.CycleInfo newVal)
         {
-            for (var i = 0; i < slots.Length; i++)
+            if (oldVal.Round < newVal.Round)
             {
-                var slot = slots[i];
-                
-                if(i == RewardSlot)
-                    continue;
-                
-                if(slot.monster is null)
-                    continue;
-                
-                var currentHp = slot.monster.GamePlay.GetAttr(GameplayAttr.Heart);
-                if (i == BossSlot)
+                if (newVal.Round == Define.RewardSlot)
                 {
-                    currentHp *= (int)(cycle.Stage * 1.5);
+                    PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Store);
+                }
+                else if (newVal.Round == Define.BossSlot)
+                {
+                    currentMonster = SpawnMonster(bossId);
+                    var currentHp = currentMonster.GamePlay.GetAttr(GameplayAttr.Heart);
+                    currentHp *= (int)(newVal.Stage * 1.5);
+                    currentMonster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
+                    
+                    currentMonster.onDamaged = InfoView.OnDamaged;
                 }
                 else
                 {
-                    currentHp *= cycle.Stage;
+                    var ranIndex = Random.Range(0, monsterIds.Length);
+                    currentMonster = SpawnMonster(monsterIds[ranIndex]);
+                    var currentHp = currentMonster.GamePlay.GetAttr(GameplayAttr.Heart);
+                    currentHp *= newVal.Stage;
+                    currentMonster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
+                    
+                    currentMonster.onDamaged = InfoView.OnDamaged;
                 }
-                
-                slot.monster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
             }
         }
 
-        public bool TakeDamage(int damage)
+        private MonsterController SpawnMonster(DataRegistryIdSO monsterId)
         {
-            var currentHp = currentSlot.monster.GamePlay.GetAttr(GameplayAttr.Heart);
-            currentHp = Math.Max(0, currentHp - damage);
-            Debug.Log("remaining hp : " + currentHp );
-            
-            currentSlot.monster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
-            view.OnDamaged?.Invoke(currentHp);
+            MonsterController monster = null;
+            if (DataRegistry.Instance.MonsterRegistry.TryGetValue(monsterId, out var monsterDataSo))
+            {
+                var pos = Vector3.zero;
+                monster = monsterDataSo.SpawnMonster(transform, pos);
+            }
 
-            return currentHp <= 0;
+            return monster;
         }
     }
 }

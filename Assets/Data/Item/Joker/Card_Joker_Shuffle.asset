@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Joker_Shuffle
   m_EditorClassIdentifier: 
+  registryId: {fileID: 11400000, guid: 260e40be1a7701b4eb3bc129216e2b23, type: 2}
   title: 
   description: 
   image: {fileID: 0}
+  price: 0
   number: 0
   type: 5
   effect:

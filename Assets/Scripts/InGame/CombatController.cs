@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using TSoft.Data.Registry;
+using TSoft.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -46,11 +47,10 @@ namespace TSoft.InGame
             if (currentField != null)
             {
                 Destroy(currentField.gameObject);
-                transform.rotation = new Quaternion(0,0,0,0);
             }
             
             currentField = DataRegistry.Instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
-            currentField.SetFieldData(currentCycleInfo);
+            currentField.CurrentCycle = currentCycleInfo;
             
             await UniTask.WaitForSeconds(1);
         }
@@ -59,15 +59,18 @@ namespace TSoft.InGame
         {
             if (currentCycleInfo.Round > 0)
             {
-                onGameFinish?.Invoke();    
+                if (currentCycleInfo.Round != Define.RewardSlot)
+                {
+                    onGameFinish?.Invoke();
+                    Destroy(currentField.CurrentMonster.gameObject);    
+                }
+              
             }
             
             await UniTask.WaitForSeconds(1);
             
             currentCycleInfo.Round++;
-            
-            var mIndex = currentCycleInfo.Round;
-            currentField.CurrentSlotIndex = mIndex;
+            currentField.CurrentCycle = currentCycleInfo;
             
             Debug.Log("current round" + currentCycleInfo.Round);
         }

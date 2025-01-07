@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using Cysharp.Threading.Tasks.Triggers;
 using Sirenix.Utilities;
 using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
@@ -142,7 +141,7 @@ namespace TSoft.InGame.Player
 
             currentPokerCardSelected.Clear();
             
-            var isDead = director.CurrentField.TakeDamage((int)damage);
+            var isDead = director.CurrentField.CurrentMonster.TakeDamage((int)damage);
             
             if (isDead)
             {

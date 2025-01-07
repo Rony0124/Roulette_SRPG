@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_AddDmg
   m_EditorClassIdentifier: 
+  registryId: {fileID: 11400000, guid: c27a310a272fc434fba58eb3e8bc167c, type: 2}
   title: 
   description: 
   image: {fileID: 0}
+  price: 0
   effect: {fileID: 11400000, guid: f96b589330ef0174cac4e1be69a73ef0, type: 2}

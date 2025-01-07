@@ -8,7 +8,7 @@ namespace TSoft.UI.Views.InGame
     public class FieldInfoView : ViewBase
     {
         public Action<float> OnDamaged;
-        public Action<FieldController.FieldSlot> OnMonsterSpawn;
+        public Action<MonsterController> OnMonsterSpawn;
         
         private enum FieldInfoText
         {
@@ -39,10 +39,10 @@ namespace TSoft.UI.Views.InGame
             OnMonsterSpawn -= UpdateOnMonsterSpawn;
         }
 
-        private void UpdateOnMonsterSpawn(FieldController.FieldSlot data)
+        private void UpdateOnMonsterSpawn(MonsterController monster)
         {
-            txtName.text = data.monster.Data.Name;
-            txtHp.text = (int)data.monster.GamePlay.GetAttr(GameplayAttr.Heart) + "";
+            txtName.text = monster.Data.Name;
+            txtHp.text = (int)monster.GamePlay.GetAttr(GameplayAttr.Heart) + "";
         }
 
         private void UpdateMonsterHp(float hp)

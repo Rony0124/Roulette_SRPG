@@ -9,6 +9,8 @@ namespace TSoft.InGame
 {
     public class MonsterController : MonoBehaviour
     {
+        public Action<float> onDamaged;
+        
         private MonsterData data;
         private Gameplay gameplay;
        
@@ -28,16 +30,25 @@ namespace TSoft.InGame
             gameplay = GetComponent<Gameplay>();
         }
 
-        public void TakeDamage(bool isDead)
+        public bool TakeDamage(int damage)
         {
+            var currentHp = GamePlay.GetAttr(GameplayAttr.Heart);
+            currentHp = Math.Max(0, currentHp - damage);
+            Debug.Log("remaining hp : " + currentHp );
+            
+            GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
+            var isDead = currentHp <= 0;
             if (isDead)
             {
                 onDead?.Invoke();
             }
             else
             {
+                onDamaged?.Invoke(currentHp);
                 onDamage?.Invoke();    
             }
+
+            return isDead;
         }
     }
 }
