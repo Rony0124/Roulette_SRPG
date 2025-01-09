@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
+using TCGStarter.Tweening;
 using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.CardSystem.CE;
@@ -17,14 +18,13 @@ namespace TSoft.InGame.Player
    
         [Header("Positions")]
         [SerializeField] private Transform hand;
-        [SerializeField] private Transform cardPreview;
         [SerializeField] private Transform deck;
         
         private Gameplay gameplay;
         private AbilityContainer abilityContainer;
         
-        //animation
         private Vector3[] cardPositions;
+        private Vector3[] cardRotations;
         private int currentCardPreviewIdx;
         
         //cards
@@ -32,8 +32,6 @@ namespace TSoft.InGame.Player
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
         
-        private PokerCard currentPokerCardPreview;
-        private PokerCard currentPokerCardHold;
         private Queue<CustomEffect> customEffects;
         
         public bool CanMoveNextCycle { get; set; }
@@ -225,7 +223,6 @@ namespace TSoft.InGame.Player
         
         private void RemoveCardFromHand(PokerCard pokerCard)
         {
-            currentPokerCardPreview = null;
             cardsOnHand.Remove(pokerCard);
             ArrangeHand(animationSpeed / 2f);
         }
@@ -245,35 +242,54 @@ namespace TSoft.InGame.Player
         private void ArrangeHand(float duration)
         {
             cardPositions = new Vector3[cardsOnHand.Count];
-            
-            var xSpacing = cardXSpacing;
-            var mid = cardsOnHand.Count / 2;
+            cardRotations = new Vector3[cardsOnHand.Count];
+            float xspace = cardXSpacing / 2;
+            float yspace = 0;
+            float angle = cardAngle;
+            int mid = cardsOnHand.Count / 2;
 
             if (cardsOnHand.Count % 2 == 1)
             {
-                cardPositions[mid] = new Vector3(0, cardYSpacing, 0);
-                
-                cardsOnHand[mid].PositionCard(0, cardY + cardYSpacing, duration);
-                
+                cardPositions[mid] = new Vector3(0, 0, 0);
+                cardRotations[mid] = new Vector3(0, 0, 0);
+
+                RelocateCard(cardsOnHand[mid], 0, 0, 0, duration);
                 mid++;
-                xSpacing = cardXSpacing;
+                xspace = cardXSpacing;
+                yspace = -cardYSpacing;
+
             }
 
-            for (var i = mid; i < cardsOnHand.Count; i++)
+            for (int i = mid; i < cardsOnHand.Count; i++)
             {
-                if (i == mid)
-                {
-                    xSpacing /= 2;
-                }
-                
-                cardPositions[i] = new Vector3(xSpacing, cardYSpacing, 0);
-                cardPositions[cardsOnHand.Count - i - 1] = new Vector3(-xSpacing, cardYSpacing, 0);
-           
-                cardsOnHand[i].PositionCard(xSpacing, cardY + cardYSpacing, duration);
-                cardsOnHand[cardsOnHand.Count - i - 1].PositionCard(-xSpacing,cardY + cardYSpacing, duration);
+                cardPositions[i] = new Vector3(xspace, yspace, 0);
+                cardRotations[i] = new Vector3(0, 0, -angle);
+                cardPositions[cardsOnHand.Count - i - 1] = new Vector3(-xspace, yspace, 0);
+                cardRotations[cardsOnHand.Count - i - 1] = new Vector3(0, 0, angle);
 
-                xSpacing += cardXSpacing;
+                RelocateCard(cardsOnHand[i], xspace, yspace, -angle, duration);
+                RelocateCard(cardsOnHand[cardsOnHand.Count - i - 1], -xspace, yspace, angle, duration);
+
+                xspace += cardXSpacing;
+                yspace -= cardYSpacing;
+                yspace *= 1.5f;
+                angle += cardAngle;
             }
+        }
+        
+        private void RelocateCard(PokerCard card, float x, float y, float angle, float duration)
+        {
+            PositionCard(card, x, y, duration);
+            RotateCard(card, angle, duration);
+        }
+        
+        private void PositionCard(PokerCard card, float x, float y, float duration)
+        {
+            card.transform.TweenMove(new Vector3(x, cardY + y, 0), duration);
+        }
+        private void RotateCard(PokerCard card, float angle, float duration)
+        {
+            card.transform.TweenRotate(new Vector3(0, 0, angle), duration);
         }
         
 #if UNITY_EDITOR

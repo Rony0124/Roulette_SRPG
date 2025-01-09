@@ -10,6 +10,9 @@ namespace TSoft.InGame.Player
         [SerializeField] private float cardY;
         [SerializeField] private float cardXSpacing;
         [SerializeField] private float cardYSpacing;
+        [Range(0, 5)]
+        [SerializeField] private float cardAngle = 3;
+        
         [Range(0.2f, 2f)]
         [SerializeField] private float animationSpeed;
         
@@ -35,27 +38,12 @@ namespace TSoft.InGame.Player
         
         private void Card_OnHover(PokerCard pokerCard)
         {
-            if (currentPokerCardPreview == pokerCard || currentPokerCardHold != null || !cardsOnHand.Contains(pokerCard))
-                return;
-
-            currentPokerCardPreview = pokerCard;
-            currentCardPreviewIdx = cardsOnHand.IndexOf(currentPokerCardPreview);
             pokerCard.SetCardDetails(true);
-
-            pokerCard.transform.SetParent(cardPreview);
         }
         
         private void Card_OnStopHover(PokerCard pokerCard)
         {
-            if (currentPokerCardPreview != pokerCard)
-                return;
-            
-            pokerCard.transform.SetParent(hand);
-            pokerCard.transform.SetSiblingIndex(currentCardPreviewIdx);
             pokerCard.SetCardDetails(false);
-            
-            currentPokerCardPreview = null;
-            currentCardPreviewIdx = -1;
         }
 
         private void OnClickJoker(PokerCard pokerCard)
@@ -77,6 +65,9 @@ namespace TSoft.InGame.Player
                 pokerCard.SetVisualsPosition(Vector3.zero);
                 pokerCard.SetFloating(false);
                 
+                currentCardPreviewIdx = cardsOnHand.IndexOf(pokerCard);
+                RotateCard(pokerCard, cardRotations[currentCardPreviewIdx].z, animationSpeed / 10);
+                
                 currentPokerCardSelected.Remove(pokerCard);
             }
             else
@@ -84,7 +75,8 @@ namespace TSoft.InGame.Player
                 if(currentPokerCardSelected.Count >= HandCountMax)
                     return;
                 
-                pokerCard.SetVisualsPosition(Vector3.up * 10);
+                pokerCard.SetVisualsPosition(Vector3.up * 100);
+                RotateCard(pokerCard, 0, 0);
                 pokerCard.SetFloating(true);
                 
                 currentPokerCardSelected.Add(pokerCard);

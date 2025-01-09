@@ -2889,7 +2889,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 1999925344163037218}
-  cardPreview: {fileID: 1724789607}
+  cardPreview: {fileID: 0}
   deck: {fileID: 1999925344163037216}
   cardsOnHand: []
   defaultCardDB:
@@ -2951,6 +2951,7 @@ MonoBehaviour:
   cardY: 10
   cardXSpacing: 120
   cardYSpacing: 10
+  cardAngle: 3
   animationSpeed: 0.3
 --- !u!114 &938555715
 MonoBehaviour:
@@ -4778,12 +4779,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672696954}
   m_CullTransparentMesh: 1
---- !u!224 &1724789607 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1827595097126409023, guid: f0f49348213350241a7477f97b3c757a,
-    type: 3}
-  m_PrefabInstance: {fileID: 1999925344163037215}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1762044936
 GameObject:
   m_ObjectHideFlags: 0
@@ -5753,7 +5748,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3530397179665141217, guid: f0f49348213350241a7477f97b3c757a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0f49348213350241a7477f97b3c757a, type: 3}
