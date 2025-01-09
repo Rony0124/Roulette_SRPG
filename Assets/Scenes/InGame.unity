@@ -2889,7 +2889,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hand: {fileID: 1999925344163037218}
-  cardPreview: {fileID: 0}
   deck: {fileID: 1999925344163037216}
   cardsOnHand: []
   defaultCardDB:
@@ -2948,10 +2947,10 @@ MonoBehaviour:
   specialCardDB: []
   pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01,
     type: 3}
-  cardY: 10
+  cardY: 110
   cardXSpacing: 120
-  cardYSpacing: 10
-  cardAngle: 3
+  cardYSpacing: 7
+  cardAngle: 2
   animationSpeed: 0.3
 --- !u!114 &938555715
 MonoBehaviour:

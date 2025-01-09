@@ -25,8 +25,7 @@ namespace TSoft.InGame.Player
         
         private Vector3[] cardPositions;
         private Vector3[] cardRotations;
-        private int currentCardPreviewIdx;
-        
+    
         //cards
         [SerializeField]
         private List<PokerCard> cardsOnHand;
@@ -257,7 +256,6 @@ namespace TSoft.InGame.Player
                 mid++;
                 xspace = cardXSpacing;
                 yspace = -cardYSpacing;
-
             }
 
             for (int i = mid; i < cardsOnHand.Count; i++)

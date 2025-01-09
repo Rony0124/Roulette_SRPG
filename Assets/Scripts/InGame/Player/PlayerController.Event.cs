@@ -65,8 +65,8 @@ namespace TSoft.InGame.Player
                 pokerCard.SetVisualsPosition(Vector3.zero);
                 pokerCard.SetFloating(false);
                 
-                currentCardPreviewIdx = cardsOnHand.IndexOf(pokerCard);
-                RotateCard(pokerCard, cardRotations[currentCardPreviewIdx].z, animationSpeed / 10);
+                var cardIdx = cardsOnHand.IndexOf(pokerCard);
+                RotateCard(pokerCard, cardRotations[cardIdx].z, animationSpeed / 10);
                 
                 currentPokerCardSelected.Remove(pokerCard);
             }
