@@ -54,7 +54,7 @@ namespace TSoft.InGame.Player
             }
             else
             {
-                customEffects.Enqueue(pokerCard.cardData.effect);
+                customEffects_joker.Enqueue(pokerCard.cardData.effect);
             }
         }
 

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using TSoft.InGame.CardSystem;
 using UnityEngine;
 
@@ -7,11 +9,17 @@ namespace TSoft.InGame.Player
 {
     public partial class PlayerController
     {
-        public struct CardPattern
+        [Serializable]
+        public class CardPattern
         {
             public CardPatternType PatternType;
             public float Modifier;
         }
+        
+        //test 용으로 inspector에서 편집 가능하도록 설정
+        [Header("Card Pattern")]
+        [TableList]
+        private List<CardPattern> defaultCardPatterns;
 
         private CardPattern currentPattern;
         public CardPattern CurrentPattern => currentPattern;

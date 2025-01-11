@@ -71,5 +71,6 @@ namespace TSoft.InGame
         MaxCapacity = 1005,
         
         BasicAttackPower = 2000,
+        SkillDamage = 2001,
     }
 }

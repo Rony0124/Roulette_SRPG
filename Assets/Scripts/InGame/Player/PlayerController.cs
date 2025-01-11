@@ -31,14 +31,15 @@ namespace TSoft.InGame.Player
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
         
-        private Queue<CustomEffect> customEffects;
+        private Queue<CustomEffect> customEffects_joker;
         
         public bool CanMoveNextCycle { get; set; }
-       
-        public List<PokerCard> CardsOnHand => cardsOnHand;
         
         public AbilityContainer AbilityContainer => abilityContainer;
         public Gameplay Gameplay =>  gameplay;
+
+        public float currentDamage { get; set; }
+        public float currentDamageModifier { get; set; }
         
         private const int HandCountMax = 5;
         
@@ -46,7 +47,7 @@ namespace TSoft.InGame.Player
         {
             currentPokerCardSelected = new List<PokerCard>();
             cardsOnHand = new List<PokerCard>();
-            customEffects = new Queue<CustomEffect>();
+            customEffects_joker = new Queue<CustomEffect>();
 
             gameplay = GetComponent<Gameplay>();
             abilityContainer = GetComponent<AbilityContainer>();
@@ -69,6 +70,7 @@ namespace TSoft.InGame.Player
         {
             await UniTask.WaitForSeconds(2);
             await UniTask.WaitWhile(() => !CanMoveNextCycle);
+            
             DiscardAll();
         }
 
@@ -115,20 +117,22 @@ namespace TSoft.InGame.Player
             gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
             
             //기본 데미지 적용
-            var damage = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
+            currentDamage = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
             
             //카드 패턴에 의한 데미지 추가
-            damage *= CurrentPattern.Modifier;
+            currentDamageModifier *= CurrentPattern.Modifier;
             
-            Debug.Log("damage" + damage);
+            Debug.Log("damage" + currentDamage);
             
-            //카드 
-            while (customEffects.Count > 0)
+            //조커 이팩트 적용
+            //단일 적용
+            while (customEffects_joker.Count > 0)
             {
-                var ce = customEffects.Dequeue();
+                var ce = customEffects_joker.Dequeue();
                 ce.ApplyEffect(this);
             }
             
+            //카드 삭제
             foreach (var selectedCard in currentPokerCardSelected)
             {
                 selectedCard.Dissolve(animationSpeed);
@@ -138,7 +142,9 @@ namespace TSoft.InGame.Player
 
             currentPokerCardSelected.Clear();
             
-            var isDead = director.CurrentField.CurrentMonster.TakeDamage((int)damage);
+            var ultDmg = currentDamage * currentDamageModifier;
+            
+            var isDead = director.CurrentField.CurrentMonster.TakeDamage((int)ultDmg);
             
             if (isDead)
             {

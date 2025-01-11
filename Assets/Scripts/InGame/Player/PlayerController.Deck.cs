@@ -33,7 +33,7 @@ namespace TSoft.InGame.Player
         
         public void DrawCards()
         {
-            var cardVoids = Gameplay.GetAttr(GameplayAttr.Capacity) - CardsOnHand.Count;
+            var cardVoids = Gameplay.GetAttr(GameplayAttr.Capacity) - cardsOnHand.Count;
             
             if (cardVoids < 1)
             {
