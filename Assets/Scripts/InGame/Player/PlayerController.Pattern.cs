@@ -46,6 +46,8 @@ namespace TSoft.InGame.Player
                 .ToList();
             
             string detectedPattern = null;
+            if (currentPattern is null)
+                currentPattern = new();
 
             if (CheckForStraightFlush(currentPokerCardSelected))
             {
