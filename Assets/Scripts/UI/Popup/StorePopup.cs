@@ -281,11 +281,15 @@ namespace TSoft.UI.Popup
 
                     var artifactInfo = DataRegistry.Instance.ArtifactRegistry.Get(CurrentStoreItem.Id);
                     abilityContainer.currentArtifacts.Add(artifactInfo);
+
+                    artifactsStore.Remove(CurrentStoreItem);
                     
                     break;
                 case ItemType.Joker:
                     var jokerInfo = DataRegistry.Instance.JokerRegistry.Get(CurrentStoreItem.Id);
                     player.AddJoker(jokerInfo);
+                    
+                    jokersStore.Remove(CurrentStoreItem);
                     break;
             }
             
@@ -309,13 +313,16 @@ namespace TSoft.UI.Popup
                 case ItemType.Artifact:
                     var abilityContainer = player.AbilityContainer;
 
-                    var artifactInfo = DataRegistry.Instance.ArtifactRegistry.Get(CurrentStoreItem.Id);
+                    var artifactInfo = DataRegistry.Instance.ArtifactRegistry.Get(currentInventoryItem.Id);
                     abilityContainer.currentArtifacts.Remove(artifactInfo);
-                    
+
+                    artifactsInventory.Remove(currentInventoryItem);
                     break;
                 case ItemType.Joker:
-                    var jokerInfo = DataRegistry.Instance.JokerRegistry.Get(CurrentStoreItem.Id);
+                    var jokerInfo = DataRegistry.Instance.JokerRegistry.Get(currentInventoryItem.Id);
                     player.RemoveJoker(jokerInfo);
+                    
+                    jokersInventory.Remove(currentInventoryItem);
                     break;
             }
             
