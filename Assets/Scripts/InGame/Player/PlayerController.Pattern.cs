@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using TSoft.Data.Skill;
 using TSoft.InGame.CardSystem;
 using UnityEngine;
 
@@ -14,15 +15,43 @@ namespace TSoft.InGame.Player
         {
             public CardPatternType PatternType;
             public float Modifier;
+            public SkillSO skill;
         }
         
         //test 용으로 inspector에서 편집 가능하도록 설정
         [Header("Card Pattern")]
-        [TableList]
+        [SerializeField][TableList]
         private List<CardPattern> defaultCardPatterns;
+            
+        private List<CardPattern> cardPatterns;
 
         private CardPattern currentPattern;
         public CardPattern CurrentPattern => currentPattern;
+
+        public Dictionary<CardPatternType, ParticleSystem> particleDictionary;
+
+        private void InitPattern()
+        {
+            if (particleDictionary is {Count: > 0})
+            {
+                foreach (var ps in particleDictionary.Values)
+                {
+                    Destroy(ps.gameObject);
+                }
+            }
+            
+            cardPatterns = new();
+            particleDictionary = new();
+            
+            foreach (var defaultCardPattern in defaultCardPatterns)
+            {
+                var particleObj = Instantiate(defaultCardPattern.skill.skillParticleObj, transform);
+                var particle = particleObj.GetComponent<ParticleSystem>();
+                
+                particleDictionary.Add(defaultCardPattern.PatternType, particle);
+                cardPatterns.Add(defaultCardPattern);
+            }
+        }
         
         private void CheckCardPatternOnHand()
         {
@@ -46,54 +75,48 @@ namespace TSoft.InGame.Player
                 .ToList();
             
             string detectedPattern = null;
-            if (currentPattern is null)
-                currentPattern = new();
+            
+            currentPattern ??= new CardPattern();
+            var patternType = CardPatternType.None;
 
             if (CheckForStraightFlush(currentPokerCardSelected))
             {
-                currentPattern.PatternType = CardPatternType.StraightFlush;
-                currentPattern.Modifier = 180;
+                patternType = CardPatternType.StraightFlush;
             }
             else if (rankGroups.Any(g => g.Count() == 4))
             {
-                currentPattern.PatternType = CardPatternType.FourOfKind;
-                currentPattern.Modifier = 120;
+                patternType = CardPatternType.FourOfKind;
             }
             else if (rankGroups.Any(g => g.Count() == 3) && rankGroups.Any(g => g.Count() == 2))
             {
-                currentPattern.PatternType = CardPatternType.FullHouse;
-                currentPattern.Modifier = 100;
+                patternType = CardPatternType.FullHouse;
             }
             else if (suitGroups.Any(g => g.Count() >= 5))
             {
-                currentPattern.PatternType = CardPatternType.Flush;
-                currentPattern.Modifier = 40;
+                patternType = CardPatternType.Flush;
             }
             else if (CheckForStraight(sortedRanks))
             {
-                currentPattern.PatternType = CardPatternType.Straight;
-                currentPattern.Modifier = 25;
+                patternType = CardPatternType.Straight;
             }
             else if (rankGroups.Any(g => g.Count() == 3))
             {
-                currentPattern.PatternType = CardPatternType.ThreeOfKind;
-                currentPattern.Modifier = 8;
+                patternType = CardPatternType.ThreeOfKind;
             }
             else if (rankGroups.Count(g => g.Count() == 2) >= 2)
             {
-                currentPattern.PatternType = CardPatternType.TwoPair;
-                currentPattern.Modifier = 4;
+                patternType = CardPatternType.TwoPair;
             }
             else if (rankGroups.Any(g => g.Count() == 2))
             {
-                currentPattern.PatternType = CardPatternType.OnePair;
-                currentPattern.Modifier = 2;
+                patternType = CardPatternType.OnePair;
             }
             else
             {
-                currentPattern.PatternType = CardPatternType.HighCard;
-                currentPattern.Modifier = 1;
+                patternType = CardPatternType.HighCard;
             }
+
+            currentPattern = cardPatterns.Find(pattern => pattern.PatternType == patternType);
 
             Debug.Log($"Highest Pattern Detected: {detectedPattern}");
         }

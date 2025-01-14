@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d654eb5653643294f91a630610a2dbcb, type: 3}
+  m_Name: SkillRegistry
+  m_EditorClassIdentifier: 
+  assetDictionary:
+    m_Keys:
+    - {fileID: 11400000, guid: 1cd59d3a6460aaf4bb5b5d93a4a9aa1b, type: 2}
+    m_Values:
+    - {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}

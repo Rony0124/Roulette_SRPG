@@ -23,6 +23,8 @@ namespace TSoft.InGame
                 Stage = 0;
             }
         }
+
+        [SerializeField] private float gameFinishDuration;
         
         //field
         private FieldController currentField;

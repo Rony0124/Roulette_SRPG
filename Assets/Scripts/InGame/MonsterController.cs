@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.Feedbacks;
 using TSoft.Data.Monster;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Managers;
@@ -21,18 +22,25 @@ namespace TSoft.InGame
         }
         
         public Gameplay GamePlay => gameplay;
+        
+        public MMFeedbacks DamageFeedback;
 
-        public UnityEvent onDamage;
+        [SerializeField] private float textAddPositionY;
+
+       // public UnityEvent onDamage;
         public UnityEvent onDead;
 
         private void Awake()
         {
             gameplay = GetComponent<Gameplay>();
+            gameplay.Init();
         }
 
         public bool TakeDamage(int damage)
         {
             var currentHp = GamePlay.GetAttr(GameplayAttr.Heart);
+            Debug.Log("currentHp hp : " + currentHp );
+            Debug.Log("damage : " + damage );
             currentHp = Math.Max(0, currentHp - damage);
             Debug.Log("remaining hp : " + currentHp );
             
@@ -45,10 +53,13 @@ namespace TSoft.InGame
             else
             {
                 onDamaged?.Invoke(currentHp);
-                onDamage?.Invoke();    
+                var textPos = transform.position + (Vector3.up * textAddPositionY);
+                DamageFeedback?.PlayFeedbacks(textPos , damage);
+              //  onDamage?.Invoke();    
             }
 
             return isDead;
         }
     }
 }
+

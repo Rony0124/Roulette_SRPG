@@ -17,6 +17,8 @@ namespace TSoft.InGame.Player
         public List<ArtifactSO> defaultArtifacts;
         public ObservableList<ArtifactSO> currentArtifacts;
         
+        
+        
         private void Awake()
         {
             gameplay = GetComponent<Gameplay>();

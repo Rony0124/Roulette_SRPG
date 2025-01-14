@@ -17,3 +17,4 @@ MonoBehaviour:
   monsterRegistry: {fileID: 11400000, guid: a2129c9d39361bb4ca15b1a5287b78e7, type: 2}
   artifactRegistry: {fileID: 11400000, guid: 3852b3f8a5164c64397600ec5a8ea520, type: 2}
   jokerRegistry: {fileID: 11400000, guid: 98592933b566b7847ab691764ff0c2d8, type: 2}
+  skillRegistry: {fileID: 11400000, guid: ba93d6251f61a8d498efe668365aba4f, type: 2}

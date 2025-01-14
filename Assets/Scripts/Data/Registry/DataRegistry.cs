@@ -20,11 +20,15 @@ namespace TSoft.Data.Registry
         private ArtifactRegistry artifactRegistry;
         [SerializeField]
         private JokerRegistry jokerRegistry;
+        [SerializeField]
+        private SkillRegistry skillRegistry;
+
         
         public StageRegistry StageRegistry => stageRegistry;
         public MonsterRegistry MonsterRegistry => monsterRegistry;
         public ArtifactRegistry ArtifactRegistry => artifactRegistry;
         public JokerRegistry JokerRegistry => jokerRegistry;
+        private SkillRegistry SkillRegistry => skillRegistry;
 
         /*public async UniTask Load()
         {

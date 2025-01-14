@@ -30,6 +30,8 @@ namespace TSoft.InGame.Player
         [SerializeField]
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
+
+        [SerializeField] private ParticleSystem skillPs;
         
         private Queue<CustomEffect> customEffects_joker;
         
@@ -61,6 +63,7 @@ namespace TSoft.InGame.Player
         protected override async UniTask OnGameReady()
         {
             InitializeDeck();
+            InitPattern();
             onGameReady?.Invoke();
             
             await UniTask.WaitForSeconds(1);
@@ -144,6 +147,8 @@ namespace TSoft.InGame.Player
             
             var ultDmg = currentDamage * currentDamageModifier;
             
+            currentPattern.skill.PlaySkill(this, director.CurrentField.CurrentMonster);
+            
             var isDead = director.CurrentField.CurrentMonster.TakeDamage((int)ultDmg);
             
             if (isDead)
@@ -164,6 +169,13 @@ namespace TSoft.InGame.Player
             }
             
             return true;
+        }
+
+        public void Attack(int damage)
+        {
+            skillPs.transform.position = director.CurrentField.CurrentMonster.transform.position + Vector3.up; 
+            skillPs.Play();
+            director.CurrentField.CurrentMonster.TakeDamage((int)damage);
         }
         
         public bool TryDiscardSelectedCard()

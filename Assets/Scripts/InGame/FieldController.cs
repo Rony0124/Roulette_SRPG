@@ -92,7 +92,7 @@ namespace TSoft.InGame
                 {
                     currentMonster = SpawnMonster(bossId);
                     var currentHp = currentMonster.GamePlay.GetAttr(GameplayAttr.Heart);
-                    currentHp *= (int)(newVal.Stage * 1.5);
+                    currentHp *= (newVal.Stage+ 1) * 1.5f;
                     currentMonster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
                     
                     currentMonster.onDamaged = InfoView.OnDamaged;
@@ -102,7 +102,8 @@ namespace TSoft.InGame
                     var ranIndex = Random.Range(0, monsterIds.Length);
                     currentMonster = SpawnMonster(monsterIds[ranIndex]);
                     var currentHp = currentMonster.GamePlay.GetAttr(GameplayAttr.Heart);
-                    currentHp *= newVal.Stage;
+                    Debug.Log("currentHp hp : " + currentHp );
+                    currentHp *= (newVal.Stage + 1);
                     currentMonster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
                     
                     currentMonster.onDamaged = InfoView.OnDamaged;

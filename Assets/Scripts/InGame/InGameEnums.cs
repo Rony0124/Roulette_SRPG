@@ -48,6 +48,7 @@ namespace TSoft.InGame
 
     public enum CardPatternType
     {
+        None,
         StraightFlush,
         FourOfKind,
         FullHouse,
