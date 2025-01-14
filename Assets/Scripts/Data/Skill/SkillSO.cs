@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using TSoft.InGame.CardSystem.CE;
+using TSoft.InGame.GamePlaySystem;
+using TSoft.InGame.Player;
 
 namespace TSoft.Data.Skill
 {
@@ -12,7 +15,7 @@ namespace TSoft.Data.Skill
         [SerializeReference]
         public CustomEffect effect;
 
-        public void PlaySkill(PlayerControllelr player)
+        public void PlaySkill(PlayerController player)
         {
             //스킬 effect 데미지 계산
             foreach (var effect in effects)
