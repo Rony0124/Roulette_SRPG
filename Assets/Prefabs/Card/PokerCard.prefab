@@ -67,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 241706543, guid: f2c76e34176db8c47bdf6d67d6322b30, type: 3}
+  m_Sprite: {fileID: -604732898, guid: cd21c1f4d2dab7c44948c80207202fa5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -134,12 +134,7 @@ MonoBehaviour:
   imgBG: {fileID: 1508116142251715085}
   Visuals: {fileID: 7484354149988837323}
   HitBox: {fileID: 3388862083880449325}
-  cardData:
-    Title: 
-    Description: 
-    Image: {fileID: 0}
-    Number: 0
-    Type: 0
+  cardData: {fileID: 0}
 --- !u!222 &3298381349320101068
 CanvasRenderer:
   m_ObjectHideFlags: 0
