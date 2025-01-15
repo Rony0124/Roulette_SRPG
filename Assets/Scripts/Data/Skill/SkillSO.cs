@@ -23,13 +23,13 @@ namespace TSoft.Data.Skill
                 foreach (var gameplayEffect in gamePlayEffects)
                 {
                     player.Gameplay.ApplyEffectSelf(gameplayEffect);
-                }    
+                }
             }
 
             if (effect is not null)
             {
                 //스킬 추과 효과 존재하면 적용
-                effect.ApplyEffect(player);    
+                effect.ApplyEffect(player, monster);
             }
             
             //파티클 시스템 가져오기
@@ -38,6 +38,8 @@ namespace TSoft.Data.Skill
                 particleSystem.transform.position = monster.transform.position + Vector3.up; 
                 particleSystem.Play();    
             }
+            
+            monster.TakeDamage((int)player.CurrentDmg);
         }
     }
 }

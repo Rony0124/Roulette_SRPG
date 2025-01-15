@@ -3815,10 +3815,10 @@ MonoBehaviour:
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 7
     Modifier: 10
-    skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
+    skill: {fileID: 11400000, guid: 77a2e535ceb4f8c4c9c67a4c2a8074fe, type: 2}
   - PatternType: 8
     Modifier: 2
-    skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
+    skill: {fileID: 11400000, guid: a72fe590d72362941a705d8d3dd31d94, type: 2}
   - PatternType: 9
     Modifier: 1
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}

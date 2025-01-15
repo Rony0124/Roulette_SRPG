@@ -2,9 +2,7 @@ using System;
 using MoreMountains.Feedbacks;
 using TSoft.Data.Monster;
 using TSoft.InGame.GamePlaySystem;
-using TSoft.Managers;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace TSoft.InGame
 {
@@ -22,6 +20,9 @@ namespace TSoft.InGame
         }
         
         public Gameplay GamePlay => gameplay;
+
+        private bool isDead;
+        public bool IsDead => isDead; 
         
         [SerializeField] private MMFeedbacks DamageFeedback;
         [SerializeField] private MMFeedbacks DeathFeedback;
@@ -32,27 +33,29 @@ namespace TSoft.InGame
             gameplay.Init();
         }
 
-        public bool TakeDamage(int damage)
+        public void TakeDamage(int damage, bool ignoreFeedback = false)
         {
             var currentHp = GamePlay.GetAttr(GameplayAttr.Heart);
-            Debug.Log("currentHp hp : " + currentHp );
-            Debug.Log("damage : " + damage );
             currentHp = Math.Max(0, currentHp - damage);
-            Debug.Log("remaining hp : " + currentHp );
             
             GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
-            var isDead = currentHp <= 0;
+            isDead = currentHp <= 0;
             if (isDead)
             {
+                if (ignoreFeedback)
+                    return;
+                    
                 DeathFeedback?.PlayFeedbacks(transform.position , damage);
             }
             else
             {
                 onDamaged?.Invoke(currentHp);
-                DamageFeedback?.PlayFeedbacks(transform.position , damage);
-            }
 
-            return isDead;
+                if (!ignoreFeedback)
+                {
+                    DamageFeedback?.PlayFeedbacks(transform.position , damage);    
+                }
+            }
         }
     }
 }

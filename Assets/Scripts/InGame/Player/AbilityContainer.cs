@@ -6,7 +6,6 @@ using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Utils;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace TSoft.InGame.Player
 {
@@ -16,8 +15,6 @@ namespace TSoft.InGame.Player
         
         public List<ArtifactSO> defaultArtifacts;
         public ObservableList<ArtifactSO> currentArtifacts;
-        
-        
         
         private void Awake()
         {

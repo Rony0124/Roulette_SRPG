@@ -8,7 +8,7 @@ namespace TSoft.InGame.GamePlaySystem
     public class GameplayEffectModifier
     {
         public GameplayAttr attrType;
-                
+        
         public enum ModifierOpType
         {
             Add,

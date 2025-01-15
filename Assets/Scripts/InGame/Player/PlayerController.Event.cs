@@ -50,7 +50,7 @@ namespace TSoft.InGame.Player
         {
             if (pokerCard.cardData.policy == CustomEffectPolicy.Instant)
             {
-                pokerCard.cardData.effect.ApplyEffect(this);
+                pokerCard.cardData.effect.ApplyEffect(this, director.CurrentField.CurrentMonster);
             }
             else
             {

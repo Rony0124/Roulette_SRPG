@@ -39,9 +39,8 @@ namespace TSoft.InGame.Player
         
         public AbilityContainer AbilityContainer => abilityContainer;
         public Gameplay Gameplay =>  gameplay;
-
-        public float currentDamage { get; set; }
-        public float currentDamageModifier { get; set; }
+        
+        public float CurrentDmg { get; set; }
         
         private const int HandCountMax = 5;
         
@@ -120,20 +119,26 @@ namespace TSoft.InGame.Player
             gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
             
             //기본 데미지 적용
-            currentDamage = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
+            CurrentDmg = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
             
             //카드 패턴에 의한 데미지 추가
-            currentDamageModifier *= CurrentPattern.Modifier;
-            
-            Debug.Log("damage" + currentDamage);
+            var currentDamageModifier = CurrentPattern.Modifier;
             
             //조커 이팩트 적용
             //단일 적용
             while (customEffects_joker.Count > 0)
             {
                 var ce = customEffects_joker.Dequeue();
-                ce.ApplyEffect(this);
+                ce.ApplyEffect(this, director.CurrentField.CurrentMonster);
             }
+            
+            //스킬 실행 및 적용
+            CurrentDmg *= currentDamageModifier;
+            var defaultSkillDmg = gameplay.GetAttr(GameplayAttr.SkillDamage);
+            currentPattern.skill.PlaySkill(this, director.CurrentField.CurrentMonster);
+            
+            var skillDamage = gameplay.GetAttr(GameplayAttr.SkillDamage);
+            gameplay.SetAttr(GameplayAttr.SkillDamage, defaultSkillDmg);
             
             //카드 삭제
             foreach (var selectedCard in currentPokerCardSelected)
@@ -145,13 +150,11 @@ namespace TSoft.InGame.Player
 
             currentPokerCardSelected.Clear();
             
-            var ultDmg = currentDamage * currentDamageModifier;
+            //var ultDmg = currentDamage * currentDamageModifier * skillDamage;
+            //var isDead = director.CurrentField.CurrentMonster.TakeDamage((int)ultDmg);
             
-            currentPattern.skill.PlaySkill(this, director.CurrentField.CurrentMonster);
             
-            var isDead = director.CurrentField.CurrentMonster.TakeDamage((int)ultDmg);
-            
-            if (isDead)
+            if (director.CurrentField.CurrentMonster.IsDead)
             {
                 if (currentHeart > 0)
                 {
