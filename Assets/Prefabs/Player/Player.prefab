@@ -27,13 +27,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8481043479687266652}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.0650476, y: 0.21969172, z: 0.0023103803, w: 0.97339565}
+  m_LocalRotation: {x: -0.06504878, y: 0.21969298, z: 0.0023141077, w: 0.9733953}
   m_LocalPosition: {x: 0.8150512, y: -4.023719, z: 1.6224421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -7.334, y: 25.526, z: -1.391}
 --- !u!114 &123563507619229904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,7 +49,6 @@ MonoBehaviour:
   hand: {fileID: 0}
   deck: {fileID: 0}
   cardsOnHand: []
-  skillPs: {fileID: 0}
   defaultCardDB:
   - {fileID: 11400000, guid: 3ffda229b8ef3a641ba239f6771972fa, type: 2}
   - {fileID: 11400000, guid: e815372c747695d4cbc9f452a7989b95, type: 2}
@@ -166,6 +165,8 @@ MonoBehaviour:
     value: 8
   - attrType: 2000
     value: 10
+  - attrType: 2001
+    value: 1
   Attributes: []
   defaultEffects: []
 --- !u!114 &1047355927819672411

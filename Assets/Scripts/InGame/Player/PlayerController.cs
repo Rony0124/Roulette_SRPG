@@ -30,8 +30,6 @@ namespace TSoft.InGame.Player
         [SerializeField]
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
-
-        [SerializeField] private ParticleSystem skillPs;
         
         private Queue<CustomEffect> customEffects_joker;
         
