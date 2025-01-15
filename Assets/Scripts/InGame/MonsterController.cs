@@ -23,12 +23,8 @@ namespace TSoft.InGame
         
         public Gameplay GamePlay => gameplay;
         
-        public MMFeedbacks DamageFeedback;
-
-        [SerializeField] private float textAddPositionY;
-
-       // public UnityEvent onDamage;
-        public UnityEvent onDead;
+        [SerializeField] private MMFeedbacks DamageFeedback;
+        [SerializeField] private MMFeedbacks DeathFeedback;
 
         private void Awake()
         {
@@ -48,14 +44,12 @@ namespace TSoft.InGame
             var isDead = currentHp <= 0;
             if (isDead)
             {
-                onDead?.Invoke();
+                DeathFeedback?.PlayFeedbacks(transform.position , damage);
             }
             else
             {
                 onDamaged?.Invoke(currentHp);
-                var textPos = transform.position + (Vector3.up * textAddPositionY);
-                DamageFeedback?.PlayFeedbacks(textPos , damage);
-              //  onDamage?.Invoke();    
+                DamageFeedback?.PlayFeedbacks(transform.position , damage);
             }
 
             return isDead;
