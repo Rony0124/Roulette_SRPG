@@ -134,11 +134,12 @@ namespace TSoft.InGame.Player
             
             //스킬 실행 및 적용
             CurrentDmg *= currentDamageModifier;
-            var defaultSkillDmg = gameplay.GetAttr(GameplayAttr.SkillDamage);
+             
+            var defaultSkillDmg = gameplay.GetAttr(GameplayAttr.SkillDamage, false);
             
             currentPattern.skill.PlaySkill(this, director.CurrentField.CurrentMonster);
             
-            gameplay.SetAttr(GameplayAttr.SkillDamage, defaultSkillDmg);
+            gameplay.SetAttr(GameplayAttr.SkillDamage, defaultSkillDmg, false);
             
             //카드 삭제
             foreach (var selectedCard in currentPokerCardSelected)

@@ -1,6 +1,7 @@
 using System;
 using System.Buffers;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 using TSoft.InGame.CardSystem;
 using UnityEngine;
@@ -20,6 +21,14 @@ namespace TSoft.InGame.GamePlaySystem
             public Gameplay source;
             public GameplayEffectSO sourceEffect;
             public AppliedAttributeModifier[] appliedModifiers;
+            
+            public float duration;
+            
+            ~AppliedGameplayEffect()
+            {
+                if (appliedModifiers != null)
+                    ArrayPool<AppliedAttributeModifier>.Shared.Return(appliedModifiers);
+            }
             
             public void CaptureModifier(Gameplay target)
             {
@@ -72,18 +81,84 @@ namespace TSoft.InGame.GamePlaySystem
 
         public void ApplyEffect(GameplayEffectSO effect, Gameplay source)
         {
-            AppliedGameplayEffect appliedEffect = new AppliedGameplayEffect();
-            appliedEffect.source = source;
-            appliedEffect.sourceEffect = effect;
+            var appliedEffect = new AppliedGameplayEffect
+            {
+                source = source,
+                sourceEffect = effect
+            };
+
+            if (effect.duration.policy == GameplayDuration.PolicyType.HasDuration)
+            {
+                appliedEffect.duration = effect.duration.magnitude;
+            }
             
             appliedEffect.CaptureModifier(this);
-
-            ApplyGameplayEffect(appliedEffect);
+            
+            if (effect.duration.policy == GameplayDuration.PolicyType.Instant)
+            {
+                ApplyInstantGameplayEffect(appliedEffect);
+                UnapplyEffect(appliedEffect);
+            }
+            else if(effect.duration.policy == GameplayDuration.PolicyType.HasDuration)
+            {
+                ApplyDurationalGameplayEffect(appliedEffect).Forget();
+            }
+            else
+            {
+                ApplyInfiniteGameplayEffect(appliedEffect);
+            }
         }
         
-        public void ApplyGameplayEffect(AppliedGameplayEffect appliedEffect)
+        public void ApplyInstantGameplayEffect(AppliedGameplayEffect appliedEffect)
         {
+            foreach (var appliedModifier in appliedEffect.appliedModifiers)
+            {
+                float baseAttr = GetAttr(appliedModifier.attrType, false);
+
+                Debug.Log("baseAttr" + baseAttr);
+                if (float.IsNaN(appliedModifier.modifier.Override))
+                {
+                    Debug.Log("appliedModifier.modifier.Multiply" + appliedModifier.modifier.Multiply);
+                    
+                    baseAttr += appliedModifier.modifier.Add;
+                    baseAttr *= appliedModifier.modifier.Multiply;
+                }
+                else
+                {
+                    baseAttr = appliedModifier.modifier.Override;
+                }
+
+                SetAttr(appliedModifier.attrType, baseAttr, false);
+                
+                
+            }
+
+            UpdateAttributes();
+        }
+        
+        private async UniTaskVoid ApplyDurationalGameplayEffect(AppliedGameplayEffect appliedEffect)
+        {
+            ApplyInfiniteGameplayEffect(appliedEffect);
+            
+            await UniTask.WaitForSeconds(appliedEffect.duration);
+
+            UnapplyEffect(appliedEffect);
+        }
+        
+        private void ApplyInfiniteGameplayEffect(AppliedGameplayEffect appliedEffect)
+        {
+            var effect = appliedEffects.Find(effect => effect == appliedEffect);
+            if(effect != null)
+                UnapplyEffect(effect);
+
             appliedEffects.Add(appliedEffect);
+            
+            UpdateAttributes();
+        }
+        
+        private void UnapplyEffect(AppliedGameplayEffect appliedEffect)
+        {
+            appliedEffects.Remove(appliedEffect);
             
             UpdateAttributes();
         }

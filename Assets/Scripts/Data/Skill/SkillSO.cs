@@ -27,6 +27,7 @@ namespace TSoft.Data.Skill
             }
             
             var skillDamage = player.Gameplay.GetAttr(GameplayAttr.SkillDamage);
+            Debug.Log("skillDamage" + skillDamage);
             player.CurrentDmg *= skillDamage;
 
             if (effect is not null)
