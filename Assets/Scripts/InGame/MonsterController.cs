@@ -26,6 +26,7 @@ namespace TSoft.InGame
         
         [SerializeField] private MMFeedbacks DamageFeedback;
         [SerializeField] private MMFeedbacks DeathFeedback;
+        [SerializeField] private MMFeedbacks DamageTextFeedback;
 
         private void Awake()
         {
@@ -35,17 +36,20 @@ namespace TSoft.InGame
 
         public void TakeDamage(int damage, bool ignoreFeedback = false)
         {
+            DamageTextFeedback?.PlayFeedbacks(transform.position , damage);
+            
             var currentHp = GamePlay.GetAttr(GameplayAttr.Heart);
             currentHp = Math.Max(0, currentHp - damage);
             
             GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
             isDead = currentHp <= 0;
+            
             if (isDead)
             {
                 if (ignoreFeedback)
                     return;
                     
-                DeathFeedback?.PlayFeedbacks(transform.position , damage);
+                DeathFeedback?.PlayFeedbacks();
             }
             else
             {
@@ -53,7 +57,7 @@ namespace TSoft.InGame
 
                 if (!ignoreFeedback)
                 {
-                    DamageFeedback?.PlayFeedbacks(transform.position , damage);    
+                    DamageFeedback?.PlayFeedbacks();    
                 }
             }
         }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modifiers:
   - attrType: 2001
-    modifierOp: 0
+    modifierOp: 1
     magnitude: 2

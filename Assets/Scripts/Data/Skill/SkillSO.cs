@@ -25,6 +25,9 @@ namespace TSoft.Data.Skill
                     player.Gameplay.ApplyEffectSelf(gameplayEffect);
                 }
             }
+            
+            var skillDamage = player.Gameplay.GetAttr(GameplayAttr.SkillDamage);
+            player.CurrentDmg *= skillDamage;
 
             if (effect is not null)
             {

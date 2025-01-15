@@ -135,9 +135,9 @@ namespace TSoft.InGame.Player
             //스킬 실행 및 적용
             CurrentDmg *= currentDamageModifier;
             var defaultSkillDmg = gameplay.GetAttr(GameplayAttr.SkillDamage);
+            
             currentPattern.skill.PlaySkill(this, director.CurrentField.CurrentMonster);
             
-            var skillDamage = gameplay.GetAttr(GameplayAttr.SkillDamage);
             gameplay.SetAttr(GameplayAttr.SkillDamage, defaultSkillDmg);
             
             //카드 삭제
@@ -172,13 +172,6 @@ namespace TSoft.InGame.Player
             }
             
             return true;
-        }
-
-        public void Attack(int damage)
-        {
-            skillPs.transform.position = director.CurrentField.CurrentMonster.transform.position + Vector3.up; 
-            skillPs.Play();
-            director.CurrentField.CurrentMonster.TakeDamage((int)damage);
         }
         
         public bool TryDiscardSelectedCard()
