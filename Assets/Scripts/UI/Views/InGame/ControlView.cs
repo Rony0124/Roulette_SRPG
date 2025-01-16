@@ -1,3 +1,4 @@
+using System;
 using TSoft.InGame;
 using TSoft.UI.Core;
 using TSoft.Utils;
@@ -13,7 +14,8 @@ namespace TSoft.UI.Views.InGame
         private enum ControlText
         {
             EnergyAmount,
-            HeartAmount
+            HeartAmount,
+            DeckText
         }
         
         private enum ControlButton
@@ -25,6 +27,7 @@ namespace TSoft.UI.Views.InGame
         //UI
         private TMPro.TextMeshProUGUI txtEnergy;
         private TMPro.TextMeshProUGUI txtHeart;
+        private TMPro.TextMeshProUGUI txtDeck;
     
         //Play
         [SerializeField]
@@ -40,6 +43,7 @@ namespace TSoft.UI.Views.InGame
 
             txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
             txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
+            txtDeck = Get<TMPro.TextMeshProUGUI>((int)ControlText.DeckText);
         }
 
         protected override void OnActivated()
@@ -47,6 +51,8 @@ namespace TSoft.UI.Views.InGame
             player.onGameReady += UpdateCardOnGameReady;
             player.Gameplay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += OnPlayerHeartChanged;
             player.Gameplay.GetAttrVar(GameplayAttr.Energy).OnValueChanged += OnPlayerEnergyChanged;
+
+            player.onDeckChanged += UpdateDeck;
         }
 
         protected override void OnDeactivated()
@@ -54,6 +60,8 @@ namespace TSoft.UI.Views.InGame
             player.onGameReady -= UpdateCardOnGameReady;
             player.Gameplay.GetAttrVar(GameplayAttr.Heart).OnValueChanged -= OnPlayerHeartChanged;
             player.Gameplay.GetAttrVar(GameplayAttr.Energy).OnValueChanged -= OnPlayerEnergyChanged;
+            
+            player.onDeckChanged -= UpdateDeck;
         }
 
         private void UpdateCardOnGameReady()
@@ -105,6 +113,11 @@ namespace TSoft.UI.Views.InGame
         private void UpdateHeart(float curVal, float maxVal)
         {
             txtHeart.text = curVal + " / " + maxVal;
+        }
+
+        private void UpdateDeck(int cardNum, int maxCardNum)
+        {
+            txtDeck.text = cardNum + "/" + maxCardNum;
         }
     }
 }

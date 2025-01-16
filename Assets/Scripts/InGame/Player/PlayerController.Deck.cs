@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TSoft.Data.Card;
@@ -9,6 +10,8 @@ namespace TSoft.InGame.Player
 {
     public partial class PlayerController
     {
+        public Action<int, int> onDeckChanged; 
+        
         [Header("Deck")]
         [SerializeField] private List<CardSO> defaultCardDB;
         [SerializeField] private List<CardSO> specialCardDB;
@@ -17,6 +20,8 @@ namespace TSoft.InGame.Player
         [SerializeField] private PokerCard pokerCardPrefab;
         
         private Queue<CardSO> cardsOnDeck;
+        
+        public int maxCardsNum; 
 
         private void InitializeDeck()
         {
@@ -29,6 +34,8 @@ namespace TSoft.InGame.Player
             }
             
             Shuffle(currentDeck);
+
+            maxCardsNum = cardsOnDeck.Count;
         }
         
         public void DrawCards()
@@ -68,6 +75,8 @@ namespace TSoft.InGame.Player
                 return false;
 
             card = cardsOnDeck.Dequeue();
+            
+            onDeckChanged?.Invoke(cardsOnDeck.Count, maxCardsNum);
             
             return true;
         }
