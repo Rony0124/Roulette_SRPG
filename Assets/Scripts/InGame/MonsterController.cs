@@ -44,6 +44,8 @@ namespace TSoft.InGame
             GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
             isDead = currentHp <= 0;
             
+            onDamaged?.Invoke(currentHp);
+            
             if (isDead)
             {
                 if (ignoreFeedback)
@@ -53,8 +55,6 @@ namespace TSoft.InGame
             }
             else
             {
-                onDamaged?.Invoke(currentHp);
-
                 if (!ignoreFeedback)
                 {
                     DamageFeedback?.PlayFeedbacks();    

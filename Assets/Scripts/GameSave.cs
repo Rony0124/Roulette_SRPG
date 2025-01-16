@@ -14,7 +14,10 @@ namespace TSoft
         private ES3Settings easySaveSettings;
         
         //gold
+        public Action<int> onGoldChanged;
+        
         private int gold;
+        public int Gold => gold;
         
         private static readonly int MaxGold = 999999999;
         private static readonly int MinGold = 0;
@@ -48,6 +51,8 @@ namespace TSoft
         private void SetGold(int newValue)
         {
             gold = Math.Clamp(newValue, MinGold, MaxGold);
+            onGoldChanged?.Invoke(gold);
+            
             SaveRaw(GoldKey, gold);
         }
 

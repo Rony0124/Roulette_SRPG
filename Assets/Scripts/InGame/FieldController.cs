@@ -61,7 +61,7 @@ namespace TSoft.InGame
             get => currentMonster;
             set
             {
-                InfoView.OnMonsterSpawn?.Invoke(currentMonster);
+                InfoView.OnMonsterSpawn?.Invoke(value);
                 currentMonster = value;
             }
         }
@@ -90,23 +90,34 @@ namespace TSoft.InGame
                 }
                 else if (newVal.Round == Define.BossSlot)
                 {
-                    currentMonster = SpawnMonster(bossId);
-                    var currentHp = currentMonster.GamePlay.GetAttr(GameplayAttr.Heart);
-                    currentHp *= (newVal.Stage+ 1) * 1.5f;
-                    currentMonster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
+                    CurrentMonster = SpawnMonster(bossId);
                     
-                    currentMonster.onDamaged = InfoView.OnDamaged;
+                    var maxHp = currentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
+                    maxHp *= (newVal.Stage+ 1) * 1.5f;
+                    
+                    currentMonster.GamePlay.SetAttr(GameplayAttr.MaxHeart, maxHp);
+                    currentMonster.GamePlay.SetAttr(GameplayAttr.Heart, maxHp);
+                    
+                    currentMonster.GamePlay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += (oldVal, newVal) =>
+                    {
+                        InfoView.OnDamaged?.Invoke(newVal, maxHp);
+                    };
                 }
                 else
                 {
                     var ranIndex = Random.Range(0, monsterIds.Length);
-                    currentMonster = SpawnMonster(monsterIds[ranIndex]);
-                    var currentHp = currentMonster.GamePlay.GetAttr(GameplayAttr.Heart);
-                    Debug.Log("currentHp hp : " + currentHp );
-                    currentHp *= (newVal.Stage + 1);
-                    currentMonster.GamePlay.SetAttr(GameplayAttr.Heart, currentHp);
+                    CurrentMonster = SpawnMonster(monsterIds[ranIndex]);
                     
-                    currentMonster.onDamaged = InfoView.OnDamaged;
+                    var maxHp = currentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
+                    maxHp *= (newVal.Stage + 1);
+                    
+                    currentMonster.GamePlay.SetAttr(GameplayAttr.MaxHeart, maxHp);
+                    currentMonster.GamePlay.SetAttr(GameplayAttr.Heart, maxHp);
+                    
+                    currentMonster.GamePlay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += (oldVal, newVal) =>
+                    {
+                        InfoView.OnDamaged?.Invoke(newVal, maxHp);
+                    };
                 }
             }
         }

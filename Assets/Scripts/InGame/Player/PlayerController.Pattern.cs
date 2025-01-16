@@ -10,6 +10,8 @@ namespace TSoft.InGame.Player
 {
     public partial class PlayerController
     {
+        public Action<CardPattern> onPatternSelected;
+        
         [Serializable]
         public class CardPattern
         {
@@ -26,7 +28,20 @@ namespace TSoft.InGame.Player
         private List<CardPattern> cardPatterns;
 
         private CardPattern currentPattern;
-        public CardPattern CurrentPattern => currentPattern;
+
+        public CardPattern CurrentPattern
+        {
+            get => currentPattern;
+            set
+            {
+                if (value is not null)
+                {
+                    onPatternSelected?.Invoke(value);
+                }
+                
+                currentPattern = value;
+            }
+        }
 
         public Dictionary<CardPatternType, ParticleSystem> particleDictionary;
 
@@ -114,7 +129,7 @@ namespace TSoft.InGame.Player
                 patternType = CardPatternType.HighCard;
             }
 
-            currentPattern = cardPatterns.Find(pattern => pattern.PatternType == patternType);
+            CurrentPattern = cardPatterns.Find(pattern => pattern.PatternType == patternType);
         }
         
         private bool CheckForStraightFlush(List<PokerCard> cards)
