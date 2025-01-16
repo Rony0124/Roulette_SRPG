@@ -47,17 +47,17 @@ namespace TSoft.InGame.GamePlaySystem
 
                     switch (modifier.modifierOp)
                     {
-                        case GameplayEffectModifier.ModifierOpType.Add:
+                        case ModifierOpType.Add:
                             appliedModifier.modifier.Add = magnitude;
                             break;
-                        case GameplayEffectModifier.ModifierOpType.Multiply:
+                        case ModifierOpType.Multiply:
                             appliedModifier.modifier.Multiply = magnitude;
                             break;
-                        case GameplayEffectModifier.ModifierOpType.Divide:
+                        case ModifierOpType.Divide:
                             if (magnitude != 0.0f)
                                 appliedModifier.modifier.Multiply = 1.0f / magnitude;
                             break;
-                        case GameplayEffectModifier.ModifierOpType.Override:
+                        case ModifierOpType.Override:
                             appliedModifier.modifier.Override = magnitude;
                             break;
                     }
@@ -97,7 +97,6 @@ namespace TSoft.InGame.GamePlaySystem
             if (effect.duration.policy == GameplayDuration.PolicyType.Instant)
             {
                 ApplyInstantGameplayEffect(appliedEffect);
-                UnapplyEffect(appliedEffect);
             }
             else if(effect.duration.policy == GameplayDuration.PolicyType.HasDuration)
             {
@@ -113,13 +112,11 @@ namespace TSoft.InGame.GamePlaySystem
         {
             foreach (var appliedModifier in appliedEffect.appliedModifiers)
             {
+                Debug.Log("[test attr]" + appliedModifier.attrType);
                 float baseAttr = GetAttr(appliedModifier.attrType, false);
-
-                Debug.Log("baseAttr" + baseAttr);
+                
                 if (float.IsNaN(appliedModifier.modifier.Override))
                 {
-                    Debug.Log("appliedModifier.modifier.Multiply" + appliedModifier.modifier.Multiply);
-                    
                     baseAttr += appliedModifier.modifier.Add;
                     baseAttr *= appliedModifier.modifier.Multiply;
                 }
@@ -127,10 +124,10 @@ namespace TSoft.InGame.GamePlaySystem
                 {
                     baseAttr = appliedModifier.modifier.Override;
                 }
+                
+                Debug.Log("[test attr]" + baseAttr);
 
                 SetAttr(appliedModifier.attrType, baseAttr, false);
-                
-                
             }
 
             UpdateAttributes();

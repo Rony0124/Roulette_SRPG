@@ -17,8 +17,9 @@ MonoBehaviour:
   description: 
   image: {fileID: 0}
   price: 0
-  gamePlayEffects:
-  - {fileID: 11400000, guid: 611022ad3a4a8bf46b8d5d7f023b6d4f, type: 2}
+  modifiers:
+  - modifierOp: 1
+    magnitude: 2
   effect:
     rid: -2
   skillParticleObj: {fileID: 3294898671608175754, guid: e9419f2da11a7064db8ee18b0128de31,

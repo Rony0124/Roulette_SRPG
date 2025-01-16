@@ -7421,6 +7421,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 9176220145216558040, guid: 4cf780e446bc9e944852b8711555d1ab,
+        type: 3}
+      propertyPath: defaultAttributes.Array.size
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8453,7 +8458,7 @@ GameObject:
   - component: {fileID: 6289747311478657898}
   - component: {fileID: 4594432521200478672}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MonsterNameTxt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9608,6 +9613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69f62518d90de94aaf5647ad69d327b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 938555714}
 --- !u!222 &6896583488617294791
 CanvasRenderer:
   m_ObjectHideFlags: 0

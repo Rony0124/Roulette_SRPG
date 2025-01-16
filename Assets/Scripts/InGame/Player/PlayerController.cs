@@ -8,6 +8,7 @@ using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.CardSystem.CE;
 using TSoft.InGame.GamePlaySystem;
+using TSoft.Utils;
 using UnityEngine;
 
 namespace TSoft.InGame.Player
@@ -132,12 +133,8 @@ namespace TSoft.InGame.Player
             
             //스킬 실행 및 적용
             CurrentDmg *= currentDamageModifier;
-             
-            var defaultSkillDmg = gameplay.GetAttr(GameplayAttr.SkillDamage, false);
             
             currentPattern.skill.PlaySkill(this, director.CurrentField.CurrentMonster);
-            
-            gameplay.SetAttr(GameplayAttr.SkillDamage, defaultSkillDmg, false);
             
             //카드 삭제
             foreach (var selectedCard in currentPokerCardSelected)
@@ -149,10 +146,6 @@ namespace TSoft.InGame.Player
 
             currentPokerCardSelected.Clear();
             
-            //var ultDmg = currentDamage * currentDamageModifier * skillDamage;
-            //var isDead = director.CurrentField.CurrentMonster.TakeDamage((int)ultDmg);
-            
-            
             if (director.CurrentField.CurrentMonster.IsDead)
             {
                 if (currentHeart > 0)
@@ -163,7 +156,7 @@ namespace TSoft.InGame.Player
             }
             else
             {
-                if (currentHeart <= 0)
+                if (currentHeart <= 0 || cardsOnHand.Count <= 0)
                 {
                     director.GameOver(false);
                     return false;
@@ -179,15 +172,15 @@ namespace TSoft.InGame.Player
             if(currentEnergy <= 0)
                 return false;
             
+            --currentEnergy;
+            gameplay.SetAttr(GameplayAttr.Energy, currentEnergy);
+            
             foreach (var card in currentPokerCardSelected)
             {
                 Discard(card);
             }
             
             currentPokerCardSelected.Clear();
-            
-            --currentEnergy;
-            gameplay.SetAttr(GameplayAttr.Energy, currentEnergy);
             
             return true;
         }
@@ -313,7 +306,7 @@ namespace TSoft.InGame.Player
         
             for (var i = 0; i < count; i++)
             {
-                GUI.Label(rc, $"{gameplay.Attributes[i].attrType} : {gameplay.Attributes[i].value.CurrentValue}");
+                GUI.Label(rc, $"{gameplay.Attributes[i].attrType} : {gameplay.Attributes[i].value.CurrentValue.Value}");
                 rc.y += 25;
             }
         }

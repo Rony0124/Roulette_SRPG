@@ -60,6 +60,14 @@ namespace TSoft.InGame
         HighCard
     }
     
+    public enum ModifierOpType
+    {
+        Add,
+        Multiply,
+        Divide,
+        Override,
+    }
+    
     public enum GameplayAttr
     {
         None = 0,
@@ -72,6 +80,5 @@ namespace TSoft.InGame
         MaxCapacity = 1005,
         
         BasicAttackPower = 2000,
-        SkillDamage = 2001,
     }
 }

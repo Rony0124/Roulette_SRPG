@@ -42,6 +42,7 @@ namespace TSoft.InGame.Player
             
             cardPatterns = new();
             particleDictionary = new();
+            currentPattern = new();
             
             foreach (var defaultCardPattern in defaultCardPatterns)
             {
@@ -74,10 +75,7 @@ namespace TSoft.InGame.Player
                 .OrderBy(rank => rank)
                 .ToList();
             
-            string detectedPattern = null;
-            
-            currentPattern ??= new CardPattern();
-            var patternType = CardPatternType.None;
+            CardPatternType patternType;
 
             if (CheckForStraightFlush(currentPokerCardSelected))
             {
@@ -117,8 +115,6 @@ namespace TSoft.InGame.Player
             }
 
             currentPattern = cardPatterns.Find(pattern => pattern.PatternType == patternType);
-
-            Debug.Log($"Highest Pattern Detected: {detectedPattern}");
         }
         
         private bool CheckForStraightFlush(List<PokerCard> cards)

@@ -9,14 +9,6 @@ namespace TSoft.InGame.GamePlaySystem
     {
         public GameplayAttr attrType;
         
-        public enum ModifierOpType
-        {
-            Add,
-            Multiply,
-            Divide,
-            Override,
-        }
-        
         public ModifierOpType modifierOp;
         
         public float magnitude;
@@ -29,5 +21,13 @@ namespace TSoft.InGame.GamePlaySystem
 
         public Tags sourceTags;
         public Tags targetTags;*/
+    }
+    
+    [Serializable]
+    public class Modifier
+    {
+        public ModifierOpType modifierOp;
+        
+        public float magnitude;
     }
 }

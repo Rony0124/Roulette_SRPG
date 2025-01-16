@@ -1,6 +1,7 @@
 using TSoft.InGame;
 using TSoft.UI.Core;
 using TSoft.Utils;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using PlayerController = TSoft.InGame.Player.PlayerController;
@@ -26,6 +27,7 @@ namespace TSoft.UI.Views.InGame
         private TMPro.TextMeshProUGUI txtHeart;
     
         //Play
+        [SerializeField]
         private PlayerController player;
         
         private void Awake()
@@ -38,36 +40,31 @@ namespace TSoft.UI.Views.InGame
 
             txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
             txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
-
-            player = FindObjectOfType<PlayerController>();
         }
 
         protected override void OnActivated()
         {
-            //director 참조 타이밍 개선 필요
-            if (player == null)
-            {
-                player = FindObjectOfType<PlayerController>();
-            }
-
-            if (player != null)
-            {
-                player.onGameReady += UpdateCardOnGameReady;
-            }
+            player.onGameReady += UpdateCardOnGameReady;
+            player.Gameplay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += OnPlayerHeartChanged;
+            player.Gameplay.GetAttrVar(GameplayAttr.Energy).OnValueChanged += OnPlayerEnergyChanged;
         }
 
         protected override void OnDeactivated()
         {
-            if (player != null)
-            {
-                player.onGameReady -= UpdateCardOnGameReady;
-            }
+            player.onGameReady -= UpdateCardOnGameReady;
+            player.Gameplay.GetAttrVar(GameplayAttr.Heart).OnValueChanged -= OnPlayerHeartChanged;
+            player.Gameplay.GetAttrVar(GameplayAttr.Energy).OnValueChanged -= OnPlayerEnergyChanged;
         }
 
         private void UpdateCardOnGameReady()
         {
-            UpdateEnergy();
-            UpdateHeart();
+            var maxEnergyCount = player.Gameplay.GetAttr(GameplayAttr.MaxEnergy);
+            var energyCount = player.Gameplay.GetAttr(GameplayAttr.Energy);
+            var maxHeartCount = player.Gameplay.GetAttr(GameplayAttr.MaxHeart);
+            var heartCount = player.Gameplay.GetAttr(GameplayAttr.Heart);
+            
+            UpdateEnergy(energyCount, maxEnergyCount);
+            UpdateHeart(heartCount, maxHeartCount);
             
             player.DrawCards();
         }
@@ -77,7 +74,6 @@ namespace TSoft.UI.Views.InGame
             if(!player.TryDiscardSelectedCard())
                 return;
             
-            UpdateEnergy();
             player.DrawCards();
         }
 
@@ -86,21 +82,29 @@ namespace TSoft.UI.Views.InGame
             if (!player.TryUseCardsOnHand()) 
                 return;
             
-            UpdateHeart();
-            
             player.DrawCards();
         }
-        
-        private void UpdateEnergy()
+
+        private void OnPlayerHeartChanged(float oldVal, float newVal)
         {
-            var energyCount = player.Gameplay.GetAttr(GameplayAttr.Energy);
-            txtHeart.text = energyCount + "";
+            var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxHeart);
+            txtHeart.text = newVal + " / " + maxCount;
         }
         
-        private void UpdateHeart()
+        private void OnPlayerEnergyChanged(float oldVal, float newVal)
         {
-            var heartCount = player.Gameplay.GetAttr(GameplayAttr.Heart);
-            txtHeart.text = heartCount + "";
+            var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxEnergy);
+            txtEnergy.text = newVal + " / " + maxCount;
+        }
+        
+        private void UpdateEnergy(float curVal, float maxVal)
+        {
+            txtEnergy.text = curVal + " / " + maxVal;
+        }
+        
+        private void UpdateHeart(float curVal, float maxVal)
+        {
+            txtHeart.text = curVal + " / " + maxVal;
         }
     }
 }

@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using TSoft.Utils;
+using UnityEngine;
 
 namespace TSoft.InGame.GamePlaySystem
 {
@@ -16,12 +18,18 @@ namespace TSoft.InGame.GamePlaySystem
             
             foreach (var defaultAttribute in defaultAttributes)
             {
+                var baseVal = new ObservableVar<float>();
+                var currentVal = new ObservableVar<float>();
+                
+                baseVal.Value = defaultAttribute.value;
+                currentVal.Value = defaultAttribute.value;
+                
                 var value = new GameplayAttributeValue
                 {
-                    BaseValue = defaultAttribute.value,
-                    CurrentValue = defaultAttribute.value
+                    BaseValue = baseVal,
+                    CurrentValue = currentVal
                 };
-                
+
                 GameplayAttributeModifier modifier = default;
                 modifier.SetDefault();
                 
@@ -43,12 +51,14 @@ namespace TSoft.InGame.GamePlaySystem
                 if (appliedEffect.appliedModifiers == null) 
                     continue;
                 
+                Debug.Log("[test attr]" + appliedEffect.sourceEffect);
+                
                 foreach (var appliedModifiers in appliedEffect.appliedModifiers)
                 {
                     CombineModifier(appliedModifiers.attrType, appliedModifiers.modifier);
                 }
             }
-            
+                
             for (int i = 0; i < Attributes.Count; ++i)
             {
                 var state = Attributes[i];
@@ -87,6 +97,14 @@ namespace TSoft.InGame.GamePlaySystem
             if(!TryGetAttrIndex(attribute, out var index))
                 return 0.0f;
             
+            return current ? Attributes[index].value.CurrentValue.Value : Attributes[index].value.BaseValue.Value;
+        }
+        
+        public ObservableVar<float> GetAttrVar(GameplayAttr attribute, bool current = true)
+        {
+            if(!TryGetAttrIndex(attribute, out var index))
+                return null;
+            
             return current ? Attributes[index].value.CurrentValue : Attributes[index].value.BaseValue;
         }
         
@@ -98,7 +116,7 @@ namespace TSoft.InGame.GamePlaySystem
                 return false;
             }
             
-            value = current ? Attributes[index].value.CurrentValue : Attributes[index].value.BaseValue;
+            value = current ? Attributes[index].value.CurrentValue.Value : Attributes[index].value.BaseValue.Value;
             return true;
         }
         
@@ -110,9 +128,9 @@ namespace TSoft.InGame.GamePlaySystem
             var state = Attributes[index];
             
             if(current)
-                state.value.CurrentValue = value;
+                state.value.CurrentValue.Value = value;
             else
-                state.value.BaseValue = value;
+                state.value.BaseValue.Value = value;
             
             Attributes[index] = state;
         }

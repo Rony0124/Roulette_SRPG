@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem.CE;
@@ -9,7 +10,7 @@ namespace TSoft.Data.Skill
     [CreateAssetMenu(fileName = "Skill", menuName = "Data/Skill", order = 2)]
     public class SkillSO : ItemSO
     {
-        public GameplayEffectSO[] gamePlayEffects;
+        public List<Modifier> modifiers;
         [SerializeReference]
         public CustomEffect effect;
 
@@ -17,18 +18,24 @@ namespace TSoft.Data.Skill
 
         public void PlaySkill(PlayerController player, MonsterController monster)
         {
-            if (gamePlayEffects is { Length: > 0 })
+            var dmg = player.CurrentDmg;
+            foreach (var modifier in modifiers)
             {
-                //스킬 effect 데미지 계산
-                foreach (var gameplayEffect in gamePlayEffects)
+                if (modifier.modifierOp == ModifierOpType.Add)
                 {
-                    player.Gameplay.ApplyEffectSelf(gameplayEffect);
+                    dmg += modifier.magnitude;
+                }
+                else if(modifier.modifierOp == ModifierOpType.Multiply)
+                {
+                    dmg *= modifier.magnitude;
+                }
+                else
+                {
+                    dmg = modifier.magnitude;
                 }
             }
-            
-            var skillDamage = player.Gameplay.GetAttr(GameplayAttr.SkillDamage);
-            Debug.Log("skillDamage" + skillDamage);
-            player.CurrentDmg *= skillDamage;
+          
+            player.CurrentDmg = dmg;
 
             if (effect is not null)
             {

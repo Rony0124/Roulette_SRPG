@@ -1,4 +1,5 @@
 using System;
+using TSoft.Utils;
 
 namespace TSoft.InGame.GamePlaySystem
 {
@@ -25,15 +26,15 @@ namespace TSoft.InGame.GamePlaySystem
     
     public struct GameplayAttributeValue
     {
-        public float BaseValue;
-        public float CurrentValue;
-        
+        public ObservableVar<float> BaseValue;
+        public ObservableVar<float> CurrentValue;
+
         public void UpdateCurrent(GameplayAttributeModifier modifier)
         {
             if (float.IsNaN(modifier.Override))
-                CurrentValue = (BaseValue + modifier.Add) * modifier.Multiply;
+                CurrentValue.Value = (BaseValue.Value + modifier.Add) * modifier.Multiply;
             else
-                CurrentValue = modifier.Override;
+                CurrentValue.Value = modifier.Override;
         }
     }
     
