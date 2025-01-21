@@ -1,7 +1,10 @@
+using System;
 using TSoft.Core;
-using TSoft.Data.Registry;
 using TSoft.InGame;
+using TSoft.Map;
+using TSoft.Utils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace TSoft
 {
@@ -29,5 +32,42 @@ namespace TSoft
         public delegate void OnLocalDirectorChanged(DirectorBase previousValue, DirectorBase newValue);
         
         public OnLocalDirectorChanged OnDirectorChanged;
+
+        private NodeBlueprint currentNode;
+        public NodeBlueprint CurrentNode
+        {
+            get => currentNode;
+            set
+            {
+                if (currentNode != value)
+                {
+                    OnCurrentNodeChanged(value);    
+                }
+
+                currentNode = value;
+            }
+        }
+
+        private void OnCurrentNodeChanged(NodeBlueprint node)
+        {
+            switch (node.nodeType)
+            {
+                case NodeType.MinorEnemy:
+                    SceneManager.LoadScene(Define.InGame);
+                    break;
+                case NodeType.EliteEnemy:
+                    SceneManager.LoadScene(Define.InGame);
+                    break;
+                case NodeType.Boss:
+                    SceneManager.LoadScene(Define.InGame);
+                    break;
+                case NodeType.Treasure:
+                    break;
+                case NodeType.Store:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
+        }
     }
 }

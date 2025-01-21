@@ -1,6 +1,8 @@
 using Cysharp.Threading.Tasks;
+using TSoft.Data.Monster;
 using TSoft.Data.Registry;
-using TSoft.Utils;
+using TSoft.Data.Stage;
+using TSoft.UI.Views.InGame;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,7 +10,7 @@ namespace TSoft.InGame
 {
     public class CombatController : ControllerBase
     {
-        public struct CycleInfo
+        /*public struct CycleInfo
         {
             public int Round;
             public int Stage;
@@ -22,59 +24,56 @@ namespace TSoft.InGame
                 Round = 0;
                 Stage = 0;
             }
-        }
+        }*/
 
+        //view
+        [SerializeField]
+        private BackgroundView bgView;
+        [SerializeField]
+        private FieldInfoView infoView;
+        
         [SerializeField] private float gameFinishDuration;
         
-        //field
-        private FieldController currentField;
-        //cycle
-        private CycleInfo currentCycleInfo;
-        
-        public FieldController CurrentField => currentField;
-        public CycleInfo CurrentCycleInfo => currentCycleInfo;
+        //monster
+        private MonsterController currentMonster;
+
+        public MonsterController CurrentMonster
+        {
+            get => currentMonster;
+            set
+            {
+                if (value != null)
+                {
+                    infoView.OnMonsterSpawn?.Invoke(value);
+                    bgView.OnMonsterSpawn?.Invoke(value.Data.monsterType);
+                    
+                    currentMonster = value;
+                }
+            }
+        }
+
+        private MonsterDataSO monsterData;
 
         public UnityEvent onGameFinish;
         
         protected override void InitOnDirectorChanged()
         {
-            currentCycleInfo.Reset();
+          if (DataRegistry.Instance.MonsterRegistry.TryGetValue(GameContext.Instance.CurrentNode.monsterId, out var monsterDataSo))
+          {
+              monsterData = monsterDataSo;
+          }
         }
         
         protected override async UniTask OnPrePlay()
         {
-            currentCycleInfo.Round = 0;
-            currentCycleInfo.Stage++;
-
-            if (currentField != null)
-            {
-                Destroy(currentField.gameObject);
-            }
-            
-            currentField = DataRegistry.Instance.StageRegistry.SpawnNextStage(transform, currentCycleInfo.Stage);
-            currentField.CurrentCycle = currentCycleInfo;
+            CurrentMonster = monsterData.SpawnMonster(transform, Vector3.zero);
             
             await UniTask.WaitForSeconds(1);
         }
 
         protected override async UniTask OnGameReady()
         {
-            if (currentCycleInfo.Round > 0)
-            {
-                if (currentCycleInfo.Round != Define.RewardSlot)
-                {
-                    onGameFinish?.Invoke();
-                    Destroy(currentField.CurrentMonster.gameObject);    
-                }
-              
-            }
-            
             await UniTask.WaitForSeconds(1);
-            
-            currentCycleInfo.Round++;
-            currentField.CurrentCycle = currentCycleInfo;
-            
-            Debug.Log("current round" + currentCycleInfo.Round);
         }
         
         protected override async UniTask OnGameFinishSuccess()

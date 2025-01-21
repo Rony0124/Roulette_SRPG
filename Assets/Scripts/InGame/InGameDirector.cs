@@ -22,7 +22,7 @@ namespace TSoft.InGame
         private ObservableVar<StageState> currentStageState;
         
         public PlayerController Player => player;
-        public FieldController CurrentField => combat.CurrentField;
+        public MonsterController CurrentMonster => combat.CurrentMonster;
 
         public GameState CurrentGameState => currentGameState.Value;
         public StageState CurrentStageState => currentStageState.Value;
@@ -141,14 +141,14 @@ namespace TSoft.InGame
 
         public void GameFinishSuccess()
         {
-            if (combat.CurrentCycleInfo.IsRoundMax)
+            /*if (combat.CurrentCycleInfo.IsRoundMax)
             {
                 ChangeStageState(StageState.PostPlayingSuccess);   
             }
             else
             {
                 ChangeGameState(GameState.Ready);
-            }
+            }*/
             
             PopupContainer.Instance.ClosePopupUI();
         }

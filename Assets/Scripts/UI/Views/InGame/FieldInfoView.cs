@@ -1,6 +1,5 @@
 using System;
 using TSoft.InGame;
-using TSoft.Managers;
 using TSoft.UI.Core;
 
 namespace TSoft.UI.Views.InGame
@@ -41,7 +40,7 @@ namespace TSoft.UI.Views.InGame
 
         private void UpdateOnMonsterSpawn(MonsterController monster)
         {
-            txtName.text = monster.Data.Name;
+            txtName.text = monster.Data.name;
             txtHp.text = (int)monster.GamePlay.GetAttr(GameplayAttr.Heart) + " / " + (int)monster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
         }
 

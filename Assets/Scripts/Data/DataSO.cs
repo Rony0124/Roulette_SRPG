@@ -5,7 +5,7 @@ namespace TSoft.Data
     public class DataSO : ScriptableObject
     {
         [SerializeField]
-        private DataRegistryIdSO registryId;
+        protected DataRegistryIdSO registryId;
         
         public DataRegistryIdSO RegistryId => registryId;
         

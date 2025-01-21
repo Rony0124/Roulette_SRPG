@@ -1,17 +1,26 @@
+using System;
+using TSoft.Data.Monster;
+using TSoft.InGame;
 using TSoft.UI.Core;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace TSoft.UI.Views.InGame
 {
     public class BackgroundView : ViewBase
     {
+        public Action<MonsterType> OnMonsterSpawn;
+        
         private enum BgImage
         {
             Background
         }
 
         private Image bg;
+
+        [SerializeField] 
+        private SerializedDictionary<MonsterType, Sprite> bgDictionary;
         
         private void Awake()
         {
@@ -22,15 +31,20 @@ namespace TSoft.UI.Views.InGame
         
         protected override void OnActivated()
         {
+            OnMonsterSpawn += SetBackground;
         }
 
         protected override void OnDeactivated()
         {
+            OnMonsterSpawn -= SetBackground;
         }
 
-        public void SetBackground(Sprite background)
+        private void SetBackground(MonsterType type)
         {
-            bg.sprite = background;
+            if (bgDictionary.TryGetValue(type, out var sp))
+            {
+                bg.sprite = sp;    
+            }
         }
     }
 }

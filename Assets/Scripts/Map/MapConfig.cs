@@ -11,8 +11,10 @@ namespace TSoft.Map
         public List<NodeBlueprint> nodeBlueprints;
         [Tooltip("Nodes that will be used on layers with Randomize Nodes > 0")]
         public List<NodeType> randomNodes = new List<NodeType>
-            {NodeType.Mystery, NodeType.Store, NodeType.Treasure, NodeType.MinorEnemy, NodeType.RestSite};
+            {NodeType.Store, NodeType.Treasure, NodeType.MinorEnemy};
         public int GridWidth => Mathf.Max(numOfPreBossNodes.max, numOfStartingNodes.max);
+
+        public Sprite stageBackground;
         
         public IntMinMax numOfPreBossNodes;
         public IntMinMax numOfStartingNodes;

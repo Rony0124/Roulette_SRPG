@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using TSoft.Data;
 using UnityEngine;
 
 namespace TSoft.Map
@@ -8,11 +7,9 @@ namespace TSoft.Map
     {
         MinorEnemy,
         EliteEnemy,
-        RestSite,
         Treasure,
         Store,
-        Boss,
-        Mystery
+        Boss
     }
     
     [CreateAssetMenu]
@@ -20,6 +17,7 @@ namespace TSoft.Map
     {
         public Sprite sprite;
         public NodeType nodeType;
+        public DataRegistryIdSO monsterId;
     }
 }
 

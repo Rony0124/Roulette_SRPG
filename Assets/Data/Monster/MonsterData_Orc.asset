@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: MonsterData_Orc
   m_EditorClassIdentifier: 
   registryId: {fileID: 11400000, guid: b233d01d59e19804795422f599092797, type: 2}
-  monsterPrefab: {fileID: 6014484093212867787, guid: 88655bb052df34240b56775793cac721, type: 3}
+  monsterPrefab: {fileID: 6014484093212867787, guid: 88655bb052df34240b56775793cac721,
+    type: 3}
   monsterData:
-    Name: Orc
+    name: Orc Warrior
+    monsterType: 0

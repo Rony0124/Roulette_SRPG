@@ -128,13 +128,13 @@ namespace TSoft.InGame.Player
             while (customEffects_joker.Count > 0)
             {
                 var ce = customEffects_joker.Dequeue();
-                ce.ApplyEffect(this, director.CurrentField.CurrentMonster);
+                ce.ApplyEffect(this, director.CurrentMonster);
             }
             
             //스킬 실행 및 적용
             CurrentDmg *= currentDamageModifier;
             
-            currentPattern.skill.PlaySkill(this, director.CurrentField.CurrentMonster);
+            currentPattern.skill.PlaySkill(this, director.CurrentMonster);
             
             //카드 삭제
             foreach (var selectedCard in currentPokerCardSelected)
@@ -146,7 +146,7 @@ namespace TSoft.InGame.Player
 
             currentPokerCardSelected.Clear();
             
-            if (director.CurrentField.CurrentMonster.IsDead)
+            if (director.CurrentMonster.IsDead)
             {
                 if (currentHeart > 0)
                 {

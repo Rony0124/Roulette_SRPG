@@ -62,26 +62,8 @@ namespace TSoft.Map
         private static void EnterNode(MapNode mapNode)
         {
             Debug.Log("Entering node: " + mapNode.Node.blueprintName + " of type: " + mapNode.Node.nodeType);
-            
-            switch (mapNode.Node.nodeType)
-            {
-                case NodeType.MinorEnemy:
-                    break;
-                case NodeType.EliteEnemy:
-                    break;
-                case NodeType.RestSite:
-                    break;
-                case NodeType.Treasure:
-                    break;
-                case NodeType.Store:
-                    break;
-                case NodeType.Boss:
-                    break;
-                case NodeType.Mystery:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+
+            GameContext.Instance.CurrentNode = mapNode.Blueprint;
         }
 
         private void PlayWarningThatNodeCannotBeAccessed()
