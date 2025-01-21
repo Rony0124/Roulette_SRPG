@@ -17,4 +17,4 @@ MonoBehaviour:
     type: 3}
   monsterData:
     name: Orc Warrior
-    monsterType: 0
+    monsterType: 1

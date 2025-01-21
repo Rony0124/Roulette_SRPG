@@ -17,11 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 80ba0ceb56fdf35478e22fba78946d69
   m_SerializeEntries:
-  - m_GUID: 3277ce9070050744b8406080b7ae20e4
-    m_Address: Assets/Data/Registry/StageRegistry.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3852b3f8a5164c64397600ec5a8ea520
     m_Address: Assets/Data/Registry/ArtifactRegistry.asset
     m_ReadOnly: 0

@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using Sirenix.OdinInspector;
 using TSoft.Data.Monster;
 using TSoft.InGame;
 using TSoft.UI.Core;
@@ -17,10 +20,17 @@ namespace TSoft.UI.Views.InGame
             Background
         }
 
+        [Serializable]
+        public class MonsterBackground
+        {
+            public MonsterType monsterType;
+            public Sprite background;
+        }
+
         private Image bg;
 
-        [SerializeField] 
-        private SerializedDictionary<MonsterType, Sprite> bgDictionary;
+        [SerializeField][TableList]
+        private List<MonsterBackground> bgList;
         
         private void Awake()
         {
@@ -41,9 +51,10 @@ namespace TSoft.UI.Views.InGame
 
         private void SetBackground(MonsterType type)
         {
-            if (bgDictionary.TryGetValue(type, out var sp))
+            var monsterBg = bgList.FirstOrDefault(item => item.monsterType == type);
+            if (monsterBg != null)
             {
-                bg.sprite = sp;    
+                bg.sprite = monsterBg.background;
             }
         }
     }

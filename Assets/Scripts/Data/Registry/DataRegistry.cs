@@ -13,8 +13,6 @@ namespace TSoft.Data.Registry
         [SerializeField] private AssetReference stageRegistryRef;*/
         
         [SerializeField]
-        private StageRegistry stageRegistry;
-        [SerializeField]
         private MonsterRegistry monsterRegistry;
         [SerializeField]
         private ArtifactRegistry artifactRegistry;
@@ -22,9 +20,7 @@ namespace TSoft.Data.Registry
         private JokerRegistry jokerRegistry;
         [SerializeField]
         private SkillRegistry skillRegistry;
-
         
-        public StageRegistry StageRegistry => stageRegistry;
         public MonsterRegistry MonsterRegistry => monsterRegistry;
         public ArtifactRegistry ArtifactRegistry => artifactRegistry;
         public JokerRegistry JokerRegistry => jokerRegistry;

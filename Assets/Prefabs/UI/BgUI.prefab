@@ -190,7 +190,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03a9eff1d3c17d94ea764a9fde24f194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgDictionary:
-    m_Keys: 00000000
-    m_Values:
-    - {fileID: 21300000, guid: 5d01f498635e4f54eacd745aeff7dea8, type: 3}
+  bgList:
+  - monsterType: 1
+    background: {fileID: 21300000, guid: 5d01f498635e4f54eacd745aeff7dea8, type: 3}
