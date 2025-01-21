@@ -6,7 +6,7 @@ namespace TSoft.Map
 {
     public static class ShufflingExtension
     {
-        private static System.Random rng = new System.Random();
+        private static Random rng = new ();
 
         public static void Shuffle<T>(this IList<T> list)
         {

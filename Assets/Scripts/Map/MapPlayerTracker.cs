@@ -25,7 +25,7 @@ namespace TSoft.Map
         {
             if (Locked) return;
 
-            // Debug.Log("Selected node: " + mapNode.Node.point);
+            Debug.Log("Selected node: " + mapNode.Node.point);
 
             if (mapManager.CurrentMap.path.Count == 0)
             {
@@ -61,11 +61,8 @@ namespace TSoft.Map
 
         private static void EnterNode(MapNode mapNode)
         {
-            // we have access to blueprint name here as well
             Debug.Log("Entering node: " + mapNode.Node.blueprintName + " of type: " + mapNode.Node.nodeType);
-            // load appropriate scene with context based on nodeType:
-            // or show appropriate GUI over the map: 
-            // if you choose to show GUI in some of these cases, do not forget to set "Locked" in MapPlayerTracker back to false
+            
             switch (mapNode.Node.nodeType)
             {
                 case NodeType.MinorEnemy:
