@@ -26,7 +26,7 @@ namespace TSoft.UI.Views.Lobby
         
         private void OnGameStartClicked(PointerEventData data)
         {
-            SceneManager.LoadScene(Define.InGame);
+            SceneManager.LoadScene(Define.StageMap);
         }
     }
 }

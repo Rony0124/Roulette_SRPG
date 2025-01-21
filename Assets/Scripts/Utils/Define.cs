@@ -16,6 +16,7 @@ namespace TSoft.Utils
 
         public static readonly string Lobby = "Lobby";
         public static readonly string InGame = "InGame";
+        public static readonly string StageMap = "StageMap";
         
         public static readonly int MonsterSlotMax = 1;
         public static readonly int RewardSlot = 2;

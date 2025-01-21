@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sr: {fileID: 0}
-  image: {fileID: 0}
+  image: {fileID: 2919015302754717492}
   visitedCircle: {fileID: 0}
   circleImage: {fileID: 7905945200246686803}
   visitedCircleImage: {fileID: 7808440883513284448}
