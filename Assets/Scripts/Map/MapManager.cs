@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace TSoft.Map
@@ -40,7 +42,6 @@ namespace TSoft.Map
         {
             Map map = MapGenerator.GetMap(config);
             CurrentMap = map;
-            Debug.Log(map.ToJson());
             view.ShowMap(map);
         }
 

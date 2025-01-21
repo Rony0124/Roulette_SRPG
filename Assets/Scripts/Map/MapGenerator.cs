@@ -128,13 +128,13 @@ namespace TSoft.Map
                 for (int j = 0; j < config.layers.Count - 1; ++j)
                 {
                     Node node = GetNode(new Vector2Int(i, j));
-                    if (node == null || node.HasNoConnections()) continue;
+                    if (node == null || node.HasNoConnections) continue;
                     Node right = GetNode(new Vector2Int(i + 1, j));
-                    if (right == null || right.HasNoConnections()) continue;
+                    if (right == null || right.HasNoConnections) continue;
                     Node top = GetNode(new Vector2Int(i, j + 1));
-                    if (top == null || top.HasNoConnections()) continue;
+                    if (top == null || top.HasNoConnections) continue;
                     Node topRight = GetNode(new Vector2Int(i + 1, j + 1));
-                    if (topRight == null || topRight.HasNoConnections()) continue;
+                    if (topRight == null || topRight.HasNoConnections) continue;
 
                     // Debug.Log("Inspecting node for connections: " + node.point);
                     if (!node.outgoing.Any(element => element.Equals(topRight.point))) continue;

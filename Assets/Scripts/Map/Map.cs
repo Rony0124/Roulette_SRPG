@@ -29,6 +29,17 @@ namespace TSoft.Map
         {
             return nodes.FirstOrDefault(n => n.point.Equals(point));
         }
+        
+        public float DistanceBetweenFirstAndLastLayers()
+        {
+            Node bossNode = GetBossNode();
+            Node firstLayerNode = nodes.FirstOrDefault(n => n.point.y == 0);
+
+            if (bossNode == null || firstLayerNode == null)
+                return 0f;
+
+            return bossNode.position.y - firstLayerNode.position.y;
+        }
     }
 }
 
