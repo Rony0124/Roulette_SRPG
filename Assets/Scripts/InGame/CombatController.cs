@@ -63,10 +63,25 @@ namespace TSoft.InGame
         
         protected override void InitOnDirectorChanged()
         {
-          if (DataRegistry.Instance.MonsterRegistry.TryGetValue(GameContext.Instance.CurrentNode.monsterId, out var monsterDataSo))
-          {
-              monsterData = monsterDataSo;
-          }
+#if UNITY_EDITOR
+            if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.monsterId == null)
+            {
+                if (TsDevPreferences.MonsterId != null)
+                {
+                    if (DataRegistry.Instance.MonsterRegistry.TryGetValue(TsDevPreferences.MonsterId, out var defaultMonster))
+                    { 
+                        monsterData = defaultMonster;
+                    }    
+                }
+            }
+#endif
+            if (monsterData != null) 
+                return;
+            
+            if (DataRegistry.Instance.MonsterRegistry.TryGetValue(GameContext.Instance.CurrentNode.monsterId, out var monsterDataSo))
+            { 
+                monsterData = monsterDataSo;
+            }
         }
         
         protected override async UniTask OnPrePlay()
