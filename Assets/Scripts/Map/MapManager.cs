@@ -15,9 +15,13 @@ namespace TSoft.Map
 
         private void Start()
         {
+           
+            
             if (PlayerPrefs.HasKey("Map"))
             {
-                string mapJson = PlayerPrefs.GetString("Map");
+                PlayerPrefs.DeleteAll();
+                
+                /*string mapJson = PlayerPrefs.GetString("Map");
                 Map map = JsonConvert.DeserializeObject<Map>(mapJson);
                 // using this instead of .Contains()
                 if (map.path.Any(p => p.Equals(map.GetBossNode().point)))
@@ -30,12 +34,16 @@ namespace TSoft.Map
                     CurrentMap = map;
                     // player has not reached the boss yet, load the current map
                     view.ShowMap(map);
-                }
+                }*/
             }
+            /*
             else
             {
                 GenerateNewMap();
             }
+            */
+            
+            GenerateNewMap();
         }
 
         public void GenerateNewMap()

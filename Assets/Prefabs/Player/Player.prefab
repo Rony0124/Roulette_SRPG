@@ -105,37 +105,38 @@ MonoBehaviour:
   specialCardDB: []
   pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01,
     type: 3}
+  maxCardsNum: 0
   cardY: 140
   cardXSpacing: 120
   cardYSpacing: 4
   cardAngle: 1.6
   animationSpeed: 0.3
   defaultCardPatterns:
-  - PatternType: 1
+  - PatternType: 9
     Modifier: 180
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-  - PatternType: 2
+  - PatternType: 8
     Modifier: 120
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-  - PatternType: 3
+  - PatternType: 7
     Modifier: 80
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-  - PatternType: 4
+  - PatternType: 6
     Modifier: 40
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 5
     Modifier: 30
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-  - PatternType: 6
+  - PatternType: 4
     Modifier: 20
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-  - PatternType: 7
+  - PatternType: 3
     Modifier: 5
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-  - PatternType: 8
+  - PatternType: 2
     Modifier: 2
     skill: {fileID: 11400000, guid: a72fe590d72362941a705d8d3dd31d94, type: 2}
-  - PatternType: 9
+  - PatternType: 1
     Modifier: 1
     skill: {fileID: 11400000, guid: 77a2e535ceb4f8c4c9c67a4c2a8074fe, type: 2}
 --- !u!114 &9176220145216558040
@@ -165,8 +166,6 @@ MonoBehaviour:
     value: 8
   - attrType: 2000
     value: 10
-  - attrType: 2001
-    value: 1
   Attributes: []
   defaultEffects: []
 --- !u!114 &1047355927819672411

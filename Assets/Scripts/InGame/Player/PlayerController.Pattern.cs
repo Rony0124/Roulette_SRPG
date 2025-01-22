@@ -42,6 +42,8 @@ namespace TSoft.InGame.Player
                 currentPattern = value;
             }
         }
+        
+        private bool[] grade;
 
         public Dictionary<CardPatternType, ParticleSystem> particleDictionary;
 
@@ -71,104 +73,115 @@ namespace TSoft.InGame.Player
         
         private void CheckCardPatternOnHand()
         {
-            if (currentPokerCardSelected is not { Count: > 0 })
+            if (currentPokerCardSelected == null || currentPokerCardSelected.Count == 0)
                 return;
+
+            grade = new bool[10];
+            grade[(int)CardPatternType.None] = true;
+            grade[(int)CardPatternType.HighCard] = true;
             
-            var rankGroups = currentPokerCardSelected
-                .GroupBy(card => card.cardData.number)
-                .OrderByDescending(group => group.Count())
-                .ToList();
+            int[] suits = new int[5]; 
+            int[] numbers = new int[15];
             
-            var suitGroups = currentPokerCardSelected
-                .GroupBy(card => card.cardData.type)
-                .OrderByDescending(group => group.Count())
-                .ToList();
-            
-            var sortedRanks = currentPokerCardSelected
-                .Select(card => card.cardData.number)
-                .Distinct()
-                .OrderBy(rank => rank)
-                .ToList();
-            
-            CardPatternType patternType;
-
-            if (CheckForStraightFlush(currentPokerCardSelected))
-            {
-                patternType = CardPatternType.StraightFlush;
-            }
-            else if (rankGroups.Any(g => g.Count() == 4))
-            {
-                patternType = CardPatternType.FourOfKind;
-            }
-            else if (rankGroups.Any(g => g.Count() == 3) && rankGroups.Any(g => g.Count() == 2))
-            {
-                patternType = CardPatternType.FullHouse;
-            }
-            else if (suitGroups.Any(g => g.Count() >= 5))
-            {
-                patternType = CardPatternType.Flush;
-            }
-            else if (CheckForStraight(sortedRanks))
-            {
-                patternType = CardPatternType.Straight;
-            }
-            else if (rankGroups.Any(g => g.Count() == 3))
-            {
-                patternType = CardPatternType.ThreeOfKind;
-            }
-            else if (rankGroups.Count(g => g.Count() == 2) >= 2)
-            {
-                patternType = CardPatternType.TwoPair;
-            }
-            else if (rankGroups.Any(g => g.Count() == 2))
-            {
-                patternType = CardPatternType.OnePair;
-            }
-            else
-            {
-                patternType = CardPatternType.HighCard;
-            }
-
-            CurrentPattern = cardPatterns.Find(pattern => pattern.PatternType == patternType);
-        }
-        
-        private bool CheckForStraightFlush(List<PokerCard> cards)
-        {
-            var suitGroups = cards.GroupBy(card => card.cardData.type);
-
-            foreach (var suitGroup in suitGroups)
-            {
-                var sortedRanks = suitGroup
-                    .Select(card => card.cardData.number)
-                    .Distinct()
-                    .OrderBy(rank => rank)
-                    .ToList();
-
-                if (CheckForStraight(sortedRanks))
-                    return true;
-            }
-
-            return false;
-        }
-        
-        private bool CheckForStraight(List<int> sortedRanks)
-        {
-            int consecutiveCount = 1;
-            for (int i = 1; i < sortedRanks.Count; i++)
-            {
-                if (sortedRanks[i] == sortedRanks[i - 1] + 1)
-                {
-                    consecutiveCount++;
-                    if (consecutiveCount >= 5)
-                        return true;
-                }
-                else
-                {
-                    consecutiveCount = 1;
+            for(int i=0; i< currentPokerCardSelected.Count; i++) {
+                PokerCard card = currentPokerCardSelected[i];
+                // 카드 숫자에 따른 count
+                numbers[card.cardData.number]++;
+                // Ace의 경우 
+                if(card.cardData.number == 1) numbers[14]++;
+                // 카드 모양에 따른 count
+                switch (card.cardData.type) {
+                    case CardType.Spade:
+                        suits[1]++;
+                        break;
+                    case CardType.Diamond:
+                        suits[2]++;
+                        break;
+                    case CardType.Club:
+                        suits[3]++;
+                        break;
+                    case CardType.Heart:
+                        suits[4]++;
+                        break;
                 }
             }
-            return false;
+            
+            bool isStraight = false;
+            // Ace를 1, 14로 처리해서 연속된 구간 확인
+            for(int i=1; i<=10; i++){
+                int temp = 0;
+                // 5개의 연속 구간 확인
+                for(int j=i; j<i+5; j++){
+                    if(numbers[j] != 1) 
+                        break;
+                    
+                    temp++;
+                }
+                
+                if(temp == 5) 
+                    isStraight = true;
+            }
+            
+            if(isStraight) 
+                grade[5] = true;
+            
+            bool isFlush = false;
+            for(int i=1; i<5; i++) {
+                if(suits[i] == 5) 
+                    isFlush = true;
+            }
+            
+            if(isFlush) 
+                grade[6] = true;
+            
+            
+            // [9] Straight Flush (같은 무늬의 연속된 숫자 5개가 존재)
+            if(isFlush && isStraight) 
+                grade[9] = true;
+            
+            int pairCnt = 0;
+            int tripleCnt = 0;
+            // Ace를 1로 단일 숫자로 처리해서 확인 (14 의미 제외)
+            for(int i=1; i<14; i++) {
+                // [7] 4 Card (네 개의 같은 숫자가 존재)
+                if(numbers[i] == 4) 
+                    grade[8] = true;
+ 
+                // 같은 숫자가 2개
+                if(numbers[i] == 2) 
+                    pairCnt++;
+                // 같은 숫자가 3개
+                else if(numbers[i] == 3)
+                    tripleCnt++;
+            }
+            
+            // [1] 1 Pair (같은 숫자가 한 쌍 존재)
+            if(pairCnt == 1) 
+                grade[2] = true;
+            // [2] 2 Pair (각기 같은 숫자가 두 쌍 존재)
+            if(pairCnt == 2) 
+                grade[3] = true;
+            // [3] Triple (세 개의 같은 숫자가 존재)
+            if(tripleCnt == 1) 
+                grade[4] = true;
+            // [6] Full House (Triple과 Pair가 함께 존재)
+            if(tripleCnt == 1 && pairCnt == 1)
+                grade[7] = true;
+            
+            for (int i = 9; i >= 0; i--)
+            {
+                if (i == 0)
+                {
+                    break;
+                }
+                
+                if (grade[i])
+                {
+                    // 현재 패턴 설정
+                    CurrentPattern = cardPatterns.Find(pattern => pattern.PatternType == (CardPatternType)i);
+                    break;
+                }
+            }
         }
-        
     }
 }

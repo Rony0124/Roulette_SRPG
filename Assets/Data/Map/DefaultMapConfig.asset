@@ -16,8 +16,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 541c557a1f793ad45ae2b77b2efbc619, type: 2}
   - {fileID: 11400000, guid: 2a8e459af90834b40962248778fd99bb, type: 2}
   - {fileID: 11400000, guid: 664ad9ff16de1fc40889d531cdd514eb, type: 2}
-  - {fileID: 11400000, guid: cbffa35a052c18d42ba71d9d9cb74b5a, type: 2}
-  randomNodes: 030000000000000001000000
+  randomNodes: 0000000001000000
+  stageBackground: {fileID: 0}
   numOfPreBossNodes:
     min: 4
     max: 5
@@ -47,7 +47,7 @@ MonoBehaviour:
     nodesApartDistance: 2
     randomizePosition: 0.509
     randomizeNodes: 0
-  - nodeType: 3
+  - nodeType: 1
     distanceFromPreviousLayer:
       min: 2
       max: 3
@@ -103,7 +103,7 @@ MonoBehaviour:
     nodesApartDistance: 2
     randomizePosition: 0.524
     randomizeNodes: 0.739
-  - nodeType: 5
+  - nodeType: 4
     distanceFromPreviousLayer:
       min: 4
       max: 5

@@ -49,15 +49,15 @@ namespace TSoft.InGame
     public enum CardPatternType
     {
         None,
-        StraightFlush,
-        FourOfKind,
-        FullHouse,
-        Flush,
-        Straight,
-        ThreeOfKind,
-        TwoPair,
+        HighCard,
         OnePair,
-        HighCard
+        TwoPair,
+        ThreeOfKind,
+        Straight,
+        Flush,
+        FullHouse,
+        FourOfKind,
+        StraightFlush,
     }
     
     public enum ModifierOpType

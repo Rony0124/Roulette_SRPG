@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Club 6
   m_EditorClassIdentifier: 
+  registryId: {fileID: 0}
   title: 
   description: 
   image: {fileID: 21300000, guid: 9e4fef354a531d446b72020d5125348d, type: 3}
-  number: 0
+  price: 0
+  number: 6
   type: 2
   effect:
     rid: -2

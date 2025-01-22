@@ -46,7 +46,7 @@ namespace TSoft.InGame
                     infoView.OnMonsterSpawn?.Invoke(value);
                     bgView.OnMonsterSpawn?.Invoke(value.Data.monsterType);
                     
-                    currentMonster.GamePlay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += (oldVal, newVal) =>
+                    value.GamePlay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += (oldVal, newVal) =>
                     {
                         var maxHp = currentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
                         infoView.OnDamaged?.Invoke(newVal, maxHp);

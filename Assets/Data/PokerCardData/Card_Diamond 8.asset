@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Diamond 8
   m_EditorClassIdentifier: 
+  registryId: {fileID: 0}
   title: 
   description: 
   image: {fileID: 21300000, guid: 8423e4f3a72eff947aaffe2339fe204e, type: 3}
-  number: 0
+  price: 0
+  number: 8
   type: 1
   effect:
     rid: -2
