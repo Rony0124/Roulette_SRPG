@@ -185,6 +185,8 @@ namespace TSoft.InGame
         //스테이지 마무리 준비 (실패)
         private async UniTaskVoid StartPostPlayingFailed()
         {
+            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
+            
             await UniTask.WaitForSeconds(1);
             
             ChangeStageState(StageState.Outro);

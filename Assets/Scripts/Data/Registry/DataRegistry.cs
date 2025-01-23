@@ -24,7 +24,7 @@ namespace TSoft.Data.Registry
         public MonsterRegistry MonsterRegistry => monsterRegistry;
         public ArtifactRegistry ArtifactRegistry => artifactRegistry;
         public JokerRegistry JokerRegistry => jokerRegistry;
-        private SkillRegistry SkillRegistry => skillRegistry;
+        public SkillRegistry SkillRegistry => skillRegistry;
 
         /*public async UniTask Load()
         {

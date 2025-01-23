@@ -13,8 +13,7 @@ namespace TSoft.Managers
         public enum PopupType
         {
             GameOver,
-            Win,
-            Store
+            Win
         }
         
         [Serializable]
