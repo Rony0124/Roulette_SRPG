@@ -30,6 +30,13 @@ namespace TSoft
         private static readonly string GoldKey = "gold";
         private static readonly string ItemIdKey = "ItemId";
         
+        //map
+        private Map.Map mapSaved;
+        public Map.Map MapSaved => mapSaved;
+        
+        private static readonly string MapKey = "map";
+        
+        
         private void Awake()
         {
             easySaveSettings = new ES3Settings(ES3.EncryptionType.AES, "IAmCheater");
@@ -107,10 +114,32 @@ namespace TSoft
 
         #endregion
         
+        #region Map
+
+        public void SaveMap(Map.Map map)
+        {
+            mapSaved = map;
+            SaveRaw(MapKey, mapSaved);
+        }
+
+        public void ResetMap()
+        {
+            mapSaved = null;
+            SaveMap(mapSaved);
+        }
+
+        public bool IsMapExist()
+        {
+            return mapSaved != null;
+        }
+        
+        #endregion
+        
         private void LoadFromSaveFile() 
         {
             gold = LoadRaw(GoldKey, gold);
             possessItemIds = LoadRaw(ItemIdKey, possessItemIds);
+            mapSaved = LoadRaw(MapKey, mapSaved);
 
             possessItemIdsSet = !possessItemIds.IsNullOrEmpty() ? new HashSet<Guid>(possessItemIds) : new HashSet<Guid>();
             
