@@ -58,7 +58,7 @@ namespace TSoft.InGame.Player
             LoadSaveItems();
         }
 
-        protected override async UniTask OnGameReady()
+        protected override async UniTask OnPrePlay()
         {
             InitializeDeck();
             InitPattern();
@@ -67,7 +67,7 @@ namespace TSoft.InGame.Player
             await UniTask.WaitForSeconds(1);
         }
         
-        protected override async UniTask OnGameFinishSuccess()
+        protected override async UniTask OnPostPlaySuccess()
         {
             await UniTask.WaitForSeconds(2);
             await UniTask.WaitWhile(() => !CanMoveNextCycle);

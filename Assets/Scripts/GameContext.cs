@@ -47,7 +47,7 @@ namespace TSoft
                 currentNode = value;
             }
         }
-
+        
         private void OnCurrentNodeChanged(NodeBlueprint node)
         {
             switch (node.nodeType)

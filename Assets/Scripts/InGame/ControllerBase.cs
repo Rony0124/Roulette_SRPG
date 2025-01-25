@@ -6,12 +6,10 @@ namespace TSoft.InGame
     public abstract class ControllerBase : MonoBehaviour
     {
         //life cycle 동기화 flag
-        protected GameState currentGameState;
         protected StageState currentStageState;
         //director
         protected InGameDirector director;
         
-        public GameState CurrentGameState => currentGameState;
         public StageState CurrentStageState => currentStageState;
         
         public InGameDirector Director
@@ -25,27 +23,6 @@ namespace TSoft.InGame
         }
 
         protected abstract void InitOnDirectorChanged();
-        
-        public async UniTaskVoid OnGameStateChanged(GameState oldVal, GameState newVal)
-        {
-            switch (newVal)
-            {
-                case GameState.Ready:
-                    await OnGameReady();
-                    break;
-                case GameState.Play:
-                    await OnGamePlay();
-                    break;
-                case GameState.FinishSuccess:
-                    await OnGameFinishSuccess();
-                    break;
-                case GameState.FinishFailed:
-                    await OnGameFinishFailed();
-                    break;
-            }
-
-            currentGameState = newVal;
-        }
         
         public async UniTaskVoid OnStageStateChanged(StageState oldVal, StageState newVal)
         {
@@ -75,31 +52,6 @@ namespace TSoft.InGame
 
             currentStageState = newVal;
         }
-
-        #region Game
-
-        protected virtual async UniTask OnGameReady()
-        {
-            await UniTask.CompletedTask;
-        }
-        
-        protected virtual async UniTask OnGamePlay()
-        {
-            await UniTask.CompletedTask;
-        }
-        
-        protected virtual async UniTask OnGameFinishSuccess()
-        {
-            await UniTask.CompletedTask;
-        }
-        
-        protected virtual async UniTask OnGameFinishFailed()
-        {
-            await UniTask.CompletedTask;
-        }
-
-        #endregion
-        
         
         #region Stage
 

@@ -9,22 +9,7 @@ namespace TSoft.InGame
 {
     public class CombatController : ControllerBase
     {
-        /*public struct CycleInfo
-        {
-            public int Round;
-            public int Stage;
-            
-            //TODO TEST!!!!!
-            public bool IsRoundMax => Round >= 3;
-            //public bool IsRoundMax => Round >= 5;
-            
-            public void Reset()
-            {
-                Round = 0;
-                Stage = 0;
-            }
-        }*/
-
+      
         //view
         [SerializeField]
         private BackgroundView bgView;
@@ -87,17 +72,6 @@ namespace TSoft.InGame
         protected override async UniTask OnPrePlay()
         {
             CurrentMonster = monsterData.SpawnMonster(transform, Vector3.zero);
-            
-            await UniTask.WaitForSeconds(1);
-        }
-
-        protected override async UniTask OnGameReady()
-        {
-            await UniTask.WaitForSeconds(1);
-        }
-        
-        protected override async UniTask OnGameFinishSuccess()
-        {
             
             await UniTask.WaitForSeconds(1);
         }

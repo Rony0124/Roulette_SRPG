@@ -14,15 +14,6 @@ namespace TSoft.InGame
         Exit,               // 로비로 돌아간다.
     };
     
-    public enum GameState
-    {
-        None,
-        Ready,
-        Play,
-        FinishSuccess,
-        FinishFailed
-    };
-    
     public enum CardType
     {
         None,
