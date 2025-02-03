@@ -5,6 +5,8 @@ using System.Linq;
 using Sirenix.Utilities;
 using TSoft.Core;
 using TSoft.Data.Registry;
+using TSoft.Data.Skill;
+using TSoft.InGame;
 using UnityEngine;
 
 namespace TSoft
@@ -29,6 +31,13 @@ namespace TSoft
         
         private static readonly string GoldKey = "gold";
         private static readonly string ItemIdKey = "ItemId";
+        
+        //equippedItem
+        private Dictionary<int, Guid> skillEquippedDictionary;
+        private Dictionary<int, Guid> artifactEquippedSet;
+        
+        public Dictionary<int, Guid> SkillEquippedDictionary => skillEquippedDictionary;
+        public Dictionary<int, Guid> ArtifactEquippedSet => artifactEquippedSet;
         
         //map
         private Map.Map mapSaved;
@@ -110,6 +119,25 @@ namespace TSoft
             possessItemIds.Clear();
             
             SaveItemsRaw();
+        }
+
+        #endregion
+
+        #region EquippedItem
+
+        public void SaveEquippedSkill(CardPatternType pattern, Guid skillId)
+        {
+            if (skillEquippedDictionary.ContainsKey((int)pattern))
+            {
+                skillEquippedDictionary[(int)pattern] = skillId;
+            }
+            else
+            {
+                if (!skillEquippedDictionary.TryAdd((int)pattern, skillId))
+                {
+                    Debug.Log("Can not Save Equipped Skill");
+                }
+            }
         }
 
         #endregion
