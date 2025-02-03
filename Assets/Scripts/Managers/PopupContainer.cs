@@ -84,6 +84,11 @@ namespace TSoft.Managers
             order--;
         }
 
+        public PopupView GetCurrentPopup()
+        {
+            return popupStack.Peek();
+        }
+
         public void CloseAllPopupUI()
         {
             while (popupStack.Count > 0)

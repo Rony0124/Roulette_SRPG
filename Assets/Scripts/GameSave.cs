@@ -139,6 +139,16 @@ namespace TSoft
                 }
             }
         }
+        
+        public void SaveUnEquippedSkill(CardPatternType pattern)
+        {
+            if (!skillEquippedDictionary.ContainsKey((int)pattern))
+            {
+                return;
+            }
+
+            skillEquippedDictionary.Remove((int)pattern);
+        }
 
         #endregion
         
@@ -170,6 +180,8 @@ namespace TSoft
             mapSaved = LoadRaw(MapKey, mapSaved);
 
             possessItemIdsSet = !possessItemIds.IsNullOrEmpty() ? new HashSet<Guid>(possessItemIds) : new HashSet<Guid>();
+
+            skillEquippedDictionary = new();
             
             Debug.Log("[GameSave] Load Finished"); 
         }
