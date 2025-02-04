@@ -1,35 +1,27 @@
-using TMPro;
-using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.InGame;
 using TSoft.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
-namespace TSoft.UI.Popup.Inventory
+namespace TSoft.UI.Popup.Inventory.Skill
 {
-    public class SkillEquipmentSlot : MonoBehaviour, IDropHandler
+    public class SkillEquipmentSlot : EquipmentSlot
     {
-        [SerializeField] private Image slotBackgroundImage;
-        [SerializeField] private GameObject iconPrefab;
         [SerializeField] private CardPatternType cardPatternType;
         
-        private SkillSlotItemIcon icon;
-        private ItemSO skillItem;
-        
-        public void UpdateIcon()
+        public override void UpdateIcon()
         {
             if (GameSave.Instance.SkillEquippedDictionary.TryGetValue((int)cardPatternType, out var skillId))
             {
                 if(!icon)
                     icon = Instantiate(iconPrefab, transform).GetComponent<SkillSlotItemIcon>();
                 
-                skillItem = DataRegistry.Instance.SkillRegistry.Get(skillId);
+                item = DataRegistry.Instance.SkillRegistry.Get(skillId);
                 
                 slotBackgroundImage.gameObject.SetActive(true);
                 
-                icon.SetSlotIcon(skillItem);
+                icon.SetSlotIcon(item);
             }
             else
             {
@@ -40,7 +32,7 @@ namespace TSoft.UI.Popup.Inventory
             }
         }
         
-        public void OnDrop(PointerEventData eventData)
+        public override void OnDrop(PointerEventData eventData)
         {
             GameObject dropped = eventData.pointerDrag;
             if (dropped == null)
@@ -59,7 +51,7 @@ namespace TSoft.UI.Popup.Inventory
             //add to gamesave equipped item
             GameSave.Instance.SaveEquippedSkill(cardPatternType, slot.itemData.RegistryId.Guid);
 
-            var skillPopup = PopupContainer.Instance.GetCurrentPopup() as SkillInventoryPopup;
+            var skillPopup = PopupContainer.Instance.GetCurrentPopup() as InventoryPopup;
 
             if (skillPopup != null) 
                 skillPopup.onUpdatePopup?.Invoke();

@@ -1,16 +1,16 @@
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.Utilities;
 using TSoft.Data;
 using TSoft.Data.Registry;
-using UnityEngine;
-using System.Linq;
 using TSoft.InGame;
 using TSoft.Managers;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace TSoft.UI.Popup.Inventory
+namespace TSoft.UI.Popup.Inventory.Skill
 {
-    public class SkillInventoryPanel : MonoBehaviour, IDropHandler
+    public class SkillInventoryPanel : MonoBehaviour, IDropHandler, IInventoryUpdateHandler
     {
         [SerializeField] private Transform scrollContent;
         [SerializeField] private GameObject slotPrefab;
@@ -99,8 +99,7 @@ namespace TSoft.UI.Popup.Inventory
                 GameSave.Instance.SaveUnEquippedSkill(typeKey);
             }
             
-            
-            var skillPopup = PopupContainer.Instance.GetCurrentPopup() as SkillInventoryPopup;
+            var skillPopup = PopupContainer.Instance.GetCurrentPopup() as InventoryPopup;
 
             if (skillPopup != null) 
                 skillPopup.onUpdatePopup?.Invoke();
