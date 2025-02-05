@@ -1,30 +1,20 @@
-using TSoft.Data;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace TSoft.UI.Popup.Inventory
 {
-    public class ItemIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
+    public class JokerInventoryIcon : ItemIcon
     {
-        [SerializeField] protected Image itemIcon;
-        [SerializeField] protected GameObject disableImage;
+        public Action<JokerInventoryIcon> onItemClicked;
+        public Action<JokerInventoryIcon> onItemReleased;
         
-        protected ItemSO currentItem = default;
-        protected bool enableItemPointerAction = true;
-
-        public void SetItemIcon(ItemSO item)
-        {
-            currentItem = item;
-
-            itemIcon.sprite = item.image;
-        }
-
-        public virtual void OnPointerDown(PointerEventData eventData)
+        public override void OnPointerDown(PointerEventData eventData)
         {
         }
 
-        public virtual void OnPointerUp(PointerEventData eventData)
+        public override void OnPointerUp(PointerEventData eventData)
         {
             if (eventData.dragging)
                 return;
@@ -43,15 +33,18 @@ namespace TSoft.UI.Popup.Inventory
                 {
                     Debug.Log("아이템 스펙 설명");
                 }
+                
+                onItemClicked?.Invoke(this);
             }
         }
 
-        public virtual void OnPointerEnter(PointerEventData eventData)
+        public override void OnPointerEnter(PointerEventData eventData)
         {
         }
 
-        public virtual void OnPointerExit(PointerEventData eventData)
+        public override void OnPointerExit(PointerEventData eventData)
         {
+            onItemReleased?.Invoke(this);
         }
     }
 }

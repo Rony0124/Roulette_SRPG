@@ -1,8 +1,7 @@
-using TSoft;
-using TSoft.UI.Popup.Inventory;
+using UI.Popup.Inventory;
 using UnityEngine;
 
-namespace UI.Popup.Inventory
+namespace TSoft.UI.Popup.Inventory.Artifact
 {
     public class ArtifactEquipmentPanel : EquipmentPanel
     {

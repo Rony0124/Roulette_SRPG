@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TSoft.Data;
 using TSoft.Data.Registry;
+using TSoft.Managers;
 using TSoft.UI.Core;
 using TSoft.UI.Popup;
 using TSoft.UI.Popup.StoreElement;
@@ -24,7 +25,10 @@ namespace TSoft.UI.Views.Store
         
         private enum StoreButton
         {
-            BackButton
+            BackButton,
+            SkillButton,
+            JokerButton,
+            ArtifactButton
         }
 
         [SerializeField] 
@@ -38,6 +42,9 @@ namespace TSoft.UI.Views.Store
         private Transform jokerDisplayParent;
         private Transform skillDisplayParent;
         private Button backButton;
+        private Button skillButton;
+        private Button jokerButton;
+        private Button artifactButton;
 
         private StoreItem currentStoreItem;
         private List<StoreItem> items;
@@ -54,8 +61,16 @@ namespace TSoft.UI.Views.Store
             artifactDisplayParent = Get<Transform>((int)TransformParent.Artifact);
             jokerDisplayParent = Get<Transform>((int)TransformParent.Joker);
             skillDisplayParent = Get<Transform>((int)TransformParent.Skill);
+
+            backButton = Get<Button>((int)StoreButton.BackButton);
+            skillButton = Get<Button>((int)StoreButton.SkillButton);
+            jokerButton = Get<Button>((int)StoreButton.JokerButton);
+            artifactButton = Get<Button>((int)StoreButton.ArtifactButton);
             
-            Get<Button>((int)StoreButton.BackButton).onClick.AddListener(OnExitClicked);
+            backButton.onClick.AddListener(OnExitClicked);
+            skillButton.onClick.AddListener(OnSkillClicked);
+            jokerButton.onClick.AddListener(OnJokerClicked);
+            artifactButton.onClick.AddListener(OnArtifactClicked);
         }
 
         protected override void OnActivated()
@@ -118,7 +133,6 @@ namespace TSoft.UI.Views.Store
                 storeItem.onSelect = () =>
                 {
                     OnSelect(storeItem);
-                    currentStoreItem = storeItem;
                 };
 
                 storeItem.onBuyClicked = OnBuyClicked;
@@ -134,6 +148,8 @@ namespace TSoft.UI.Views.Store
             {
                 currentStoreItem.OnDeselect();
             }
+            
+            currentStoreItem = item;
 
             item.OnSelect();
         }
@@ -161,7 +177,16 @@ namespace TSoft.UI.Views.Store
         
         private void OnExitClicked()
         {
-            SceneManager.LoadScene(Define.StageMap);
+            if (PopupContainer.Instance.GetCurrentPopup() != null)
+            {
+                PopupContainer.Instance.ClosePopupUI();
+                
+                ShowInventoryButtons();
+            }
+            else
+            {
+                SceneManager.LoadScene(Define.StageMap);    
+            }
         }
         
         private List<int> GetUniqueNumbers(int count)
@@ -180,6 +205,48 @@ namespace TSoft.UI.Views.Store
             }
 
             return uniqueNumbers.ToList();
+        }
+        
+        private void OnSkillClicked()
+        {
+            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Skill);
+
+            HideInventoryButtons();
+        }
+        
+        private void OnJokerClicked()
+        {
+            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Joker);
+            
+            HideInventoryButtons();
+        }
+        
+        private void OnArtifactClicked()
+        {
+            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Artifact);
+            
+            HideInventoryButtons();
+        }
+
+        private void HideInventoryButtons()
+        {
+            jokerButton.gameObject.SetActive(false);
+            skillButton.gameObject.SetActive(false);
+            artifactButton.gameObject.SetActive(false);
+            
+            if (currentStoreItem)
+            {
+                currentStoreItem.OnDeselect();
+            }
+
+            currentStoreItem = null;
+        }
+
+        private void ShowInventoryButtons()
+        {
+            jokerButton.gameObject.SetActive(true);
+            skillButton.gameObject.SetActive(true);
+            artifactButton.gameObject.SetActive(true);
         }
     }
 }

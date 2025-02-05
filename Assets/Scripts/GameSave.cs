@@ -207,6 +207,7 @@ namespace TSoft
             possessItemIdsSet = !possessItemIds.IsNullOrEmpty() ? new HashSet<Guid>(possessItemIds) : new HashSet<Guid>();
 
             skillEquippedDictionary = new();
+            artifactEquippedSet = new();
             
             Debug.Log("[GameSave] Load Finished"); 
         }

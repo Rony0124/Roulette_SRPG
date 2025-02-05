@@ -1,16 +1,14 @@
-using TSoft;
 using TSoft.Data.Registry;
 using TSoft.Managers;
-using TSoft.UI.Popup.Inventory;
 using UI.Popup.Inventory.Skill;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UI.Popup.Inventory
+namespace TSoft.UI.Popup.Inventory.Artifact
 {
     public class ArtifactEquipmentSlot : EquipmentSlot
     {
-        private int currentIndex;
+        [SerializeField] private int currentIndex;
         public override void UpdateIcon()
         {
             currentIndex = transform.GetSiblingIndex() - 1;
