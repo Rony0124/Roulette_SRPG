@@ -1,12 +1,12 @@
 using TSoft.Data;
-using TSoft.Managers;
+using TSoft.UI.Popup.Inventory;
 using UnityEngine;
 
-namespace TSoft.UI.Popup.Inventory
+namespace UI.Popup.Inventory.Skill
 {
-    public class SkillSlotItemIcon : DraggableItem
+    public class SlotItemIcon : DraggableItem
     {
-        public SkillItemIcon itemIcon;
+        public ItemIcon itemIcon;
 
         [HideInInspector]
         public ItemSO itemData;

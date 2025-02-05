@@ -5,6 +5,7 @@ using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.InGame;
 using TSoft.Managers;
+using UI.Popup.Inventory.Skill;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,7 +19,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
         [Header("test")] 
         [SerializeField] private List<DataRegistryIdSO> testIds;
         
-        private List<SkillInventoryItemSlot> inventoryItemSlots = new();
+        private List<InventoryItemSlot> inventoryItemSlots = new();
         
         public void UpdateSlots()
         {
@@ -44,7 +45,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
                     }
                  
                     var skill = DataRegistry.Instance.SkillRegistry.Get(skillId.Guid);
-                    var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<SkillInventoryItemSlot>();
+                    var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
                     
                     slot.InitSlot(skill);
                     inventoryItemSlots.Add(slot);
@@ -61,7 +62,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
                     }
                     
                     var skill = DataRegistry.Instance.SkillRegistry.Get(id.Guid);
-                    var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<SkillInventoryItemSlot>();
+                    var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
                     slot.InitSlot(skill);
                     inventoryItemSlots.Add(slot);
                 }
@@ -77,7 +78,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
                 return;
             }
             
-            var slot = dropped.GetComponent<SkillSlotItemIcon>();
+            var slot = dropped.GetComponent<SlotItemIcon>();
             if (slot == null) 
             {
                 Debug.Log("slot is null");
@@ -99,10 +100,10 @@ namespace TSoft.UI.Popup.Inventory.Skill
                 GameSave.Instance.SaveUnEquippedSkill(typeKey);
             }
             
-            var skillPopup = PopupContainer.Instance.GetCurrentPopup() as InventoryPopup;
+            var popup = PopupContainer.Instance.GetCurrentPopup() as InventoryPopup;
 
-            if (skillPopup != null) 
-                skillPopup.onUpdatePopup?.Invoke();
+            if (popup != null) 
+                popup.onUpdatePopup?.Invoke();
         }
     }
 }

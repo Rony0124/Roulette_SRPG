@@ -140,6 +140,21 @@ namespace TSoft
             }
         }
         
+        public void SaveEquippedArtifact(int index, Guid id)
+        {
+            if (artifactEquippedSet.ContainsKey(index))
+            {
+                artifactEquippedSet[index] = id;
+            }
+            else
+            {
+                if (!artifactEquippedSet.TryAdd(index, id))
+                {
+                    Debug.Log("Can not Save Equipped Skill");
+                }
+            }
+        }
+        
         public void SaveUnEquippedSkill(CardPatternType pattern)
         {
             if (!skillEquippedDictionary.ContainsKey((int)pattern))
@@ -148,6 +163,16 @@ namespace TSoft
             }
 
             skillEquippedDictionary.Remove((int)pattern);
+        }
+        
+        public void SaveUnEquippedArtifact(int index)
+        {
+            if (!artifactEquippedSet.ContainsKey(index))
+            {
+                return;
+            }
+
+            artifactEquippedSet.Remove(index);
         }
 
         #endregion

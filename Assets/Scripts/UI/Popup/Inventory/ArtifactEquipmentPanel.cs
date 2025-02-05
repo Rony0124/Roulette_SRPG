@@ -1,21 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
+using TSoft;
+using TSoft.UI.Popup.Inventory;
 using UnityEngine;
 
-namespace TSoft
+namespace UI.Popup.Inventory
 {
-    public class ArtifactEquipmentPanel : MonoBehaviour
+    public class ArtifactEquipmentPanel : EquipmentPanel
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
+        [SerializeField] private GameObject equipSlotPrefab;
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        private const int DefaultSlotNumber = 5;
     }
 }

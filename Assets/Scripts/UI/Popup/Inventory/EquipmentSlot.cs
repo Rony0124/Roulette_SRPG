@@ -1,5 +1,6 @@
 using TSoft.Data;
 using TSoft.Managers;
+using UI.Popup.Inventory.Skill;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,13 +12,13 @@ namespace TSoft.UI.Popup.Inventory
         [SerializeField] protected Image slotBackgroundImage;
         [SerializeField] protected GameObject iconPrefab;
         
-        protected SkillSlotItemIcon icon;
+        protected SlotItemIcon icon;
         protected ItemSO item;
         
         public virtual void UpdateIcon()
         {
             if(!icon)
-                icon = Instantiate(iconPrefab, transform).GetComponent<SkillSlotItemIcon>();
+                icon = Instantiate(iconPrefab, transform).GetComponent<SlotItemIcon>();
         }
         
         public virtual void OnDrop(PointerEventData eventData)
@@ -29,7 +30,7 @@ namespace TSoft.UI.Popup.Inventory
                 return;
             }
             
-            var slot = dropped.GetComponent<SkillSlotItemIcon>();
+            var slot = dropped.GetComponent<SlotItemIcon>();
             if (slot == null) 
             {
                 Debug.Log("slot is null");

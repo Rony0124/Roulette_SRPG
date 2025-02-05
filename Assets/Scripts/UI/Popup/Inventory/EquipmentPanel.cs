@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using TSoft.UI.Popup.Inventory;
 using UnityEngine;
 
-namespace TSoft.UI.Popup.Inventory
+namespace UI.Popup.Inventory
 {
     public class EquipmentPanel : MonoBehaviour, IInventoryUpdateHandler
     {
-        [SerializeField] private List<EquipmentSlot> eqSlots;
+        [SerializeField] protected List<EquipmentSlot> eqSlots;
         
         public virtual void UpdateSlots()
         {
