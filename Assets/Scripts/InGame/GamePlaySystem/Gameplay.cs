@@ -16,12 +16,12 @@ namespace TSoft.InGame.GamePlaySystem
         {
             foreach (var effect in appliedEffects_Passive)
             {
-                await effect.sourceEffect.ApplyEffect(GameplayPolicyType.Passive);
+                await effect.ApplyEffect(GameplayPolicyType.Passive);
             }
             
             foreach (var effect in appliedEffects_OnRoundBegin)
             {
-                await effect.sourceEffect.ApplyEffect(GameplayPolicyType.OnRoundBegin);
+                await effect.ApplyEffect(GameplayPolicyType.OnRoundBegin);
             }
         }
         
@@ -29,7 +29,7 @@ namespace TSoft.InGame.GamePlaySystem
         {
             foreach (var effect in appliedEffects_OnRoundFinished)
             {
-                await effect.sourceEffect.ApplyEffect(GameplayPolicyType.OnRoundFinished);
+                await effect.ApplyEffect(GameplayPolicyType.OnRoundFinished);
             }
         }
         
@@ -37,7 +37,7 @@ namespace TSoft.InGame.GamePlaySystem
         {
             foreach (var effect in appliedEffects_OnTurnBegin)
             {
-                await effect.sourceEffect.ApplyEffect(GameplayPolicyType.OnTurnBegin);
+                await effect.ApplyEffect(GameplayPolicyType.OnTurnBegin);
             }
         }
         
@@ -45,7 +45,7 @@ namespace TSoft.InGame.GamePlaySystem
         {
             foreach (var effect in appliedEffects_OnTurnFinished)
             {
-                await effect.sourceEffect.ApplyEffect(GameplayPolicyType.OnTurnFinished);
+                await effect.ApplyEffect(GameplayPolicyType.OnTurnFinished);
             }
         }
     }

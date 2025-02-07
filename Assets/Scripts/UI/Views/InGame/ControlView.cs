@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using TSoft.InGame;
 using TSoft.UI.Core;
 using TSoft.Utils;
@@ -39,7 +40,7 @@ namespace TSoft.UI.Views.InGame
             Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));
             
             Get<Button>((int)ControlButton.ButtonDiscard).gameObject.BindEvent(OnDiscardCard);
-            Get<Button>((int)ControlButton.ButtonUse).gameObject.BindEvent(OnUseCard);
+            Get<Button>((int)ControlButton.ButtonUse).onClick.AddListener(() => OnUseCard().Forget());
 
             txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
             txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
@@ -85,9 +86,10 @@ namespace TSoft.UI.Views.InGame
             player.DrawCards();
         }
 
-        private void OnUseCard(PointerEventData data)
+        private async UniTaskVoid OnUseCard()
         {
-            if (!player.TryUseCardsOnHand()) 
+            var result = await player.TryUseCardsOnHand();
+            if (!result)
                 return;
             
             player.DrawCards();

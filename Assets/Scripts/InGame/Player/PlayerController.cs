@@ -32,6 +32,8 @@ namespace TSoft.InGame.Player
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
         
+        public List<PokerCard> CurrentPokerCardSelected => currentPokerCardSelected;
+        
         private Queue<CustomEffect> customEffects_joker;
         
         public bool CanMoveNextCycle { get; set; }
@@ -63,12 +65,16 @@ namespace TSoft.InGame.Player
             InitializeDeck();
             InitPattern();
             onGameReady?.Invoke();
+
+            await gameplay.OnRoundBegin();
             
             await UniTask.WaitForSeconds(1);
         }
         
         protected override async UniTask OnPostPlaySuccess()
         {
+            await gameplay.OnRoundFinished();
+            
             await UniTask.WaitForSeconds(2);
             await UniTask.WaitWhile(() => !CanMoveNextCycle);
             
@@ -103,7 +109,8 @@ namespace TSoft.InGame.Player
             }
         }
         
-        public bool TryUseCardsOnHand()
+        //TODO : refactoring
+        public async UniTask<bool> TryUseCardsOnHand()
         {
             var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
             if (currentHeart <= 0)
@@ -117,7 +124,9 @@ namespace TSoft.InGame.Player
             --currentHeart;
             gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
             
-            //기본 데미지 적용
+            await gameplay.OnTurnBegin();
+            
+            /*//기본 데미지 적용
             CurrentDmg = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
             
             //카드 패턴에 의한 데미지 추가
@@ -132,7 +141,7 @@ namespace TSoft.InGame.Player
             }
             
             //스킬 실행 및 적용
-            CurrentDmg *= currentDamageModifier;
+            CurrentDmg *= currentDamageModifier;*/
             
             currentPattern.skill.PlaySkill(this, director.CurrentMonster);
             
@@ -145,6 +154,8 @@ namespace TSoft.InGame.Player
             }
 
             currentPokerCardSelected.Clear();
+            
+            await gameplay.OnTurnFinished();
             
             if (director.CurrentMonster.IsDead)
             {

@@ -57,7 +57,7 @@ namespace TSoft.InGame.Player
 
         public void ApplyAbility(GameplayEffectSO so)
         {
-            gameplay.AddEffectSelf(so);
+            gameplay.AddEffect(so);
         }
     }
 }
