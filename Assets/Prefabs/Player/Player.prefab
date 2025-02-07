@@ -166,6 +166,8 @@ MonoBehaviour:
     value: 8
   - attrType: 2000
     value: 10
+  - attrType: 2001
+    value: 0
   Attributes: []
   defaultEffects: []
 --- !u!114 &1047355927819672411

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using TSoft.InGame.GamePlaySystem;
-using TSoft.InGame.Player;
+using Cysharp.Threading.Tasks;
 
 namespace TSoft.InGame.CardSystem.CE
 {
@@ -12,7 +11,12 @@ namespace TSoft.InGame.CardSystem.CE
             await UniTask.CompletedTask;
         }
         
-        public virtual async UniTask ApplyEffect(InGameDirector director, List<AppliedModifier> modifiers)
+        public virtual async UniTask ApplyEffect(InGameDirector director, GameplayEffectSO sourceEffect)
+        {
+            await UniTask.CompletedTask;
+        }
+        
+        public virtual async UniTask UndoEffect(InGameDirector director, GameplayEffectSO sourceEffect)
         {
             await UniTask.CompletedTask;
         }

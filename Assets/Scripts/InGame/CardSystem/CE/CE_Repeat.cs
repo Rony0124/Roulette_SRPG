@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using TSoft.InGame.Player;
 using UnityEngine;
 
 namespace TSoft.InGame.CardSystem.CE

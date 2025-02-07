@@ -299,14 +299,14 @@ namespace TSoft.InGame.Player
 #if UNITY_EDITOR
         void OnGUI()
         {
-            var count = gameplay.Attributes.Count;
+            var count = gameplay.attributes.Count;
             Rect rc = new Rect(400, 300, 400, 20);
             GUI.Label(rc, $"Player Attribute");
             rc.y += 25;
         
             for (var i = 0; i < count; i++)
             {
-                GUI.Label(rc, $"{gameplay.Attributes[i].attrType} : {gameplay.Attributes[i].value.CurrentValue.Value}");
+                GUI.Label(rc, $"{gameplay.attributes[i].attrType} : {gameplay.attributes[i].value.CurrentValue.Value}");
                 rc.y += 25;
             }
         }

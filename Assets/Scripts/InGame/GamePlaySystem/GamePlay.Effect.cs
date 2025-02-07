@@ -45,21 +45,40 @@ namespace TSoft.InGame.GamePlaySystem
                 sourceEffect = effect
             };
 
-            switch (effect.duration.policy)
+            switch (effect.lifeCycle.begin)
             {
-                case GameplayDuration.PolicyType.Passive:
+                case GameplayPolicyType.Passive:
                     appliedEffects_Passive.Add(appliedEffect);
                     break;
-                case GameplayDuration.PolicyType.OnRoundBegin:
+                case GameplayPolicyType.OnRoundBegin:
                     appliedEffects_OnRoundBegin.Add(appliedEffect);
                     break;
-                case GameplayDuration.PolicyType.OnRoundFinished:
+                case GameplayPolicyType.OnRoundFinished:
                     appliedEffects_OnRoundFinished.Add(appliedEffect);
                     break;
-                case GameplayDuration.PolicyType.OnTurnBegin:
+                case GameplayPolicyType.OnTurnBegin:
                     appliedEffects_OnTurnBegin.Add(appliedEffect);
                     break;
-                case GameplayDuration.PolicyType.OnTurnFinished:
+                case GameplayPolicyType.OnTurnFinished:
+                    appliedEffects_OnTurnFinished.Add(appliedEffect);
+                    break;
+            }
+            
+            switch (effect.lifeCycle.end)
+            {
+                case GameplayPolicyType.Passive:
+                    appliedEffects_Passive.Add(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnRoundBegin:
+                    appliedEffects_OnRoundBegin.Add(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnRoundFinished:
+                    appliedEffects_OnRoundFinished.Add(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnTurnBegin:
+                    appliedEffects_OnTurnBegin.Add(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnTurnFinished:
                     appliedEffects_OnTurnFinished.Add(appliedEffect);
                     break;
             }

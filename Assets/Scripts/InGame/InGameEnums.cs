@@ -67,4 +67,14 @@ namespace TSoft.InGame
         BasicAttackPower = 2000,
         SkillAttackPower = 2001
     }
+    
+    public enum GameplayPolicyType
+    {
+        None,
+        Passive,
+        OnRoundBegin,
+        OnRoundFinished,
+        OnTurnBegin,
+        OnTurnFinished
+    }
 }

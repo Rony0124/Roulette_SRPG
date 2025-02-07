@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using TSoft.Utils;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TSoft.InGame.GamePlaySystem
 {
@@ -10,11 +11,13 @@ namespace TSoft.InGame.GamePlaySystem
         [TableList]
         public List<DefaultGamePlayAttribute> defaultAttributes;
         
-        public List<AttributeState> Attributes;
+        public List<AttributeState> attributes;
+        [HideInInspector] 
+        public List<AppliedModifier> attrAppliedModifiers;
         
         private void InitializeAttributes()
         {
-            Attributes = new();
+            attributes = new();
             
             foreach (var defaultAttribute in defaultAttributes)
             {
@@ -33,7 +36,7 @@ namespace TSoft.InGame.GamePlaySystem
                 GameplayAttributeModifier modifier = default;
                 modifier.SetDefault();
                 
-                Attributes.Add(new AttributeState
+                attributes.Add(new AttributeState
                 {
                     attrType = defaultAttribute.attrType,
                     value = value,
@@ -46,22 +49,19 @@ namespace TSoft.InGame.GamePlaySystem
         {
             ClearModifiers();
             
-            /*foreach(var appliedEffect in appliedEffects)
+            foreach(var appliedModifier in attrAppliedModifiers)
             {
-                if (appliedEffect.appliedModifiers == null) 
+                if (appliedModifier.attrType == GameplayAttr.None) 
                     continue;
                 
-                foreach (var appliedModifiers in appliedEffect.appliedModifiers)
-                {
-                    CombineModifier(appliedModifiers.attrType, appliedModifiers.modifier);
-                }
-            }*/
-                
-            for (int i = 0; i < Attributes.Count; ++i)
+                CombineModifier(appliedModifier.attrType, appliedModifier.modifier);
+            }
+            
+            for (int i = 0; i < attributes.Count; ++i)
             {
-                var state = Attributes[i];
+                var state = attributes[i];
                 state.value.UpdateCurrent(state.modifier);
-                Attributes[i] = state;
+                attributes[i] = state;
             }
             
             PostUpdateAttributes();
@@ -95,7 +95,7 @@ namespace TSoft.InGame.GamePlaySystem
             if(!TryGetAttrIndex(attribute, out var index))
                 return 0.0f;
             
-            return current ? Attributes[index].value.CurrentValue.Value : Attributes[index].value.BaseValue.Value;
+            return current ? attributes[index].value.CurrentValue.Value : attributes[index].value.BaseValue.Value;
         }
         
         public ObservableVar<float> GetAttrVar(GameplayAttr attribute, bool current = true)
@@ -103,7 +103,7 @@ namespace TSoft.InGame.GamePlaySystem
             if(!TryGetAttrIndex(attribute, out var index))
                 return null;
             
-            return current ? Attributes[index].value.CurrentValue : Attributes[index].value.BaseValue;
+            return current ? attributes[index].value.CurrentValue : attributes[index].value.BaseValue;
         }
         
         public bool TryGetAttr(GameplayAttr attribute, out float value, bool current = true)
@@ -114,7 +114,7 @@ namespace TSoft.InGame.GamePlaySystem
                 return false;
             }
             
-            value = current ? Attributes[index].value.CurrentValue.Value : Attributes[index].value.BaseValue.Value;
+            value = current ? attributes[index].value.CurrentValue.Value : attributes[index].value.BaseValue.Value;
             return true;
         }
         
@@ -123,23 +123,23 @@ namespace TSoft.InGame.GamePlaySystem
             if (!TryGetAttrIndex(attribute, out var index))
                 return;
 
-            var state = Attributes[index];
+            var state = attributes[index];
             
             if(current)
                 state.value.CurrentValue.Value = value;
             else
                 state.value.BaseValue.Value = value;
             
-            Attributes[index] = state;
+            attributes[index] = state;
         }
         
         private void ClearModifiers()
         {
-            for(int i = 0; i < Attributes.Count; ++i)
+            for(int i = 0; i < attributes.Count; ++i)
             {
-                var state = Attributes[i];
+                var state = attributes[i];
                 state.modifier.SetDefault();
-                Attributes[i] = state;
+                attributes[i] = state;
             }
         }
 
@@ -148,9 +148,9 @@ namespace TSoft.InGame.GamePlaySystem
             if (!TryGetAttrIndex(attribute, out var index))
                 return;
 
-            var state = Attributes[index];
+            var state = attributes[index];
             state.modifier.SetDefault();
-            Attributes[index] = state;
+            attributes[index] = state;
         }
         
         public void CombineModifier(GameplayAttr attribute, GameplayAttributeModifier modifier)
@@ -158,16 +158,16 @@ namespace TSoft.InGame.GamePlaySystem
             if (!TryGetAttrIndex(attribute, out var index))
                 return;
             
-            var state = Attributes[index];
+            var state = attributes[index];
             state.modifier.Combine(modifier);
-            Attributes[index] = state;
+            attributes[index] = state;
         }
         
         public bool TryGetAttrIndex(GameplayAttr attribute, out int index)
         {
-            for (int i = 0; i < Attributes.Count; ++i)
+            for (int i = 0; i < attributes.Count; ++i)
             {
-                if (Attributes[i].attrType == attribute)
+                if (attributes[i].attrType == attribute)
                 {
                     index = i;
                     return true;
