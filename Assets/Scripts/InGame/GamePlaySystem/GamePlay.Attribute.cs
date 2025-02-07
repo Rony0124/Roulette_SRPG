@@ -46,18 +46,16 @@ namespace TSoft.InGame.GamePlaySystem
         {
             ClearModifiers();
             
-            foreach(var appliedEffect in appliedEffects)
+            /*foreach(var appliedEffect in appliedEffects)
             {
                 if (appliedEffect.appliedModifiers == null) 
                     continue;
-                
-                Debug.Log("[test attr]" + appliedEffect.sourceEffect);
                 
                 foreach (var appliedModifiers in appliedEffect.appliedModifiers)
                 {
                     CombineModifier(appliedModifiers.attrType, appliedModifiers.modifier);
                 }
-            }
+            }*/
                 
             for (int i = 0; i < Attributes.Count; ++i)
             {

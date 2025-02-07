@@ -6,13 +6,11 @@ namespace TSoft.InGame.CardSystem.CE
 {
     public class CE_Repeat : CustomEffect
     {
-        public override void ApplyEffect(PlayerController player, MonsterController monster)
+        public override async UniTask ApplyEffect(InGameDirector director)
         {
-            Repeat(player, monster).Forget();
-        }
-
-        private async UniTaskVoid Repeat(PlayerController player, MonsterController monster)
-        {
+            var player = director.Player;
+            var monster = director.CurrentMonster;
+            
             await UniTask.WaitForSeconds(0.3f);
             
             if (player.particleDictionary.TryGetValue(player.CurrentPattern.PatternType, out var particleSystem))

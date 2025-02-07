@@ -29,13 +29,6 @@ namespace TSoft.InGame
         Instant,
         PostApply
     }
-    
-    [Flags]
-    public enum TargetFlag
-    {
-        Self = 1 << 0,
-        Monster = 1 << 1,
-    }
 
     public enum CardPatternType
     {
@@ -57,6 +50,7 @@ namespace TSoft.InGame
         Multiply,
         Divide,
         Override,
+        Repeater
     }
     
     public enum GameplayAttr
@@ -71,5 +65,6 @@ namespace TSoft.InGame
         MaxCapacity = 1005,
         
         BasicAttackPower = 2000,
+        SkillAttackPower = 2001
     }
 }

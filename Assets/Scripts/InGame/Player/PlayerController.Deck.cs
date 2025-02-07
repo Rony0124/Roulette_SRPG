@@ -84,19 +84,11 @@ namespace TSoft.InGame.Player
         public void Shuffle(List<CardSO> cards)
         {
             cards.ShuffleList();
-      
-            //test 가장 마지막에 올린다
-            foreach (var card in specialCardDB)
-            {
-                cardsOnDeck.Enqueue(card);
-            }
 
             foreach (var card in cards)
             {
                 cardsOnDeck.Enqueue(card);
             }
-            
-            //  cardsOnDeck = new Queue<CardSO>(cards);
         }
 
         public void ShuffleCurrent()

@@ -1,4 +1,6 @@
-using Sirenix.OdinInspector;
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using TSoft.InGame.CardSystem.CE;
 using UnityEngine;
 
 namespace TSoft.InGame.GamePlaySystem
@@ -8,15 +10,54 @@ namespace TSoft.InGame.GamePlaySystem
     {
         [Header("Modifiers")]
         public GameplayDuration duration;
-        
-        [HideIf("@duration.policy", GameplayDuration.PolicyType.Instant)]
-        [Tooltip("이팩트가 반복해서 적용되는 주기(초)입니다. 0으로 설정하면 주기적으로 실행되지 않습니다.")]
-        public float period;
 
-        [HideIf("@duration.policy", GameplayDuration.PolicyType.Instant)]
-        [Tooltip("이팩트를 적용할때마다 Modifier의 값들을 다시 캡쳐합니다.")]
-        public bool dynamic;
-        
+        public CustomEffect effect;
         public GameplayEffectModifier[] modifiers;
+
+        public async UniTask ApplyEffect()
+        {
+            List<AppliedModifier> appliedModifiers = new();
+            for (int i = 0; i < modifiers.Length; ++i)
+            {
+                var modifier = modifiers[i];
+
+                float magnitude = modifier.magnitude;
+
+                AppliedModifier appliedModifier = new()
+                {
+                    attrType = modifier.attrType
+                };
+                
+                appliedModifier.modifier.SetDefault();
+
+                switch (modifier.modifierOp)
+                {
+                    case ModifierOpType.Add:
+                        appliedModifier.modifier.Add = magnitude;
+                        break;
+                    case ModifierOpType.Multiply:
+                        appliedModifier.modifier.Multiply = magnitude;
+                        break;
+                    case ModifierOpType.Divide:
+                        if (magnitude != 0.0f)
+                            appliedModifier.modifier.Multiply = 1.0f / magnitude;
+                        break;
+                    case ModifierOpType.Override:
+                        appliedModifier.modifier.Override = magnitude;
+                        break;
+                    case ModifierOpType.Repeater:
+                        appliedModifier.modifier.Repeater = magnitude;
+                        break;
+                }
+                
+                appliedModifiers.Add(appliedModifier);
+            }
+            
+            var inGameDirector = GameContext.Instance.CurrentDirector as InGameDirector;
+            if (inGameDirector)
+            {
+                await effect.ApplyEffect(inGameDirector, appliedModifiers);
+            }
+        }
     }
 }

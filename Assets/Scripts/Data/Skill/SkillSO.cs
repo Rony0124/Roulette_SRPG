@@ -40,7 +40,7 @@ namespace TSoft.Data.Skill
             if (effect is not null)
             {
                 //스킬 추과 효과 존재하면 적용
-                effect.ApplyEffect(player, monster);
+               // effect.ApplyEffect();
             }
             
             //파티클 시스템 가져오기

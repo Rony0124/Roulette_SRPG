@@ -128,7 +128,7 @@ namespace TSoft.InGame.Player
             while (customEffects_joker.Count > 0)
             {
                 var ce = customEffects_joker.Dequeue();
-                ce.ApplyEffect(this, director.CurrentMonster);
+               // ce.ApplyEffect();
             }
             
             //스킬 실행 및 적용
@@ -241,7 +241,7 @@ namespace TSoft.InGame.Player
             pokerCard.transform.localScale = Vector3.one;
 
             ArrangeHand(animationSpeed);
-            StartCoroutine((IEnumerator)ListenCardEvents(pokerCard));
+            StartCoroutine(ListenCardEvents(pokerCard));
         }
 
         private void ArrangeHand(float duration)

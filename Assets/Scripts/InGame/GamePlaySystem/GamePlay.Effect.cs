@@ -11,158 +11,63 @@ namespace TSoft.InGame.GamePlaySystem
     public partial class Gameplay
     {
         [Serializable]
-        public struct DefaultEffect
-        {
-            public GameplayEffectSO effect;
-        }
-        
         public class AppliedGameplayEffect
         {
-            public Gameplay source;
             public GameplayEffectSO sourceEffect;
-            public AppliedAttributeModifier[] appliedModifiers;
-            
-            public float duration;
-            
-            ~AppliedGameplayEffect()
-            {
-                if (appliedModifiers != null)
-                    ArrayPool<AppliedAttributeModifier>.Shared.Return(appliedModifiers);
-            }
-            
-            public void CaptureModifier(Gameplay target)
-            {
-                if (appliedModifiers == null && sourceEffect.modifiers.Length > 0)
-                    appliedModifiers = ArrayPool<AppliedAttributeModifier>.Shared.Rent(sourceEffect.modifiers.Length);
-
-                for (int i = 0; i < sourceEffect.modifiers.Length; ++i)
-                {
-                    var modifier = sourceEffect.modifiers[i];
-
-                    float magnitude = modifier.magnitude;
-
-                    ref AppliedAttributeModifier appliedModifier = ref appliedModifiers[i];
-                    appliedModifier.attrType = modifier.attrType;
-                    appliedModifier.modifier.SetDefault();
-
-                    switch (modifier.modifierOp)
-                    {
-                        case ModifierOpType.Add:
-                            appliedModifier.modifier.Add = magnitude;
-                            break;
-                        case ModifierOpType.Multiply:
-                            appliedModifier.modifier.Multiply = magnitude;
-                            break;
-                        case ModifierOpType.Divide:
-                            if (magnitude != 0.0f)
-                                appliedModifier.modifier.Multiply = 1.0f / magnitude;
-                            break;
-                        case ModifierOpType.Override:
-                            appliedModifier.modifier.Override = magnitude;
-                            break;
-                    }
-                }
-            }
         }
         
-        public List<DefaultEffect> defaultEffects;
-        [HideInInspector] 
-        public List<AppliedGameplayEffect> appliedEffects;
+        public List<AppliedGameplayEffect> defaultEffects;
+        
+        public HashSet<AppliedGameplayEffect> appliedEffects_Passive;
+        public HashSet<AppliedGameplayEffect> appliedEffects_OnRoundBegin;
+        public HashSet<AppliedGameplayEffect> appliedEffects_OnRoundFinished;
+        public HashSet<AppliedGameplayEffect> appliedEffects_OnTurnBegin;
+        public HashSet<AppliedGameplayEffect> appliedEffects_OnTurnFinished;
         
         private void InitializeEffect()
         {
-            appliedEffects = new List<AppliedGameplayEffect>();
+            appliedEffects_Passive = new HashSet<AppliedGameplayEffect>();
+            appliedEffects_OnRoundBegin = new HashSet<AppliedGameplayEffect>();
+            appliedEffects_OnRoundFinished = new HashSet<AppliedGameplayEffect>();
+            appliedEffects_OnTurnBegin = new HashSet<AppliedGameplayEffect>();
+            appliedEffects_OnTurnFinished = new HashSet<AppliedGameplayEffect>();
             
             foreach (var defaultEffect in defaultEffects)
             {
-                ApplyEffect(defaultEffect.effect, this);
+                AddEffect(defaultEffect.sourceEffect);
             }
         }
 
-        public void ApplyEffect(GameplayEffectSO effect, Gameplay source)
+        public void AddEffect(GameplayEffectSO effect)
         {
             var appliedEffect = new AppliedGameplayEffect
             {
-                source = source,
                 sourceEffect = effect
             };
 
-            if (effect.duration.policy == GameplayDuration.PolicyType.HasDuration)
+            switch (effect.duration.policy)
             {
-                appliedEffect.duration = effect.duration.magnitude;
-            }
-            
-            appliedEffect.CaptureModifier(this);
-            
-            if (effect.duration.policy == GameplayDuration.PolicyType.Instant)
-            {
-                ApplyInstantGameplayEffect(appliedEffect);
-            }
-            else if(effect.duration.policy == GameplayDuration.PolicyType.HasDuration)
-            {
-                ApplyDurationalGameplayEffect(appliedEffect).Forget();
-            }
-            else
-            {
-                ApplyInfiniteGameplayEffect(appliedEffect);
+                case GameplayDuration.PolicyType.Passive:
+                    appliedEffects_Passive.Add(appliedEffect);
+                    break;
+                case GameplayDuration.PolicyType.OnRoundBegin:
+                    appliedEffects_OnRoundBegin.Add(appliedEffect);
+                    break;
+                case GameplayDuration.PolicyType.OnRoundFinished:
+                    appliedEffects_OnRoundFinished.Add(appliedEffect);
+                    break;
+                case GameplayDuration.PolicyType.OnTurnBegin:
+                    appliedEffects_OnTurnBegin.Add(appliedEffect);
+                    break;
+                case GameplayDuration.PolicyType.OnTurnFinished:
+                    appliedEffects_OnTurnFinished.Add(appliedEffect);
+                    break;
             }
         }
         
-        public void ApplyInstantGameplayEffect(AppliedGameplayEffect appliedEffect)
+        public void AddEffectSelf(GameplayEffectSO effect)
         {
-            foreach (var appliedModifier in appliedEffect.appliedModifiers)
-            {
-                Debug.Log("[test attr]" + appliedModifier.attrType);
-                float baseAttr = GetAttr(appliedModifier.attrType, false);
-                
-                if (float.IsNaN(appliedModifier.modifier.Override))
-                {
-                    baseAttr += appliedModifier.modifier.Add;
-                    baseAttr *= appliedModifier.modifier.Multiply;
-                }
-                else
-                {
-                    baseAttr = appliedModifier.modifier.Override;
-                }
-                
-                Debug.Log("[test attr]" + baseAttr);
-
-                SetAttr(appliedModifier.attrType, baseAttr, false);
-            }
-
-            UpdateAttributes();
-        }
-        
-        private async UniTaskVoid ApplyDurationalGameplayEffect(AppliedGameplayEffect appliedEffect)
-        {
-            ApplyInfiniteGameplayEffect(appliedEffect);
-            
-            await UniTask.WaitForSeconds(appliedEffect.duration);
-
-            UnapplyEffect(appliedEffect);
-        }
-        
-        private void ApplyInfiniteGameplayEffect(AppliedGameplayEffect appliedEffect)
-        {
-            var effect = appliedEffects.Find(effect => effect == appliedEffect);
-            if(effect != null)
-                UnapplyEffect(effect);
-
-            appliedEffects.Add(appliedEffect);
-            
-            UpdateAttributes();
-        }
-        
-        private void UnapplyEffect(AppliedGameplayEffect appliedEffect)
-        {
-            appliedEffects.Remove(appliedEffect);
-            
-            UpdateAttributes();
-        }
-        
-        public void ApplyEffectSelf(GameplayEffectSO effect, float level = 0)
-        {
-            ApplyEffect(effect, this);
+            AddEffect(effect);
         }
     }
 }

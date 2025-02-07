@@ -52,13 +52,12 @@ namespace TSoft.InGame.Player
                     break;
                 case ListChangedType.ItemChanged :
                     break;
-                    
             }
         }
 
         public void ApplyAbility(GameplayEffectSO so)
         {
-            gameplay.ApplyEffectSelf(so);
+            gameplay.AddEffectSelf(so);
         }
     }
 }

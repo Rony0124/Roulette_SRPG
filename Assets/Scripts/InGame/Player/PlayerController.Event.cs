@@ -50,11 +50,11 @@ namespace TSoft.InGame.Player
         {
             if (pokerCard.cardData.policy == CustomEffectPolicy.Instant)
             {
-                pokerCard.cardData.effect.ApplyEffect(this, director.CurrentMonster);
+                //pokerCard.cardData.effect.ApplyEffect(this, director.CurrentMonster);
             }
             else
             {
-                customEffects_joker.Enqueue(pokerCard.cardData.effect);
+                //customEffects_joker.Enqueue(pokerCard.cardData.effect);
             }
         }
 

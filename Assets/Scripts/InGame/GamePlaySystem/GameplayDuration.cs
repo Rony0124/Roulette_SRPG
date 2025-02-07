@@ -8,12 +8,13 @@ namespace TSoft.InGame.GamePlaySystem
     {
         public enum PolicyType
         {
-            Instant, Infinite, HasDuration
+            Passive,
+            OnRoundBegin,
+            OnRoundFinished,
+            OnTurnBegin,
+            OnTurnFinished
         }
         
         public PolicyType policy;
-        
-        [ShowIf("policy", PolicyType.HasDuration)]
-        public float magnitude;
     }
 }

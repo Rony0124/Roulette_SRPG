@@ -12,15 +12,6 @@ namespace TSoft.InGame.GamePlaySystem
         public ModifierOpType modifierOp;
         
         public float magnitude;
-       
-        /*public struct Tags
-        {
-            public List<GameplayTag> mustHaveTag;
-            public List<GameplayTag> mustNotHaveTag;
-        }
-
-        public Tags sourceTags;
-        public Tags targetTags;*/
     }
     
     [Serializable]
