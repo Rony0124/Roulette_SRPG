@@ -168,8 +168,10 @@ MonoBehaviour:
     value: 10
   - attrType: 2001
     value: 0
-  Attributes: []
-  defaultEffects: []
+  attributes: []
+  defaultEffects:
+  - sourceEffect: {fileID: 11400000, guid: e18b9a9787b90a044b175ff9e70ee77b, type: 2}
+  - sourceEffect: {fileID: 11400000, guid: b01f53607ec624b4cb9a8d786975b545, type: 2}
 --- !u!114 &1047355927819672411
 MonoBehaviour:
   m_ObjectHideFlags: 0

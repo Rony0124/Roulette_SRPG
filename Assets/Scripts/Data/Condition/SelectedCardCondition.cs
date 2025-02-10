@@ -6,9 +6,11 @@ using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
+using UnityEngine;
 
 namespace TSoft.Data.Condition
 {
+    [CreateAssetMenu(fileName = "Condition", menuName = "Create Condition/SelectedCardCondition", order = 1)]
     public class SelectedCardCondition : ConditionSO
     {
         public enum OddEven

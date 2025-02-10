@@ -10,22 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
-  m_Name: GE_Artifact_EnforceCardPicture
+  m_Name: GE_Default_ClearCard
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 4
-    end: 5
+    begin: 5
+    end: 0
   effect:
-    rid: 8436400052165148672
-  modifiers:
-  - attrType: 2000
-    modifierOp: 0
-    magnitude: 10
-  hasCondition: 1
-  condition: {fileID: 11400000, guid: af10a132c19e98c44bc02953d6484efb, type: 2}
+    rid: 8436400116383088642
+  modifiers: []
+  hasCondition: 0
+  condition: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 8436400052165148672
-      type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
+    - rid: 8436400116383088642
+      type: {class: CE_ClearSelectedCard, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

@@ -12,20 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99767fd771a054b82956c7f3bbc4687b, type: 3}
   m_Name: Skill_Explosion
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  registryId: {fileID: 11400000, guid: 34844c0b9279a1d43b9cab35b525490e, type: 2}
   title: Explosion
   description: 
   image: {fileID: 0}
   price: 0
-  modifiers:
-  - modifierOp: 1
-    magnitude: 2
-  effect:
-    rid: -2
+  effect: {fileID: 11400000, guid: 5ed3dc327a2419e4f95718dad9ffcf76, type: 2}
   skillParticleObj: {fileID: 3294898671608175754, guid: e9419f2da11a7064db8ee18b0128de31,
     type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  skillDuration: 2
+  skillRepeater: 1

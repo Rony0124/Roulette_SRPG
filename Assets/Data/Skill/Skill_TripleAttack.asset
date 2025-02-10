@@ -10,21 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99767fd771a054b82956c7f3bbc4687b, type: 3}
-  m_Name: Skill_DoubleAttack
+  m_Name: Skill_TripleAttack
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  registryId: {fileID: 11400000, guid: 7a636654c33e6804cbf1e985ce2534e2, type: 2}
   title: 
   description: 
   image: {fileID: 0}
   price: 0
-  gamePlayEffects: []
-  effect:
-    rid: 7558576535588306944
+  effect: {fileID: 11400000, guid: 03fac74660a67964590d5c532faf5418, type: 2}
   skillParticleObj: {fileID: 4389717307726803681, guid: 73df40164ba31fe47b1a7c5b404e286b,
     type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: 7558576535588306944
-      type: {class: CE_Repeat, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
-      data: 
+  skillDuration: 2
+  skillRepeater: 3

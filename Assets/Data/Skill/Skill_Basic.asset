@@ -17,13 +17,8 @@ MonoBehaviour:
   description: 
   image: {fileID: 0}
   price: 0
-  gamePlayEffects: []
-  effect:
-    rid: -2
+  effect: {fileID: 0}
   skillParticleObj: {fileID: 4389717307726803681, guid: 73df40164ba31fe47b1a7c5b404e286b,
     type: 3}
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+  skillDuration: 2
+  skillRepeater: 1

@@ -13,12 +13,4 @@ namespace TSoft.InGame.GamePlaySystem
         
         public float magnitude;
     }
-    
-    [Serializable]
-    public class Modifier
-    {
-        public ModifierOpType modifierOp;
-        
-        public float magnitude;
-    }
 }

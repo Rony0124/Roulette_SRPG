@@ -1,14 +1,11 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using TCGStarter.Tweening;
 using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
-using TSoft.InGame.CardSystem.CE;
 using TSoft.InGame.GamePlaySystem;
-using TSoft.Utils;
 using UnityEngine;
 
 namespace TSoft.InGame.Player
@@ -34,8 +31,6 @@ namespace TSoft.InGame.Player
         
         public List<PokerCard> CurrentPokerCardSelected => currentPokerCardSelected;
         
-        private Queue<CustomEffect> customEffects_joker;
-        
         public bool CanMoveNextCycle { get; set; }
         
         public AbilityContainer AbilityContainer => abilityContainer;
@@ -49,7 +44,6 @@ namespace TSoft.InGame.Player
         {
             currentPokerCardSelected = new List<PokerCard>();
             cardsOnHand = new List<PokerCard>();
-            customEffects_joker = new Queue<CustomEffect>();
 
             gameplay = GetComponent<Gameplay>();
             abilityContainer = GetComponent<AbilityContainer>();
@@ -109,7 +103,6 @@ namespace TSoft.InGame.Player
             }
         }
         
-        //TODO : refactoring
         public async UniTask<bool> TryUseCardsOnHand()
         {
             var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
@@ -120,49 +113,30 @@ namespace TSoft.InGame.Player
             if (currentPokerCardSelected.IsNullOrEmpty())
                 return false;
             
-            //하트는 먼저 깎아준다.
-            --currentHeart;
-            gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
-            
+            //현재 패턴에 해당하는 이팩트 추가
+            currentPattern.skill.ApplySkill(gameplay);
+            //turn begin 이팩트 추가
             await gameplay.OnTurnBegin();
-            
-            /*//기본 데미지 적용
-            CurrentDmg = gameplay.GetAttr(GameplayAttr.BasicAttackPower);
-            
-            //카드 패턴에 의한 데미지 추가
-            var currentDamageModifier = CurrentPattern.Modifier;
-            
-            //조커 이팩트 적용
-            //단일 적용
-            while (customEffects_joker.Count > 0)
-            {
-                var ce = customEffects_joker.Dequeue();
-               // ce.ApplyEffect();
-            }
-            
-            //스킬 실행 및 적용
-            CurrentDmg *= currentDamageModifier;*/
-            
-            currentPattern.skill.PlaySkill(this, director.CurrentMonster);
-            
-            //카드 삭제
-            foreach (var selectedCard in currentPokerCardSelected)
-            {
-                selectedCard.Dissolve(animationSpeed);
-                        
-                Discard(selectedCard);
-            }
-
-            currentPokerCardSelected.Clear();
-            
+            //스킬 플레이
+            await currentPattern.skill.PlaySkill(this, director.CurrentMonster);
+            //turn finished 이팩트 추가
             await gameplay.OnTurnFinished();
+
+            if (CheckGameOver())
+                return false;
             
+            return true;
+        }
+
+        private bool CheckGameOver()
+        {
+            var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
             if (director.CurrentMonster.IsDead)
             {
                 if (currentHeart > 0)
                 {
                     director.GameOver(true);
-                    return false;
+                    return true;
                 }
             }
             else
@@ -170,11 +144,11 @@ namespace TSoft.InGame.Player
                 if (currentHeart <= 0 || cardsOnHand.Count <= 0)
                 {
                     director.GameOver(false);
-                    return false;
+                    return true;
                 }
             }
-            
-            return true;
+
+            return false;
         }
         
         public bool TryDiscardSelectedCard()
@@ -196,7 +170,7 @@ namespace TSoft.InGame.Player
             return true;
         }
 
-        private void Discard(PokerCard pokerCard)
+        public void Discard(PokerCard pokerCard)
         {
             pokerCard.ClearEvents();
             RemoveCardFromHand(pokerCard);
