@@ -43,14 +43,12 @@ namespace TSoft.InGame.GamePlaySystem
         public float Add;
         public float Multiply;
         public float Override;
-        public float Repeater;
 
         public void SetDefault()
         {
             Add = 0.0f;
             Multiply = 1.0f;
             Override = float.NaN;
-            Repeater = 1.0f;
         }
 
         public void Combine(in GameplayAttributeModifier modifier)
@@ -58,7 +56,6 @@ namespace TSoft.InGame.GamePlaySystem
             Add += modifier.Add;
             Multiply *= modifier.Multiply;
             Override = modifier.Override;
-            Repeater = modifier.Repeater;
         }
     }
 }

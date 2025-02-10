@@ -114,7 +114,8 @@ namespace TSoft.InGame.Player
                 return false;
             
             //현재 패턴에 해당하는 이팩트 추가
-            currentPattern.skill.ApplySkill(gameplay);
+            currentPattern.ApplyCurrentPattern(this);
+            
             //turn begin 이팩트 추가
             await gameplay.OnTurnBegin();
             //스킬 플레이

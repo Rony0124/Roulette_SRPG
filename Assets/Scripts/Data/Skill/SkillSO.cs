@@ -18,12 +18,6 @@ namespace TSoft.Data.Skill
         
         public int skillRepeater = 1;
 
-        public void ApplySkill(Gameplay gameplay)
-        {
-            if(effect)
-                gameplay.AddEffect(effect);
-        }
-
         public async UniTask PlaySkill(PlayerController player, MonsterController monster)
         {
             var basicDamage = player.Gameplay.GetAttr(GameplayAttr.BasicAttackPower);

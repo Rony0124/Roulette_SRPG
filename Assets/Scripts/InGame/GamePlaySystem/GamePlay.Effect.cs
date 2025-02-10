@@ -68,9 +68,6 @@ namespace TSoft.InGame.GamePlaySystem
                         case ModifierOpType.Override:
                             appliedModifier.modifier.Override = magnitude;
                             break;
-                        case ModifierOpType.Repeater:
-                            appliedModifier.modifier.Repeater = magnitude;
-                            break;
                     }
 
                     appliedModifiers.Add(appliedModifier);

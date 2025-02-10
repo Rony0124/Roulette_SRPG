@@ -4,6 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using TSoft.Data.Skill;
 using TSoft.InGame.CardSystem;
+using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
 namespace TSoft.InGame.Player
@@ -16,8 +17,31 @@ namespace TSoft.InGame.Player
         public class CardPattern
         {
             public CardPatternType PatternType;
-            public float Modifier;
+            public GameplayEffectSO effect;
             public SkillSO skill;
+            [HideInInspector]
+            public int numbers;
+
+            public void ApplyCurrentPattern(PlayerController player)
+            {
+                if (effect)
+                {
+                    //해당 패턴 카드 숫자들을 더해준다
+                    foreach (var modifier in effect.modifiers)
+                    {
+                        if (modifier.attrType == GameplayAttr.BasicAttackPower)
+                        {
+                            modifier.magnitude += numbers;
+                            break;
+                        }
+                    }
+                    player.Gameplay.AddEffect(effect);
+                }
+                    
+                
+                if(skill)
+                    player.Gameplay.AddEffect(skill.effect);
+            }
         }
         
         //test 용으로 inspector에서 편집 가능하도록 설정
@@ -44,6 +68,7 @@ namespace TSoft.InGame.Player
         }
         
         private bool[] grade;
+        private int[] gradeNumberCombined;
 
         public Dictionary<CardPatternType, ParticleSystem> particleDictionary;
 
@@ -77,31 +102,40 @@ namespace TSoft.InGame.Player
                 return;
 
             grade = new bool[10];
+            gradeNumberCombined = new int[10];
+            
             grade[(int)CardPatternType.None] = true;
             grade[(int)CardPatternType.HighCard] = true;
             
-            int[] suits = new int[5]; 
+            int[] suits = new int[5];
             int[] numbers = new int[15];
+            int[] suitsNumberCombined = new int[5]; 
             
             for(int i=0; i< currentPokerCardSelected.Count; i++) {
                 PokerCard card = currentPokerCardSelected[i];
                 // 카드 숫자에 따른 count
                 numbers[card.cardData.number]++;
                 // Ace의 경우 
-                if(card.cardData.number == 1) numbers[14]++;
+                if(card.cardData.number == 1)
+                    numbers[14]++;
+                
                 // 카드 모양에 따른 count
                 switch (card.cardData.type) {
                     case CardType.Spade:
                         suits[1]++;
+                        suitsNumberCombined[1] += card.cardData.number; 
                         break;
                     case CardType.Diamond:
                         suits[2]++;
+                        suitsNumberCombined[2] += card.cardData.number;
                         break;
                     case CardType.Club:
                         suits[3]++;
+                        suitsNumberCombined[3] += card.cardData.number;
                         break;
                     case CardType.Heart:
                         suits[4]++;
+                        suitsNumberCombined[4] += card.cardData.number;
                         break;
                 }
             }
@@ -116,19 +150,23 @@ namespace TSoft.InGame.Player
                         break;
                     
                     temp++;
+                    gradeNumberCombined[5] += j;
                 }
                 
                 if(temp == 5) 
                     isStraight = true;
             }
             
-            if(isStraight) 
+            if(isStraight)
                 grade[5] = true;
             
             bool isFlush = false;
             for(int i=1; i<5; i++) {
-                if(suits[i] == 5) 
+                if (suits[i] == 5)
+                {
                     isFlush = true;
+                    gradeNumberCombined[6] = suitsNumberCombined[i];
+                }
             }
             
             if(isFlush) 
@@ -136,37 +174,67 @@ namespace TSoft.InGame.Player
             
             
             // [9] Straight Flush (같은 무늬의 연속된 숫자 5개가 존재)
-            if(isFlush && isStraight) 
+            if (isFlush && isStraight)
+            {
                 grade[9] = true;
+                gradeNumberCombined[9] = gradeNumberCombined[5];
+            }
             
             int pairCnt = 0;
             int tripleCnt = 0;
+            int[] pairNumbers = new int[3];
+            int tripleNumber = 0;
             // Ace를 1로 단일 숫자로 처리해서 확인 (14 의미 제외)
             for(int i=1; i<14; i++) {
                 // [7] 4 Card (네 개의 같은 숫자가 존재)
-                if(numbers[i] == 4) 
+                if (numbers[i] == 4)
+                {
                     grade[8] = true;
+                    gradeNumberCombined[8] = i * 4;
+                }
  
                 // 같은 숫자가 2개
-                if(numbers[i] == 2) 
-                    pairCnt++;
+                if (numbers[i] == 2)
+                {
+                    ++pairCnt;
+
+                    pairNumbers[pairCnt] = i * 2;
+                } 
                 // 같은 숫자가 3개
-                else if(numbers[i] == 3)
+                else if (numbers[i] == 3)
+                {
                     tripleCnt++;
+                    tripleNumber = i;
+                }
             }
             
             // [1] 1 Pair (같은 숫자가 한 쌍 존재)
-            if(pairCnt == 1) 
+            if (pairCnt == 1)
+            {
                 grade[2] = true;
+                gradeNumberCombined[2] = pairNumbers[1];
+            }
+                
             // [2] 2 Pair (각기 같은 숫자가 두 쌍 존재)
-            if(pairCnt == 2) 
+            if (pairCnt == 2)
+            {
                 grade[3] = true;
+                gradeNumberCombined[3] = pairNumbers[1] + pairNumbers[2];
+            }
+            
             // [3] Triple (세 개의 같은 숫자가 존재)
-            if(tripleCnt == 1) 
+            if (tripleCnt == 1)
+            {
                 grade[4] = true;
+                gradeNumberCombined[4] = tripleNumber;
+            }
+            
             // [6] Full House (Triple과 Pair가 함께 존재)
-            if(tripleCnt == 1 && pairCnt == 1)
+            if (tripleCnt == 1 && pairCnt == 1)
+            {
                 grade[7] = true;
+                gradeNumberCombined[7] = pairNumbers[1] + tripleNumber;
+            }
             
             for (int i = 9; i >= 0; i--)
             {
@@ -179,6 +247,7 @@ namespace TSoft.InGame.Player
                 {
                     // 현재 패턴 설정
                     CurrentPattern = cardPatterns.Find(pattern => pattern.PatternType == (CardPatternType)i);
+                    CurrentPattern.numbers = gradeNumberCombined[i];
                     break;
                 }
             }

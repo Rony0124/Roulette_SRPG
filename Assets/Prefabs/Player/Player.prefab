@@ -113,31 +113,31 @@ MonoBehaviour:
   animationSpeed: 0.3
   defaultCardPatterns:
   - PatternType: 9
-    Modifier: 180
+    effect: {fileID: 11400000, guid: 32cecdaeb6ad70447bd43640230c9903, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 8
-    Modifier: 120
+    effect: {fileID: 11400000, guid: af7b89012640a0048ba6475d99f8b955, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 7
-    Modifier: 80
+    effect: {fileID: 11400000, guid: 110913390b0aaf0488d3733e45da38f3, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 6
-    Modifier: 40
+    effect: {fileID: 11400000, guid: 96efc20fed0bb6c429c8c66d026e9147, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 5
-    Modifier: 30
+    effect: {fileID: 11400000, guid: c20e2e64daeb21641933148c4136a304, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 4
-    Modifier: 20
+    effect: {fileID: 11400000, guid: be1ad3c3e1286834988370ea4ad154cc, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 3
-    Modifier: 5
+    effect: {fileID: 11400000, guid: 95843e180495dce4bb1080b5a5dfb379, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
   - PatternType: 2
-    Modifier: 2
+    effect: {fileID: 11400000, guid: 6c2b7382884654448b4cdfa17bf884e8, type: 2}
     skill: {fileID: 11400000, guid: a72fe590d72362941a705d8d3dd31d94, type: 2}
   - PatternType: 1
-    Modifier: 1
+    effect: {fileID: 11400000, guid: 7bab602625dc29743b5b1c31e79b9ba7, type: 2}
     skill: {fileID: 11400000, guid: 77a2e535ceb4f8c4c9c67a4c2a8074fe, type: 2}
 --- !u!114 &9176220145216558040
 MonoBehaviour:
