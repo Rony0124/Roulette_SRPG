@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 2122120494, guid: 37bb7a6313f4b8447accef37ef4e99ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,5 +88,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8838940cb22e44a45807464f2ed4bba9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iconPrefab: {fileID: 806607540274934434, guid: 7174f8dabae98c845ad7d509efb9b16c,
-    type: 3}
+  iconPrefab: {fileID: 806607540274934434, guid: 7174f8dabae98c845ad7d509efb9b16c, type: 3}
