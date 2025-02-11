@@ -108,7 +108,7 @@ namespace TSoft.InGame.Player
             if (isSubmitting)
                 return false;
             
-            var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
+            var currentHeart = gameplay.GetAttr(GameplayAttr.Heart, false);
             if (currentHeart <= 0)
                 return false;
             
@@ -120,9 +120,7 @@ namespace TSoft.InGame.Player
             
             //하트 사용
             --currentHeart;
-            gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
-
-            
+            gameplay.SetAttr(GameplayAttr.Heart, currentHeart, false);
             
             gameplay.CaptureCurrentAttributeModifiers();
             
