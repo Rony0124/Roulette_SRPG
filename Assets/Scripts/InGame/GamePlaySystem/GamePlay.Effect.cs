@@ -102,19 +102,19 @@ namespace TSoft.InGame.GamePlaySystem
         
         public List<AppliedGameplayEffect> defaultEffects;
         
-        public HashSet<AppliedGameplayEffect> appliedEffects_Passive;
-        public HashSet<AppliedGameplayEffect> appliedEffects_OnRoundBegin;
-        public HashSet<AppliedGameplayEffect> appliedEffects_OnRoundFinished;
-        public HashSet<AppliedGameplayEffect> appliedEffects_OnTurnBegin;
-        public HashSet<AppliedGameplayEffect> appliedEffects_OnTurnFinished;
+        public List<AppliedGameplayEffect> appliedEffects_Passive;
+        public List<AppliedGameplayEffect> appliedEffects_OnRoundBegin;
+        public List<AppliedGameplayEffect> appliedEffects_OnRoundFinished;
+        public List<AppliedGameplayEffect> appliedEffects_OnTurnBegin;
+        public List<AppliedGameplayEffect> appliedEffects_OnTurnFinished;
         
         private void InitializeEffect()
         {
-            appliedEffects_Passive = new HashSet<AppliedGameplayEffect>();
-            appliedEffects_OnRoundBegin = new HashSet<AppliedGameplayEffect>();
-            appliedEffects_OnRoundFinished = new HashSet<AppliedGameplayEffect>();
-            appliedEffects_OnTurnBegin = new HashSet<AppliedGameplayEffect>();
-            appliedEffects_OnTurnFinished = new HashSet<AppliedGameplayEffect>();
+            appliedEffects_Passive = new List<AppliedGameplayEffect>();
+            appliedEffects_OnRoundBegin = new List<AppliedGameplayEffect>();
+            appliedEffects_OnRoundFinished = new List<AppliedGameplayEffect>();
+            appliedEffects_OnTurnBegin = new List<AppliedGameplayEffect>();
+            appliedEffects_OnTurnFinished = new List<AppliedGameplayEffect>();
             
             foreach (var defaultEffect in defaultEffects)
             {
@@ -164,6 +164,49 @@ namespace TSoft.InGame.GamePlaySystem
                     break;
                 case GameplayPolicyType.OnTurnFinished:
                     appliedEffects_OnTurnFinished.Add(appliedEffect);
+                    break;
+            }
+        }
+
+        public void RemoveEffect(AppliedGameplayEffect appliedEffect)
+        {
+            var effect = appliedEffect.sourceEffect;
+            
+            switch (effect.lifeCycle.begin)
+            {
+                case GameplayPolicyType.Passive:
+                    appliedEffects_Passive.Remove(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnRoundBegin:
+                    appliedEffects_OnRoundBegin.Remove(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnRoundFinished:
+                    appliedEffects_OnRoundFinished.Remove(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnTurnBegin:
+                    appliedEffects_OnTurnBegin.Remove(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnTurnFinished:
+                    appliedEffects_OnTurnFinished.Remove(appliedEffect);
+                    break;
+            }
+            
+            switch (effect.lifeCycle.end)
+            {
+                case GameplayPolicyType.Passive:
+                    appliedEffects_Passive.Remove(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnRoundBegin:
+                    appliedEffects_OnRoundBegin.Remove(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnRoundFinished:
+                    appliedEffects_OnRoundFinished.Remove(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnTurnBegin:
+                    appliedEffects_OnTurnBegin.Remove(appliedEffect);
+                    break;
+                case GameplayPolicyType.OnTurnFinished:
+                    appliedEffects_OnTurnFinished.Remove(appliedEffect);
                     break;
             }
         }

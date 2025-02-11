@@ -4552,6 +4552,23 @@ PrefabInstance:
       propertyPath: hand
       value: 
       objectReference: {fileID: 1559139555}
+    - target: {fileID: 123563507619229904, guid: 4cf780e446bc9e944852b8711555d1ab,
+        type: 3}
+      propertyPath: cardSubmitEffect
+      value: 
+      objectReference: {fileID: 11400000, guid: 4f6f0b6ce4e1e7c4eb70b63f68400c64,
+        type: 2}
+    - target: {fileID: 1047355927819672411, guid: 4cf780e446bc9e944852b8711555d1ab,
+        type: 3}
+      propertyPath: defaultArtifacts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1047355927819672411, guid: 4cf780e446bc9e944852b8711555d1ab,
+        type: 3}
+      propertyPath: defaultArtifacts.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 99911bdc1b0d0da4db5cf88700b5cef3,
+        type: 2}
     - target: {fileID: 1084890766169659947, guid: 4cf780e446bc9e944852b8711555d1ab,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4606,6 +4623,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176220145216558040, guid: 4cf780e446bc9e944852b8711555d1ab,
+        type: 3}
+      propertyPath: attributes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9176220145216558040, guid: 4cf780e446bc9e944852b8711555d1ab,
+        type: 3}
+      propertyPath: defaultEffects.Array.size
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

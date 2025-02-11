@@ -9,7 +9,7 @@ namespace TSoft.InGame.GamePlaySystem
         public GameplayAttr attrType;
         public float value;
     }
-    
+    [Serializable]
     public struct AppliedModifier
     {
         public GameplayAttr attrType;
@@ -38,6 +38,7 @@ namespace TSoft.InGame.GamePlaySystem
         }
     }
     
+    [Serializable]
     public struct GameplayAttributeModifier
     {
         public float Add;

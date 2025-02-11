@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GE_Skill_TripleAttack
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 0
-    end: 0
+    begin: 4
+    end: 5
   effect:
     rid: 8436400116383088644
   modifiers:

@@ -8,7 +8,6 @@ namespace TSoft.InGame.CardSystem.CE
         public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
         {
             var player = director.Player;
-            player.CurrentPokerCardSelected.Clear();
             
             //카드 삭제
             foreach (var selectedCard in player.CurrentPokerCardSelected)
@@ -17,6 +16,8 @@ namespace TSoft.InGame.CardSystem.CE
                         
                 player.Discard(selectedCard);
             }
+            
+            player.CurrentPokerCardSelected.Clear();
             
             await UniTask.CompletedTask;
         }

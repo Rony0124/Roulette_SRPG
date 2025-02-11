@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GE_Default_ClearCard
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 5
+    begin: 4
     end: 0
   effect:
     rid: 8436400116383088642

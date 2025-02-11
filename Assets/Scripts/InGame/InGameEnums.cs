@@ -24,12 +24,6 @@ namespace TSoft.InGame
         Joker
     }
 
-    public enum CustomEffectPolicy
-    {
-        Instant,
-        PostApply
-    }
-
     public enum CardPatternType
     {
         None,

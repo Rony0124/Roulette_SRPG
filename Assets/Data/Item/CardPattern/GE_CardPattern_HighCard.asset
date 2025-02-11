@@ -23,7 +23,7 @@ MonoBehaviour:
     magnitude: 0
   - attrType: 2001
     modifierOp: 0
-    magnitude: 0
+    magnitude: 1
   hasCondition: 0
   condition: {fileID: 0}
   references:

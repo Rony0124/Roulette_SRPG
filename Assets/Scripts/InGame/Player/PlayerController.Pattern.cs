@@ -19,28 +19,18 @@ namespace TSoft.InGame.Player
             public CardPatternType PatternType;
             public GameplayEffectSO effect;
             public SkillSO skill;
-            [HideInInspector]
-            public int numbers;
-
+          
             public void ApplyCurrentPattern(PlayerController player)
             {
                 if (effect)
                 {
-                    //해당 패턴 카드 숫자들을 더해준다
-                    foreach (var modifier in effect.modifiers)
-                    {
-                        if (modifier.attrType == GameplayAttr.BasicAttackPower)
-                        {
-                            modifier.magnitude += numbers;
-                            break;
-                        }
-                    }
                     player.Gameplay.AddEffect(effect);
                 }
-                    
                 
                 if(skill)
                     player.Gameplay.AddEffect(skill.effect);
+                
+                player.Gameplay.AddEffect(player.cardSubmitEffect);
             }
         }
         
@@ -48,11 +38,13 @@ namespace TSoft.InGame.Player
         [Header("Card Pattern")]
         [SerializeField][TableList]
         private List<CardPattern> defaultCardPatterns;
-            
+        
         private List<CardPattern> cardPatterns;
 
         private CardPattern currentPattern;
 
+        public GameplayEffectSO cardSubmitEffect;
+        
         public CardPattern CurrentPattern
         {
             get => currentPattern;
@@ -139,6 +131,18 @@ namespace TSoft.InGame.Player
                         break;
                 }
             }
+
+            int biggestNumber = 0;
+            for (int i = 14; i >= 0; i--)
+            {
+                if (numbers[i] > 0)
+                {
+                    biggestNumber = i;
+                    break;
+                }
+            }
+
+            gradeNumberCombined[(int)CardPatternType.HighCard] = biggestNumber;
             
             bool isStraight = false;
             // Ace를 1, 14로 처리해서 연속된 구간 확인
@@ -247,7 +251,15 @@ namespace TSoft.InGame.Player
                 {
                     // 현재 패턴 설정
                     CurrentPattern = cardPatterns.Find(pattern => pattern.PatternType == (CardPatternType)i);
-                    CurrentPattern.numbers = gradeNumberCombined[i];
+                    
+                    foreach (var modifier in cardSubmitEffect.modifiers)
+                    {
+                        if (modifier.attrType != GameplayAttr.BasicAttackPower)
+                            continue;
+                        
+                        modifier.magnitude = gradeNumberCombined[i];
+                    }
+                    
                     break;
                 }
             }

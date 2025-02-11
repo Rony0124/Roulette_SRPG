@@ -1,11 +1,16 @@
+using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using TSoft.InGame.CardSystem;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TSoft.InGame.Player
 {
     public partial class PlayerController
     {
+        public Func<PokerCard, bool> onClickCard;
+        
         [Header("Visuals")]
         [SerializeField] private float cardY;
         [SerializeField] private float cardXSpacing;
@@ -15,6 +20,9 @@ namespace TSoft.InGame.Player
         
         [Range(0.2f, 2f)]
         [SerializeField] private float animationSpeed;
+
+        [HideInInspector]
+        public bool isSelectingCardOnHand;
         
         IEnumerator ListenCardEvents(PokerCard pokerCard)
         {
@@ -48,18 +56,26 @@ namespace TSoft.InGame.Player
 
         private void OnClickJoker(PokerCard pokerCard)
         {
-            if (pokerCard.cardData.policy == CustomEffectPolicy.Instant)
+            pokerCard.cardData.customEffect?.ApplyEffect(director).Forget();
+            
+            if (pokerCard.cardData.effect)
             {
-                //pokerCard.cardData.effect.ApplyEffect(this, director.CurrentMonster);
-            }
-            else
-            {
-                //customEffects_joker.Enqueue(pokerCard.cardData.effect);
+                gameplay.AddEffect(pokerCard.cardData.effect);
             }
         }
 
         private void OnClickNormal(PokerCard pokerCard)
         {
+            if (isSelectingCardOnHand)
+            {
+                if (onClickCard(pokerCard))
+                {
+                    isSelectingCardOnHand = false;
+                }
+                
+                return;
+            }
+            
             if (pokerCard.IsFloating)
             {
                 pokerCard.SetVisualsPosition(Vector3.zero);

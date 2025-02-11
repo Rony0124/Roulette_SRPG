@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using TSoft.Utils;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,12 +13,15 @@ namespace TSoft.InGame.GamePlaySystem
         public List<DefaultGamePlayAttribute> defaultAttributes;
         
         public List<AttributeState> attributes;
-        [HideInInspector] 
+        //[HideInInspector] 
         public List<AppliedModifier> attrAppliedModifiers;
+        public List<AppliedModifier> capturedAttrAppliedModifiers;
         
         private void InitializeAttributes()
         {
             attributes = new();
+            attrAppliedModifiers = new();
+            capturedAttrAppliedModifiers = new();
             
             foreach (var defaultAttribute in defaultAttributes)
             {
@@ -65,6 +69,33 @@ namespace TSoft.InGame.GamePlaySystem
             }
             
             PostUpdateAttributes();
+        }
+
+        public void CaptureCurrentAttributeModifiers()
+        {
+            if (!capturedAttrAppliedModifiers.IsNullOrEmpty())
+            {
+                capturedAttrAppliedModifiers.Clear();
+            }
+
+            foreach (var modifier in attrAppliedModifiers)
+            {
+                capturedAttrAppliedModifiers.Add(modifier);
+            }
+        }
+
+        public void ResetAttributeModifiers()
+        {
+            attrAppliedModifiers.Clear();
+            
+            if (!capturedAttrAppliedModifiers.IsNullOrEmpty())
+            {
+                foreach (var modifier in capturedAttrAppliedModifiers)
+                {
+                    attrAppliedModifiers.Add(modifier);
+                }
+            }
+            
         }
         
         private void PostUpdateAttributes()

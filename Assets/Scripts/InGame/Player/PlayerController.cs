@@ -35,8 +35,8 @@ namespace TSoft.InGame.Player
         
         public AbilityContainer AbilityContainer => abilityContainer;
         public Gameplay Gameplay =>  gameplay;
-        
-        public float CurrentDmg { get; set; }
+
+        private bool isSubmitting;
         
         private const int HandCountMax = 5;
         
@@ -105,23 +105,45 @@ namespace TSoft.InGame.Player
         
         public async UniTask<bool> TryUseCardsOnHand()
         {
+            if (isSubmitting)
+                return false;
+            
             var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
             if (currentHeart <= 0)
                 return false;
-
+            
             //손에 들고 있는 카드가 없다면 false
             if (currentPokerCardSelected.IsNullOrEmpty())
                 return false;
+            
+            isSubmitting = true;
+            
+            //하트 사용
+            --currentHeart;
+            gameplay.SetAttr(GameplayAttr.Heart, currentHeart);
+
+            
+            
+            gameplay.CaptureCurrentAttributeModifiers();
             
             //현재 패턴에 해당하는 이팩트 추가
             currentPattern.ApplyCurrentPattern(this);
             
             //turn begin 이팩트 추가
             await gameplay.OnTurnBegin();
+            
+            //카드 삭제
+            DiscardSelectedCards();
+            
             //스킬 플레이
             await currentPattern.skill.PlaySkill(this, director.CurrentMonster);
+            
             //turn finished 이팩트 추가
             await gameplay.OnTurnFinished();
+            
+            gameplay.ResetAttributeModifiers();
+            
+            isSubmitting = false;
 
             if (CheckGameOver())
                 return false;
@@ -160,15 +182,22 @@ namespace TSoft.InGame.Player
             
             --currentEnergy;
             gameplay.SetAttr(GameplayAttr.Energy, currentEnergy);
+
+            DiscardSelectedCards();
             
+            return true;
+        }
+
+        private void DiscardSelectedCards()
+        {
             foreach (var card in currentPokerCardSelected)
             {
+                card.Dissolve(animationSpeed);
+                
                 Discard(card);
             }
             
             currentPokerCardSelected.Clear();
-            
-            return true;
         }
 
         public void Discard(PokerCard pokerCard)

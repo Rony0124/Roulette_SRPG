@@ -57,6 +57,7 @@ namespace TSoft.InGame.Player
 
         public void ApplyAbility(GameplayEffectSO so)
         {
+            Debug.Log("1");
             gameplay.AddEffect(so);
         }
     }
