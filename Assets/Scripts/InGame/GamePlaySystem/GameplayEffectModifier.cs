@@ -11,6 +11,8 @@ namespace TSoft.InGame.GamePlaySystem
         
         public ModifierOpType modifierOp;
         
-        public float magnitude;
+        public GameplayMagnitude gameplayMagnitude;
     }
+
+  
 }

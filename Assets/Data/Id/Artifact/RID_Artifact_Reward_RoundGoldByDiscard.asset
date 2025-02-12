@@ -10,5 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
-  m_Name: RID_Artifact_AddDamage
+  m_Name: RID_Artifact_Reward_RoundGoldByDiscard
   m_EditorClassIdentifier: 
+  guid: aea6e9983e8da804fb1a026233051343

@@ -17,22 +17,5 @@ namespace TSoft.InGame.CardSystem.CE
 
             await UniTask.CompletedTask;
         }
-        
-        public override async UniTask UndoEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
-        {
-            var gameplay = director.Player.Gameplay;
-
-            /*switch (sourceEffect.sourceEffect.lifeCycle.end)
-            {
-                case GameplayPolicyType.OnRoundFinished :
-                    gameplay.appliedEffects_OnRoundBegin.Remove(sourceEffect);
-                    break;
-                case GameplayPolicyType.OnTurnFinished :
-                    gameplay.appliedEffects_OnTurnBegin.Remove(sourceEffect);
-                    break;
-            }*/
-
-            await UniTask.CompletedTask;
-        }
     }
 }

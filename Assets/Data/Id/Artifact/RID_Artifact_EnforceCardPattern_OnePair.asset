@@ -9,11 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 295223a8f09d22648ac18077589dd43b, type: 3}
-  m_Name: Condition_SelectCard_CardType_Heart
+  m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
+  m_Name: RID_Artifact_EnforceCardPattern_OnePair
   m_EditorClassIdentifier: 
-  conditionType: 2
-  cardPatternType: 2
-  oddEven: 0
-  numberCombination: 
-  cardType: 4
+  guid: 196f23889f2c2384481dae0228cf704c

@@ -13,8 +13,9 @@ namespace TSoft.InGame.GamePlaySystem
         public List<DefaultGamePlayAttribute> defaultAttributes;
         
         public List<AttributeState> attributes;
-        //[HideInInspector] 
+        [HideInInspector] 
         public List<AppliedModifier> attrAppliedModifiers;
+        [HideInInspector]
         public List<AppliedModifier> capturedAttrAppliedModifiers;
         
         private void InitializeAttributes()

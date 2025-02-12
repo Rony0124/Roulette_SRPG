@@ -9,7 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
-  m_Name: RID_Artifact_DebuffMonster
+  m_Script: {fileID: 11500000, guid: 295223a8f09d22648ac18077589dd43b, type: 3}
+  m_Name: Condition_SelectedCard_CardType_Heart
   m_EditorClassIdentifier: 
-  guid: 391eaa1e9d2805747bb37ed6cc4e7f82
+  conditionType: 2
+  cardPatternType: 2
+  oddEven: 0
+  numberCombination: 
+  cardType: 4

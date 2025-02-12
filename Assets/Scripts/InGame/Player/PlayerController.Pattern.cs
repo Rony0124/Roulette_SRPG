@@ -257,7 +257,7 @@ namespace TSoft.InGame.Player
                         if (modifier.attrType != GameplayAttr.BasicAttackPower)
                             continue;
                         
-                        modifier.magnitude = gradeNumberCombined[i];
+                        modifier.gameplayMagnitude.magnitude = gradeNumberCombined[i];
                     }
                     
                     break;

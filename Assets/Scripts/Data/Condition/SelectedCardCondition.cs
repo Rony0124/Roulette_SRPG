@@ -41,11 +41,17 @@ namespace TSoft.Data.Condition
         [ShowIf("conditionType", CardConditionType.CardType)]
         public CardType cardType;
         
-        public override async UniTask<bool> CheckCondition(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
+        public override async UniTask CheckCondition(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             var selectedCards = director.Player.CurrentPokerCardSelected;
             if (selectedCards.IsNullOrEmpty())
-                return false;
+                return;
+            
+            if (conditionType == CardConditionType.CardPattern && 
+                director.Player.CurrentPattern.PatternType == cardPatternType)
+            {
+                await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);   
+            }
 
             foreach (var selectedCard in selectedCards)
             {
@@ -74,13 +80,6 @@ namespace TSoft.Data.Condition
                         break;
                 }
             }
-            
-            if (director.Player.CurrentPattern.PatternType == cardPatternType)
-            {
-                await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);   
-            }
-            
-            return false;
         }
     }
 }

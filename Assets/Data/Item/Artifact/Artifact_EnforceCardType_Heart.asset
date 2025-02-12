@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_EnforceCardType_Heart
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  registryId: {fileID: 11400000, guid: f4488f7aa0e36438a8e3d1253c935c72, type: 2}
   title: 
   description: 
   image: {fileID: 0}

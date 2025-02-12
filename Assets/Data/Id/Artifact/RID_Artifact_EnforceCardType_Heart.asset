@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
-  m_Name: RID_Artifact_AddHandCapacity
+  m_Name: RID_Artifact_EnforceCardType_Heart
   m_EditorClassIdentifier: 
-  guid: af9d886aea8782d438fa736d71913324
+  guid: 7a8f48f4e3a03864a8e3d1253c935c72

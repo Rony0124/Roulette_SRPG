@@ -8,11 +8,9 @@ namespace TSoft.Data.Condition
 {
     public class ConditionSO : ScriptableObject
     {
-        public virtual async UniTask<bool> CheckCondition(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
+        public virtual async UniTask CheckCondition(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
         {
             await UniTask.CompletedTask;
-            
-            return false;
         }
     }
 }

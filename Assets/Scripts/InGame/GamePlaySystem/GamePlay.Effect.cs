@@ -43,8 +43,14 @@ namespace TSoft.InGame.GamePlaySystem
                 for (int i = 0; i < modifiers.Length; ++i)
                 {
                     var modifier = modifiers[i];
-
-                    float magnitude = modifier.magnitude;
+                    float magnitude = 0f;
+                    if (modifier.gameplayMagnitude.magnitudeType == MagnitudeType.None)
+                    {
+                        magnitude = modifier.gameplayMagnitude.magnitude;
+                    }else if (modifier.gameplayMagnitude.magnitudeType == MagnitudeType.Random)
+                    {
+                        magnitude = modifier.gameplayMagnitude.magnitudeRandom.RandomValue;
+                    }
 
                     AppliedModifier appliedModifier = new()
                     {

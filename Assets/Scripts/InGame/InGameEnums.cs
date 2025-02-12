@@ -43,8 +43,7 @@ namespace TSoft.InGame
         Add,
         Multiply,
         Divide,
-        Override,
-        Repeater
+        Override
     }
     
     public enum GameplayAttr

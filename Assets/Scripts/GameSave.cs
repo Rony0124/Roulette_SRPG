@@ -64,7 +64,7 @@ namespace TSoft
             SetGold(gold + addValue);
         }
 
-        private void SetGold(int newValue)
+        public void SetGold(int newValue)
         {
             gold = Math.Clamp(newValue, MinGold, MaxGold);
             onGoldChanged?.Invoke(gold);
