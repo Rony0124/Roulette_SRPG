@@ -24,6 +24,9 @@ namespace TSoft.Data.Skill
             var skillDamage = player.Gameplay.GetAttr(GameplayAttr.SkillAttackPower);
           
             var dmg = basicDamage * skillDamage;
+            player.Gameplay.SetAttr(GameplayAttr.FinalDamageFactor, dmg, false);
+            
+            var finalDmg = player.Gameplay.GetAttr(GameplayAttr.FinalDamageFactor);
 
             for (var i = 0; i < skillRepeater; i++)
             {
@@ -34,7 +37,7 @@ namespace TSoft.Data.Skill
                     particleSystem.Play();
                 }
             
-                monster.TakeDamage((int)dmg);
+                monster.TakeDamage((int)finalDmg);
                 
                 await UniTask.Delay(500);
             }

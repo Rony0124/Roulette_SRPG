@@ -58,7 +58,8 @@ namespace TSoft.InGame
         MaxCapacity = 1005,
         
         BasicAttackPower = 2000,
-        SkillAttackPower = 2001
+        SkillAttackPower = 2001,
+        FinalDamageFactor = 2002
     }
     
     public enum GameplayPolicyType
