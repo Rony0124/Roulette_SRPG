@@ -50,7 +50,8 @@ namespace TSoft.Data.Condition
             if (conditionType == CardConditionType.CardPattern && 
                 director.Player.CurrentPattern.PatternType == cardPatternType)
             {
-                await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);   
+                await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);
+                return;
             }
 
             foreach (var selectedCard in selectedCards)
