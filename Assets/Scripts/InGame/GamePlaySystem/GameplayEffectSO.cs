@@ -1,5 +1,4 @@
 using System;
-using Data.Condition;
 using Sirenix.OdinInspector;
 using TSoft.Data.Condition;
 using TSoft.InGame.CardSystem.CE;
@@ -27,10 +26,9 @@ namespace TSoft.InGame.GamePlaySystem
 
         [Header("Effect")]
         public bool hasCondition;
-        [ShowIf("hasCondition")]
-        public ConditionSO condition;
 
-        [ShowIf("hasCondition")] 
-        public ConditionContext context;
+        [ShowIf("hasCondition")]
+        [SerializeReference]
+        public ConditionApplier conditionApplier;
     }
 }

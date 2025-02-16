@@ -84,7 +84,7 @@ namespace TSoft.InGame.GamePlaySystem
                 {
                     if (sourceEffect.hasCondition)
                     {
-                        await sourceEffect.condition.CheckCondition(inGameDirector, this);
+                        await sourceEffect.conditionApplier.CheckConditionEffect(inGameDirector, this);
                     }
                     else
                     {

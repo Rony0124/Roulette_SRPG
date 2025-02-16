@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
@@ -40,47 +38,38 @@ namespace TSoft.Data.Condition
         
         [ShowIf("conditionType", CardConditionType.CardType)]
         public CardType cardType;
-        
-        public override async UniTask CheckCondition(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
+
+        public override bool Interpret(ConditionApplier applier)
         {
-            var selectedCards = director.Player.CurrentPokerCardSelected;
-            if (selectedCards.IsNullOrEmpty())
-                return;
+            var eachCardApplier = applier as ConditionApplierOnCardsEach;
+            if (eachCardApplier is null)
+                return false;
             
-            if (conditionType == CardConditionType.CardPattern && 
-                director.Player.CurrentPattern.PatternType == cardPatternType)
+            var checkingCard = eachCardApplier.CurrentCheckingCard;
+            if (checkingCard is null)
+                return false;
+
+            switch (conditionType)
             {
-                await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);
-                return;
+                case CardConditionType.CardType:
+                    if (checkingCard.cardData.type == cardType)
+                        return true;
+                    break;
+                case CardConditionType.OddEven:
+                    if (checkingCard.cardData.number % 2 == 0 && oddEven == OddEven.Even)
+                        return true;
+                    
+                    if (checkingCard.cardData.number % 2 != 0 && oddEven == OddEven.Odd)
+                        return true;
+                    break;
+                case CardConditionType.NumberCombination:
+                    if (numberCombination.Contains(checkingCard.cardData.number))
+                        return true;
+                    
+                    break;
             }
 
-            foreach (var selectedCard in selectedCards)
-            {
-                switch (conditionType)
-                {
-                    case CardConditionType.CardType:
-                        if (selectedCard.cardData.type == cardType)
-                        {
-                            await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);
-                        }
-                        break;
-                    case CardConditionType.OddEven:
-                        if (selectedCard.cardData.number % 2 == 0 && oddEven == OddEven.Even)
-                        {
-                            await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);
-                        }else if (selectedCard.cardData.number % 2 != 0 && oddEven == OddEven.Odd)
-                        {
-                            await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);
-                        }
-                        break;
-                    case CardConditionType.NumberCombination:
-                        if (numberCombination.Contains(selectedCard.cardData.number))
-                        {
-                            await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);
-                        }
-                        break;
-                }
-            }
+            return false;
         }
     }
 }

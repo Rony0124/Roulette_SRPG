@@ -27,10 +27,23 @@ MonoBehaviour:
         minValue: 0
         maxValue: 0
   hasCondition: 1
-  condition: {fileID: 11400000, guid: af10a132c19e98c44bc02953d6484efb, type: 2}
+  conditionApplier:
+    rid: 8436400264610578432
   references:
     version: 2
     RefIds:
     - rid: 8436400052165148672
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
+    - rid: 8436400264610578432
+      type: {class: ConditionApplierOnCardsEach, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data:
+        director: {fileID: 0}
+        appliedEffect:
+          sourceEffect: {fileID: 0}
+          appliedModifiers: []
+        context:
+          tokens:
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: af10a132c19e98c44bc02953d6484efb,
+              type: 2}
