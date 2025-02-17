@@ -26,6 +26,8 @@ namespace TSoft.Data.Skill
             var dmg = basicDamage * skillDamage;
             player.Gameplay.SetAttr(GameplayAttr.FinalDamageFactor, dmg, false);
             
+            player.Gameplay.UpdateAttributes();
+            
             var finalDmg = player.Gameplay.GetAttr(GameplayAttr.FinalDamageFactor);
 
             for (var i = 0; i < skillRepeater; i++)

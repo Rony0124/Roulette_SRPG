@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeCycle:
     begin: 4
-    end: 5
+    end: 0
   effect:
     rid: 8436400052165148672
   modifiers:
@@ -40,10 +40,29 @@ MonoBehaviour:
       data:
         director: {fileID: 0}
         appliedEffect:
-          sourceEffect: {fileID: 0}
-          appliedModifiers: []
+          sourceEffect: {fileID: 11400000}
+          appliedModifiers:
+          - attrType: 2001
+            modifier:
+              Add: 10
+              Multiply: 1
+              Override: NaN
         context:
           tokens:
+          - tokenType: 0
+            condition: {fileID: 0}
           - tokenType: 2
             condition: {fileID: 11400000, guid: af10a132c19e98c44bc02953d6484efb,
+              type: 2}
+          - tokenType: 4
+            condition: {fileID: 0}
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: 499450e400f9e194c96cd30abb5aad69,
+              type: 2}
+          - tokenType: 1
+            condition: {fileID: 0}
+          - tokenType: 3
+            condition: {fileID: 0}
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: ceb865cfaeabb4379b024a2e6f13d77c,
               type: 2}

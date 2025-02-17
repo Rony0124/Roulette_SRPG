@@ -52,21 +52,23 @@ namespace TSoft.Data.Condition
             switch (conditionType)
             {
                 case CardConditionType.CardType:
-                    if (checkingCard.cardData.type == cardType)
-                        return true;
-                    break;
+                    Debug.Log("checkingCard.cardData.type : " + checkingCard.cardData.type);
+                    Debug.Log("cardType : " + cardType);
+                    
+                    return checkingCard.cardData.type == cardType; 
                 case CardConditionType.OddEven:
+                    Debug.Log("checkingCard.cardData.number : " + checkingCard.cardData.number);
+                    Debug.Log("{oddEven} : " + oddEven);
+                    
                     if (checkingCard.cardData.number % 2 == 0 && oddEven == OddEven.Even)
                         return true;
                     
                     if (checkingCard.cardData.number % 2 != 0 && oddEven == OddEven.Odd)
                         return true;
-                    break;
-                case CardConditionType.NumberCombination:
-                    if (numberCombination.Contains(checkingCard.cardData.number))
-                        return true;
                     
                     break;
+                case CardConditionType.NumberCombination:
+                    return numberCombination.Contains(checkingCard.cardData.number);
             }
 
             return false;

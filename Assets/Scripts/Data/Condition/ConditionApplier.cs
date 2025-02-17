@@ -60,6 +60,8 @@ namespace TSoft.Data.Condition
                 {
                     await appliedEffect.sourceEffect.effect.ApplyEffect(director, this.appliedEffect);
                 }
+
+                await UniTask.Delay(10);
             }
         }
     }

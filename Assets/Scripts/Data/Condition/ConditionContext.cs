@@ -1,11 +1,6 @@
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
-using TSoft.InGame;
-using TSoft.InGame.CardSystem;
-using TSoft.InGame.GamePlaySystem;
-using UnityEngine;
 
 namespace TSoft.Data.Condition
 {
@@ -49,7 +44,7 @@ namespace TSoft.Data.Condition
                         operators.Pop();
                         break;
 
-                    default: // 연산자
+                    default:
                         while (operators.Count > 0 && operators.Peek().tokenType != ConditionTokenType.RightBracket)
                         {
                             output.Push(operators.Pop());
@@ -71,7 +66,7 @@ namespace TSoft.Data.Condition
         {
             Stack<IConditionExpression> stack = new Stack<IConditionExpression>();
 
-            for (int i = prefixTokens.Count - 1; i >= 0; i--) // Prefix 연산
+            for (int i = prefixTokens.Count - 1; i >= 0; i--)
             {
                 ConditionToken token = prefixTokens[i];
 

@@ -22,7 +22,7 @@ MonoBehaviour:
     modifierOp: 0
     gameplayMagnitude:
       magnitudeType: 0
-      magnitude: 0
+      magnitude: 20
       magnitudeRandom:
         minValue: 0
         maxValue: 0
@@ -30,15 +30,18 @@ MonoBehaviour:
     modifierOp: 1
     gameplayMagnitude:
       magnitudeType: 0
-      magnitude: 0
+      magnitude: 1.5
       magnitudeRandom:
         minValue: 0
         maxValue: 0
   hasCondition: 0
-  condition: {fileID: 0}
+  conditionApplier:
+    rid: -2
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 8436400116383088643
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

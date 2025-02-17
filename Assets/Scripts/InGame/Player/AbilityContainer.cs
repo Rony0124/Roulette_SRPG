@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Sirenix.Utilities;
 using TSoft.Data.Card;
-using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Utils;
 using UnityEngine;
@@ -57,7 +56,6 @@ namespace TSoft.InGame.Player
 
         public void ApplyAbility(GameplayEffectSO so)
         {
-            Debug.Log("1");
             gameplay.AddEffect(so);
         }
     }

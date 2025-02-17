@@ -33,7 +33,6 @@ namespace TSoft.InGame.Player
         
         public bool CanMoveNextCycle { get; set; }
         
-        public AbilityContainer AbilityContainer => abilityContainer;
         public Gameplay Gameplay =>  gameplay;
 
         private bool isSubmitting;

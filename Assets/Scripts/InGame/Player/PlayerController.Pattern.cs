@@ -61,6 +61,8 @@ namespace TSoft.InGame.Player
         
         private bool[] grade;
         private int[] gradeNumberCombined;
+        private List<PokerCard> cardsOnPattern;
+        public List<PokerCard> CardsOnPattern => cardsOnPattern; 
 
         public Dictionary<CardPatternType, ParticleSystem> particleDictionary;
 
