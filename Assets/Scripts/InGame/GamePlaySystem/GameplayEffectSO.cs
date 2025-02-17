@@ -24,7 +24,7 @@ namespace TSoft.InGame.GamePlaySystem
         public CustomEffect effect;
         public GameplayEffectModifier[] modifiers;
 
-        [Header("Effect")]
+        [Header("Condition")]
         public bool hasCondition;
 
         [ShowIf("hasCondition")]
