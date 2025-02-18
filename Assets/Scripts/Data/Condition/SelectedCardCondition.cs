@@ -1,9 +1,6 @@
 using System.Linq;
-using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using TSoft.InGame;
-using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
 namespace TSoft.Data.Condition
@@ -20,15 +17,11 @@ namespace TSoft.Data.Condition
         public enum CardConditionType
         {
             OddEven,
-            CardPattern,
             CardType,
             NumberCombination
         }
         
         public CardConditionType conditionType;
-            
-        [ShowIf("conditionType", CardConditionType.CardPattern)]
-        public CardPatternType cardPatternType;
 
         [ShowIf("conditionType", CardConditionType.OddEven)]
         public OddEven oddEven;

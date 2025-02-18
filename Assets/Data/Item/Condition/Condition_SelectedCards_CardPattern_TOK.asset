@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 295223a8f09d22648ac18077589dd43b, type: 3}
-  m_Name: Condition_SelectedCard_CardPattern_OnePair
+  m_Script: {fileID: 11500000, guid: 414d651515480184ebd0807424fa387c, type: 3}
+  m_Name: Condition_SelectedCards_CardPattern_TOK
   m_EditorClassIdentifier: 
-  conditionType: 1
-  cardPatternType: 2
-  oddEven: 0
-  numberCombination: 
-  cardType: 0
+  conditionType: 0
+  cardPatternType: 4

@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
+using TSoft.InGame.Player;
 using UnityEngine;
 
 namespace TSoft.Data.Condition
@@ -69,16 +70,16 @@ namespace TSoft.Data.Condition
     [Serializable]
     public class ConditionApplierOnCards : ConditionApplier
     {
-        private List<PokerCard> currentCheckingCards;
+        private PlayerController.CardPattern currentPattern;
         
-        public List<PokerCard> CurrentCheckingCards => currentCheckingCards;
+        public PlayerController.CardPattern CurrentPattern => currentPattern;
         
         public override async UniTask CheckConditionEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             this.director = director;
             this.appliedEffect = appliedEffect;
 
-            currentCheckingCards = director.Player.CurrentPokerCardSelected;
+            currentPattern = director.Player.CurrentPattern;
             
             if (context.Evaluate(this))
             {
