@@ -36,7 +36,7 @@ namespace TSoft.InGame
 
         public void TakeDamage(int damage, bool ignoreFeedback = false)
         {
-            DamageTextFeedback?.PlayFeedbacks(transform.position , damage);
+            DamageTextFeedback.PlayFeedbacks(transform.position , damage);
             
             var currentHp = GamePlay.GetAttr(GameplayAttr.Heart);
             currentHp = Math.Max(0, currentHp - damage);
@@ -51,13 +51,13 @@ namespace TSoft.InGame
                 if (ignoreFeedback)
                     return;
                     
-                DeathFeedback?.PlayFeedbacks();
+                DeathFeedback.PlayFeedbacks();
             }
             else
             {
                 if (!ignoreFeedback)
                 {
-                    DamageFeedback?.PlayFeedbacks();    
+                    DamageFeedback.PlayFeedbacks();    
                 }
             }
         }

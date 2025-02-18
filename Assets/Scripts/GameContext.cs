@@ -10,6 +10,12 @@ namespace TSoft
 {
     public class GameContext : Singleton<GameContext>
     {
+        public struct StageInfo
+        {
+            public int stage;
+            public int round;
+        }
+        
         private DirectorBase currentDirector;
 
         public DirectorBase CurrentDirector
@@ -47,18 +53,26 @@ namespace TSoft
                 currentNode = value;
             }
         }
+
+        public StageInfo currentStageInfo;
         
         private void OnCurrentNodeChanged(NodeBlueprint node)
         {
             switch (node.nodeType)
             {
                 case NodeType.MinorEnemy:
+                    currentStageInfo.round++;
+                    
                     SceneManager.LoadScene(Define.InGame);
                     break;
                 case NodeType.EliteEnemy:
+                    currentStageInfo.round++;
+                    
                     SceneManager.LoadScene(Define.InGame);
                     break;
                 case NodeType.Boss:
+                    currentStageInfo.round++;
+                    
                     SceneManager.LoadScene(Define.InGame);
                     break;
                 case NodeType.Treasure:

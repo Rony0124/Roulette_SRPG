@@ -12,7 +12,8 @@ namespace TSoft.Map
 
         private void Start()
         {
-            if (GameSave.Instance.IsMapExist())
+            GenerateNewMap();
+            /*if (GameSave.Instance.IsMapExist())
             {
                 var map = GameSave.Instance.MapSaved;
                 if (map.path.Any(p => p.Equals(map.GetBossNode().point)))
@@ -30,7 +31,7 @@ namespace TSoft.Map
             else
             {
                 GenerateNewMap();
-            }
+            }*/
         }
 
         public void GenerateNewMap()

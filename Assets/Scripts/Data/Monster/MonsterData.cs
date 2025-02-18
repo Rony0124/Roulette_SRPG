@@ -14,5 +14,6 @@ namespace TSoft.Data.Monster
     {
         public string name;
         public MonsterType monsterType;
+        public Sprite monsterMontage;
     }
 }
