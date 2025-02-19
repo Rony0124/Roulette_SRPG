@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5386dd19e814f499f903f00aab8e5edb, type: 3}
-  m_Name: Boss
+  m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
+  m_Name: RID_Monster_OrcMage
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1396070358, guid: 6582f34ddd5f686408c019550cd94c9d, type: 3}
-  nodeType: 4
-  monsterId: {fileID: 11400000, guid: 08371b493fc87eb41a5b971cbd918a2f, type: 2}
+  guid: edc4ffdaf2e5d4e398996e62b3e55dd2

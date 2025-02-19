@@ -30,13 +30,6 @@ namespace TSoft.Map
                 return;
 
             Debug.Log("Selected node: " + mapNode.Node.point);
-            
-            if (mapNode.Blueprint.nodeType is NodeType.EliteEnemy or NodeType.MinorEnemy or NodeType.Boss)
-            {
-                wantedView.SetWanted(mapNode);
-                OpenWantedFeedback.PlayFeedbacks();
-                return;
-            }
 
             CheckSendPlayerToNode(mapNode);
         }
@@ -47,7 +40,7 @@ namespace TSoft.Map
             {
                 // player has not selected the node yet, he can select any of the nodes with y = 0
                 if (mapNode.Node.point.y == 0)
-                    SendPlayerToNode(mapNode);
+                    CheckNode(mapNode);
                 else
                     PlayWarningThatNodeCannotBeAccessed();
             }
@@ -57,9 +50,22 @@ namespace TSoft.Map
                 Node currentNode = mapManager.CurrentMap.GetNode(currentPoint);
 
                 if (currentNode != null && currentNode.outgoing.Any(point => point.Equals(mapNode.Node.point)))
-                    SendPlayerToNode(mapNode);
+                    CheckNode(mapNode);
                 else
                     PlayWarningThatNodeCannotBeAccessed();
+            }
+        }
+
+        private void CheckNode(MapNode mapNode)
+        {
+            if (mapNode.Blueprint.nodeType is NodeType.EliteEnemy or NodeType.MinorEnemy or NodeType.Boss)
+            {
+                wantedView.SetWanted(mapNode);
+                OpenWantedFeedback.PlayFeedbacks();
+            }
+            else
+            {
+                SendPlayerToNode(mapNode);
             }
         }
 

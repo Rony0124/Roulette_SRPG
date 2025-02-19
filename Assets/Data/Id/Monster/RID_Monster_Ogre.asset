@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
-  m_Name: RID_Monster_Orc
+  m_Name: RID_Monster_Ogre
   m_EditorClassIdentifier: 
-  guid: 1dd033b2e1590498795422f599092797
+  guid: d6f65d7caf4e941b585dfae1d838a565

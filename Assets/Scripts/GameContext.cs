@@ -78,6 +78,8 @@ namespace TSoft
                 case NodeType.Treasure:
                     break;
                 case NodeType.Store:
+                    
+                    SceneManager.LoadScene(Define.StageMap);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

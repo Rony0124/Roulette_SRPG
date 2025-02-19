@@ -5,7 +5,6 @@ namespace TSoft.Map
 {
     public class MapManager : MonoBehaviour
     {
-        public MapConfig config;
         public MapView view;
 
         public Map CurrentMap { get; private set; }
@@ -36,7 +35,8 @@ namespace TSoft.Map
 
         public void GenerateNewMap()
         {
-            Map map = MapGenerator.GetMap(config);
+            var config = view.GetRandomConfig();
+            var map = MapGenerator.GetMap(config);
             CurrentMap = map;
             view.ShowMap(map);
         }

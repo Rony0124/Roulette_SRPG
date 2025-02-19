@@ -416,7 +416,7 @@ PrefabInstance:
     - target: {fileID: 704978731055960363, guid: e33039d24a8e3544b9895649bb28f747,
         type: 3}
       propertyPath: m_Name
-      value: Monster_Orc
+      value: Monster_OrcWarrior
       objectReference: {fileID: 0}
     - target: {fileID: 2725386834610469108, guid: e33039d24a8e3544b9895649bb28f747,
         type: 3}
@@ -505,7 +505,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8200947242012738941, guid: e33039d24a8e3544b9895649bb28f747, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3084649979433885662, guid: e33039d24a8e3544b9895649bb28f747, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e33039d24a8e3544b9895649bb28f747, type: 3}
