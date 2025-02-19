@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
-  m_Name: MonsterData_boss_test
+  m_Name: MonsterData_Wolf
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 6bc88c541dc2efb469a40c7e3cfbd685, type: 2}
-  monsterPrefab: {fileID: 8355968542685539696, guid: ee3ea18f027305342a4ebba633194c10,
+  registryId: {fileID: 11400000, guid: 1e078e2e494af6848b1fdfd15eb8d4b4, type: 2}
+  monsterPrefab: {fileID: 6014484093212867787, guid: 88655bb052df34240b56775793cac721,
     type: 3}
   monsterData:
-    Name: boss1
+    name: Wolf
+    monsterType: 2
+    monsterMontage: {fileID: 21300000, guid: c34bc42e03d540549b940e977bb3c5fe, type: 3}

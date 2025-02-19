@@ -6,7 +6,8 @@ namespace TSoft.Data.Monster
     public enum MonsterType
     {
         None,
-        Barrack
+        Barrack,
+        Forest
     }
     
     [Serializable]
