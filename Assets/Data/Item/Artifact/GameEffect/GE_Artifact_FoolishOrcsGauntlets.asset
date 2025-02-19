@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
+  m_Name: GE_Artifact_FoolishOrcsGauntlets
+  m_EditorClassIdentifier: 
+  lifeCycle:
+    begin: 4
+    end: 5
+  effect:
+    rid: 8943459879931609094
+  modifiers:
+  - attrType: 2001
+    modifierOp: 0
+    gameplayMagnitude:
+      magnitudeType: 0
+      magnitude: 15
+      magnitudeRandom:
+        minValue: 0
+        maxValue: 0
+  hasCondition: 1
+  conditionApplier:
+    rid: 8943459879931609096
+  references:
+    version: 2
+    RefIds:
+    - rid: 8943459879931609094
+      type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
+      data: 
+    - rid: 8943459879931609096
+      type: {class: ConditionApplierOnCards, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data:
+        director: {fileID: 0}
+        appliedEffect:
+          sourceEffect: {fileID: 0}
+          appliedModifiers: []
+        context:
+          tokens:
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: ad3ca5eb43dfb0e4f81a0e658add9e07, type: 2}
+          - tokenType: 4
+            condition: {fileID: 0}
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: 19f9620ac037d7944a53b502c12a9ff7, type: 2}
+          - tokenType: 4
+            condition: {fileID: 0}
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: 52d2c2c4fcc2eee40ba0966ce99f45d7, type: 2}
+          - tokenType: 4
+            condition: {fileID: 0}
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: 07145bf0808c4984eb7217e6fac85bcf, type: 2}
+          - tokenType: 4
+            condition: {fileID: 0}
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: cc6175b0fc518444b9888c08e673e377, type: 2}
+          - tokenType: 4
+            condition: {fileID: 0}
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: 23cc62905dd47e44fa53597749a99331, type: 2}
+          - tokenType: 4
+            condition: {fileID: 0}
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: bd49faa396ee4014087cdc71db2bd343, type: 2}

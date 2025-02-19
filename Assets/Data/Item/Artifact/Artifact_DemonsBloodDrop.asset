@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
+  m_Name: Artifact_DemonsBloodDrop
+  m_EditorClassIdentifier: 
+  registryId: {fileID: 11400000, guid: 1c45888a2ccd4214a9571d0016be2086, type: 2}
+  title: 
+  description: 
+  image: {fileID: 1115937622, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}
+  price: 0
+  effect: {fileID: 11400000, guid: 32f5839263a19604089624519c7fb24a, type: 2}

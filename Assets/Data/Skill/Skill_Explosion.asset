@@ -15,10 +15,9 @@ MonoBehaviour:
   registryId: {fileID: 11400000, guid: 34844c0b9279a1d43b9cab35b525490e, type: 2}
   title: Explosion
   description: 
-  image: {fileID: 0}
+  image: {fileID: 1440863173, guid: 305364d2eb6367541b9631526cd612a7, type: 3}
   price: 0
   effect: {fileID: 11400000, guid: 5ed3dc327a2419e4f95718dad9ffcf76, type: 2}
-  skillParticleObj: {fileID: 3294898671608175754, guid: e9419f2da11a7064db8ee18b0128de31,
-    type: 3}
+  skillParticleObj: {fileID: 3294898671608175754, guid: e9419f2da11a7064db8ee18b0128de31, type: 3}
   skillDuration: 2
   skillRepeater: 1

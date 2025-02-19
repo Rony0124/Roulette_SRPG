@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
-  m_Name: RID_Skill_TripleAttack
+  m_Name: RID_Artifact_WolfsMeat
   m_EditorClassIdentifier: 
-  guid: 5466637a3ec30468cbf1e985ce2534e2
+  guid: 2eac00c3880674c6e87405d45f4fb5ba

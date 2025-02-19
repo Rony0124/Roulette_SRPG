@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
-  m_Name: GE_Artifact_EnforceCardType_Heart
+  m_Name: GE_Artifact_CrestOfTheCrimsonMoon
   m_EditorClassIdentifier: 
   lifeCycle:
     begin: 4
-    end: 0
+    end: 5
   effect:
-    rid: 8436400052165148672
+    rid: 8943459898593902592
   modifiers:
-  - attrType: 2001
+  - attrType: 2000
     modifierOp: 0
     gameplayMagnitude:
       magnitudeType: 0
@@ -28,38 +28,25 @@ MonoBehaviour:
         maxValue: 0
   hasCondition: 1
   conditionApplier:
-    rid: 8436400264610578432
+    rid: 8943459898593902593
   references:
     version: 2
     RefIds:
-    - rid: 8436400052165148672
+    - rid: 8943459898593902592
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
-    - rid: 8436400264610578432
-      type: {class: ConditionApplierOnCardsEach, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+    - rid: 8943459898593902593
+      type: {class: ConditionApplierOnCards, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
       data:
         director: {fileID: 0}
         appliedEffect:
-          sourceEffect: {fileID: 11400000}
-          appliedModifiers:
-          - attrType: 2001
-            modifier:
-              Add: 10
-              Multiply: 1
-              Override: NaN
+          sourceEffect: {fileID: 0}
+          appliedModifiers: []
         context:
           tokens:
-          - tokenType: 0
-            condition: {fileID: 0}
           - tokenType: 2
             condition: {fileID: 11400000, guid: af10a132c19e98c44bc02953d6484efb, type: 2}
           - tokenType: 4
             condition: {fileID: 0}
           - tokenType: 2
-            condition: {fileID: 11400000, guid: 499450e400f9e194c96cd30abb5aad69, type: 2}
-          - tokenType: 1
-            condition: {fileID: 0}
-          - tokenType: 3
-            condition: {fileID: 0}
-          - tokenType: 2
-            condition: {fileID: 11400000, guid: ceb865cfaeabb4379b024a2e6f13d77c, type: 2}
+            condition: {fileID: 11400000, guid: 819446dc409c6914ca385fcd8d6cc450, type: 2}
