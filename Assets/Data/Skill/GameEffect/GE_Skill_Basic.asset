@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
+  m_Name: GE_Skill_Basic
+  m_EditorClassIdentifier: 
+  lifeCycle:
+    begin: 4
+    end: 5
+  effect:
+    rid: 8943459921593892864
+  modifiers:
+  - attrType: 2000
+    modifierOp: 0
+    gameplayMagnitude:
+      magnitudeType: 0
+      magnitude: 0
+      magnitudeRandom:
+        minValue: 0
+        maxValue: 0
+  hasCondition: 0
+  conditionApplier:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8943459921593892864
+      type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
+      data: 
