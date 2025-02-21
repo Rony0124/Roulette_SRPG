@@ -181,7 +181,7 @@ namespace TSoft.UI.Views.Store
             {
                 PopupContainer.Instance.ClosePopupUI();
                 
-                ShowInventoryButtons();
+               // ShowInventoryButtons();
             }
             else
             {
@@ -211,21 +211,21 @@ namespace TSoft.UI.Views.Store
         {
             PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Skill);
 
-            HideInventoryButtons();
+            //HideInventoryButtons();
         }
         
         private void OnJokerClicked()
         {
             PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Joker);
             
-            HideInventoryButtons();
+            //HideInventoryButtons();
         }
         
         private void OnArtifactClicked()
         {
             PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Artifact);
             
-            HideInventoryButtons();
+            //HideInventoryButtons();
         }
 
         private void HideInventoryButtons()

@@ -9,6 +9,9 @@ namespace TSoft.UI.Popup.Inventory
 {
     public class JokerPopup : PopupView
     {
+        public Action onPopupOpen;
+        public Action onPopupClose;
+        
         public enum JokerButton
         {
             DiscardButton,
@@ -54,6 +57,8 @@ namespace TSoft.UI.Popup.Inventory
                 jokerIcon.onItemClicked = OnJokerItemClicked;
                 jokerIcon.onItemReleased = OnJokerItemReleased;
             }
+            
+            onPopupOpen?.Invoke();
         }
 
         protected override void OnDeactivated()
@@ -66,6 +71,8 @@ namespace TSoft.UI.Popup.Inventory
             }
 
             jokerIcons = new();
+            
+            onPopupClose?.Invoke();
         }
 
         private void OnJokerItemClicked(JokerInventoryIcon jokerIcon)

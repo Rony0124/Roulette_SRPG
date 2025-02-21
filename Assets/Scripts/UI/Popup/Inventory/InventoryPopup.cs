@@ -6,6 +6,8 @@ namespace TSoft.UI.Popup.Inventory
 {
     public class InventoryPopup : PopupView
     {
+        public Action onPopupOpen;
+        public Action onPopupClose;
         public Action onUpdatePopup;
         
         public enum InventoryButton
@@ -31,6 +33,8 @@ namespace TSoft.UI.Popup.Inventory
             UpdatePopup();
             
             onUpdatePopup += UpdatePopup;
+            
+            onPopupOpen?.Invoke();
         }
 
         protected override void OnDeactivated()
@@ -38,6 +42,8 @@ namespace TSoft.UI.Popup.Inventory
             base.OnDeactivated();
             
             onUpdatePopup -= UpdatePopup;
+            
+            onPopupClose?.Invoke();
         }
         
         protected virtual void UpdatePopup()

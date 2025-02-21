@@ -56,10 +56,9 @@ namespace TSoft.UI.Popup.Inventory
             {
                 foreach (var id in testIds)
                 {
-                    if (GameSave.Instance.ArtifactEquippedSet.Values.Contains(id.Guid))
-                    {
+                    if (GameSave.Instance.ArtifactEquippedSet.Count > 0 
+                        && GameSave.Instance.ArtifactEquippedSet.Values.Contains(id.Guid))
                         continue;
-                    }
                     
                     var skill = DataRegistry.Instance.ArtifactRegistry.Get(id.Guid);
                     var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
