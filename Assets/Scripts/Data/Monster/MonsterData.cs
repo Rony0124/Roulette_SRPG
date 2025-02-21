@@ -7,7 +7,11 @@ namespace TSoft.Data.Monster
     {
         None,
         Barrack,
-        Forest
+        Forest,
+        Grave,
+        Fire,
+        Ice,
+        Thunder
     }
     
     [Serializable]

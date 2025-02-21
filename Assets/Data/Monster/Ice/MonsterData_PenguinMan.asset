@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
+  m_Name: MonsterData_PenguinMan
+  m_EditorClassIdentifier: 
+  registryId: {fileID: 11400000, guid: 2a5efe0b6e8cf41938884c366bcbc831, type: 2}
+  monsterPrefab: {fileID: 398719874231823862, guid: 778d8ee4c366946eabe5804bc110cf0e, type: 3}
+  monsterData:
+    name: PenguinMan
+    monsterType: 5
+    monsterMontage: {fileID: 21300000, guid: 3813301a0e273a140800ef238eea30b6, type: 3}

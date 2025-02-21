@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: MonsterData_FrogMan
   m_EditorClassIdentifier: 
   registryId: {fileID: 11400000, guid: 305694c45af8ead45a91025fbc7213ea, type: 2}
-  monsterPrefab: {fileID: 6014484093212867787, guid: 88655bb052df34240b56775793cac721,
-    type: 3}
+  monsterPrefab: {fileID: 7834740858793957064, guid: 10ce01809716a12458ef1fbb64b384db, type: 3}
   monsterData:
     name: FrogMan
     monsterType: 2

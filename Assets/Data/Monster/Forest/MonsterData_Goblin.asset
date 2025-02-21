@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: MonsterData_Goblin
   m_EditorClassIdentifier: 
   registryId: {fileID: 11400000, guid: b0b4ae901732ebd4cba6872a3bbdb45b, type: 2}
-  monsterPrefab: {fileID: 6014484093212867787, guid: 88655bb052df34240b56775793cac721,
-    type: 3}
+  monsterPrefab: {fileID: 7150042031428633884, guid: b657785cbd030b6428b06f0329e0dc4b, type: 3}
   monsterData:
     name: Goblin
     monsterType: 2

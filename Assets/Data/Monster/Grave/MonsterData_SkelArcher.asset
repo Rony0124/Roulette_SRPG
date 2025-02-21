@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
+  m_Name: MonsterData_SkelArcher
+  m_EditorClassIdentifier: 
+  registryId: {fileID: 11400000, guid: 8576e9d26ba8540a9b769cacec57aab1, type: 2}
+  monsterPrefab: {fileID: 3006851260391671835, guid: fc7e4cb87ed1d4760b4915554f4423a3, type: 3}
+  monsterData:
+    name: Skeleton Archer
+    monsterType: 3
+    monsterMontage: {fileID: 21300000, guid: 18ce983fb65bebc469a0e6fbecbaf3e1, type: 3}

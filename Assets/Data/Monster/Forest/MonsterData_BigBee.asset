@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: MonsterData_BigBee
   m_EditorClassIdentifier: 
   registryId: {fileID: 11400000, guid: 4514bbecb6f53aa44a6bd935cf38bff6, type: 2}
-  monsterPrefab: {fileID: 6014484093212867787, guid: 88655bb052df34240b56775793cac721,
-    type: 3}
+  monsterPrefab: {fileID: 7155212785035948107, guid: 42cd80411dd640b4db0bc59a2ec1f46b, type: 3}
   monsterData:
     name: BigBee
     monsterType: 2

@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: MonsterData_Ent
   m_EditorClassIdentifier: 
   registryId: {fileID: 11400000, guid: 3ff43498411740241af5e0aa2fc9e401, type: 2}
-  monsterPrefab: {fileID: 6014484093212867787, guid: 88655bb052df34240b56775793cac721,
-    type: 3}
+  monsterPrefab: {fileID: 5312385415791380371, guid: 9d2015a7114a2384e9f592ccbb15018f, type: 3}
   monsterData:
     name: Ent
     monsterType: 2
