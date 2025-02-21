@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
+  m_Name: MonsterData_Vampire
+  m_EditorClassIdentifier: 
+  registryId: {fileID: 11400000, guid: 7bfe3813f80cb43aa8a580f7cb3d0dff, type: 2}
+  monsterPrefab: {fileID: 6333337459728894518, guid: eb970afde5f7140c8824c7d7fe747a91, type: 3}
+  monsterData:
+    name: Vampire
+    monsterType: 3
+    monsterMontage: {fileID: 21300000, guid: e7ae6129c3e2f474d8ebaadebaf3de1e, type: 3}

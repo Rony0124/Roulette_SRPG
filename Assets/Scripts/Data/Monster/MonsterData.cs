@@ -6,7 +6,12 @@ namespace TSoft.Data.Monster
     public enum MonsterType
     {
         None,
-        Barrack
+        Barrack,
+        Forest,
+        Grave,
+        Fire,
+        Ice,
+        Thunder
     }
     
     [Serializable]
@@ -14,5 +19,6 @@ namespace TSoft.Data.Monster
     {
         public string name;
         public MonsterType monsterType;
+        public Sprite monsterMontage;
     }
 }

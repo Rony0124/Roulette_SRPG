@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Random = System.Random;
 
 namespace TSoft.Map
 {
@@ -330,6 +331,13 @@ namespace TSoft.Map
         protected MapConfig GetConfig(string configName)
         {
             return allMapConfigs.FirstOrDefault(c => c.name == configName);
+        }
+        
+        public MapConfig GetRandomConfig()
+        {
+            Random rand = new Random();
+            var ran = rand.Next(0, allMapConfigs.Count);
+            return allMapConfigs[ran];
         }
 
         protected NodeBlueprint GetBlueprint(NodeType type)

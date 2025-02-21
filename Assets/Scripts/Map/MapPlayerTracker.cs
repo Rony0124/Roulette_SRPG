@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using DG.Tweening;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace TSoft.Map
@@ -11,7 +12,8 @@ namespace TSoft.Map
         public float enterNodeDelay = 1f;
         public MapManager mapManager;
         public MapView view;
-
+        public WantedView wantedView;
+        [SerializeField] private MMFeedbacks OpenWantedFeedback;
         public static MapPlayerTracker Instance;
 
         public bool Locked { get; set; }
@@ -19,19 +21,26 @@ namespace TSoft.Map
         private void Awake()
         {
             Instance = this;
+            wantedView.onGoClicked += CheckSendPlayerToNode;
         }
 
         public void SelectNode(MapNode mapNode)
         {
-            if (Locked) return;
+            if (Locked) 
+                return;
 
             Debug.Log("Selected node: " + mapNode.Node.point);
 
+            CheckSendPlayerToNode(mapNode);
+        }
+
+        private void CheckSendPlayerToNode(MapNode mapNode)
+        {
             if (mapManager.CurrentMap.path.Count == 0)
             {
                 // player has not selected the node yet, he can select any of the nodes with y = 0
                 if (mapNode.Node.point.y == 0)
-                    SendPlayerToNode(mapNode);
+                    CheckNode(mapNode);
                 else
                     PlayWarningThatNodeCannotBeAccessed();
             }
@@ -41,9 +50,22 @@ namespace TSoft.Map
                 Node currentNode = mapManager.CurrentMap.GetNode(currentPoint);
 
                 if (currentNode != null && currentNode.outgoing.Any(point => point.Equals(mapNode.Node.point)))
-                    SendPlayerToNode(mapNode);
+                    CheckNode(mapNode);
                 else
                     PlayWarningThatNodeCannotBeAccessed();
+            }
+        }
+
+        private void CheckNode(MapNode mapNode)
+        {
+            if (mapNode.Blueprint.nodeType is NodeType.EliteEnemy or NodeType.MinorEnemy or NodeType.Boss)
+            {
+                wantedView.SetWanted(mapNode);
+                OpenWantedFeedback.PlayFeedbacks();
+            }
+            else
+            {
+                SendPlayerToNode(mapNode);
             }
         }
 

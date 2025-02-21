@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
+  m_Name: MonsterData_Yeti
+  m_EditorClassIdentifier: 
+  registryId: {fileID: 11400000, guid: 4ed3ef0e0f0b54131bce7cdeae76be1b, type: 2}
+  monsterPrefab: {fileID: 1065889168440903769, guid: a6b76924f22f94a18a435334edf330fc, type: 3}
+  monsterData:
+    name: Yeti
+    monsterType: 5
+    monsterMontage: {fileID: 21300000, guid: 8a5dfd01a5c0e2348b61cb2ccdb0cdef, type: 3}

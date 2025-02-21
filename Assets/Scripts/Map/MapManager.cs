@@ -5,14 +5,14 @@ namespace TSoft.Map
 {
     public class MapManager : MonoBehaviour
     {
-        public MapConfig config;
         public MapView view;
 
         public Map CurrentMap { get; private set; }
 
         private void Start()
         {
-            if (GameSave.Instance.IsMapExist())
+            GenerateNewMap();
+            /*if (GameSave.Instance.IsMapExist())
             {
                 var map = GameSave.Instance.MapSaved;
                 if (map.path.Any(p => p.Equals(map.GetBossNode().point)))
@@ -30,12 +30,13 @@ namespace TSoft.Map
             else
             {
                 GenerateNewMap();
-            }
+            }*/
         }
 
         public void GenerateNewMap()
         {
-            Map map = MapGenerator.GetMap(config);
+            var config = view.GetRandomConfig();
+            var map = MapGenerator.GetMap(config);
             CurrentMap = map;
             view.ShowMap(map);
         }

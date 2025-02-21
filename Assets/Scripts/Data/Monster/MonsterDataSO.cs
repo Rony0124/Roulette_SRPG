@@ -11,6 +11,8 @@ namespace TSoft.Data.Monster
         [SerializeField]
         private MonsterData monsterData;
 
+        public MonsterData MonsterData => monsterData; 
+
         public MonsterController SpawnMonster(Transform parent, Vector3 position)
         {
             var monsterObj = Instantiate(monsterPrefab, parent);
