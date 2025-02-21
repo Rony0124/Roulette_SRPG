@@ -16675,8 +16675,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollContent: {fileID: 2041932062}
   slotPrefab: {fileID: 5395350051616765279, guid: 6f6fd0ade1f666e439766e502b439f10, type: 3}
-  testIds:
-  - {fileID: 11400000, guid: c27a310a272fc434fba58eb3e8bc167c, type: 2}
+  testIds: []
 --- !u!1 &1901964985
 GameObject:
   m_ObjectHideFlags: 0
