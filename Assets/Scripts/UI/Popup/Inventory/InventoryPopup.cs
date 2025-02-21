@@ -1,13 +1,27 @@
 using System;
+using TSoft.Managers;
+using UnityEngine.UI;
 
 namespace TSoft.UI.Popup.Inventory
 {
     public class InventoryPopup : PopupView
     {
         public Action onUpdatePopup;
+        
+        public enum InventoryButton
+        {
+            CancelButton
+        }
 
         protected IInventoryUpdateHandler[] inventoryPanels;
-        
+
+        private void Awake()
+        {
+            Bind<Button>(typeof(InventoryButton));
+            
+            Get<Button>((int)InventoryButton.CancelButton).onClick.AddListener(OnCancelClicked);
+        }
+
         protected override void OnActivated()
         {
             base.OnActivated();
@@ -35,6 +49,11 @@ namespace TSoft.UI.Popup.Inventory
             {
                 panel.UpdateSlots();
             }
+        }
+
+        private void OnCancelClicked()
+        {
+            PopupContainer.Instance.ClosePopupUI();
         }
     }
 }

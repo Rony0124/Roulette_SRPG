@@ -21,7 +21,7 @@ namespace TSoft.Map
         private void Awake()
         {
             Instance = this;
-            wantedView.onGoClicked += CheckSendPlayerToNode;
+            wantedView.onGoClicked += SendPlayerToNode;
         }
 
         public void SelectNode(MapNode mapNode)

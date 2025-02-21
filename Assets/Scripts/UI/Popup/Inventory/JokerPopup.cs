@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using TSoft.Data.Registry;
+using TSoft.Managers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,8 @@ namespace TSoft.UI.Popup.Inventory
     {
         public enum JokerButton
         {
-            DiscardButton
+            DiscardButton,
+            CancelButton
         }
         
         public enum PopupTransform
@@ -33,6 +35,7 @@ namespace TSoft.UI.Popup.Inventory
             content = Get<Transform>((int)PopupTransform.JokerContent);
             
             Get<Button>((int)JokerButton.DiscardButton).onClick.AddListener(OnDiscardClicked);
+            Get<Button>((int)JokerButton.CancelButton).onClick.AddListener(OnCancelClicked);
         }
 
         protected override void OnActivated()
@@ -80,9 +83,17 @@ namespace TSoft.UI.Popup.Inventory
 
         private void OnDiscardClicked()
         {
+            if(!currentSelectedIcon)
+                return;
+            
             Destroy(currentSelectedIcon.gameObject);
 
             jokerIcons.Remove(currentSelectedIcon);
+        }
+        
+        private void OnCancelClicked()
+        {
+            PopupContainer.Instance.ClosePopupUI();
         }
     }
 }
