@@ -1,11 +1,9 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.UI.Core;
-using TSoft.UI.Popup;
 using TSoft.UI.Popup.StoreElement;
 using TSoft.Utils;
 using UnityEngine;
@@ -25,10 +23,7 @@ namespace TSoft.UI.Views.Store
         
         private enum StoreButton
         {
-            BackButton,
-            SkillButton,
-            JokerButton,
-            ArtifactButton
+            BackButton
         }
 
         [SerializeField] 
@@ -41,10 +36,6 @@ namespace TSoft.UI.Views.Store
         private Transform artifactDisplayParent;
         private Transform jokerDisplayParent;
         private Transform skillDisplayParent;
-        private Button backButton;
-        private Button skillButton;
-        private Button jokerButton;
-        private Button artifactButton;
 
         private StoreItem currentStoreItem;
         private List<StoreItem> items;
@@ -62,15 +53,7 @@ namespace TSoft.UI.Views.Store
             jokerDisplayParent = Get<Transform>((int)TransformParent.Joker);
             skillDisplayParent = Get<Transform>((int)TransformParent.Skill);
 
-            backButton = Get<Button>((int)StoreButton.BackButton);
-            skillButton = Get<Button>((int)StoreButton.SkillButton);
-            jokerButton = Get<Button>((int)StoreButton.JokerButton);
-            artifactButton = Get<Button>((int)StoreButton.ArtifactButton);
-            
-            backButton.onClick.AddListener(OnExitClicked);
-            skillButton.onClick.AddListener(OnSkillClicked);
-            jokerButton.onClick.AddListener(OnJokerClicked);
-            artifactButton.onClick.AddListener(OnArtifactClicked);
+            Get<Button>((int)StoreButton.BackButton).onClick.AddListener(OnExitClicked);
         }
 
         protected override void OnActivated()
@@ -180,8 +163,6 @@ namespace TSoft.UI.Views.Store
             if (PopupContainer.Instance.GetCurrentPopup() != null)
             {
                 PopupContainer.Instance.ClosePopupUI();
-                
-               // ShowInventoryButtons();
             }
             else
             {
@@ -205,48 +186,6 @@ namespace TSoft.UI.Views.Store
             }
 
             return uniqueNumbers.ToList();
-        }
-        
-        private void OnSkillClicked()
-        {
-            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Skill);
-
-            //HideInventoryButtons();
-        }
-        
-        private void OnJokerClicked()
-        {
-            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Joker);
-            
-            //HideInventoryButtons();
-        }
-        
-        private void OnArtifactClicked()
-        {
-            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Artifact);
-            
-            //HideInventoryButtons();
-        }
-
-        private void HideInventoryButtons()
-        {
-            jokerButton.gameObject.SetActive(false);
-            skillButton.gameObject.SetActive(false);
-            artifactButton.gameObject.SetActive(false);
-            
-            if (currentStoreItem)
-            {
-                currentStoreItem.OnDeselect();
-            }
-
-            currentStoreItem = null;
-        }
-
-        private void ShowInventoryButtons()
-        {
-            jokerButton.gameObject.SetActive(true);
-            skillButton.gameObject.SetActive(true);
-            artifactButton.gameObject.SetActive(true);
         }
     }
 }

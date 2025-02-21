@@ -103,8 +103,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5b7632899c443764b87f38f4d17046db, type: 2}
   - {fileID: 11400000, guid: fad4c0acb9c75324fb67db0793e445bf, type: 2}
   specialCardDB: []
-  pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01,
-    type: 3}
+  pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01, type: 3}
   maxCardsNum: 0
   cardY: 140
   cardXSpacing: 120
@@ -116,39 +115,31 @@ MonoBehaviour:
   - PatternType: 9
     effect: {fileID: 11400000, guid: 32cecdaeb6ad70447bd43640230c9903, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-    numbers: 0
   - PatternType: 8
     effect: {fileID: 11400000, guid: af7b89012640a0048ba6475d99f8b955, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-    numbers: 0
   - PatternType: 7
     effect: {fileID: 11400000, guid: 110913390b0aaf0488d3733e45da38f3, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-    numbers: 0
   - PatternType: 6
     effect: {fileID: 11400000, guid: 96efc20fed0bb6c429c8c66d026e9147, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-    numbers: 0
   - PatternType: 5
     effect: {fileID: 11400000, guid: c20e2e64daeb21641933148c4136a304, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-    numbers: 0
   - PatternType: 4
     effect: {fileID: 11400000, guid: be1ad3c3e1286834988370ea4ad154cc, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-    numbers: 0
   - PatternType: 3
     effect: {fileID: 11400000, guid: 95843e180495dce4bb1080b5a5dfb379, type: 2}
     skill: {fileID: 11400000, guid: 4f31b13619c11fe4b934ab4c7cf4ee67, type: 2}
-    numbers: 0
   - PatternType: 2
     effect: {fileID: 11400000, guid: 6c2b7382884654448b4cdfa17bf884e8, type: 2}
     skill: {fileID: 11400000, guid: a72fe590d72362941a705d8d3dd31d94, type: 2}
-    numbers: 0
   - PatternType: 1
     effect: {fileID: 11400000, guid: 7bab602625dc29743b5b1c31e79b9ba7, type: 2}
     skill: {fileID: 11400000, guid: 77a2e535ceb4f8c4c9c67a4c2a8074fe, type: 2}
-    numbers: 0
+  cardSubmitEffect: {fileID: 11400000, guid: 4f6f0b6ce4e1e7c4eb70b63f68400c64, type: 2}
 --- !u!114 &9176220145216558040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,10 +169,17 @@ MonoBehaviour:
     value: 10
   - attrType: 2001
     value: 0
+  - attrType: 2002
+    value: 0
   attributes: []
-  defaultEffects:
-  - sourceEffect: {fileID: 11400000, guid: e18b9a9787b90a044b175ff9e70ee77b, type: 2}
-  - sourceEffect: {fileID: 11400000, guid: b01f53607ec624b4cb9a8d786975b545, type: 2}
+  attrAppliedModifiers: []
+  capturedAttrAppliedModifiers: []
+  defaultEffects: []
+  appliedEffects_Passive: []
+  appliedEffects_OnRoundBegin: []
+  appliedEffects_OnRoundFinished: []
+  appliedEffects_OnTurnBegin: []
+  appliedEffects_OnTurnFinished: []
 --- !u!114 &1047355927819672411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,4 +192,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42e7c1b60d7b2974db3c02999c27977d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultArtifacts: []
+  defaultArtifacts:
+  - {fileID: 11400000, guid: 99911bdc1b0d0da4db5cf88700b5cef3, type: 2}
