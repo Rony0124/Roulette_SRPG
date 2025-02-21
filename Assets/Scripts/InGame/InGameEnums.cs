@@ -13,6 +13,27 @@ namespace TSoft.InGame
         Outro,
         Exit,               // 로비로 돌아간다.
     };
+
+    public enum ConditionType
+    {
+        Random,
+        Card
+    }
+    
+    public enum OddEven
+    {
+        Odd,
+        Even
+    }
+    
+    public enum CardConditionType
+    {
+        None,
+        CardPattern,
+        NumberCombination,
+        OddEven,
+        CardType
+    }
     
     public enum CardType
     {

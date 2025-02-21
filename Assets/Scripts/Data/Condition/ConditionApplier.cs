@@ -27,16 +27,12 @@ namespace TSoft.Data.Condition
 
             if (context.Evaluate(this))
             {
-                await appliedEffect.sourceEffect.effect.ApplyEffect(director, this.appliedEffect);
+                await appliedEffect.sourceEffect.gameplayEffect.effect.ApplyEffect(director, this.appliedEffect);
             }
-        }
-
-        public async UniTask CheckConditionEffect()
-        {
-            if (director is null || appliedEffect is null)
-                return;
-
-            await appliedEffect.sourceEffect.effect.ApplyEffect(director, appliedEffect);
+            else if (appliedEffect.sourceEffect.hasUnsatisfiedEffect)
+            {
+                await appliedEffect.sourceEffect.unsatisfiedEffect.effect.ApplyEffect(director, this.appliedEffect);
+            }
         }
     }
     
@@ -59,7 +55,11 @@ namespace TSoft.Data.Condition
                 
                 if (context.Evaluate(this))
                 {
-                    await appliedEffect.sourceEffect.effect.ApplyEffect(director, this.appliedEffect);
+                    await appliedEffect.sourceEffect.gameplayEffect.effect.ApplyEffect(director, this.appliedEffect);
+                }
+                else if (appliedEffect.sourceEffect.hasUnsatisfiedEffect)
+                {
+                    await appliedEffect.sourceEffect.unsatisfiedEffect.effect.ApplyEffect(director, this.appliedEffect);
                 }
 
                 await UniTask.Delay(10);
@@ -74,16 +74,24 @@ namespace TSoft.Data.Condition
         
         public PlayerController.CardPattern CurrentPattern => currentPattern;
         
+        private List<PokerCard> currentCards;
+        public List<PokerCard> CurrentCards => currentCards;
+        
         public override async UniTask CheckConditionEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             this.director = director;
             this.appliedEffect = appliedEffect;
 
             currentPattern = director.Player.CurrentPattern;
+            currentCards = director.Player.CurrentPokerCardSelected;
             
             if (context.Evaluate(this))
             {
-                await appliedEffect.sourceEffect.effect.ApplyEffect(director, this.appliedEffect);
+                await appliedEffect.sourceEffect.gameplayEffect.effect.ApplyEffect(director, this.appliedEffect);
+            }
+            else if (appliedEffect.sourceEffect.hasUnsatisfiedEffect)
+            {
+                await appliedEffect.sourceEffect.unsatisfiedEffect.effect.ApplyEffect(director, this.appliedEffect);
             }
         }
     }

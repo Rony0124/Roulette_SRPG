@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 414d651515480184ebd0807424fa387c, type: 3}
-  m_Name: Condition_SelectedCards_CardPattern_Flush
+  m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
+  m_Name: RID_Artifact_AceCrown
   m_EditorClassIdentifier: 
-  conditionType: 0
-  cardPatternType: 6
+  guid: 32ab46852e7e56f41af7c0ddf56af4d6

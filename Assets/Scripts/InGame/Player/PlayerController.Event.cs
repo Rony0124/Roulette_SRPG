@@ -23,6 +23,9 @@ namespace TSoft.InGame.Player
 
         [HideInInspector]
         public bool isSelectingCardOnHand;
+
+        private int jokerUsedNumber = 0;
+        public int JokerUsedNumber => jokerUsedNumber;
         
         IEnumerator ListenCardEvents(PokerCard pokerCard)
         {
@@ -56,6 +59,8 @@ namespace TSoft.InGame.Player
 
         private void OnClickJoker(PokerCard pokerCard)
         {
+            jokerUsedNumber++;
+            
             pokerCard.cardData.customEffect?.ApplyEffect(director).Forget();
             
             if (pokerCard.cardData.effect)

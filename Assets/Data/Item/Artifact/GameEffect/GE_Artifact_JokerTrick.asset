@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
+  m_Name: GE_Artifact_JokerTrick
+  m_EditorClassIdentifier: 
+  lifeCycle:
+    begin: 2
+    end: 3
+  effect:
+    rid: 8506343607258054658
+  modifiers:
+  - attrType: 2002
+    modifierOp: 1
+    gameplayMagnitude:
+      magnitudeType: 0
+      magnitude: 1.5
+      magnitudeRandom:
+        minValue: 0
+        maxValue: 0
+  hasCondition: 1
+  conditionApplier:
+    rid: 8506343607258054659
+  references:
+    version: 2
+    RefIds:
+    - rid: 8506343607258054658
+      type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
+      data: 
+    - rid: 8506343607258054659
+      type: {class: ConditionApplier, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data:
+        director: {fileID: 0}
+        appliedEffect:
+          sourceEffect: {fileID: 0}
+          appliedModifiers: []
+        context:
+          tokens:
+          - tokenType: 2
+            condition: {fileID: 11400000, guid: 2d9542d8cfedf498b868f8347056a0c1, type: 2}

@@ -37,8 +37,8 @@ namespace TSoft.InGame.GamePlaySystem
             {
                 appliedModifiers = new();
                 
-                var modifiers = sourceEffect.modifiers;
-                var effect = sourceEffect.effect;
+                var modifiers = sourceEffect.gameplayEffect.modifiers;
+                var effect = sourceEffect.gameplayEffect.effect;
                 
                 for (int i = 0; i < modifiers.Length; ++i)
                 {
@@ -96,7 +96,7 @@ namespace TSoft.InGame.GamePlaySystem
 
             private async UniTask UndoEffect()
             {
-                var effect = sourceEffect.effect;
+                var effect = sourceEffect.gameplayEffect.effect;
                 
                 var inGameDirector = GameContext.Instance.CurrentDirector as InGameDirector;
                 if (inGameDirector)

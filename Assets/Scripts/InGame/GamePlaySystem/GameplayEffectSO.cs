@@ -10,6 +10,14 @@ namespace TSoft.InGame.GamePlaySystem
     public class GameplayEffectSO : ScriptableObject
     {
         [Serializable]
+        public class GameplayEffect
+        {
+            [SerializeReference]
+            public CustomEffect effect;
+            public GameplayEffectModifier[] modifiers;
+        }
+        
+        [Serializable]
         public class GameplayEffectLifeCycle
         {
             public GameplayPolicyType begin;
@@ -19,10 +27,13 @@ namespace TSoft.InGame.GamePlaySystem
         [Header("Policy")]
         public GameplayEffectLifeCycle lifeCycle;
         
-        [Header("Effect")]
-        [SerializeReference]
-        public CustomEffect effect;
-        public GameplayEffectModifier[] modifiers;
+        [Header("GameplayEffect")]
+        public GameplayEffect gameplayEffect;
+        
+        public bool hasUnsatisfiedEffect;
+        
+        [ShowIf("hasUnsatisfiedEffect")]
+        public GameplayEffect unsatisfiedEffect;
 
         [Header("Condition")]
         public bool hasCondition;

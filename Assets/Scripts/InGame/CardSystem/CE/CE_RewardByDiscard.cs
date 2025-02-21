@@ -11,7 +11,7 @@ public class CE_RewardByDiscard : CustomEffect
         var currentGold = GameSave.Instance.Gold;
         var currentEnergy = director.Player.Gameplay.GetAttr(GameplayAttr.Energy);
         
-        foreach (var modifier in sourceEffect.sourceEffect.modifiers)
+        foreach (var modifier in sourceEffect.sourceEffect.gameplayEffect.modifiers)
         {
             if (modifier.attrType != GameplayAttr.None)
             {

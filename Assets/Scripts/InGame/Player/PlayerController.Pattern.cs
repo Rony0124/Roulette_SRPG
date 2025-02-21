@@ -254,7 +254,7 @@ namespace TSoft.InGame.Player
                     // 현재 패턴 설정
                     CurrentPattern = cardPatterns.Find(pattern => pattern.PatternType == (CardPatternType)i);
                     
-                    foreach (var modifier in cardSubmitEffect.modifiers)
+                    foreach (var modifier in cardSubmitEffect.gameplayEffect.modifiers)
                     {
                         if (modifier.attrType != GameplayAttr.BasicAttackPower)
                             continue;

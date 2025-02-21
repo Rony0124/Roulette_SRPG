@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 295223a8f09d22648ac18077589dd43b, type: 3}
-  m_Name: Condition_SelectedCard_OddEven_Odd
+  m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
+  m_Name: Artifact_JokerTrick
   m_EditorClassIdentifier: 
-  conditionType: 0
-  cardPatternType: 0
-  oddEven: 0
-  numberCombination: 0100000000000000
-  cardType: 0
+  registryId: {fileID: 0}
+  title: 
+  description: 
+  image: {fileID: 0}
+  price: 0
+  effect: {fileID: 11400000, guid: 033a21dd73c5f4620a830ac8a195e041, type: 2}

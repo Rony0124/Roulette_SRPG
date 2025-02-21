@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace TSoft.Data.Condition
 {
@@ -72,7 +74,7 @@ namespace TSoft.Data.Condition
 
                 if (token.tokenType == ConditionTokenType.Condition)
                 {
-                    stack.Push(new ConditionExpression(token.condition));
+                    stack.Push(new ConditionExpression(token.customCondition, token.conditionAttr));
                 }
                 else
                 {
@@ -176,16 +178,17 @@ namespace TSoft.Data.Condition
     
     public class ConditionExpression : IConditionExpression
     {
-        private readonly ConditionSO condition;
-
-        public ConditionExpression(ConditionSO condition)
+        private readonly CustomCondition _customCondition;
+        
+        public ConditionExpression(CustomCondition customCondition, ConditionAttr conditionAttr)
         {
-            this.condition = condition;
+            this._customCondition = customCondition;
+            customCondition.conditionAttr = conditionAttr;
         }
 
         public bool Interpret(ConditionApplier applier)
         {
-            return condition.Interpret(applier);
+            return _customCondition.Interpret(applier);
         }
     }
 
@@ -206,7 +209,11 @@ namespace TSoft.Data.Condition
         public ConditionTokenType tokenType;
         
         [ShowIf("tokenType", ConditionTokenType.Condition)]
-        public ConditionSO condition;
+        [SerializeReference]
+        public CustomCondition customCondition;
+        
+        [ShowIf("tokenType", ConditionTokenType.Condition)]
+        public ConditionAttr conditionAttr;
     }
     
 }

@@ -141,6 +141,8 @@ namespace TSoft.InGame.Player
             gameplay.ResetAttributeModifiers();
             
             isSubmitting = false;
+            
+            jokerUsedNumber = 0;
 
             if (CheckGameOver())
                 return false;
