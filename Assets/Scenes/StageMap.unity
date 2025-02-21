@@ -2204,49 +2204,13 @@ PrefabInstance:
       value: MapObject
       objectReference: {fileID: 0}
     - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: xSize
-      value: 11
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: padding
-      value: 400
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: yOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
       propertyPath: scrollRectVertical
       value: 
       objectReference: {fileID: 25107011}
     - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: backgroundPadding.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: backgroundPadding.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
       propertyPath: scrollRectHorizontal
       value: 
       objectReference: {fileID: 1816048640}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: unitsToPixelsMultiplier
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: allMapConfigs.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: allMapConfigs.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: f42346899103f1e43ac2a35ddcb1f8de, type: 2}
-    - target: {fileID: 7813270725029575813, guid: 35ae70acade733143b3d99d327fcd316, type: 3}
-      propertyPath: allMapConfigs.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: 987e3f53e4b91403d9c0a2322fe108af, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

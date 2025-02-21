@@ -47,16 +47,20 @@ MonoBehaviour:
   mapManager: {fileID: 8256559476706165661}
   orientation: 3
   allMapConfigs:
-  - {fileID: 11400000, guid: cb384bac34489e144908f38759a68af6, type: 2}
-  nodePrefab: {fileID: 723197524490611355, guid: e8ba3d3a2c2751c419129973f11ae581,
-    type: 3}
+  - {fileID: 11400000, guid: f42346899103f1e43ac2a35ddcb1f8de, type: 2}
+  - {fileID: 11400000, guid: 987e3f53e4b91403d9c0a2322fe108af, type: 2}
+  - {fileID: 11400000, guid: 1173ba8c4330540b191bcf8ece519b0f, type: 2}
+  - {fileID: 11400000, guid: ac3330121e83840bcb59adb77d778dc5, type: 2}
+  - {fileID: 11400000, guid: 586edd554d78a42f3aa434b55352c377, type: 2}
+  - {fileID: 11400000, guid: 408178ad1fa114d04a257f810ccd8fc9, type: 2}
+  nodePrefab: {fileID: 723197524490611355, guid: e8ba3d3a2c2751c419129973f11ae581, type: 3}
   orientationOffset: -4
   background: {fileID: 21300000, guid: c1c04a0ceec99624eb6b300960551d07, type: 3}
   backgroundColor:
     serializedVersion: 2
     rgba: 4294967295
-  xSize: 11.5
-  yOffset: 2
+  xSize: 11
+  yOffset: 0
   linePrefab: {fileID: 0}
   linePointsCount: 10
   offsetFromNodes: 15
@@ -76,10 +80,9 @@ MonoBehaviour:
   scrollRectVertical: {fileID: 0}
   unitsToPixelsMultiplier: 60
   padding: 400
-  backgroundPadding: {x: -100, y: -100}
+  backgroundPadding: {x: 0, y: 0}
   backgroundPPUMultiplier: 2
-  uiLinePrefab: {fileID: 8680139918324757656, guid: 000027c1a28a1b84d91d1438903907aa,
-    type: 3}
+  uiLinePrefab: {fileID: 8680139918324757656, guid: 000027c1a28a1b84d91d1438903907aa, type: 3}
 --- !u!1 &1394082277420523539
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,7 +244,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a81ba5fb205a453d9c7f50da176197e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  config: {fileID: 11400000, guid: cb384bac34489e144908f38759a68af6, type: 2}
   view: {fileID: 7813270725029575813}
 --- !u!1 &8677960699289039346
 GameObject:
