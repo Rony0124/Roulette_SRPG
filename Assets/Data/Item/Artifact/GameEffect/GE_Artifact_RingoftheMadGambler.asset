@@ -10,44 +10,50 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
-  m_Name: GE_Artifact_BeginnersGrimoire
+  m_Name: GE_Artifact_RingoftheMadGambler
   m_EditorClassIdentifier: 
   lifeCycle:
     begin: 2
     end: 3
   gameplayEffect:
     effect:
-      rid: 8436400433813258262
+      rid: 8436400433813258257
     modifiers:
     - attrType: 2002
       modifierOp: 1
       gameplayMagnitude:
         magnitudeType: 0
-        magnitude: 1.3
+        magnitude: 2
         magnitudeRandom:
           minValue: 0
           maxValue: 0
-  hasUnsatisfiedEffect: 0
+  hasUnsatisfiedEffect: 1
   unsatisfiedEffect:
     effect:
-      rid: -2
-    modifiers: []
+      rid: 8436400433813258258
+    modifiers:
+    - attrType: 2002
+      modifierOp: 3
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 0
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
   hasCondition: 1
   conditionApplier:
-    rid: 8943459879931609100
+    rid: 8436400433813258259
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
-    - rid: 8436400433813258262
+    - rid: 8436400433813258257
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
-    - rid: 8436400433813258263
-      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+    - rid: 8436400433813258258
+      type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
-    - rid: 8943459879931609100
-      type: {class: ConditionApplierOnCards, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+    - rid: 8436400433813258259
+      type: {class: ConditionApplier, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
       data:
         director: {fileID: 0}
         appliedEffect:
@@ -57,12 +63,15 @@ MonoBehaviour:
           tokens:
           - tokenType: 2
             customCondition:
-              rid: 8436400433813258263
+              rid: 8436400433813258261
             conditionAttr:
-              conditionType: 2
-              cardConditionType: 1
+              conditionType: 1
+              cardConditionType: 0
               oddEven: 0
               numberCombination: 
               cardType: 0
-              cardPatternType: 2
-              randomMagnitude: 0
+              cardPatternType: 0
+              randomMagnitude: 0.3
+    - rid: 8436400433813258261
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 

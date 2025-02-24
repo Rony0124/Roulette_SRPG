@@ -15,24 +15,35 @@ MonoBehaviour:
   lifeCycle:
     begin: 2
     end: 3
-  effect:
-    rid: 8506343607258054658
-  modifiers:
-  - attrType: 2002
-    modifierOp: 1
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: 1.5
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
+  gameplayEffect:
+    effect:
+      rid: 8436400433813258241
+    modifiers:
+    - attrType: 2002
+      modifierOp: 1
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 1.5
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+  hasUnsatisfiedEffect: 0
+  unsatisfiedEffect:
+    effect:
+      rid: -2
+    modifiers: []
   hasCondition: 1
   conditionApplier:
     rid: 8506343607258054659
   references:
     version: 2
     RefIds:
-    - rid: 8506343607258054658
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8436400433813258240
+      type: {class: JokerUsedCustomCondition, ns: Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258241
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
     - rid: 8506343607258054659
@@ -45,4 +56,13 @@ MonoBehaviour:
         context:
           tokens:
           - tokenType: 2
-            condition: {fileID: 11400000, guid: 2d9542d8cfedf498b868f8347056a0c1, type: 2}
+            customCondition:
+              rid: 8436400433813258240
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0

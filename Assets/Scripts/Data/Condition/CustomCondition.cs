@@ -26,7 +26,7 @@ namespace TSoft.Data.Condition
         public CardPatternType cardPatternType;
 
         [ShowIf("conditionType", ConditionType.Random)]
-        public float randomMagnitude;
+        [Range(0,1)] public float randomMagnitude;
     }
     
     public abstract class CustomCondition : IConditionExpression

@@ -13,26 +13,40 @@ MonoBehaviour:
   m_Name: GE_Artifact_CrestOfTheCrimsonMoon
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 4
-    end: 5
-  effect:
-    rid: 8943459898593902592
-  modifiers:
-  - attrType: 2000
-    modifierOp: 0
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: 10
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
+    begin: 2
+    end: 3
+  gameplayEffect:
+    effect:
+      rid: 8436400433813258267
+    modifiers:
+    - attrType: 2000
+      modifierOp: 0
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 10
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+  hasUnsatisfiedEffect: 0
+  unsatisfiedEffect:
+    effect:
+      rid: -2
+    modifiers: []
   hasCondition: 1
   conditionApplier:
     rid: 8943459898593902593
   references:
     version: 2
     RefIds:
-    - rid: 8943459898593902592
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8436400433813258264
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258265
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258267
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
     - rid: 8943459898593902593
@@ -45,8 +59,35 @@ MonoBehaviour:
         context:
           tokens:
           - tokenType: 2
-            condition: {fileID: 11400000, guid: af10a132c19e98c44bc02953d6484efb, type: 2}
+            customCondition:
+              rid: 8436400433813258264
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 4
+              oddEven: 0
+              numberCombination: 
+              cardType: 4
+              cardPatternType: 0
+              randomMagnitude: 0
           - tokenType: 4
-            condition: {fileID: 0}
+            customCondition:
+              rid: -2
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0
           - tokenType: 2
-            condition: {fileID: 11400000, guid: 819446dc409c6914ca385fcd8d6cc450, type: 2}
+            customCondition:
+              rid: 8436400433813258265
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 4
+              oddEven: 0
+              numberCombination: 
+              cardType: 1
+              cardPatternType: 0
+              randomMagnitude: 0

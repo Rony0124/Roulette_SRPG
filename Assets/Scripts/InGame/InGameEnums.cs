@@ -16,6 +16,7 @@ namespace TSoft.InGame
 
     public enum ConditionType
     {
+        None,
         Random,
         Card
     }

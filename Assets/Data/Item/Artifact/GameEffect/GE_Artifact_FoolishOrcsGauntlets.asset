@@ -13,27 +13,56 @@ MonoBehaviour:
   m_Name: GE_Artifact_FoolishOrcsGauntlets
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 4
-    end: 5
-  effect:
-    rid: 8943459879931609094
-  modifiers:
-  - attrType: 2001
-    modifierOp: 0
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: 15
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
+    begin: 2
+    end: 3
+  gameplayEffect:
+    effect:
+      rid: 8436400433813258249
+    modifiers:
+    - attrType: 2001
+      modifierOp: 0
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 15
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+  hasUnsatisfiedEffect: 0
+  unsatisfiedEffect:
+    effect:
+      rid: -2
+    modifiers: []
   hasCondition: 1
   conditionApplier:
     rid: 8943459879931609096
   references:
     version: 2
     RefIds:
-    - rid: 8943459879931609094
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8436400433813258249
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258250
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258251
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258252
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258253
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258254
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258255
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258256
+      type: {class: SelectedCardsCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
       data: 
     - rid: 8943459879931609096
       type: {class: ConditionApplierOnCards, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
@@ -45,28 +74,145 @@ MonoBehaviour:
         context:
           tokens:
           - tokenType: 2
-            condition: {fileID: 11400000, guid: ad3ca5eb43dfb0e4f81a0e658add9e07, type: 2}
+            customCondition:
+              rid: 8436400433813258250
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 1
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 3
+              randomMagnitude: 0
           - tokenType: 4
-            condition: {fileID: 0}
+            customCondition:
+              rid: -2
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0
           - tokenType: 2
-            condition: {fileID: 11400000, guid: 19f9620ac037d7944a53b502c12a9ff7, type: 2}
+            customCondition:
+              rid: 8436400433813258251
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 1
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 4
+              randomMagnitude: 0
           - tokenType: 4
-            condition: {fileID: 0}
+            customCondition:
+              rid: -2
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0
           - tokenType: 2
-            condition: {fileID: 11400000, guid: 52d2c2c4fcc2eee40ba0966ce99f45d7, type: 2}
+            customCondition:
+              rid: 8436400433813258252
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 1
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 5
+              randomMagnitude: 0
           - tokenType: 4
-            condition: {fileID: 0}
+            customCondition:
+              rid: -2
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0
           - tokenType: 2
-            condition: {fileID: 11400000, guid: 07145bf0808c4984eb7217e6fac85bcf, type: 2}
+            customCondition:
+              rid: 8436400433813258253
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 1
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 6
+              randomMagnitude: 0
           - tokenType: 4
-            condition: {fileID: 0}
+            customCondition:
+              rid: -2
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0
           - tokenType: 2
-            condition: {fileID: 11400000, guid: cc6175b0fc518444b9888c08e673e377, type: 2}
+            customCondition:
+              rid: 8436400433813258254
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 1
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 7
+              randomMagnitude: 0
           - tokenType: 4
-            condition: {fileID: 0}
+            customCondition:
+              rid: -2
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0
           - tokenType: 2
-            condition: {fileID: 11400000, guid: 23cc62905dd47e44fa53597749a99331, type: 2}
+            customCondition:
+              rid: 8436400433813258255
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 1
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 8
+              randomMagnitude: 0
           - tokenType: 4
-            condition: {fileID: 0}
+            customCondition:
+              rid: -2
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0
           - tokenType: 2
-            condition: {fileID: 11400000, guid: bd49faa396ee4014087cdc71db2bd343, type: 2}
+            customCondition:
+              rid: 8436400433813258256
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 1
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 9
+              randomMagnitude: 0

@@ -13,34 +13,42 @@ MonoBehaviour:
   m_Name: GE_Artifact_DemonsBloodDrop
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 4
-    end: 5
-  effect:
-    rid: 8943459879931609089
-  modifiers:
-  - attrType: 1000
-    modifierOp: 0
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: -2
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
-  - attrType: 2002
-    modifierOp: 1
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: 2
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
+    begin: 2
+    end: 3
+  gameplayEffect:
+    effect:
+      rid: 8436400433813258248
+    modifiers:
+    - attrType: 1000
+      modifierOp: 0
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: -1
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+    - attrType: 2002
+      modifierOp: 1
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 2
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+  hasUnsatisfiedEffect: 0
+  unsatisfiedEffect:
+    effect:
+      rid: -2
+    modifiers: []
   hasCondition: 0
   conditionApplier:
     rid: 8943459879931609090
   references:
     version: 2
     RefIds:
-    - rid: 8943459879931609089
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8436400433813258248
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
     - rid: 8943459879931609090
@@ -53,4 +61,13 @@ MonoBehaviour:
         context:
           tokens:
           - tokenType: 0
-            condition: {fileID: 0}
+            customCondition:
+              rid: -2
+            conditionAttr:
+              conditionType: 0
+              cardConditionType: 0
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0

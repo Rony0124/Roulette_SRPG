@@ -16,9 +16,9 @@ namespace TSoft.Data.Condition
             if (checkingCard is null)
                 return false;
             
-            var conditionType = conditionAttr.cardConditionType;
+            var cardConditionType = conditionAttr.cardConditionType;
 
-            switch (conditionType)
+            switch (cardConditionType)
             {
                 case CardConditionType.CardType:
                     Debug.Log("checkingCard.cardData.type : " + checkingCard.cardData.type);

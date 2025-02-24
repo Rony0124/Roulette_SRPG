@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using TSoft.InGame;
+using UnityEngine;
 
 namespace TSoft.Data.Condition
 {
@@ -19,13 +20,21 @@ namespace TSoft.Data.Condition
             var currentSelectedCards = eachCardApplier.CurrentCards;
             if (currentSelectedCards is null || currentSelectedCards.Count <= 0)
                 return false;
+            
+            var conditionType = conditionAttr.conditionType;
+            if (conditionType == ConditionType.Random)
+            {
+                return Random.Range(0, 1) <= conditionAttr.randomMagnitude;
+            }
 
-            var conditionType = conditionAttr.cardConditionType;
+            var cardConditionType = conditionAttr.cardConditionType;
 
-            switch (conditionType)
+            switch (cardConditionType)
             {
                 case CardConditionType.CardPattern:
                     return pattern.PatternType == conditionAttr.cardPatternType; 
+                case CardConditionType.CardType:
+                    return currentSelectedCards.FindAll(card => conditionAttr.cardType == card.cardData.type).Count > 0;
                 case CardConditionType.NumberCombination:
                     return currentSelectedCards.FindAll(card => conditionAttr.numberCombination.Contains(card.cardData.number)).Count > 0;
             }

@@ -13,19 +13,33 @@ MonoBehaviour:
   m_Name: GE_Artifact_WolfsMeat
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 2
-    end: 3
-  effect:
-    rid: 8943459898593902597
-  modifiers:
-  - attrType: 1000
-    modifierOp: 0
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: 1
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
+    begin: 1
+    end: 0
+  gameplayEffect:
+    effect:
+      rid: 8436400433813258270
+    modifiers:
+    - attrType: 1001
+      modifierOp: 0
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 1
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+    - attrType: 1000
+      modifierOp: 0
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 1
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+  hasUnsatisfiedEffect: 0
+  unsatisfiedEffect:
+    effect:
+      rid: -2
+    modifiers: []
   hasCondition: 0
   conditionApplier:
     rid: -2
@@ -34,6 +48,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8943459898593902597
+    - rid: 8436400433813258270
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

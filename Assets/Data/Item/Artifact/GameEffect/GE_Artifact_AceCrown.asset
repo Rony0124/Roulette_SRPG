@@ -53,7 +53,7 @@ MonoBehaviour:
             customCondition:
               rid: 8506343607258054661
             conditionAttr:
-              conditionType: 1
+              conditionType: 2
               cardConditionType: 2
               oddEven: 0
               numberCombination: 01000000
