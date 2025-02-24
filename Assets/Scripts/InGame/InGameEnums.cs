@@ -94,4 +94,10 @@ namespace TSoft.InGame
         OnTurnBegin,
         OnTurnFinished
     }
+
+    public enum GameplayLifeCycleType
+    {
+        None,
+        Instant
+    }
 }

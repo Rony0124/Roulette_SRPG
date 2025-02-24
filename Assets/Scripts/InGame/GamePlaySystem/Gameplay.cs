@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -43,7 +42,10 @@ namespace TSoft.InGame.GamePlaySystem
                   
                 if (effect.sourceEffect.lifeCycle.end == GameplayPolicyType.OnTurnBegin)
                 {
-                    endedEffects.Add(effect);
+                    if (effect.sourceEffect.lifeCycle.type == GameplayLifeCycleType.Instant)
+                    {
+                        endedEffects.Add(effect);    
+                    }
                 }
             }
             
@@ -62,7 +64,10 @@ namespace TSoft.InGame.GamePlaySystem
                 
                 if (effect.sourceEffect.lifeCycle.end == GameplayPolicyType.OnTurnFinished)
                 {
-                    endedEffects.Add(effect);
+                    if (effect.sourceEffect.lifeCycle.type == GameplayLifeCycleType.Instant)
+                    {
+                        endedEffects.Add(effect);    
+                    }
                 }
             }
 

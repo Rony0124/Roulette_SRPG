@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: GE_Artifact_DemonsBloodDrop
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 2
-    end: 3
+    begin: 4
+    end: 5
+    type: 0
   gameplayEffect:
     effect:
       rid: 8436400433813258248
