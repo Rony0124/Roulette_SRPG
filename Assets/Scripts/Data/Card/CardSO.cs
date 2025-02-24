@@ -12,8 +12,8 @@ namespace TSoft.Data.Card
         public int number;
         public CardType type;
         
-        [ShowIf("type", CardType.Joker), SerializeReference]
-        public CustomEffect customEffect;
+        [ShowIf("type", CardType.Joker)]
+        public GameplayEffectSO.GameplayEffect instantEffect;
         
         [ShowIf("type", CardType.Joker)]
         public GameplayEffectSO effect;

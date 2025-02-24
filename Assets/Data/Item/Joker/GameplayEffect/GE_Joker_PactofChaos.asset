@@ -15,32 +15,35 @@ MonoBehaviour:
   lifeCycle:
     begin: 4
     end: 5
-  effect:
-    rid: 8943459921593892865
-  modifiers:
-  - attrType: 2000
-    modifierOp: 1
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: 2
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
-  - attrType: 1002
-    modifierOp: 0
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: -1
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
+  gameplayEffect:
+    effect:
+      rid: 8436400433813258275
+    modifiers:
+    - attrType: 2000
+      modifierOp: 1
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 2
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+  hasUnsatisfiedEffect: 0
+  unsatisfiedEffect:
+    effect:
+      rid: -2
+    modifiers: []
   hasCondition: 1
   conditionApplier:
     rid: 8943459921593892869
   references:
     version: 2
     RefIds:
-    - rid: 8943459921593892865
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 8436400433813258274
+      type: {class: SelectedCardCustomCondition, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data: 
+    - rid: 8436400433813258275
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
     - rid: 8943459921593892869
@@ -53,4 +56,13 @@ MonoBehaviour:
         context:
           tokens:
           - tokenType: 2
-            condition: {fileID: 11400000, guid: ceb865cfaeabb4379b024a2e6f13d77c, type: 2}
+            customCondition:
+              rid: 8436400433813258274
+            conditionAttr:
+              conditionType: 2
+              cardConditionType: 3
+              oddEven: 0
+              numberCombination: 
+              cardType: 0
+              cardPatternType: 0
+              randomMagnitude: 0

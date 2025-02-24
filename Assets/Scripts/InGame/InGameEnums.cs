@@ -62,6 +62,7 @@ namespace TSoft.InGame
     
     public enum ModifierOpType
     {
+        None,
         Add,
         Multiply,
         Divide,

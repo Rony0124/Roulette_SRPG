@@ -12,16 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Joker_CrimsonDiceofFate
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  registryId: {fileID: 11400000, guid: 68b572dde10ed4a41accea9bb63b62e2, type: 2}
   title: 
   description: 
   image: {fileID: 0}
   price: 0
   number: 0
-  type: 0
-  customEffect:
-    rid: -2
-  effect: {fileID: 0}
+  type: 5
+  instantEffect:
+    effect:
+      rid: -2
+    modifiers: []
+  effect: {fileID: 11400000, guid: de826c5a54a2fd14d87e636790cb67cc, type: 2}
   references:
     version: 2
     RefIds:

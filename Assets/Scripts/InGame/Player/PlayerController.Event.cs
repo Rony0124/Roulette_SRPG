@@ -61,7 +61,7 @@ namespace TSoft.InGame.Player
         {
             jokerUsedNumber++;
             
-            pokerCard.cardData.customEffect?.ApplyEffect(director).Forget();
+            pokerCard.cardData.instantEffect?.effect?.ApplyEffect(director).Forget();
             
             if (pokerCard.cardData.effect)
             {

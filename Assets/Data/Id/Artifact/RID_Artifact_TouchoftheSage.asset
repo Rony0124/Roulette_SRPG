@@ -10,5 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
-  m_Name: RID_Joker_Shuffle
+  m_Name: RID_Artifact_TouchoftheSage
   m_EditorClassIdentifier: 
+  guid: d9668a79f0068413c89441d7eb3ddf75

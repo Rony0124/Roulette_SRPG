@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
-  m_Name: RID_Joker_EnhanceBasicApRandom
+  m_Name: RID_Joker_TheGoblinSlySmile
   m_EditorClassIdentifier: 
-  guid: 286b4235e41db894b82a318f8a959daa
+  guid: 2f3f1c2c867ae4d4b9e6d9a7888c50fe

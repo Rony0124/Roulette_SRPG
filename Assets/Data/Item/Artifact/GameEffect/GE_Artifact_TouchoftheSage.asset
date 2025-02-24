@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
-  m_Name: GE_Artifact_DemonsBloodDrop
+  m_Name: GE_Artifact_TouchoftheSage
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 2
-    end: 3
+    begin: 1
+    end: 0
   gameplayEffect:
     effect:
-      rid: 8436400433813258248
+      rid: 8436400433813258272
     modifiers:
-    - attrType: 1000
+    - attrType: 1004
       modifierOp: 1
       gameplayMagnitude:
         magnitudeType: 0
-        magnitude: -1
+        magnitude: 2
         magnitudeRandom:
           minValue: 0
           maxValue: 0
-    - attrType: 2002
-      modifierOp: 2
+    - attrType: 1005
+      modifierOp: 0
       gameplayMagnitude:
         magnitudeType: 0
         magnitude: 2
@@ -42,32 +42,12 @@ MonoBehaviour:
     modifiers: []
   hasCondition: 0
   conditionApplier:
-    rid: 8943459879931609090
+    rid: -2
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8436400433813258248
+    - rid: 8436400433813258272
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
-    - rid: 8943459879931609090
-      type: {class: ConditionApplier, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
-      data:
-        director: {fileID: 0}
-        appliedEffect:
-          sourceEffect: {fileID: 0}
-          appliedModifiers: []
-        context:
-          tokens:
-          - tokenType: 0
-            customCondition:
-              rid: -2
-            conditionAttr:
-              conditionType: 0
-              cardConditionType: 0
-              oddEven: 0
-              numberCombination: 
-              cardType: 0
-              cardPatternType: 0
-              randomMagnitude: 0

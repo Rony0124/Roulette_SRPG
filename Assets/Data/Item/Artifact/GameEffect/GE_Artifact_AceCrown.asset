@@ -20,7 +20,7 @@ MonoBehaviour:
       rid: 8506343607258054660
     modifiers:
     - attrType: 2001
-      modifierOp: 1
+      modifierOp: 2
       gameplayMagnitude:
         magnitudeType: 0
         magnitude: 2

@@ -10,21 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
-  m_Name: Card_Joker_Shuffle
+  m_Name: Card_Joker_TheGoblinSlySmile
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 260e40be1a7701b4eb3bc129216e2b23, type: 2}
+  registryId: {fileID: 11400000, guid: 2c1c3f2f7a86d4e4b9e6d9a7888c50fe, type: 2}
   title: 
   description: 
   image: {fileID: 0}
   price: 0
   number: 0
   type: 5
-  customEffect:
-    rid: 8436400116383088655
+  instantEffect:
+    effect:
+      rid: 8436400439862493185
+    modifiers:
+    - attrType: 0
+      modifierOp: 0
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 1
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
   effect: {fileID: 0}
   references:
     version: 2
     RefIds:
-    - rid: 8436400116383088655
-      type: {class: CE_Shuffle, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
+    - rid: 8436400439862493185
+      type: {class: CE_DrawCard, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 
