@@ -58,12 +58,16 @@ namespace TSoft.UI.Popup.Inventory
             foreach (var jokerId in DataRegistry.Instance.JokerRegistry.Ids)
             {
                 if (!GameSave.Instance.HasItemsId(jokerId.Guid))
+                {
+                    var njokerData = DataRegistry.Instance.JokerRegistry.Get(jokerId);
+                    Debug.Log(njokerData.name + "not have");
                     continue;
-
+                }
+                
                 var jokerData = DataRegistry.Instance.JokerRegistry.Get(jokerId);
                 var jokerIcon = Instantiate(jokerIconPrefab, content).GetComponent<JokerInventoryIcon>();
                 jokerIcon.SetItemIcon(jokerData);
-
+                Debug.Log(jokerData.name);
                 jokerIcon.onItemClicked = OnJokerItemClicked;
                 jokerIcon.onItemReleased = OnJokerItemReleased;
                 
