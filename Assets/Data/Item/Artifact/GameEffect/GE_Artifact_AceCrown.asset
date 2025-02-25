@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeCycle:
     begin: 4
-    end: 5
+    end: 3
     type: 1
   gameplayEffect:
     effect:
@@ -46,8 +46,13 @@ MonoBehaviour:
       data:
         director: {fileID: 0}
         appliedEffect:
-          sourceEffect: {fileID: 0}
-          appliedModifiers: []
+          sourceEffect: {fileID: 11400000}
+          appliedModifiers:
+          - attrType: 2001
+            modifier:
+              Add: 0
+              Multiply: 2
+              Override: NaN
         context:
           tokens:
           - tokenType: 2

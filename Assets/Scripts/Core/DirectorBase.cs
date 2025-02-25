@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace TSoft.InGame
@@ -7,6 +8,11 @@ namespace TSoft.InGame
         private void Awake()
         {
             InitOnAwake();
+        }
+
+        private void OnDestroy()
+        {
+            GameContext.Instance.OnDirectorChanged -= OnDirectorChanged;
         }
 
         protected virtual void InitOnAwake()

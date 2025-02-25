@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GE_Artifact_JudgmentofGreed
   m_EditorClassIdentifier: 
   lifeCycle:
-    begin: 2
+    begin: 3
     end: 3
     type: 0
   gameplayEffect:

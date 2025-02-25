@@ -22,7 +22,6 @@ namespace TSoft.InGame.GamePlaySystem
         {
             public GameplayPolicyType begin;
             public GameplayPolicyType end;
-            public GameplayLifeCycleType type;
         }
         
         [Header("Policy")]

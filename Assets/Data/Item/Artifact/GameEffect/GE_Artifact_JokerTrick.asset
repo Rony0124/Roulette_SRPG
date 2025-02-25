@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeCycle:
     begin: 4
-    end: 5
+    end: 3
     type: 0
   gameplayEffect:
     effect:

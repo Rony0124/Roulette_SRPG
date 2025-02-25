@@ -42,10 +42,7 @@ namespace TSoft.InGame.GamePlaySystem
                   
                 if (effect.sourceEffect.lifeCycle.end == GameplayPolicyType.OnTurnBegin)
                 {
-                    if (effect.sourceEffect.lifeCycle.type == GameplayLifeCycleType.Instant)
-                    {
-                        endedEffects.Add(effect);    
-                    }
+                    endedEffects.Add(effect);
                 }
             }
             
@@ -64,10 +61,7 @@ namespace TSoft.InGame.GamePlaySystem
                 
                 if (effect.sourceEffect.lifeCycle.end == GameplayPolicyType.OnTurnFinished)
                 {
-                    if (effect.sourceEffect.lifeCycle.type == GameplayLifeCycleType.Instant)
-                    {
-                        endedEffects.Add(effect);    
-                    }
+                    endedEffects.Add(effect);
                 }
             }
 
