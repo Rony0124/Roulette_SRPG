@@ -44,6 +44,16 @@ namespace TSoft.UI.Popup.Inventory
         protected override void OnActivated()
         {
             base.OnActivated();
+
+            if (jokerIcons.Count > 0)
+            {
+                foreach (var jokerIcon in jokerIcons)
+                {
+                    Destroy(jokerIcon.gameObject);
+                }
+
+                jokerIcons = new();
+            }
             
             foreach (var jokerId in DataRegistry.Instance.JokerRegistry.Ids)
             {
@@ -56,6 +66,8 @@ namespace TSoft.UI.Popup.Inventory
 
                 jokerIcon.onItemClicked = OnJokerItemClicked;
                 jokerIcon.onItemReleased = OnJokerItemReleased;
+                
+                jokerIcons.Add(jokerIcon);
             }
             
             onPopupOpen?.Invoke();
@@ -78,6 +90,7 @@ namespace TSoft.UI.Popup.Inventory
         private void OnJokerItemClicked(JokerInventoryIcon jokerIcon)
         {
             currentSelectedIcon = jokerIcon;
+            Debug.Log("???");
         }
         
         private void OnJokerItemReleased(JokerInventoryIcon jokerIcon)

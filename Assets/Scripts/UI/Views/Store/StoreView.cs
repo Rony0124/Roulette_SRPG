@@ -108,6 +108,11 @@ namespace TSoft.UI.Views.Store
                 {
                     continue;
                 }
+                
+                if (GameSave.Instance.HasItemsId(kvp.Key))
+                {
+                    continue;
+                }
 
                 var obj = Instantiate(prefab, parent);
                 var storeItem = obj.GetComponent<StoreItem>();
