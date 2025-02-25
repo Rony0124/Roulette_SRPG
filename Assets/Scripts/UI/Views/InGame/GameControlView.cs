@@ -9,12 +9,10 @@ namespace TSoft.UI.Views.InGame
     {
         private enum GameControlText
         {
-            CombinationNameText,
-            GoldTxt
+            CombinationNameText
         }
         
         private TMPro.TextMeshProUGUI txtCombinationNameText;
-        private TMPro.TextMeshProUGUI txtGoldTxt;
 
         [SerializeField] private PlayerController player;
         
@@ -23,9 +21,6 @@ namespace TSoft.UI.Views.InGame
             Bind<TMPro.TextMeshProUGUI>(typeof(GameControlText));
             
             txtCombinationNameText = Get<TMPro.TextMeshProUGUI>((int)GameControlText.CombinationNameText);
-            txtGoldTxt = Get<TMPro.TextMeshProUGUI>((int)GameControlText.GoldTxt);
-
-            UpdateGold(GameSave.Instance.Gold);
         }
 
         protected override void OnActivated()
@@ -41,11 +36,6 @@ namespace TSoft.UI.Views.InGame
         public void UpdateCombination(PlayerController.CardPattern pattern)
         {
             txtCombinationNameText.text = pattern.PatternType.ToString();
-        }
-
-        public void UpdateGold(int gold)
-        {
-            txtGoldTxt.text = gold.ToString();
         }
     }
 }

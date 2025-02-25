@@ -75,6 +75,8 @@ namespace UI.Views
             CreateArtifactSlots();
             
             GameSave.Instance.onGoldChanged += UpdateGold;
+            
+            UpdateGold(GameSave.Instance.Gold);
         }
 
         protected override void OnDeactivated()
