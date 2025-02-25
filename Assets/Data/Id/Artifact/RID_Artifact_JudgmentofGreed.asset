@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b2b3d28983bbed4596a3d23abb18235, type: 3}
-  m_Name: RID_Artifact_VerdictofAvarice
+  m_Name: RID_Artifact_JudgmentofGreed
   m_EditorClassIdentifier: 
   guid: 30221cfa0ff344cbabac7caedfaa1486

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
-  m_Name: GE_Artifact_VerdictofAvarice
+  m_Name: GE_Artifact_JudgmentofGreed
   m_EditorClassIdentifier: 
   lifeCycle:
     begin: 2

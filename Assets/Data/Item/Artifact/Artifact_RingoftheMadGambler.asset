@@ -15,6 +15,6 @@ MonoBehaviour:
   registryId: {fileID: 11400000, guid: 32f87ceac9036e04e97bd533927ff4ed, type: 2}
   title: 
   description: 
-  image: {fileID: 0}
+  image: {fileID: -1435712700, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}
   price: 0
   effect: {fileID: 11400000, guid: 3e7856979f75e754da1946e8d8533a97, type: 2}
