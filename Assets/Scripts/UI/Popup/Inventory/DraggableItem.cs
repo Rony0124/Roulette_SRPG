@@ -39,6 +39,7 @@ namespace TSoft.UI.Popup.Inventory
         public void OnEndDrag(PointerEventData eventData)
         {
             transform.SetParent(parentAfterDrag);
+            transform.localPosition = Vector3.zero;
             parentAfterDrag = null;
             canvasGroup.blocksRaycasts = true;
         }
