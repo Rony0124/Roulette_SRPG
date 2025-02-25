@@ -24,7 +24,7 @@ MonoBehaviour:
       modifierOp: 1
       gameplayMagnitude:
         magnitudeType: 0
-        magnitude: 0
+        magnitude: 10
         magnitudeRandom:
           minValue: 0
           maxValue: 0
@@ -32,7 +32,7 @@ MonoBehaviour:
       modifierOp: 1
       gameplayMagnitude:
         magnitudeType: 0
-        magnitude: 0
+        magnitude: 10
         magnitudeRandom:
           minValue: 0
           maxValue: 0

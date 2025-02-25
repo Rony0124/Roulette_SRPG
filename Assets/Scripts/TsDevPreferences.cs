@@ -74,7 +74,7 @@ using UnityEngine;
         private void OnGUI_InGame()
         {
             GUILayout.Label("Monster", EditorStyles.boldLabel);
-            MonsterId = EditorGUILayout.ObjectField(new GUIContent("Monster Id", "스테이지를 아래 값으로 고정합니다."), MonsterId, typeof(DataRegistryIdSO), false) as DataRegistryIdSO;
+            MonsterId = EditorGUILayout.ObjectField(new GUIContent("Monster Id", "몬스터 id 값 설정"), MonsterId, typeof(DataRegistryIdSO), false) as DataRegistryIdSO;
         }
         
         private void OnGUI_Stage()

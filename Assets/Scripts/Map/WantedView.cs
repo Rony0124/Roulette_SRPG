@@ -43,7 +43,11 @@ namespace TSoft.Map
             icon.sprite = monsterData.MonsterData.monsterMontage;
             
             var stageInfo = GameContext.Instance.currentStageInfo;
-            bountyText.text = ((stageInfo.stage + stageInfo.round + 1) * 100 * (blueprint.nodeType == NodeType.Boss ? 1.5 : 1)).ToString();
+            var bounty = (stageInfo.stage + stageInfo.round + 1) * 100 *
+                          (blueprint.nodeType == NodeType.Boss ? 1.5 : 1);
+            bountyText.text = bounty.ToString();
+
+            GameContext.Instance.currentBounty = bounty;
         }
     }
 }

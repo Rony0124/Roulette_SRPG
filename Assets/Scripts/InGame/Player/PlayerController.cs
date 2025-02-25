@@ -313,14 +313,14 @@ namespace TSoft.InGame.Player
 #if UNITY_EDITOR
         void OnGUI()
         {
-            var count = gameplay.appliedEffects_OnTurnBegin.Count;
+            var count = gameplay.attributes.Count;
             Rect rc = new Rect(400, 300, 400, 20);
             GUI.Label(rc, $"Player Attribute");
             rc.y += 25;
         
             for (var i = 0; i < count; i++)
             {
-                GUI.Label(rc, $"{gameplay.appliedEffects_OnTurnBegin[i]}");
+                GUI.Label(rc, $"{gameplay.attributes[i].attrType} : {gameplay.attributes[i].value.CurrentValue.Value}");
                 rc.y += 25;
             }
         }

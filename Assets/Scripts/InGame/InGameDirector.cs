@@ -4,6 +4,7 @@ using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.Utils;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using PlayerController = TSoft.InGame.Player.PlayerController;
 
 namespace TSoft.InGame
@@ -100,6 +101,19 @@ namespace TSoft.InGame
         public void GameFinishSuccess()
         {
             PopupContainer.Instance.ClosePopupUI();
+            
+            GameSave.Instance.AddGold((int)GameContext.Instance.currentBounty);
+            
+            SceneManager.LoadScene(Define.StageMap);
+        }
+
+        public void GameFinishFail()
+        {
+            PopupContainer.Instance.ClosePopupUI();
+
+            GameSave.Instance.ClearSaveFile();
+            
+            SceneManager.LoadScene(Define.Lobby);
         }
 
         #region Stage

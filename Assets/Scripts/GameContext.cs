@@ -55,6 +55,8 @@ namespace TSoft
         }
 
         public StageInfo currentStageInfo;
+
+        public double currentBounty;
         
         private void OnCurrentNodeChanged(NodeBlueprint node)
         {
