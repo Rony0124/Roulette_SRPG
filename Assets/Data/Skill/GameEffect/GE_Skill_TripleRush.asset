@@ -15,25 +15,24 @@ MonoBehaviour:
   lifeCycle:
     begin: 4
     end: 5
-  effect:
-    rid: 8436400116383088644
-  modifiers:
-  - attrType: 2000
-    modifierOp: 0
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: 20
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
-  - attrType: 2001
-    modifierOp: 1
-    gameplayMagnitude:
-      magnitudeType: 0
-      magnitude: 1.1
-      magnitudeRandom:
-        minValue: 0
-        maxValue: 0
+    type: 0
+  gameplayEffect:
+    effect:
+      rid: 8436400439862493198
+    modifiers:
+    - attrType: 2001
+      modifierOp: 2
+      gameplayMagnitude:
+        magnitudeType: 0
+        magnitude: 0
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+  hasUnsatisfiedEffect: 0
+  unsatisfiedEffect:
+    effect:
+      rid: -2
+    modifiers: []
   hasCondition: 0
   conditionApplier:
     rid: -2
@@ -42,6 +41,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8436400116383088644
+    - rid: 8436400439862493198
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

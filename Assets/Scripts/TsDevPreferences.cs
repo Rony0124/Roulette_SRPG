@@ -11,6 +11,7 @@ using UnityEngine;
         string[] toolbarStrings = {"InGame", "StageMap", "Lobby" };
         
         public static DataRegistryIdSO MonsterId;
+        public static int monsterHp;
         
         private static bool prefsLoaded = false;
         
