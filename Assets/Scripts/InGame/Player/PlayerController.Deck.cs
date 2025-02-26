@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using TSoft.Data.Card;
+using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
 using TSoft.Utils;
 using UnityEngine;
@@ -31,6 +32,15 @@ namespace TSoft.InGame.Player
             foreach (var card in defaultCardDB)
             {
                 currentDeck.Add(card);
+            }
+
+            foreach (var dataId in DataRegistry.Instance.JokerRegistry.Ids)
+            {
+                if (!GameSave.Instance.HasItemsId(dataId.Guid))
+                    continue;
+
+                var joker = DataRegistry.Instance.JokerRegistry.Get(dataId);
+                currentDeck.Add(joker);
             }
             
             Shuffle(currentDeck);

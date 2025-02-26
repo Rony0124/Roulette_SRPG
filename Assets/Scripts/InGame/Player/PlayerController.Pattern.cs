@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using TSoft.Data.Registry;
 using TSoft.Data.Skill;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
@@ -79,14 +80,24 @@ namespace TSoft.InGame.Player
             cardPatterns = new();
             particleDictionary = new();
             currentPattern = new();
-            
-            foreach (var defaultCardPattern in defaultCardPatterns)
+
+            var cardPatternCount = defaultCardPatterns.Count;
+            for (var i = 0; i < cardPatternCount; i++)
             {
-                var particleObj = Instantiate(defaultCardPattern.skill.skillParticleObj, transform);
+                var cardPattern = defaultCardPatterns[i];
+                var patternType = defaultCardPatterns[i].PatternType;
+                
+                if (GameSave.Instance.SkillEquippedDictionary.TryGetValue((int)patternType, out var skillId))
+                {
+                    var skill = DataRegistry.Instance.SkillRegistry.Get(skillId);
+                    cardPattern.skill = skill;
+                }
+                
+                var particleObj = Instantiate(cardPattern.skill.skillParticleObj, transform);
                 var particle = particleObj.GetComponent<ParticleSystem>();
                 
-                particleDictionary.Add(defaultCardPattern.PatternType, particle);
-                cardPatterns.Add(defaultCardPattern);
+                particleDictionary.Add(cardPattern.PatternType, particle);
+                cardPatterns.Add(cardPattern);
             }
         }
         
