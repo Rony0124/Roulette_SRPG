@@ -6,6 +6,7 @@ using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.UI.Core;
+using TSoft.UI.Popup.Inventory;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,6 +45,7 @@ namespace UI.Views
         [SerializeField] private GameObject artifactSlotPrefab;
         private Transform artifactsContainer;
         private TextMeshProUGUI quantityText;
+        private List<ArtifactSlot> artifactSlots = new();
         
         private const int DefaultArtifactSlotCount = 5;
 
@@ -72,7 +74,7 @@ namespace UI.Views
 
         protected override void OnActivated()
         {
-            CreateArtifactSlots();
+            UpdateArtifactSlots();
             
             GameSave.Instance.onGoldChanged += UpdateGold;
             
@@ -102,6 +104,11 @@ namespace UI.Views
         private void OnArtifactClicked()
         {
             PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Artifact);
+            
+            var popup = PopupContainer.Instance.GetCurrentPopup() as InventoryPopup;
+
+            if (popup != null)
+                popup.onUpdatePopup += UpdateArtifactSlots;
         }
         
         private void HideInventoryButtons()
@@ -118,8 +125,18 @@ namespace UI.Views
             artifactButton.gameObject.SetActive(true);
         }
 
-        private void CreateArtifactSlots()
+        private void UpdateArtifactSlots()
         {
+            if (artifactSlots.Count > 0)
+            {
+                foreach (var artifactSlot in artifactSlots)
+                {
+                    Destroy(artifactSlot.gameObject);
+                }
+
+                artifactSlots = new();
+            }
+            
             int quantity = 0;
             for (var i = 0; i < DefaultArtifactSlotCount; i++)
             {
@@ -132,6 +149,8 @@ namespace UI.Views
 
                     quantity++;
                 }
+                
+                artifactSlots.Add(slot);
             }
 
             SetQuantityText(quantity);

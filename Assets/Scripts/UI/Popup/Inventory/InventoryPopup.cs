@@ -60,6 +60,7 @@ namespace TSoft.UI.Popup.Inventory
         private void OnCancelClicked()
         {
             PopupContainer.Instance.ClosePopupUI();
+            onUpdatePopup = null;
         }
     }
 }
