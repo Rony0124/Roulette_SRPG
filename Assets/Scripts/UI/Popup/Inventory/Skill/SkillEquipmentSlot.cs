@@ -31,6 +31,9 @@ namespace TSoft.UI.Popup.Inventory.Skill
                 
                 if(icon)
                     Destroy(icon.gameObject);
+
+                icon = null;
+                item = null;
             }
         }
         

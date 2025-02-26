@@ -127,6 +127,19 @@ namespace TSoft
 
         public void SaveEquippedSkill(CardPatternType pattern, Guid skillId)
         {
+            int removalKey = -9999;
+            foreach (var guidKvp in skillEquippedDictionary)
+            {
+                if (guidKvp.Value == skillId)
+                {
+                    removalKey = guidKvp.Key;
+                    break;
+                }
+            }
+
+            if(removalKey >= 0)
+                skillEquippedDictionary.Remove(removalKey);
+            
             if (skillEquippedDictionary.ContainsKey((int)pattern))
             {
                 skillEquippedDictionary[(int)pattern] = skillId;
@@ -142,6 +155,19 @@ namespace TSoft
         
         public void SaveEquippedArtifact(int index, Guid id)
         {
+            int removalKey = -9999;
+            foreach (var guidKvp in artifactEquippedSet)
+            {
+                if (guidKvp.Value == id)
+                {
+                    removalKey = guidKvp.Key;
+                    break;
+                }
+            }
+
+            if(removalKey >= 0)
+                artifactEquippedSet.Remove(removalKey);
+            
             if (artifactEquippedSet.ContainsKey(index))
             {
                 artifactEquippedSet[index] = id;
