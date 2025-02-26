@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using Sirenix.Utilities;
 using TSoft.Data.Card;
+using TSoft.Data.Registry;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Utils;
 using UnityEngine;
@@ -34,6 +35,16 @@ namespace TSoft.InGame.Player
                     
                     currentArtifacts.Add(artifact);
                 }    
+            }
+
+            if (GameSave.Instance.ArtifactEquippedSet.Count > 0)
+            {
+                var artifactIds = GameSave.Instance.ArtifactEquippedSet.Values;
+                foreach (var artifactId in artifactIds)
+                {
+                    var artifact = DataRegistry.Instance.ArtifactRegistry.Get(artifactId);
+                    currentArtifacts.Add(artifact);
+                }
             }
         }
 

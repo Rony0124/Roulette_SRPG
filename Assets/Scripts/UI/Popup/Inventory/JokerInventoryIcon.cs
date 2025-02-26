@@ -31,7 +31,7 @@ namespace TSoft.UI.Popup.Inventory
 
                 if (Vector2.Distance(pressPosition, eventData.position) < 10)
                 {
-                    Debug.Log("아이템 스펙 설명");
+                    Debug.Log("아이템 스펙 설명" + currentItem.title);
                 }
                 
                 onItemClicked?.Invoke(this);
@@ -44,7 +44,7 @@ namespace TSoft.UI.Popup.Inventory
 
         public override void OnPointerExit(PointerEventData eventData)
         {
-            onItemReleased?.Invoke(this);
+            //.onItemReleased?.Invoke(this);
         }
     }
 }

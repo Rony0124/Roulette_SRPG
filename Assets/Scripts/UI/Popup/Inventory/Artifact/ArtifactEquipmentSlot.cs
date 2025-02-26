@@ -17,7 +17,7 @@ namespace TSoft.UI.Popup.Inventory.Artifact
                 if(!icon)
                     icon = Instantiate(iconPrefab, transform).GetComponent<SlotItemIcon>();
                 
-                item = DataRegistry.Instance.SkillRegistry.Get(id);
+                item = DataRegistry.Instance.ArtifactRegistry.Get(id);
                 
                 slotBackgroundImage.gameObject.SetActive(true);
                 

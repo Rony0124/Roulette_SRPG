@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TSoft.Data;
@@ -89,7 +90,9 @@ namespace TSoft.UI.Views.Store
         private void CreateDisplay<T>(RegistrySO<T> registry, GameObject prefab, Transform parent)
             where T : ItemSO
         {
-            int displayCount = 0;
+            var displayCount = 0;
+            var random = new System.Random();
+          
             foreach (var itemId in registry.Ids)
             {
                 if (GameSave.Instance.HasItemsId(itemId.Guid))
@@ -100,28 +103,43 @@ namespace TSoft.UI.Views.Store
                 displayCount++;
             }
 
-            var uniqueNumbers = GetUniqueNumbers(displayCount);
+            displayCount = Mathf.Min(displayCount, MaxDisplayNumber);
+            
+            var displayIndex = new int[displayCount];
 
-            for (int i = 0; i < uniqueNumbers.Count; i++)
+            for (int i = 0; i < displayCount; i++)
             {
-                if (!registry.TryGetKvpByIndex(uniqueNumbers[i], out var kvp))
+                while (true)
                 {
-                    continue;
+                    var ranNum = random.Next(registry.Ids.Count);
+                    
+                    if (!registry.TryGetKvpByIndex(ranNum, out var kvp))
+                        continue;
+
+                    if (GameSave.Instance.HasItemsId(kvp.Key))
+                        continue;
+                    
+                    if(displayIndex.Contains(ranNum))
+                        continue;
+                    
+                    var obj = Instantiate(prefab, parent);
+                    var storeItem = obj.GetComponent<StoreItem>();
+                    var info = kvp.Value;
+
+                    storeItem.onSelect = () =>
+                    {
+                        OnSelect(storeItem);
+                    };
+
+                    storeItem.onBuyClicked = OnBuyClicked;
+
+                    storeItem.SetElement(info);
+                    items.Add(storeItem);
+
+                    displayIndex[i] = ranNum;
+                    
+                    break;
                 }
-
-                var obj = Instantiate(prefab, parent);
-                var storeItem = obj.GetComponent<StoreItem>();
-                var info = kvp.Value;
-
-                storeItem.onSelect = () =>
-                {
-                    OnSelect(storeItem);
-                };
-
-                storeItem.onBuyClicked = OnBuyClicked;
-
-                storeItem.SetElement(info);
-                items.Add(storeItem);
             }
         }
 
