@@ -10,6 +10,7 @@ using TSoft.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace TSoft.UI.Views.Store
 {
@@ -90,58 +91,68 @@ namespace TSoft.UI.Views.Store
         private void CreateDisplay<T>(RegistrySO<T> registry, GameObject prefab, Transform parent)
             where T : ItemSO
         {
-            var displayCount = 0;
-            var random = new System.Random();
-          
-            foreach (var itemId in registry.Ids)
+            List<Guid> GetAvailableItems()
             {
-                if (GameSave.Instance.HasItemsId(itemId.Guid))
+                var guids = new List<Guid>();
+                foreach (var itemId in registry.Ids)
                 {
-                    continue;
+                    if (GameSave.Instance.HasItemsId(itemId.Guid))
+                        continue;
+                    
+                    guids.Add(itemId.Guid);
                 }
                 
-                displayCount++;
+                return guids;
+            }
+            
+            List<int> GetUniqueNumbers(int maxNumber)
+            {
+                if(maxNumber == 0)
+                    return new List<int>();
+            
+                var uniqueNumbers = new HashSet<int>();
+                var min = Mathf.Min(maxNumber, MaxDisplayNumber);
+            
+                while (uniqueNumbers.Count < min)
+                {
+                    int number = Random.Range(0, maxNumber);
+                    
+                    uniqueNumbers.Add(number);
+                }
+
+                return uniqueNumbers.ToList();
+            }
+            
+            var availableItems = GetAvailableItems();
+            var uniqueNumbers = GetUniqueNumbers(availableItems.Count);
+
+            if (uniqueNumbers.Count == 0)
+            {
+                Debug.Log("[Store] No available items to display.");
+                return;
             }
 
-            displayCount = Mathf.Min(displayCount, MaxDisplayNumber);
-            
-            var displayIndex = new int[displayCount];
-
-            for (int i = 0; i < displayCount; i++)
+            foreach (var uniqueNumber in uniqueNumbers)
             {
-                while (true)
+                var item = registry.Get(availableItems[uniqueNumber]);
+                    
+                var obj = Instantiate(prefab, parent);
+                var storeItem = obj.GetComponent<StoreItem>();
+                var info = item;
+
+                storeItem.onSelect = () =>
                 {
-                    var ranNum = random.Next(registry.Ids.Count);
-                    
-                    if (!registry.TryGetKvpByIndex(ranNum, out var kvp))
-                        continue;
+                    OnSelect(storeItem);
+                };
 
-                    if (GameSave.Instance.HasItemsId(kvp.Key))
-                        continue;
-                    
-                    if(displayIndex.Contains(ranNum))
-                        continue;
-                    
-                    var obj = Instantiate(prefab, parent);
-                    var storeItem = obj.GetComponent<StoreItem>();
-                    var info = kvp.Value;
+                storeItem.onBuyClicked = OnBuyClicked;
 
-                    storeItem.onSelect = () =>
-                    {
-                        OnSelect(storeItem);
-                    };
-
-                    storeItem.onBuyClicked = OnBuyClicked;
-
-                    storeItem.SetElement(info);
-                    items.Add(storeItem);
-
-                    displayIndex[i] = ranNum;
-                    
-                    break;
-                }
+                storeItem.SetElement(info);
+                items.Add(storeItem);
             }
         }
+        
+      
 
         private void OnSelect(StoreItem item)
         {
@@ -186,24 +197,6 @@ namespace TSoft.UI.Views.Store
             {
                 SceneManager.LoadScene(Define.StageMap);    
             }
-        }
-        
-        private List<int> GetUniqueNumbers(int count)
-        {
-            if(count == 0)
-                return new List<int>();
-            
-            var uniqueNumbers = new HashSet<int>();
-            var random = new System.Random();
-            var min = Mathf.Min(count, MaxDisplayNumber);
-            
-            while (uniqueNumbers.Count < min)
-            {
-                int number = random.Next(0, count);
-                uniqueNumbers.Add(number);
-            }
-
-            return uniqueNumbers.ToList();
         }
     }
 }

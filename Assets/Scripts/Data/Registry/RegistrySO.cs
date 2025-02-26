@@ -55,6 +55,13 @@ namespace TSoft.Data.Registry
         {
             return assetDictionary.TryGetValue(key, out data);
         }
+        
+        public bool TryGetValue(Guid key, out TData data)
+        {
+            data = Get(key);
+            
+            return data is not null;
+        }
 
         public bool TryGetDataByIndex(int index, out TData data)
         {
