@@ -90,7 +90,6 @@ namespace TSoft.UI.Views.Store
         private void CreateDisplay<T>(RegistrySO<T> registry, GameObject prefab, Transform parent)
             where T : ItemSO
         {
-            var displayIndex = new Guid[MaxDisplayNumber];
             var displayCount = 0;
             var random = new System.Random();
           
@@ -105,6 +104,8 @@ namespace TSoft.UI.Views.Store
             }
 
             displayCount = Mathf.Min(displayCount, MaxDisplayNumber);
+            
+            var displayIndex = new int[displayCount];
 
             for (int i = 0; i < displayCount; i++)
             {
@@ -116,6 +117,9 @@ namespace TSoft.UI.Views.Store
                         continue;
 
                     if (GameSave.Instance.HasItemsId(kvp.Key))
+                        continue;
+                    
+                    if(displayIndex.Contains(ranNum))
                         continue;
                     
                     var obj = Instantiate(prefab, parent);
@@ -131,6 +135,8 @@ namespace TSoft.UI.Views.Store
 
                     storeItem.SetElement(info);
                     items.Add(storeItem);
+
+                    displayIndex[i] = ranNum;
                     
                     break;
                 }
