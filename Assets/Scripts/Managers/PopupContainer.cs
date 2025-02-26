@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using TSoft.Core;
 using TSoft.UI.Popup;
 using TSoft.Utils;
 using UnityEngine;
+using Utils;
 
 namespace TSoft.Managers
 {
@@ -31,7 +33,7 @@ namespace TSoft.Managers
         
         private int order = 10; 
         
-        Stack<PopupView> popupStack = new Stack<PopupView>();
+        UniqueStack<PopupView> popupStack = new ();
         
         public void SetCanvas(GameObject go, bool sort = true)
         {
@@ -52,8 +54,12 @@ namespace TSoft.Managers
         
         public  void ShowPopupUI(PopupType type)
         {
+            ClosePopupUI();
+            
             GameObject go = popups.Find(Popup => Popup.type == type).popupObj;
             go.SetActive(true);
+
+            SetCanvas(go);
             
             var popup = UIUtil.GetOrAddComponent<PopupView>(go);
             popupStack.Push(popup);
