@@ -53,9 +53,23 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ac3330121e83840bcb59adb77d778dc5, type: 2}
   - {fileID: 11400000, guid: 586edd554d78a42f3aa434b55352c377, type: 2}
   - {fileID: 11400000, guid: 408178ad1fa114d04a257f810ccd8fc9, type: 2}
-  nodePrefab: {fileID: 723197524490611355, guid: e8ba3d3a2c2751c419129973f11ae581, type: 3}
+  nodePrefab: {fileID: 723197524490611355, guid: e8ba3d3a2c2751c419129973f11ae581,
+    type: 3}
   orientationOffset: -4
-  background: {fileID: 21300000, guid: c1c04a0ceec99624eb6b300960551d07, type: 3}
+  backgroundSet:
+    _serializedList:
+    - Key: BarrakMapConfig
+      Value: {fileID: 0}
+    - Key: ThunderMapConfig
+      Value: {fileID: 0}
+    - Key: IceMapConfig
+      Value: {fileID: 0}
+    - Key: GraveMapConfig
+      Value: {fileID: 0}
+    - Key: ForestMapConfig
+      Value: {fileID: 0}
+    - Key: FireMapConfig
+      Value: {fileID: 0}
   backgroundColor:
     serializedVersion: 2
     rgba: 4294967295
@@ -82,7 +96,8 @@ MonoBehaviour:
   padding: 400
   backgroundPadding: {x: 0, y: 0}
   backgroundPPUMultiplier: 2
-  uiLinePrefab: {fileID: 8680139918324757656, guid: 000027c1a28a1b84d91d1438903907aa, type: 3}
+  uiLinePrefab: {fileID: 8680139918324757656, guid: 000027c1a28a1b84d91d1438903907aa,
+    type: 3}
 --- !u!1 &1394082277420523539
 GameObject:
   m_ObjectHideFlags: 0

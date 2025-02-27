@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TSoft.Map.UILine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -148,6 +149,9 @@ namespace TSoft.Map
 
         protected override void CreateMapBackground(Map m)
         {
+            if(!backgroundSet.TryGetValue(m.configName, out var background))
+                return;
+            
             GameObject backgroundObject = new GameObject("Background");
             backgroundObject.transform.SetParent(mapParent.transform);
             backgroundObject.transform.localScale = Vector3.one;

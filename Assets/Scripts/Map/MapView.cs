@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using Random = System.Random;
 
@@ -26,9 +27,10 @@ namespace TSoft.Map
         public GameObject nodePrefab;
         [Tooltip("Offset of the start/end nodes of the map from the edges of the screen")]
         public float orientationOffset;
+        
         [Header("Background Settings")]
         [Tooltip("If the background sprite is null, background will not be shown")]
-        public Sprite background;
+        public SerializedDictionary<string, Sprite> backgroundSet;
         public Color32 backgroundColor = Color.white;
         public float xSize;
         public float yOffset;
@@ -107,8 +109,9 @@ namespace TSoft.Map
 
         protected virtual void CreateMapBackground(Map m)
         {
-            if (background == null) return;
-
+            if (!backgroundSet.TryGetValue(m.configName, out var background))
+                return;
+            
             GameObject backgroundObject = new GameObject("Background");
             backgroundObject.transform.SetParent(mapParent.transform);
             MapNode bossNode = MapNodes.FirstOrDefault(node => node.Node.nodeType == NodeType.Boss);
