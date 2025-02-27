@@ -7,6 +7,7 @@ namespace TSoft.Map
 {
     public class Map
     {
+        
         public List<Node> nodes;
         public List<Vector2Int> path;
         public string bossNodeName;

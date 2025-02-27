@@ -39,7 +39,7 @@ namespace TSoft.UI.Popup.Inventory
             {
                 if (GameSave.Instance.HasItemsId(itemId.Guid))
                 {
-                    if (GameSave.Instance.ArtifactEquippedSet.Values.Contains(itemId.Guid))
+                    if (GameSave.Instance.ArtifactEquippedDictionary.Values.Contains(itemId.Guid))
                     {
                         continue;
                     }
@@ -56,8 +56,8 @@ namespace TSoft.UI.Popup.Inventory
             {
                 foreach (var id in testIds)
                 {
-                    if (GameSave.Instance.ArtifactEquippedSet.Count > 0 
-                        && GameSave.Instance.ArtifactEquippedSet.Values.Contains(id.Guid))
+                    if (GameSave.Instance.ArtifactEquippedDictionary.Count > 0 
+                        && GameSave.Instance.ArtifactEquippedDictionary.Values.Contains(id.Guid))
                         continue;
                     
                     var skill = DataRegistry.Instance.ArtifactRegistry.Get(id.Guid);
@@ -84,10 +84,10 @@ namespace TSoft.UI.Popup.Inventory
                 return;
             }
 
-            if (GameSave.Instance.ArtifactEquippedSet.Count > 0)
+            if (GameSave.Instance.ArtifactEquippedDictionary.Count > 0)
             {
                 int index = -1;
-                foreach (var kvp in GameSave.Instance.ArtifactEquippedSet)
+                foreach (var kvp in GameSave.Instance.ArtifactEquippedDictionary)
                 {
                     if (slot.itemData.RegistryId.Guid == kvp.Value)
                     {

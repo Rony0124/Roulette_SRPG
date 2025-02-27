@@ -37,9 +37,9 @@ namespace TSoft.InGame.Player
                 }    
             }
 
-            if (GameSave.Instance.ArtifactEquippedSet.Count > 0)
+            if (GameSave.Instance.ArtifactEquippedDictionary.Count > 0)
             {
-                var artifactIds = GameSave.Instance.ArtifactEquippedSet.Values;
+                var artifactIds = GameSave.Instance.ArtifactEquippedDictionary.Values;
                 foreach (var artifactId in artifactIds)
                 {
                     var artifact = DataRegistry.Instance.ArtifactRegistry.Get(artifactId);

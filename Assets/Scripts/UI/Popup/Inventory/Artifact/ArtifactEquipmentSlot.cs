@@ -12,7 +12,7 @@ namespace TSoft.UI.Popup.Inventory.Artifact
         public override void UpdateIcon()
         {
             currentIndex = transform.GetSiblingIndex() - 1;
-            if (GameSave.Instance.ArtifactEquippedSet.TryGetValue(currentIndex, out var id))
+            if (GameSave.Instance.ArtifactEquippedDictionary.TryGetValue(currentIndex, out var id))
             {
                 if(!icon)
                     icon = Instantiate(iconPrefab, transform).GetComponent<SlotItemIcon>();

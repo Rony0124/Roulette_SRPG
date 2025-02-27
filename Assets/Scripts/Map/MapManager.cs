@@ -1,4 +1,5 @@
 using System.Linq;
+using Newtonsoft.Json;
 using UnityEngine;
 
 namespace TSoft.Map
@@ -11,10 +12,11 @@ namespace TSoft.Map
 
         private void Start()
         {
-            GenerateNewMap();
-            /*if (GameSave.Instance.IsMapExist())
+            if (GameSave.Instance.IsMapExist())
             {
-                var map = GameSave.Instance.MapSaved;
+                var mapJson = GameSave.Instance.MapSaved;
+                var map = JsonConvert.DeserializeObject<Map>(mapJson);
+             
                 if (map.path.Any(p => p.Equals(map.GetBossNode().point)))
                 {
                     // payer has already reached the boss, generate a new map
@@ -30,7 +32,7 @@ namespace TSoft.Map
             else
             {
                 GenerateNewMap();
-            }*/
+            }
         }
 
         public void GenerateNewMap()
@@ -46,7 +48,10 @@ namespace TSoft.Map
             if (CurrentMap == null) 
                 return;
             
-            GameSave.Instance.SaveMap(CurrentMap);
+            string mapJson = JsonConvert.SerializeObject(CurrentMap, Formatting.Indented,
+                new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+            
+            GameSave.Instance.SaveMap(mapJson);
         }
 
         private void OnApplicationQuit()

@@ -142,7 +142,7 @@ namespace UI.Views
             {
                 var slot = Instantiate(artifactSlotPrefab, artifactsContainer).GetComponent<ArtifactSlot>();
                 
-                if (GameSave.Instance.ArtifactEquippedSet.TryGetValue(i, out var artifactId))
+                if (GameSave.Instance.ArtifactEquippedDictionary.TryGetValue(i, out var artifactId))
                 {
                     var artifactData = DataRegistry.Instance.ArtifactRegistry.Get(artifactId);
                     slot.SetSlot(artifactData);

@@ -18,8 +18,6 @@ namespace TSoft.Map
         public readonly string blueprintName;
         public Vector2 position;
         
-        public bool HasNoConnections => incoming.Count == 0 && outgoing.Count == 0;
-        
         public Node(NodeType nodeType, string blueprintName, Vector2Int point)
         {
             this.nodeType = nodeType;
@@ -51,6 +49,11 @@ namespace TSoft.Map
         public void RemoveOutgoing(Vector2Int p)
         {
             outgoing.RemoveAll(element => element.Equals(p));
+        }
+
+        public bool HasNoConnections()
+        {
+            return incoming.Count == 0 && outgoing.Count == 0;
         }
     }
 }

@@ -33,15 +33,18 @@ namespace TSoft
         private static readonly string ItemIdKey = "ItemId";
         
         //equippedItem
-        private Dictionary<int, Guid> skillEquippedDictionary;
-        private Dictionary<int, Guid> artifactEquippedSet;
+        private Dictionary<int, Guid> skillEquippedDictionary = new();
+        private Dictionary<int, Guid> artifactEquippedDictionary = new();
         
         public Dictionary<int, Guid> SkillEquippedDictionary => skillEquippedDictionary;
-        public Dictionary<int, Guid> ArtifactEquippedSet => artifactEquippedSet;
+        public Dictionary<int, Guid> ArtifactEquippedDictionary => artifactEquippedDictionary;
+        
+        private const string SkillEquippedKey = "equippedSkill";
+        private const string ArtifactEquippedKey = "equippedArtifact";
         
         //map
-        private Map.Map mapSaved;
-        public Map.Map MapSaved => mapSaved;
+        private string mapSaved;
+        public string MapSaved => mapSaved;
         
         private static readonly string MapKey = "map";
         
@@ -151,12 +154,14 @@ namespace TSoft
                     Debug.Log("Can not Save Equipped Skill");
                 }
             }
+            
+            SaveRaw(SkillEquippedKey, skillEquippedDictionary);
         }
         
         public void SaveEquippedArtifact(int index, Guid id)
         {
             int removalKey = -9999;
-            foreach (var guidKvp in artifactEquippedSet)
+            foreach (var guidKvp in artifactEquippedDictionary)
             {
                 if (guidKvp.Value == id)
                 {
@@ -166,19 +171,21 @@ namespace TSoft
             }
 
             if(removalKey >= 0)
-                artifactEquippedSet.Remove(removalKey);
+                artifactEquippedDictionary.Remove(removalKey);
             
-            if (artifactEquippedSet.ContainsKey(index))
+            if (artifactEquippedDictionary.ContainsKey(index))
             {
-                artifactEquippedSet[index] = id;
+                artifactEquippedDictionary[index] = id;
             }
             else
             {
-                if (!artifactEquippedSet.TryAdd(index, id))
+                if (!artifactEquippedDictionary.TryAdd(index, id))
                 {
                     Debug.Log("Can not Save Equipped Skill");
                 }
             }
+            
+            SaveRaw(ArtifactEquippedKey, artifactEquippedDictionary);
         }
         
         public void SaveUnEquippedSkill(CardPatternType pattern)
@@ -189,26 +196,39 @@ namespace TSoft
             }
 
             skillEquippedDictionary.Remove((int)pattern);
+            
+            SaveRaw(SkillEquippedKey, skillEquippedDictionary);
         }
         
         public void SaveUnEquippedArtifact(int index)
         {
-            if (!artifactEquippedSet.ContainsKey(index))
+            if (!artifactEquippedDictionary.ContainsKey(index))
             {
                 return;
             }
 
-            artifactEquippedSet.Remove(index);
+            artifactEquippedDictionary.Remove(index);
+            
+            SaveRaw(ArtifactEquippedKey, artifactEquippedDictionary);
+        }
+
+        public void ClearEquipments()
+        {
+            artifactEquippedDictionary.Clear();
+            skillEquippedDictionary.Clear();
+            
+            SaveRaw(ArtifactEquippedKey, artifactEquippedDictionary);
+            SaveRaw(SkillEquippedKey, skillEquippedDictionary);
         }
 
         #endregion
         
         #region Map
 
-        public void SaveMap(Map.Map map)
+        public void SaveMap(string map)
         {
             mapSaved = map;
-            SaveRaw(MapKey, mapSaved);
+            SaveRaw(MapKey, map);
         }
 
         public void ResetMap()
@@ -232,8 +252,8 @@ namespace TSoft
 
             possessItemIdsSet = !possessItemIds.IsNullOrEmpty() ? new HashSet<Guid>(possessItemIds) : new HashSet<Guid>();
 
-            skillEquippedDictionary = new();
-            artifactEquippedSet = new();
+            skillEquippedDictionary = LoadRaw(SkillEquippedKey, skillEquippedDictionary);
+            artifactEquippedDictionary = LoadRaw(ArtifactEquippedKey, artifactEquippedDictionary);
             
             Debug.Log("[GameSave] Load Finished"); 
         }
@@ -242,6 +262,8 @@ namespace TSoft
         {
             ResetGold();
             RemoveAllItemsIds();
+            ResetMap();
+            ClearEquipments();
         }
         
         [IngameDebugConsole.ConsoleMethod("gamesave.clearsave", "세이브 파일 클리어")]
