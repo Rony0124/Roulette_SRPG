@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5386dd19e814f499f903f00aab8e5edb, type: 3}
   m_Name: MinorEnemy_PlagueDoctor
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 618374498, guid: e59a0a57c56874a40af27b452b1716c4, type: 3}
   nodeType: 0
   monsterId: {fileID: 11400000, guid: aa6d7d652dc8847169cb95d1745d2681, type: 2}

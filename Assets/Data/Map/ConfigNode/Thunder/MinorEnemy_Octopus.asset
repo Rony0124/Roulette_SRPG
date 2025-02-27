@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5386dd19e814f499f903f00aab8e5edb, type: 3}
   m_Name: MinorEnemy_Octopus
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 658253596, guid: e59a0a57c56874a40af27b452b1716c4, type: 3}
   nodeType: 0
   monsterId: {fileID: 11400000, guid: 34233452a2ba94e10bce1c96188efa10, type: 2}

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5386dd19e814f499f903f00aab8e5edb, type: 3}
   m_Name: EliteEnemy_Ifrit
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 81906974, guid: e59a0a57c56874a40af27b452b1716c4, type: 3}
   nodeType: 1
   monsterId: {fileID: 11400000, guid: d473f394ec3c04b428f98c398ef8118e, type: 2}

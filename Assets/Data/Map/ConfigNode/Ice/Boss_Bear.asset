@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5386dd19e814f499f903f00aab8e5edb, type: 3}
   m_Name: Boss_Bear
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: 1872254317, guid: e59a0a57c56874a40af27b452b1716c4, type: 3}
   nodeType: 4
   monsterId: {fileID: 11400000, guid: de71abc77e8d14fb0b370872024f9470, type: 2}

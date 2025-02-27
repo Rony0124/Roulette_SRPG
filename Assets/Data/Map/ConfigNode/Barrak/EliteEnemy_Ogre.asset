@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5386dd19e814f499f903f00aab8e5edb, type: 3}
   m_Name: EliteEnemy_Ogre
   m_EditorClassIdentifier: 
-  sprite: {fileID: 496806899, guid: 6582f34ddd5f686408c019550cd94c9d, type: 3}
+  sprite: {fileID: 350876040, guid: e59a0a57c56874a40af27b452b1716c4, type: 3}
   nodeType: 1
   monsterId: {fileID: 11400000, guid: 7c5df6d64eaf1b94585dfae1d838a565, type: 2}

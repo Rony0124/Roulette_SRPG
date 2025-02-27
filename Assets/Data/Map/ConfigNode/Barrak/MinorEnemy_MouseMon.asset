@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5386dd19e814f499f903f00aab8e5edb, type: 3}
   m_Name: MinorEnemy_MouseMon
   m_EditorClassIdentifier: 
-  sprite: {fileID: 184926547, guid: 6582f34ddd5f686408c019550cd94c9d, type: 3}
+  sprite: {fileID: -1319331751, guid: e59a0a57c56874a40af27b452b1716c4, type: 3}
   nodeType: 0
   monsterId: {fileID: 11400000, guid: 4455d21fc82f37c43950fdb355d31360, type: 2}

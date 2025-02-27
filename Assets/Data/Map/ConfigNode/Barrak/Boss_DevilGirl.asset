@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5386dd19e814f499f903f00aab8e5edb, type: 3}
   m_Name: Boss_DevilGirl
   m_EditorClassIdentifier: 
-  sprite: {fileID: 1396070358, guid: 6582f34ddd5f686408c019550cd94c9d, type: 3}
+  sprite: {fileID: -1753841914, guid: e59a0a57c56874a40af27b452b1716c4, type: 3}
   nodeType: 4
   monsterId: {fileID: 11400000, guid: 08371b493fc87eb41a5b971cbd918a2f, type: 2}
