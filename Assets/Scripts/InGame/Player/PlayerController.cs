@@ -179,6 +179,10 @@ namespace TSoft.InGame.Player
             if(currentEnergy <= 0)
                 return false;
             
+            //손에 들고 있는 카드가 없다면 false
+            if (currentPokerCardSelected.IsNullOrEmpty())
+                return false;
+            
             --currentEnergy;
             gameplay.SetAttr(GameplayAttr.Energy, currentEnergy);
 
