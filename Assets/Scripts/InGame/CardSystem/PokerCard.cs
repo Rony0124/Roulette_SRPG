@@ -18,9 +18,6 @@ namespace TSoft.InGame.CardSystem
         public event Action<PokerCard> OnRelease;
 
         [Header("Card Details")]
-        [SerializeField] private TextMeshProUGUI txtTitle;
-        [SerializeField] private TextMeshProUGUI txtDescription;
-        [SerializeField] private GameObject cardInfoObj;
         [SerializeField] private Image imgBG;
         
         [Header("System Helpers")]
@@ -46,17 +43,13 @@ namespace TSoft.InGame.CardSystem
         public void SetData(CardSO card)
         {
             cardData = card;
-            txtTitle.text = card.title;
-            txtDescription.text = card.description;
             imgBG.sprite = card.image;
         }
 
         public void Dissolve(float animationSpeed)
         {
             HitBox.SetActive(false);
-
-            txtTitle.TweenFade(0f, animationSpeed / 4, false);
-            txtDescription.TweenFade(0f, animationSpeed / 4, false);
+            
             imgBG.TweenFade(0f, animationSpeed, false);
             imgBG.transform.TweenScale(Vector3.one * 1.2f, animationSpeed, false);
 
@@ -70,11 +63,6 @@ namespace TSoft.InGame.CardSystem
             {
                 Visuals.transform.localPosition = basePosition;
             }
-        }
-
-        public void SetCardDetails(bool isEnable)
-        {
-            cardInfoObj.SetActive(isEnable);
         }
 
         private void HandleFloating()

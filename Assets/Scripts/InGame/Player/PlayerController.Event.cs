@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using TMPro;
 using TSoft.InGame.CardSystem;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -20,6 +21,12 @@ namespace TSoft.InGame.Player
         
         [Range(0.2f, 2f)]
         [SerializeField] private float animationSpeed;
+        
+        [Header("Info")]
+        [SerializeField] private float infoHeight;
+        [SerializeField] private GameObject infoObject;
+        [SerializeField] private TextMeshProUGUI infoTitle;
+        [SerializeField] private TextMeshProUGUI infoDescription;
 
         [HideInInspector]
         public bool isSelectingCardOnHand;
@@ -49,12 +56,21 @@ namespace TSoft.InGame.Player
         
         private void Card_OnHover(PokerCard pokerCard)
         {
-            pokerCard.SetCardDetails(true);
+            var pos = pokerCard.transform.position;
+            pos.y = infoHeight;
+            
+            infoObject.transform.position = pos;
+            
+            infoObject.SetActive(true);
+            infoTitle.text = pokerCard.cardData.title;
+            infoDescription.text = pokerCard.cardData.description;
+         //   pokerCard.SetCardDetails(true);
         }
         
         private void Card_OnStopHover(PokerCard pokerCard)
         {
-            pokerCard.SetCardDetails(false);
+            infoObject.SetActive(false);
+           // pokerCard.SetCardDetails(false);
         }
 
         private void OnClickJoker(PokerCard pokerCard)
