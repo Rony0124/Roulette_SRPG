@@ -1,4 +1,5 @@
 using TSoft.Data;
+using TSoft.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -26,6 +27,10 @@ namespace TSoft.UI.Popup.Inventory
 
         public virtual void OnPointerUp(PointerEventData eventData)
         {
+        }
+
+        public virtual void OnPointerEnter(PointerEventData eventData)
+        {
             if (eventData.dragging)
                 return;
 
@@ -41,17 +46,23 @@ namespace TSoft.UI.Popup.Inventory
 
                 if (Vector2.Distance(pressPosition, eventData.position) < 10)
                 {
-                    Debug.Log("아이템 스펙 설명");
+                    var infoPanel = PopupContainer.Instance.GetPopupUI(PopupContainer.PopupType.ItemInfo) as ItemInfoPopup;
+                    if (infoPanel == null) 
+                        return;
+                    
+                    infoPanel.InitPopup(currentItem);
+                    infoPanel.ShowPanel(transform.position);
                 }
             }
         }
 
-        public virtual void OnPointerEnter(PointerEventData eventData)
-        {
-        }
-
         public virtual void OnPointerExit(PointerEventData eventData)
         {
+            var infoPanel = PopupContainer.Instance.GetPopupUI(PopupContainer.PopupType.ItemInfo) as ItemInfoPopup;
+            if (infoPanel == null) 
+                return;
+            
+            infoPanel.HidePanel();
         }
     }
 }
