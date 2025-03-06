@@ -19,9 +19,11 @@ MonoBehaviour:
   price: 0
   number: 1
   type: 2
-  effect:
-    rid: -2
-  policy: 0
+  instantEffect:
+    effect:
+      rid: -2
+    modifiers: []
+  effect: {fileID: 0}
   references:
     version: 2
     RefIds:

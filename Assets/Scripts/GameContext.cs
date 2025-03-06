@@ -39,8 +39,8 @@ namespace TSoft
         
         public OnLocalDirectorChanged OnDirectorChanged;
 
-        private NodeBlueprint currentNode;
-        public NodeBlueprint CurrentNode
+        private MapNode currentNode;
+        public MapNode CurrentNode
         {
             get => currentNode;
             set
@@ -53,14 +53,16 @@ namespace TSoft
                 currentNode = value;
             }
         }
+        
+        public Map.Map CurrentMap { get; set; }
 
         public StageInfo currentStageInfo;
 
         public double currentBounty;
         
-        private void OnCurrentNodeChanged(NodeBlueprint node)
+        private void OnCurrentNodeChanged(MapNode node)
         {
-            switch (node.nodeType)
+            switch (node.Blueprint.nodeType)
             {
                 case NodeType.MinorEnemy:
                     currentStageInfo.round++;

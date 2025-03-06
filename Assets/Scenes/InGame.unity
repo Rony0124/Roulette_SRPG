@@ -4610,13 +4610,13 @@ PrefabInstance:
     - target: {fileID: 1047355927819672411, guid: 4cf780e446bc9e944852b8711555d1ab,
         type: 3}
       propertyPath: defaultArtifacts.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1047355927819672411, guid: 4cf780e446bc9e944852b8711555d1ab,
         type: 3}
       propertyPath: defaultArtifacts.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: ff08e9872703940038100dfead2ca692,
+      objectReference: {fileID: 11400000, guid: ad8ed1d0854914be287635b7c8c661f0,
         type: 2}
     - target: {fileID: 1047355927819672411, guid: 4cf780e446bc9e944852b8711555d1ab,
         type: 3}

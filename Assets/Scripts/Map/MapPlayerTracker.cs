@@ -64,7 +64,10 @@ namespace TSoft.Map
                 OpenWantedFeedback.PlayFeedbacks();
             }
             else
-            {
+            {  
+                mapManager.CurrentMap.path.Add(mapNode.Node.point);
+                mapManager.SaveMap();
+                
                 SendPlayerToNode(mapNode);
             }
         }
@@ -72,10 +75,10 @@ namespace TSoft.Map
         private void SendPlayerToNode(MapNode mapNode)
         {
             Locked = lockAfterSelecting;
-            mapManager.CurrentMap.path.Add(mapNode.Node.point);
-            mapManager.SaveMap();
+            
             view.SetAttainableNodes();
             view.SetLineColors();
+            
             mapNode.ShowSwirlAnimation();
 
             DOTween.Sequence().AppendInterval(enterNodeDelay).OnComplete(() => EnterNode(mapNode));
@@ -85,7 +88,7 @@ namespace TSoft.Map
         {
             Debug.Log("Entering node: " + mapNode.Node.blueprintName + " of type: " + mapNode.Node.nodeType);
 
-            GameContext.Instance.CurrentNode = mapNode.Blueprint;
+            GameContext.Instance.CurrentNode = mapNode;
         }
 
         private void PlayWarningThatNodeCannotBeAccessed()

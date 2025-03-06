@@ -9,7 +9,6 @@ namespace TSoft.InGame
 {
     public class CombatController : ControllerBase
     {
-      
         //view
         [SerializeField]
         private BackgroundView bgView;
@@ -49,7 +48,7 @@ namespace TSoft.InGame
         protected override void InitOnDirectorChanged()
         {
 #if UNITY_EDITOR
-            if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.monsterId == null)
+            if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.Blueprint.monsterId == null)
             {
                 if (TsDevPreferences.MonsterId != null)
                 {
@@ -63,7 +62,7 @@ namespace TSoft.InGame
             if (monsterData != null) 
                 return;
             
-            if (DataRegistry.Instance.MonsterRegistry.TryGetValue(GameContext.Instance.CurrentNode.monsterId, out var monsterDataSo))
+            if (DataRegistry.Instance.MonsterRegistry.TryGetValue(GameContext.Instance.CurrentNode.Blueprint.monsterId, out var monsterDataSo))
             { 
                 monsterData = monsterDataSo;
             }

@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Newtonsoft.Json;
 using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.Utils;
@@ -91,6 +92,18 @@ namespace TSoft.InGame
 
             if (isSuccess)
             {
+                var currentMap = GameContext.Instance.CurrentMap;
+                if (currentMap == null) 
+                    return;
+                
+                currentMap.path.Add(GameContext.Instance.CurrentNode.Node.point);
+            
+                string mapJson = JsonConvert.SerializeObject(currentMap, Formatting.Indented,
+                    new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
+            
+                GameSave.Instance.SaveMap(mapJson);
+                
+                
                 ChangeStageState(StageState.PostPlayingSuccess);
             }else
             {

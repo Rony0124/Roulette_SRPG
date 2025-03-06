@@ -25,6 +25,8 @@ namespace TSoft.Map
                 else
                 {
                     CurrentMap = map;
+                    GameContext.Instance.CurrentMap = CurrentMap;
+                    
                     // player has not reached the boss yet, load the current map
                     view.ShowMap(map);
                 }
@@ -39,7 +41,10 @@ namespace TSoft.Map
         {
             var config = view.GetRandomConfig();
             var map = MapGenerator.GetMap(config);
+            
             CurrentMap = map;
+            GameContext.Instance.CurrentMap = map;
+            
             view.ShowMap(map);
         }
 
