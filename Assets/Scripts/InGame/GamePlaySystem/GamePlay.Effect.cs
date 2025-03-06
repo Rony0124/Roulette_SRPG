@@ -39,6 +39,7 @@ namespace TSoft.InGame.GamePlaySystem
                 
                 var modifiers = sourceEffect.gameplayEffect.modifiers;
                 var effect = sourceEffect.gameplayEffect.effect;
+                var inGameDirector = GameContext.Instance.CurrentDirector as InGameDirector;
                 
                 for (int i = 0; i < modifiers.Length; ++i)
                 {
@@ -50,6 +51,9 @@ namespace TSoft.InGame.GamePlaySystem
                     }else if (modifier.gameplayMagnitude.magnitudeType == MagnitudeType.Random)
                     {
                         magnitude = modifier.gameplayMagnitude.magnitudeRandom.RandomValue;
+                    }else if (modifier.gameplayMagnitude.magnitudeType == MagnitudeType.Curve)
+                    {
+                        magnitude = modifier.gameplayMagnitude.magnitudeCurve.CalculateCurve(inGameDirector);
                     }
 
                     AppliedModifier appliedModifier = new()
@@ -78,19 +82,14 @@ namespace TSoft.InGame.GamePlaySystem
 
                     appliedModifiers.Add(appliedModifier);
                 }
-
-                var inGameDirector = GameContext.Instance.CurrentDirector as InGameDirector;
-                if (inGameDirector)
+                
+                if (sourceEffect.hasCondition)
                 {
-                    if (sourceEffect.hasCondition)
-                    {
-                        await sourceEffect.conditionApplier.CheckConditionEffect(inGameDirector, this);
-                    }
-                    else
-                    {
-                        await effect.ApplyEffect(inGameDirector, this);    
-                    }
-                    
+                    await sourceEffect.conditionApplier.CheckConditionEffect(inGameDirector, this);
+                }
+                else
+                {
+                    await effect.ApplyEffect(inGameDirector, this);    
                 }
             }
 

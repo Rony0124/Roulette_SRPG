@@ -25,7 +25,6 @@ namespace TSoft.UI.Views.Lobby
             Get<Button>((int)UIButton.Continue).gameObject.BindEvent(OnContinueClicked);
             Get<Button>((int)UIButton.Exit).gameObject.BindEvent(OnExitClicked);
             Get<Button>((int)UIButton.Option).gameObject.BindEvent(OnOptionClicked);
-            
         }
 
         protected override void OnDeactivated()

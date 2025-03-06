@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
+  m_Name: GE_Default_Combo
+  m_EditorClassIdentifier: 
+  lifeCycle:
+    begin: 4
+    end: 5
+  gameplayEffect:
+    effect:
+      rid: 1771402440583413762
+    modifiers:
+    - attrType: 2000
+      modifierOp: 1
+      gameplayMagnitude:
+        magnitudeType: 2
+        magnitude: 0
+        magnitudeRandom:
+          minValue: 0
+          maxValue: 0
+        magnitudeCurve:
+          rid: 1771402440583413761
+  hasUnsatisfiedEffect: 0
+  unsatisfiedEffect:
+    effect:
+      rid: -2
+    modifiers: []
+  hasCondition: 0
+  conditionApplier:
+    rid: 1771402440583413760
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 1771402440583413760
+      type: {class: ConditionApplier, ns: TSoft.Data.Condition, asm: Assembly-CSharp}
+      data:
+        director: {fileID: 0}
+        appliedEffect:
+          sourceEffect: {fileID: 0}
+          appliedModifiers: []
+        context:
+          tokens: []
+    - rid: 1771402440583413761
+      type: {class: ComboCalculator, ns: TSoft.InGame.GamePlaySystem, asm: Assembly-CSharp}
+      data:
+        magnitudeCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 100
+            value: 100
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 34
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+    - rid: 1771402440583413762
+      type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
+      data: 

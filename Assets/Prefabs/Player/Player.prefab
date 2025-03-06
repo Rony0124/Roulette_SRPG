@@ -110,6 +110,10 @@ MonoBehaviour:
   cardYSpacing: 4
   cardAngle: 1.6
   animationSpeed: 0.3
+  infoHeight: 430
+  infoObject: {fileID: 0}
+  infoTitle: {fileID: 0}
+  infoDescription: {fileID: 0}
   isSelectingCardOnHand: 0
   defaultCardPatterns:
   - PatternType: 9
@@ -140,6 +144,7 @@ MonoBehaviour:
     effect: {fileID: 11400000, guid: 7bab602625dc29743b5b1c31e79b9ba7, type: 2}
     skill: {fileID: 11400000, guid: 77a2e535ceb4f8c4c9c67a4c2a8074fe, type: 2}
   cardSubmitEffect: {fileID: 11400000, guid: 4f6f0b6ce4e1e7c4eb70b63f68400c64, type: 2}
+  ccomboEffect: {fileID: 11400000, guid: e18b9a9787b90a044b175ff9e70ee77b, type: 2}
 --- !u!114 &9176220145216558040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,4 +198,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defaultArtifacts:
-  - {fileID: 11400000, guid: 99911bdc1b0d0da4db5cf88700b5cef3, type: 2}
+  - {fileID: 11400000, guid: ad8ed1d0854914be287635b7c8c661f0, type: 2}

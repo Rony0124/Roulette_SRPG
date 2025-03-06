@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using TSoft.Data.Registry;
 using TSoft.Data.Skill;
 using TSoft.InGame.CardSystem;
@@ -24,14 +25,15 @@ namespace TSoft.InGame.Player
             public void ApplyCurrentPattern(PlayerController player)
             {
                 if (effect)
-                {
                     player.Gameplay.AddEffect(effect);
-                }
                 
                 if(skill)
                     player.Gameplay.AddEffect(skill.effect);
                 
                 player.Gameplay.AddEffect(player.cardSubmitEffect);
+                player.Gameplay.AddEffect(player.ccomboEffect);
+                
+                player.CheckPatternCombo(this);
             }
         }
         
@@ -45,6 +47,7 @@ namespace TSoft.InGame.Player
         private CardPattern currentPattern;
 
         public GameplayEffectSO cardSubmitEffect;
+        public GameplayEffectSO ccomboEffect;
         
         public CardPattern CurrentPattern
         {
@@ -64,6 +67,8 @@ namespace TSoft.InGame.Player
         private int[] gradeNumberCombined;
         private List<PokerCard> cardsOnPattern;
         public List<PokerCard> CardsOnPattern => cardsOnPattern; 
+        
+        public Stack<CardPattern> previousPatterns = new();
 
         public Dictionary<CardPatternType, ParticleSystem> particleDictionary;
 
@@ -276,6 +281,16 @@ namespace TSoft.InGame.Player
                     break;
                 }
             }
+        }
+
+        private void CheckPatternCombo(CardPattern pattern)
+        {
+            if (previousPatterns.Count > 0 && previousPatterns.Peek().PatternType != pattern.PatternType)
+            {
+                previousPatterns.Clear();
+            }
+            
+            previousPatterns.Push(pattern);
         }
     }
 }

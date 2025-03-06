@@ -1,12 +1,14 @@
 using System;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace TSoft.InGame.GamePlaySystem
 {
     public enum MagnitudeType
     {
         None,
-        Random
+        Random,
+        Curve
     }
     
     [Serializable]
@@ -19,6 +21,10 @@ namespace TSoft.InGame.GamePlaySystem
         
         [ShowIf("magnitudeType", MagnitudeType.Random)]
         public RandomMagnitude magnitudeRandom;
+        
+        [ShowIf("magnitudeType", MagnitudeType.Curve)]
+        [SerializeReference]
+        public GameplayMagnitudeCalculator magnitudeCurve;
     }
 
     [Serializable]
@@ -29,6 +35,22 @@ namespace TSoft.InGame.GamePlaySystem
         
         public float RandomValue => UnityEngine.Random.Range(minValue, maxValue);
     }
-    
-    
+
+    public abstract class GameplayMagnitudeCalculator
+    {
+        public AnimationCurve magnitudeCurve;
+        
+        public abstract float CalculateCurve(InGameDirector director);
+    }
+
+    public class ComboCalculator : GameplayMagnitudeCalculator
+    {
+        public override float CalculateCurve(InGameDirector director)
+        {
+            var player = director.Player;
+            var combo = player.previousPatterns.Count;
+            
+            return magnitudeCurve.Evaluate(combo);
+        }
+    }
 }
