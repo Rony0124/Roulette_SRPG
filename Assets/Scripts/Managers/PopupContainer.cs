@@ -52,7 +52,7 @@ namespace TSoft.Managers
             }    
         }
         
-        public  void ShowPopupUI(PopupType type)
+        public void ShowPopupUI(PopupType type)
         {
             ClosePopupUI();
             
@@ -63,6 +63,18 @@ namespace TSoft.Managers
             
             var popup = UIUtil.GetOrAddComponent<PopupView>(go);
             popupStack.Push(popup);
+        }
+        
+        public PopupView GetPopupUI(PopupType type)
+        {
+            ClosePopupUI();
+            
+            GameObject go = popups.Find(Popup => Popup.type == type).popupObj;
+
+            SetCanvas(go);
+            
+            var popup = UIUtil.GetOrAddComponent<PopupView>(go);
+            return popup;
         }
         
         public void ClosePopupUI(PopupView popup)

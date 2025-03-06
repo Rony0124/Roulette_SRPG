@@ -1,4 +1,6 @@
 using TSoft.Data;
+using TSoft.Managers;
+using TSoft.UI.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,7 +13,6 @@ namespace TSoft.UI.Popup.Inventory
         [SerializeField] protected GameObject disableImage;
         
         protected ItemSO currentItem = default;
-        protected bool enableItemPointerAction = true;
 
         public void SetItemIcon(ItemSO item)
         {
@@ -26,32 +27,31 @@ namespace TSoft.UI.Popup.Inventory
 
         public virtual void OnPointerUp(PointerEventData eventData)
         {
+        }
+
+        public virtual void OnPointerEnter(PointerEventData eventData)
+        {
             if (eventData.dragging)
                 return;
 
             if (currentItem == null)
                 return;
-
-            if (!enableItemPointerAction)
+            
+            var infoPanel = BootstrapView.Instance.itemInfo;
+            if (infoPanel == null) 
                 return;
-
-            if (eventData.button == PointerEventData.InputButton.Left && eventData.pointerPress == gameObject)
-            {
-                Vector2 pressPosition = eventData.pressPosition;
-
-                if (Vector2.Distance(pressPosition, eventData.position) < 10)
-                {
-                    Debug.Log("아이템 스펙 설명");
-                }
-            }
-        }
-
-        public virtual void OnPointerEnter(PointerEventData eventData)
-        {
+            
+            infoPanel.InitPopup(currentItem);
+            infoPanel.ShowPanel(transform.position);
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
+            var infoPanel = BootstrapView.Instance.itemInfo;
+            if (infoPanel == null) 
+                return;
+            
+            infoPanel.HidePanel();
         }
     }
 }

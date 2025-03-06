@@ -1,19 +1,20 @@
 using System;
 using System.Collections.Generic;
 using TMPro;
-using TSoft;
-using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.UI.Core;
 using TSoft.UI.Popup.Inventory;
+using UI.Views;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Views
+namespace TSoft.UI.Views
 {
     public class BootstrapView : ViewBase
     {
+        public static BootstrapView Instance;
+        
         private enum BootstrapButton
         {
             OptionButton,
@@ -51,9 +52,13 @@ namespace UI.Views
 
         [Header("PlayerInfo")] 
         private TextMeshProUGUI goldText;
+
+        public ItemInfoPopup itemInfo;
         
         private void Awake()
         {
+            Instance = this;
+            
             Bind<Button>(typeof(BootstrapButton));
             Bind<Transform>(typeof(BootstrapTransform));
             Bind<TextMeshProUGUI>(typeof(BootstrapText));
@@ -164,6 +169,30 @@ namespace UI.Views
         private void UpdateGold(int gold)
         {
             goldText.text = gold.ToString();
+        }
+        
+        private void CalcMousePosition()
+        {
+            // 텍스트 라벨을 가져온다.
+            var infoPanel = itemInfo;
+            RectTransform rt = infoPanel.transform as RectTransform;
+
+            var canvasRt = GetComponent<Canvas>().transform as RectTransform;
+            Vector2 mousePosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+       
+            // 마우스 좌표를 canvas내에서의 좌표로 변환
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRt, mousePosition, Camera.main, out var localPosition);
+
+            //툴팁이 마우스 기준 우측에 나오는것을 고려하여 마우스의 위치가 가로길이 기준 75%를 초과하면 마우스기준 우측으로 나타나도록 한다.
+            //계산식은 현재 나타난 텍스트UI의 가로길이만큼을 빼주며, *0.5f는 Scale이 0.5f로 설정되어있기때문에 사용
+            if (mousePosition.x > Screen.width * 0.75f)
+            {
+                localPosition.x -= rt.sizeDelta.x;
+            }
+
+            // 위치 변경
+            if (rt != null) 
+                rt.anchoredPosition = localPosition;
         }
     }
 }
