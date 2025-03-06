@@ -29,16 +29,23 @@ namespace TSoft.UI.Popup.Inventory
         
         public void ShowPanel(Vector2 sourcePos)
         {
-            gameObject.SetActive(true);
-
+            RectTransform rt = transform as RectTransform;
+            
+            if (sourcePos.x > Screen.width * 0.75f)
+            {
+                sourcePos.x -= rt.sizeDelta.x;
+            }
+            
             transform.position = sourcePos;
             
-            gameObject.transform.SetAsLastSibling();
+            gameObject.SetActive(true);
+            
+           // gameObject.transform.SetAsLastSibling();
         }
         
         public void HidePanel()
         {
-            transform.position = _originalPosition;
+           // transform.position = _originalPosition;
             
             gameObject.SetActive(false);
         }

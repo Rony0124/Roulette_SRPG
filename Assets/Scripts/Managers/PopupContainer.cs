@@ -18,8 +18,7 @@ namespace TSoft.Managers
             Win,
             Skill,
             Joker,
-            Artifact,
-            ItemInfo
+            Artifact
         }
         
         [Serializable]

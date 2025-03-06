@@ -22,9 +22,6 @@ namespace TSoft.UI.Popup.Inventory
             if (currentItem == null)
                 return;
 
-            if (!enableItemPointerAction)
-                return;
-
             if (eventData.button == PointerEventData.InputButton.Left && eventData.pointerPress == gameObject)
             {
                 Vector2 pressPosition = eventData.pressPosition;
