@@ -1,10 +1,11 @@
+using System;
 using Cysharp.Threading.Tasks;
 using TSoft.InGame;
 using TSoft.InGame.Player;
 
 namespace TSoft.UI.Views.InGame
 {
-    public class GameplayViewModel : ViewModel
+    public class GameplayViewModelBase : ViewModelBase
     {
         private GameplayView View => view as GameplayView;
         private GameplayModel Model => model as GameplayModel;
@@ -13,13 +14,13 @@ namespace TSoft.UI.Views.InGame
 
         private void Start()
         {
-            player = Model.Player;
-            
             View.DiscardButton.onClick.AddListener(OnDiscardCard);
             View.UseButton.onClick.AddListener(() => OnUseCard().Forget());
             
-            player.Gameplay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += OnPlayerHeartChanged;
-            player.Gameplay.GetAttrVar(GameplayAttr.Energy).OnValueChanged += OnPlayerEnergyChanged;
+            Model.PlayerHeart.OnValueChanged += OnPlayerHeartChanged;
+            Model.PlayerEnergy.OnValueChanged += OnPlayerEnergyChanged;
+            
+            player = Model.Player;
             
             //TODO 이벤트 버스로 변경
             player.onDeckChanged += OnDeckChanged;
@@ -71,6 +72,12 @@ namespace TSoft.UI.Views.InGame
             View.SetHeartText(heartCount, maxHeartCount);
             
             player.DrawCards();
+        }
+
+        private void OnDestroy()
+        {
+            player.onDeckChanged -= OnDeckChanged;
+            player.onGameReady -= UpdateCardOnGameReady;
         }
     }
 }

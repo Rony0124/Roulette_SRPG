@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TSoft.UI.Views
 {
-    public class ViewModel : MonoBehaviour
+    public class ViewModelBase : MonoBehaviour
     {
         protected ViewBase view;
         protected ModelBase model;
