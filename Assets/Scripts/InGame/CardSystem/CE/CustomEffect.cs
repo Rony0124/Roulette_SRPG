@@ -16,7 +16,7 @@ namespace TSoft.InGame.CardSystem.CE
             await UniTask.CompletedTask;
         }
         
-        public virtual async UniTask UndoEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
+        public virtual async UniTask UnapplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
         {
             await UniTask.CompletedTask;
         }

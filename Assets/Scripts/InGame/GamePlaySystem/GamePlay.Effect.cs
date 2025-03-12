@@ -100,7 +100,7 @@ namespace TSoft.InGame.GamePlaySystem
                 var inGameDirector = GameContext.Instance.CurrentDirector as InGameDirector;
                 if (inGameDirector)
                 {
-                    await effect.UndoEffect(inGameDirector, this);
+                    await effect.UnapplyEffect(inGameDirector, this);
                 }
             }
         }

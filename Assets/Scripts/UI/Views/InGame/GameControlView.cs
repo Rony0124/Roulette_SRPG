@@ -9,7 +9,8 @@ namespace TSoft.UI.Views.InGame
     {
         private enum GameControlText
         {
-            CombinationNameText
+            CombinationNameText, 
+            CalcText
         }
         
         private TMPro.TextMeshProUGUI txtCombinationNameText;

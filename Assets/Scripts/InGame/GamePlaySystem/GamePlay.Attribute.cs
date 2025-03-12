@@ -14,7 +14,7 @@ namespace TSoft.InGame.GamePlaySystem
         
         public List<AttributeState> attributes;
         [HideInInspector] 
-        public List<AppliedModifier> attrAppliedModifiers;
+        public ObservableList<AppliedModifier> attrAppliedModifiers;
         [HideInInspector]
         public List<AppliedModifier> capturedAttrAppliedModifiers;
         
