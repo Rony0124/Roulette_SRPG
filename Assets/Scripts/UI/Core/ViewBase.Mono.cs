@@ -13,9 +13,15 @@ namespace TSoft.UI.Core
         private void OnDisable() {
             OnDeactivated();
         }
-        
-        protected abstract void OnActivated();
-        protected abstract void OnDeactivated();
-        
+
+        protected virtual void OnActivated()
+        {
+            
+        }
+
+        protected virtual void OnDeactivated()
+        {
+            
+        }
     }
 }

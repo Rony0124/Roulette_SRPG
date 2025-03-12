@@ -1,12 +1,5 @@
-using System;
-using Cysharp.Threading.Tasks;
-using TSoft.InGame;
 using TSoft.UI.Core;
-using TSoft.Utils;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using PlayerController = TSoft.InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {
@@ -29,95 +22,34 @@ namespace TSoft.UI.Views.InGame
         private TMPro.TextMeshProUGUI txtEnergy;
         private TMPro.TextMeshProUGUI txtHeart;
         private TMPro.TextMeshProUGUI txtDeck;
-    
-        //Play
-        [SerializeField]
-        private PlayerController player;
+
+        public Button DiscardButton { get; private set; }
+        public Button UseButton { get; private set; }
         
         private void Awake()
         {
             Bind<Button>(typeof(ControlButton));
             Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));
             
-            Get<Button>((int)ControlButton.ButtonDiscard).gameObject.BindEvent(OnDiscardCard);
-            Get<Button>((int)ControlButton.ButtonUse).onClick.AddListener(() => OnUseCard().Forget());
-
+            DiscardButton = Get<Button>((int)ControlButton.ButtonDiscard);
+            UseButton = Get<Button>((int)ControlButton.ButtonUse);
+            
             txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
             txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
             txtDeck = Get<TMPro.TextMeshProUGUI>((int)ControlText.DeckText);
         }
 
-        protected override void OnActivated()
+        public void SetHeartText(float currentHeart, float maxHeart)
         {
-            player.onGameReady += UpdateCardOnGameReady;
-            player.Gameplay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += OnPlayerHeartChanged;
-            player.Gameplay.GetAttrVar(GameplayAttr.Energy).OnValueChanged += OnPlayerEnergyChanged;
-
-            player.onDeckChanged += UpdateDeck;
-        }
-
-        protected override void OnDeactivated()
-        {
-            player.onGameReady -= UpdateCardOnGameReady;
-            player.Gameplay.GetAttrVar(GameplayAttr.Heart).OnValueChanged -= OnPlayerHeartChanged;
-            player.Gameplay.GetAttrVar(GameplayAttr.Energy).OnValueChanged -= OnPlayerEnergyChanged;
-            
-            player.onDeckChanged -= UpdateDeck;
-        }
-
-        private void UpdateCardOnGameReady()
-        {
-            var maxEnergyCount = player.Gameplay.GetAttr(GameplayAttr.MaxEnergy);
-            var energyCount = player.Gameplay.GetAttr(GameplayAttr.Energy);
-            var maxHeartCount = player.Gameplay.GetAttr(GameplayAttr.MaxHeart);
-            var heartCount = player.Gameplay.GetAttr(GameplayAttr.Heart);
-            
-            UpdateEnergy(energyCount, maxEnergyCount);
-            UpdateHeart(heartCount, maxHeartCount);
-            
-            player.DrawCards();
+            txtHeart.text = currentHeart + " / " + maxHeart;
         }
         
-        private void OnDiscardCard(PointerEventData data)
+        public void SetEnergyText(float currentEnergy, float maxEnergy)
         {
-            if(!player.TryDiscardSelectedCard())
-                return;
-            
-            player.DrawCards();
+            txtEnergy.text = currentEnergy + " / " + maxEnergy;
         }
 
-        private async UniTaskVoid OnUseCard()
-        {
-            var result = await player.TryUseCardsOnHand();
-            if (!result)
-                return;
-            
-            player.DrawCards();
-        }
-
-        private void OnPlayerHeartChanged(float oldVal, float newVal)
-        {
-            var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxHeart);
-            txtHeart.text = newVal + " / " + maxCount;
-        }
-        
-        private void OnPlayerEnergyChanged(float oldVal, float newVal)
-        {
-            var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxEnergy);
-            txtEnergy.text = newVal + " / " + maxCount;
-        }
-        
-        private void UpdateEnergy(float curVal, float maxVal)
-        {
-            txtEnergy.text = curVal + " / " + maxVal;
-        }
-        
-        private void UpdateHeart(float curVal, float maxVal)
-        {
-            txtHeart.text = curVal + " / " + maxVal;
-        }
-
-        private void UpdateDeck(int cardNum, int maxCardNum)
+        public void SetDeckText(int cardNum, int maxCardNum)
         {
             txtDeck.text = cardNum + "/" + maxCardNum;
         }

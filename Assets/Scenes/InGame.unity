@@ -6650,8 +6650,6 @@ MonoBehaviour:
     popupObj: {fileID: 393348712}
   - type: 4
     popupObj: {fileID: 1578474361}
-  - type: 5
-    popupObj: {fileID: 0}
 --- !u!1 &1790951391
 GameObject:
   m_ObjectHideFlags: 0
