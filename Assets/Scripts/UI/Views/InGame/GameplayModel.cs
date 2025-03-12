@@ -1,9 +1,9 @@
 using TSoft.InGame.Player;
 using UnityEngine;
 
-namespace TSoft.UI.Views
+namespace TSoft.UI.Views.InGame
 {
-    public class GameControlModel : ModelBase
+    public class GameplayModel : ModelBase
     {
         //Play
         [SerializeField]

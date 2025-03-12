@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace TSoft.UI.Views.InGame
 {
-    public class ControlView : ViewBase
+    public class GameplayView : ViewBase
     {
         private enum ControlText
         {

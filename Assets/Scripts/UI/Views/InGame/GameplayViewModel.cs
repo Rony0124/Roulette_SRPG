@@ -1,14 +1,13 @@
 using Cysharp.Threading.Tasks;
 using TSoft.InGame;
 using TSoft.InGame.Player;
-using TSoft.UI.Views.InGame;
 
-namespace TSoft.UI.Views
+namespace TSoft.UI.Views.InGame
 {
-    public class ControlViewModel : ViewModel
+    public class GameplayViewModel : ViewModel
     {
-        private ControlView View => view as ControlView;
-        private GameControlModel Model => model as GameControlModel;
+        private GameplayView View => view as GameplayView;
+        private GameplayModel Model => model as GameplayModel;
 
         private PlayerController player;
 
