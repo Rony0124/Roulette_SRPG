@@ -7995,8 +7995,10 @@ GameObject:
   - component: {fileID: 3581932772321181733}
   - component: {fileID: 610325333885436490}
   - component: {fileID: 6893966927251644859}
+  - component: {fileID: 6893966927251644861}
+  - component: {fileID: 6893966927251644860}
   m_Layer: 5
-  m_Name: ControlUI
+  m_Name: GameplayUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9744,7 +9746,7 @@ GameObject:
   - component: {fileID: 6050965656978962108}
   - component: {fileID: 4196267117318883837}
   m_Layer: 5
-  m_Name: Runinfo
+  m_Name: Skillinfo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9838,7 +9840,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69f62518d90de94aaf5647ad69d327b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6893966927251644860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478659355152184128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c738a15ffbd864ebad17c7023b9245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   player: {fileID: 938555714}
+--- !u!114 &6893966927251644861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1478659355152184128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b9770f8bffab64c9f887c09dd6aa69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &6896583488617294791
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9858,7 +9884,7 @@ GameObject:
   - component: {fileID: 2501961224177523828}
   - component: {fileID: 3208808018128530000}
   m_Layer: 5
-  m_Name: ControlPanel
+  m_Name: GameplayPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

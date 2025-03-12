@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace TSoft.UI.Views
 {
-    public class GameControlModel : Model
+    public class GameControlModel : ModelBase
     {
         //Play
         [SerializeField]

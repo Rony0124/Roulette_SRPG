@@ -1,4 +1,3 @@
-using System;
 using Cysharp.Threading.Tasks;
 using TSoft.InGame;
 using TSoft.InGame.Player;
@@ -8,8 +7,8 @@ namespace TSoft.UI.Views
 {
     public class ControlViewModel : ViewModel
     {
-        public ControlView View => view as ControlView;
-        public GameControlModel Model => model as GameControlModel;
+        private ControlView View => view as ControlView;
+        private GameControlModel Model => model as GameControlModel;
 
         private PlayerController player;
 
@@ -22,6 +21,8 @@ namespace TSoft.UI.Views
             
             player.Gameplay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += OnPlayerHeartChanged;
             player.Gameplay.GetAttrVar(GameplayAttr.Energy).OnValueChanged += OnPlayerEnergyChanged;
+            
+            //TODO 이벤트 버스로 변경
             player.onDeckChanged += OnDeckChanged;
             player.onGameReady += UpdateCardOnGameReady;
         }

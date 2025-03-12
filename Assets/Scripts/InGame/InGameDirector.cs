@@ -1,7 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
-using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.Utils;
 using UnityEngine;
