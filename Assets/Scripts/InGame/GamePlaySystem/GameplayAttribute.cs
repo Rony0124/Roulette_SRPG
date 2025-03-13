@@ -9,6 +9,7 @@ namespace TSoft.InGame.GamePlaySystem
         public GameplayAttr attrType;
         public float value;
     }
+    
     [Serializable]
     public struct AppliedModifier
     {

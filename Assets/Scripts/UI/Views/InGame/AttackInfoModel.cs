@@ -1,8 +1,8 @@
-using TSoft;
+using TSoft.Data;
 using TSoft.InGame.Player;
 using UnityEngine;
 
-namespace UI.Views.InGame
+namespace TSoft.UI.Views.InGame
 {
     public class AttackInfoModel : ModelBase
     {

@@ -19,9 +19,8 @@ namespace TSoft.UI.Views.InGame
       
          View.SetMonsterNameText(monsterController.Data.name);
          View.SetMonsterHpText(heart, maxHeart);
-         View.SetBackground(monsterController.Data.monsterType);
 
-         Model.monsterHp.OnValueChanged += OnMonsterDamaged;
+         monsterController.GamePlay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += OnMonsterDamaged;
       }
 
       private void OnMonsterDamaged(float oldValue, float newValue)

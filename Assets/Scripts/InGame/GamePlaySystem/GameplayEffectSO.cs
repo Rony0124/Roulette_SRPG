@@ -1,5 +1,6 @@
 using System;
 using Sirenix.OdinInspector;
+using TSoft.Data;
 using TSoft.Data.Condition;
 using TSoft.InGame.CardSystem.CE;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace TSoft.InGame.GamePlaySystem
         
         [Header("GameplayEffect")]
         public GameplayEffect gameplayEffect;
+        public DataRegistryIdSO effectEventId;
         
         public bool hasUnsatisfiedEffect;
         
