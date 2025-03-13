@@ -1,6 +1,5 @@
 using TSoft.Data.Registry;
 using TSoft.Managers;
-using UI.Popup.Inventory.Skill;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

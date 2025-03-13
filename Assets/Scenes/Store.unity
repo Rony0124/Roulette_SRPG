@@ -5966,6 +5966,7 @@ GameObject:
   - component: {fileID: 1043540536}
   - component: {fileID: 1043540535}
   - component: {fileID: 1043540538}
+  - component: {fileID: 1043540539}
   m_Layer: 5
   m_Name: StoreView
   m_TagString: Untagged
@@ -6080,6 +6081,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 99129afd09ce60b4ba76dcb085588bed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  artifactDisplayPrefab: {fileID: 1956855369314719016, guid: f5428eeb704019b4e9b76556cccb35b1,
+    type: 3}
+  jokerDisplayPrefab: {fileID: 1971082727770734454, guid: 5298fa29f35fc644bb747b07e4a98e1c,
+    type: 3}
+  skillDisplayPrefab: {fileID: 7741474669079817041, guid: ff0ae60cb4206844aa0ff294d83f4bfc,
+    type: 3}
+--- !u!114 &1043540539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043540533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 745ad0409a87bad44be5b51de69f535e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   artifactDisplayPrefab: {fileID: 1956855369314719016, guid: f5428eeb704019b4e9b76556cccb35b1,

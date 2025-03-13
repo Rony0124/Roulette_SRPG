@@ -1,6 +1,5 @@
+using System;
 using TSoft.Data;
-using TSoft.Managers;
-using TSoft.UI.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +8,9 @@ namespace TSoft.UI.Popup.Inventory
 {
     public class ItemIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        public Action<ItemSO, Vector2> onPointerEnter;
+        public Action onPointerExit;
+        
         [SerializeField] protected Image itemIcon;
         [SerializeField] protected GameObject disableImage;
         
@@ -37,21 +39,18 @@ namespace TSoft.UI.Popup.Inventory
             if (currentItem == null)
                 return;
             
-            var infoPanel = BootstrapView.Instance.itemInfo;
-            if (infoPanel == null) 
-                return;
-            
-            infoPanel.InitPopup(currentItem);
-            infoPanel.ShowPanel(transform.position);
+            onPointerEnter?.Invoke(currentItem, transform.position);
         }
 
         public virtual void OnPointerExit(PointerEventData eventData)
         {
-            var infoPanel = BootstrapView.Instance.itemInfo;
-            if (infoPanel == null) 
-                return;
-            
-            infoPanel.HidePanel();
+            onPointerExit?.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            onPointerEnter = null;
+            onPointerExit = null;
         }
     }
 }

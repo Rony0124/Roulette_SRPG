@@ -5,7 +5,6 @@ using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.InGame;
 using TSoft.Managers;
-using UI.Popup.Inventory.Skill;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,6 +14,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
     {
         [SerializeField] private Transform scrollContent;
         [SerializeField] private GameObject slotPrefab;
+        [SerializeField] private ItemInfoPopup info;
         
         [Header("test")] 
         [SerializeField] private List<DataRegistryIdSO> testIds;
@@ -48,6 +48,9 @@ namespace TSoft.UI.Popup.Inventory.Skill
                     var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
                     
                     slot.InitSlot(skill);
+                    slot.icon.itemIcon.onPointerEnter = OnItemPointerEnter;
+                    slot.icon.itemIcon.onPointerExit = OnItemPointerExit;
+                    
                     inventoryItemSlots.Add(slot);
                 }
             }
@@ -67,6 +70,17 @@ namespace TSoft.UI.Popup.Inventory.Skill
                     inventoryItemSlots.Add(slot);
                 }
             }
+        }
+        
+        private void OnItemPointerEnter(ItemSO itemData, Vector2 position)
+        {
+            info.InitPopup(itemData);
+            info.ShowPanel(position);
+        }
+        
+        private void OnItemPointerExit()
+        {
+            info.HidePanel();
         }
         
         public void OnDrop(PointerEventData eventData)

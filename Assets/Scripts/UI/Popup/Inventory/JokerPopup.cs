@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.Managers;
+using TSoft.UI.Views.Bootstrap;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -23,7 +25,11 @@ namespace TSoft.UI.Popup.Inventory
             JokerContent
         }
         
-        [SerializeField] private GameObject jokerIconPrefab;
+        [SerializeField] 
+        private GameObject jokerIconPrefab;
+        
+        [SerializeField] 
+        private ItemInfoPopup info;
 
         private Transform content;
         
@@ -67,7 +73,9 @@ namespace TSoft.UI.Popup.Inventory
                 var jokerData = DataRegistry.Instance.JokerRegistry.Get(jokerId);
                 var jokerIcon = Instantiate(jokerIconPrefab, content).GetComponent<JokerInventoryIcon>();
                 jokerIcon.SetItemIcon(jokerData);
-                Debug.Log(jokerData.name);
+                
+                jokerIcon.onPointerEnter = OnJokerItemPointerEnter;
+                jokerIcon.onPointerExit = OnJokerItemPointerExit;
                 jokerIcon.onItemClicked = OnJokerItemClicked;
                 jokerIcon.onItemReleased = OnJokerItemReleased;
                 
@@ -91,10 +99,20 @@ namespace TSoft.UI.Popup.Inventory
             onPopupClose?.Invoke();
         }
 
+        private void OnJokerItemPointerEnter(ItemSO itemData, Vector2 position)
+        {
+            info.InitPopup(itemData);
+            info.ShowPanel(position);
+        }
+        
+        private void OnJokerItemPointerExit()
+        {
+            info.HidePanel();
+        }
+
         private void OnJokerItemClicked(JokerInventoryIcon jokerIcon)
         {
             currentSelectedIcon = jokerIcon;
-            Debug.Log("???");
         }
         
         private void OnJokerItemReleased(JokerInventoryIcon jokerIcon)

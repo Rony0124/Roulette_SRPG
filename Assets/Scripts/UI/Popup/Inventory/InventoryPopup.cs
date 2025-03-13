@@ -1,5 +1,8 @@
 using System;
 using TSoft.Managers;
+using TSoft.UI.Views;
+using TSoft.UI.Views.Bootstrap;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace TSoft.UI.Popup.Inventory

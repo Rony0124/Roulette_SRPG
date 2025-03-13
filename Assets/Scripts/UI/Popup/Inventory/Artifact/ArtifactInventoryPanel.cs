@@ -1,20 +1,18 @@
 using System.Collections.Generic;
-using TSoft.Data.Registry;
-using TSoft.InGame;
-using TSoft.Managers;
-using UI.Popup.Inventory.Skill;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using System.Linq;
 using Sirenix.Utilities;
 using TSoft.Data;
+using TSoft.Data.Registry;
+using TSoft.Managers;
+using UnityEngine;
+using UnityEngine.EventSystems;
 
-namespace TSoft.UI.Popup.Inventory
+namespace TSoft.UI.Popup.Inventory.Artifact
 {
     public class ArtifactInventoryPanel : MonoBehaviour, IDropHandler, IInventoryUpdateHandler
     {
         [SerializeField] private Transform scrollContent;
+        [SerializeField] private ItemInfoPopup info;
         [SerializeField] private GameObject slotPrefab;
         
         [Header("test")] 
@@ -48,6 +46,9 @@ namespace TSoft.UI.Popup.Inventory
                     var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
                     
                     slot.InitSlot(skill);
+                    slot.icon.itemIcon.onPointerEnter = OnItemPointerEnter;
+                    slot.icon.itemIcon.onPointerExit = OnItemPointerExit;
+                    
                     inventoryItemSlots.Add(slot);
                 }
             }
@@ -66,6 +67,17 @@ namespace TSoft.UI.Popup.Inventory
                     inventoryItemSlots.Add(slot);
                 }
             }
+        }
+        
+        private void OnItemPointerEnter(ItemSO itemData, Vector2 position)
+        {
+            info.InitPopup(itemData);
+            info.ShowPanel(position);
+        }
+        
+        private void OnItemPointerExit()
+        {
+            info.HidePanel();
         }
 
         public void OnDrop(PointerEventData eventData)

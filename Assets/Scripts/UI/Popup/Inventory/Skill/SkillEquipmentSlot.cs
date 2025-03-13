@@ -2,7 +2,6 @@ using TSoft.Data.Registry;
 using TSoft.InGame;
 using TSoft.Managers;
 using UI.Popup.Inventory;
-using UI.Popup.Inventory.Skill;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

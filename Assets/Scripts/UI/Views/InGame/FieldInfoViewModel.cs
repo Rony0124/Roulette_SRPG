@@ -1,31 +1,33 @@
 using TSoft.InGame;
-using TSoft.UI.Views;
-using TSoft.UI.Views.InGame;
 
-public class FieldInfoViewModel : ViewModelBase
+namespace TSoft.UI.Views.InGame
 {
-   private FieldInfoView View => view as FieldInfoView;
-   private FieldInfoModel Model => model as FieldInfoModel;
-
-   private void Start()
+   public class FieldInfoViewModel : ViewModelBase
    {
-      Model.Combat.OnMonsterSpawn += OnMonsterSpawn;
-   }
+      private FieldInfoView View => view as FieldInfoView;
+      private FieldInfoModel Model => model as FieldInfoModel;
 
-   private void OnMonsterSpawn(MonsterController monsterController)
-   {
-      var heart = monsterController.GamePlay.GetAttr(GameplayAttr.Heart);
-      var maxHeart = monsterController.GamePlay.GetAttr(GameplayAttr.MaxHeart);
+      private void Start()
+      {
+         Model.Combat.OnMonsterSpawn += OnMonsterSpawn;
+      }
+
+      private void OnMonsterSpawn(MonsterController monsterController)
+      {
+         var heart = monsterController.GamePlay.GetAttr(GameplayAttr.Heart);
+         var maxHeart = monsterController.GamePlay.GetAttr(GameplayAttr.MaxHeart);
       
-      View.UpdateMonsterNameText(monsterController.Data.name);
-      View.UpdateMonsterHpText(heart, maxHeart);
+         View.SetMonsterNameText(monsterController.Data.name);
+         View.SetMonsterHpText(heart, maxHeart);
+         View.SetBackground(monsterController.Data.monsterType);
 
-      Model.monsterHp.OnValueChanged += OnMonsterDamaged;
-   }
+         Model.monsterHp.OnValueChanged += OnMonsterDamaged;
+      }
 
-   private void OnMonsterDamaged(float oldValue, float newValue)
-   {
-      var maxHp = Model.Combat.CurrentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
-      View.UpdateMonsterHpText(newValue, maxHp);
+      private void OnMonsterDamaged(float oldValue, float newValue)
+      {
+         var maxHp = Model.Combat.CurrentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
+         View.SetMonsterHpText(newValue, maxHp);
+      }
    }
 }

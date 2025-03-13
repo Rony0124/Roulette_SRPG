@@ -1,8 +1,7 @@
 using TSoft.Data;
-using TSoft.UI.Popup.Inventory;
 using UnityEngine;
 
-namespace UI.Popup.Inventory.Skill
+namespace TSoft.UI.Popup.Inventory
 {
     public class SlotItemIcon : DraggableItem
     {

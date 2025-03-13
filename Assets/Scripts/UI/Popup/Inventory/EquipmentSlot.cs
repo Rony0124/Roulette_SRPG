@@ -1,6 +1,6 @@
 using TSoft.Data;
 using TSoft.Managers;
-using UI.Popup.Inventory.Skill;
+using TSoft.UI.Views;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -9,6 +9,7 @@ namespace TSoft.UI.Popup.Inventory
 {
     public class EquipmentSlot : MonoBehaviour, IDropHandler
     {
+        [SerializeField] protected PopupView popup;
         [SerializeField] protected Image slotBackgroundImage;
         [SerializeField] protected GameObject iconPrefab;
         
