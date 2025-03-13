@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using TSoft.Data.Monster;
 using TSoft.Data.Registry;
@@ -9,11 +10,7 @@ namespace TSoft.InGame
 {
     public class CombatController : ControllerBase
     {
-        //view
-        [SerializeField]
-        private BackgroundView bgView;
-        [SerializeField]
-        private FieldInfoView infoView;
+        public Action<MonsterController> OnMonsterSpawn;
         
         [SerializeField] private float gameFinishDuration;
         
@@ -27,14 +24,7 @@ namespace TSoft.InGame
             {
                 if (value != null)
                 {
-                    infoView.OnMonsterSpawn?.Invoke(value);
-                    bgView.OnMonsterSpawn?.Invoke(value.Data.monsterType);
-                    
-                    value.GamePlay.GetAttrVar(GameplayAttr.Heart).OnValueChanged += (oldVal, newVal) =>
-                    {
-                        var maxHp = currentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
-                        infoView.OnDamaged?.Invoke(newVal, maxHp);
-                    };
+                    OnMonsterSpawn?.Invoke(value);
                     
                     currentMonster = value;
                 }

@@ -1,14 +1,9 @@
-using System;
-using TSoft.InGame;
 using TSoft.UI.Core;
 
 namespace TSoft.UI.Views.InGame
 {
     public class FieldInfoView : ViewBase
     {
-        public Action<float, float> OnDamaged;
-        public Action<MonsterController> OnMonsterSpawn;
-        
         private enum FieldInfoText
         {
             MonsterNameTxt,
@@ -26,25 +21,12 @@ namespace TSoft.UI.Views.InGame
             txtHp = Get<TMPro.TextMeshProUGUI>((int)FieldInfoText.FieldHpTxt);
         }
         
-        protected override void OnActivated()
+        public void UpdateMonsterNameText(string monsterName)
         {
-            OnDamaged += UpdateMonsterHp;
-            OnMonsterSpawn += UpdateOnMonsterSpawn;
+            txtName.text = monsterName;
         }
 
-        protected override void OnDeactivated()
-        {
-            OnDamaged -= UpdateMonsterHp;
-            OnMonsterSpawn -= UpdateOnMonsterSpawn;
-        }
-
-        private void UpdateOnMonsterSpawn(MonsterController monster)
-        {
-            txtName.text = monster.Data.name;
-            txtHp.text = (int)monster.GamePlay.GetAttr(GameplayAttr.Heart) + " / " + (int)monster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
-        }
-
-        private void UpdateMonsterHp(float hp, float maxHp)
+        public void UpdateMonsterHpText(float hp, float maxHp)
         {
             txtHp.text = (int)hp + " / " + (int)maxHp;
         }
