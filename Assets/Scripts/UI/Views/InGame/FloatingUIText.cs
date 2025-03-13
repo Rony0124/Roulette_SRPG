@@ -12,11 +12,6 @@ namespace TSoft.UI.Views.InGame
 
         private bool isPooled;
 
-        private void Awake()
-        {
-            //tmp = GetComponent<TextMeshProUGUI>();
-        }
-
         public void SetText(string content, Color color)
         {
             tmp.text = content;

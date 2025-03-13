@@ -47,6 +47,11 @@ namespace TSoft.UI.Views.InGame
                     {
                         if (Mathf.Abs(appliedModifier.modifier.Add) > float.Epsilon && info.opType == ModifierOpType.Add)
                         {
+                            if (info.attrType == GameplayAttr.BasicAttackPower)
+                            {
+                                Debug.Log("기본 공격이 몇이나 올라가는 건가요" + appliedModifier.modifier.Add);    
+                            }
+                            
                             ShowFloatingText(info.targetTransform.position, appliedModifier.modifier.Add, info.attrType);
                         }
 

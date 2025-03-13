@@ -30,7 +30,10 @@ namespace TSoft.InGame.GamePlaySystem
         
         [Header("GameplayEffect")]
         public GameplayEffect gameplayEffect;
-        public DataRegistryIdSO effectEventId;
+        
+        public bool hasDuration;
+        [ShowIf("hasDuration")]
+        public float duration;
         
         public bool hasUnsatisfiedEffect;
         
