@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_DevilGirl
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 08371b493fc87eb41a5b971cbd918a2f, type: 2}
+  _id:
+    _value: 2d11fdc56cbbd422a8e337c30ac7d123
+  _assetGuid: c5fd112dbb6c22d4a8e337c30ac7d123
+  _lastGeneratedAssetGuid: c5fd112dbb6c22d4a8e337c30ac7d123
   monsterPrefab: {fileID: 370512662279297455, guid: 362ed98a2f26fe64eaf6025372cb537e,
     type: 3}
   monsterData:

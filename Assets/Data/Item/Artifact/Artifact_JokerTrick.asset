@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_JokerTrick
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: a26530eef9de2431cb71f07ec9d65e14, type: 2}
+  _id:
+    _value: 87e908ff0327009438100dfead2ca692
+  _assetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
+  _lastGeneratedAssetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
   title: 
   description: 
   image: {fileID: -1266743751, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}

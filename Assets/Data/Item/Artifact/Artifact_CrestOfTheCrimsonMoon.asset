@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_CrestOfTheCrimsonMoon
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 8eac1f1d21d29f0499045a6d18231a8d, type: 2}
+  _id:
+    _value: a7b8fef7f183e449ca3edb5f66e5f625
+  _assetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
+  _lastGeneratedAssetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
   title: 
   description: 
   image: {fileID: -2089745200, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}

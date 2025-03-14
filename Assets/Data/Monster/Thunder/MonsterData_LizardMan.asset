@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_LizardMan
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: a8b8cf8143741416d8d79846e97078c7, type: 2}
-  monsterPrefab: {fileID: 2765646870260190933, guid: e6be6db1c253945778c445523afefd93, type: 3}
+  _id:
+    _value: 4d318173de281b146a8dc4af00b00c07
+  _assetGuid: 7381314d28de141b6a8dc4af00b00c07
+  _lastGeneratedAssetGuid: 7381314d28de141b6a8dc4af00b00c07
+  monsterPrefab: {fileID: 2765646870260190933, guid: e6be6db1c253945778c445523afefd93,
+    type: 3}
   monsterData:
     name: LizardMan
     monsterType: 6

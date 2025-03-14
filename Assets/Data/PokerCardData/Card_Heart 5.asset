@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Heart 5
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  _id:
+    _value: 76b9b4b6609434ec6a57bf1ae3b391b5
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   title: 
   description: 
   image: {fileID: 21300000, guid: 9c915f806d6d09845b4cc77519f902d7, type: 3}
   price: 0
   number: 5
   type: 4
-  effect:
-    rid: -2
-  policy: 0
+  instantEffect:
+    effect:
+      rid: -2
+    modifiers: []
+  effect: {fileID: 0}
   references:
     version: 2
     RefIds:

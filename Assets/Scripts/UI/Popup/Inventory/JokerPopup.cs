@@ -61,18 +61,13 @@ namespace TSoft.UI.Popup.Inventory
                 jokerIcons = new();
             }
             
-            foreach (var jokerId in DataRegistry.Instance.JokerRegistry.Ids)
+            foreach (var kvp in DataRegistry.Instance.JokerRegistry.assetGuidLookup)
             {
-                if (!GameSave.Instance.HasItemsId(jokerId.Guid))
-                {
-                    var njokerData = DataRegistry.Instance.JokerRegistry.Get(jokerId);
-                    Debug.Log(njokerData.name + "not have");
+                if (!GameSave.Instance.HasItemsId(kvp.Key))
                     continue;
-                }
                 
-                var jokerData = DataRegistry.Instance.JokerRegistry.Get(jokerId);
                 var jokerIcon = Instantiate(jokerIconPrefab, content).GetComponent<JokerInventoryIcon>();
-                jokerIcon.SetItemIcon(jokerData);
+                jokerIcon.SetItemIcon(kvp.Value);
                 
                 jokerIcon.onPointerEnter = OnJokerItemPointerEnter;
                 jokerIcon.onPointerExit = OnJokerItemPointerExit;

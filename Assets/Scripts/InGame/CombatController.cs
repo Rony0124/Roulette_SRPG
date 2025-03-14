@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using TSoft.Data;
 using TSoft.Data.Monster;
 using TSoft.Data.Registry;
 using TSoft.UI.Views.InGame;
@@ -38,14 +39,11 @@ namespace TSoft.InGame
         protected override void InitOnDirectorChanged()
         {
 #if UNITY_EDITOR
-            if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.Blueprint.monsterId == null)
+            if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.Blueprint.monsterId == RegistryId.Null)
             {
-                if (TsDevPreferences.MonsterId != null)
+                if (TsDevPreferences.Monster != null)
                 {
-                    if (DataRegistry.Instance.MonsterRegistry.TryGetValue(TsDevPreferences.MonsterId, out var defaultMonster))
-                    { 
-                        monsterData = defaultMonster;
-                    }    
+                    monsterData = TsDevPreferences.Monster;
                 }
             }
 #endif

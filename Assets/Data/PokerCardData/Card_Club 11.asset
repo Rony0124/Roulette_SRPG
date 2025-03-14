@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Club 11
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  _id:
+    _value: 5232dbe5ff9974d43bab4b48e6778e7a
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   title: 
   description: 
   image: {fileID: 21300000, guid: eb01a0c0319df854aa13366f4e1528a1, type: 3}
   price: 0
   number: 11
   type: 2
-  effect:
-    rid: -2
-  policy: 0
+  instantEffect:
+    effect:
+      rid: -2
+    modifiers: []
+  effect: {fileID: 0}
   references:
     version: 2
     RefIds:

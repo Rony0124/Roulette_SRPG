@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Spade 6
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  _id:
+    _value: 6718b514d24a34f3d90f494f7e79c898
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   title: 
   description: 
   image: {fileID: 21300000, guid: 6a15298c71266594086136f6121ae454, type: 3}
   price: 0
   number: 6
   type: 3
-  effect:
-    rid: -2
-  policy: 0
+  instantEffect:
+    effect:
+      rid: -2
+    modifiers: []
+  effect: {fileID: 0}
   references:
     version: 2
     RefIds:

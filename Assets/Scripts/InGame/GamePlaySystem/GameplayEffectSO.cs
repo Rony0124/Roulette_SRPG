@@ -8,7 +8,7 @@ using UnityEngine;
 namespace TSoft.InGame.GamePlaySystem
 {
     [CreateAssetMenu(fileName = "GE_", menuName = "Create GameplayEffect", order = 1)]
-    public class GameplayEffectSO : ScriptableObject
+    public class GameplayEffectSO : RegistryAsset
     {
         [Serializable]
         public class GameplayEffect

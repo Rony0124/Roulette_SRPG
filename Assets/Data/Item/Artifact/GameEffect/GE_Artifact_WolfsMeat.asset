@@ -7,15 +7,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_Artifact_WolfsMeat
   m_EditorClassIdentifier: 
+  _id:
+    _value: d71cf46d5690340c683b78a8a50dc822
+  _assetGuid: 6df41cd790560c34683b78a8a50dc822
+  _lastGeneratedAssetGuid: 6df41cd790560c34683b78a8a50dc822
   lifeCycle:
     begin: 4
     end: 5
-    type: 1
   gameplayEffect:
     effect:
       rid: 8436400433813258270
@@ -28,6 +31,8 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
     - attrType: 1000
       modifierOp: 1
       gameplayMagnitude:
@@ -36,6 +41,10 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
+  hasDuration: 0
+  duration: 0
   hasUnsatisfiedEffect: 0
   unsatisfiedEffect:
     effect:

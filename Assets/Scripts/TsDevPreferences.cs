@@ -1,4 +1,5 @@
 using TSoft.Data;
+using TSoft.Data.Monster;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ using UnityEngine;
         int toolbarInt = 0;
         string[] toolbarStrings = {"InGame", "StageMap", "Lobby" };
         
-        public static DataRegistryIdSO MonsterId;
+        public static MonsterDataSO Monster;
         public static int monsterHp;
         
         private static bool prefsLoaded = false;
@@ -32,12 +33,12 @@ using UnityEngine;
             string overrideStagePath = EditorPrefs.GetString("monsterIdPath", "");
 
             if (overrideStagePath.Length > 0)
-                MonsterId = AssetDatabase.LoadAssetAtPath<DataRegistryIdSO>(overrideStagePath);
+                Monster = AssetDatabase.LoadAssetAtPath<MonsterDataSO>(overrideStagePath);
         }
 
         private static void SavePrefs()
         {
-            string monsterIdPath = AssetDatabase.GetAssetPath(MonsterId);
+            string monsterIdPath = AssetDatabase.GetAssetPath(Monster);
             EditorPrefs.SetString("monsterIdPath", monsterIdPath);
         }
 
@@ -74,7 +75,7 @@ using UnityEngine;
         private void OnGUI_InGame()
         {
             GUILayout.Label("Monster", EditorStyles.boldLabel);
-            MonsterId = EditorGUILayout.ObjectField(new GUIContent("Monster Id", "몬스터 id 값 설정"), MonsterId, typeof(DataRegistryIdSO), false) as DataRegistryIdSO;
+            Monster = EditorGUILayout.ObjectField(new GUIContent("Monster Id", "몬스터 id 값 설정"), Monster, typeof(MonsterDataSO), false) as MonsterDataSO;
         }
         
         private void OnGUI_Stage()

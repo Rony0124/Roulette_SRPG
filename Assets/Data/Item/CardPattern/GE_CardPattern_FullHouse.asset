@@ -7,15 +7,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_CardPattern_FullHouse
   m_EditorClassIdentifier: 
+  _id:
+    _value: 391309110a0b04af88d3733e45da38f3
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   lifeCycle:
     begin: 4
     end: 5
-    type: 0
   gameplayEffect:
     effect:
       rid: 8436400439862493189
@@ -28,6 +31,8 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
     - attrType: 2001
       modifierOp: 1
       gameplayMagnitude:
@@ -36,6 +41,10 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
+  hasDuration: 0
+  duration: 0
   hasUnsatisfiedEffect: 0
   unsatisfiedEffect:
     effect:

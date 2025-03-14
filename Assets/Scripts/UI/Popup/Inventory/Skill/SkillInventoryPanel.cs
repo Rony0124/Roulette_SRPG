@@ -23,8 +23,6 @@ namespace TSoft.UI.Popup.Inventory.Skill
         
         public void UpdateSlots()
         {
-            var skills = DataRegistry.Instance.SkillRegistry.Ids;
-            
             if (inventoryItemSlots.Count > 0)
             {
                 foreach (var itemSlot in inventoryItemSlots)
@@ -35,19 +33,18 @@ namespace TSoft.UI.Popup.Inventory.Skill
                 inventoryItemSlots = new();
             }
 
-            foreach (var skillId in skills)
+            foreach (var kvp in DataRegistry.Instance.SkillRegistry.assetGuidLookup)
             {
-                if (GameSave.Instance.HasItemsId(skillId.Guid))
+                if (GameSave.Instance.HasItemsId(kvp.Key))
                 {
-                    if (GameSave.Instance.SkillEquippedDictionary.Values.Contains(skillId.Guid))
+                    if (GameSave.Instance.SkillEquippedDictionary.Values.Contains(kvp.Key))
                     {
                         continue;
                     }
-                 
-                    var skill = DataRegistry.Instance.SkillRegistry.Get(skillId.Guid);
+                    
                     var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
                     
-                    slot.InitSlot(skill);
+                    slot.InitSlot(kvp.Value);
                     slot.icon.itemIcon.onPointerEnter = OnItemPointerEnter;
                     slot.icon.itemIcon.onPointerExit = OnItemPointerExit;
                     
@@ -104,7 +101,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
                 CardPatternType typeKey = CardPatternType.None;
                 foreach (var kvp in GameSave.Instance.SkillEquippedDictionary)
                 {
-                    if (slot.itemData.RegistryId.Guid == kvp.Value)
+                    if (slot.itemData.Id.Value == kvp.Value)
                     {
                         typeKey = (CardPatternType)kvp.Key;
                         break;

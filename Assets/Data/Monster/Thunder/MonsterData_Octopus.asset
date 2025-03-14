@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Octopus
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 34233452a2ba94e10bce1c96188efa10, type: 2}
-  monsterPrefab: {fileID: 3052168130071359875, guid: dd641c04ea4734f1b870e645a4f82fbe, type: 3}
+  _id:
+    _value: 333a55083da2a694c9b6b0c016e5650d
+  _assetGuid: 08553a33a23d94a6c9b6b0c016e5650d
+  _lastGeneratedAssetGuid: 08553a33a23d94a6c9b6b0c016e5650d
+  monsterPrefab: {fileID: 3052168130071359875, guid: dd641c04ea4734f1b870e645a4f82fbe,
+    type: 3}
   monsterData:
     name: Octopus
     monsterType: 6

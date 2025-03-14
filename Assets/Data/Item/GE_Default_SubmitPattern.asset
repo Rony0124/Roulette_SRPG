@@ -7,11 +7,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_Default_SubmitPattern
   m_EditorClassIdentifier: 
+  _id:
+    _value: 6c0b6f4fe1e4c4e7eb70b63f68400c64
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   lifeCycle:
     begin: 4
     end: 5
@@ -23,10 +27,14 @@ MonoBehaviour:
       modifierOp: 1
       gameplayMagnitude:
         magnitudeType: 0
-        magnitude: 0
+        magnitude: 8
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
+  hasDuration: 0
+  duration: 0
   hasUnsatisfiedEffect: 0
   unsatisfiedEffect:
     effect:

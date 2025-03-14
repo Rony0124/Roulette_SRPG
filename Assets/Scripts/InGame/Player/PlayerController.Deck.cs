@@ -33,14 +33,11 @@ namespace TSoft.InGame.Player
             {
                 currentDeck.Add(card);
             }
-
-            foreach (var dataId in DataRegistry.Instance.JokerRegistry.Ids)
+            
+            foreach (var kvp in DataRegistry.Instance.JokerRegistry.assetGuidLookup
+                         .Where(kvp => GameSave.Instance.HasItemsId(kvp.Key)))
             {
-                if (!GameSave.Instance.HasItemsId(dataId.Guid))
-                    continue;
-
-                var joker = DataRegistry.Instance.JokerRegistry.Get(dataId);
-                currentDeck.Add(joker);
+                currentDeck.Add(kvp.Value);
             }
             
             Shuffle(currentDeck);

@@ -21,8 +21,6 @@ namespace TSoft.UI.Popup.Inventory.Artifact
         private List<InventoryItemSlot> inventoryItemSlots = new();
         public void UpdateSlots()
         {
-            var items = DataRegistry.Instance.ArtifactRegistry.Ids;
-            
             if (inventoryItemSlots.Count > 0)
             {
                 foreach (var itemSlot in inventoryItemSlots)
@@ -33,24 +31,21 @@ namespace TSoft.UI.Popup.Inventory.Artifact
                 inventoryItemSlots = new();
             }
 
-            foreach (var itemId in items)
+            foreach (var kvp in DataRegistry.Instance.ArtifactRegistry.assetGuidLookup)
             {
-                if (GameSave.Instance.HasItemsId(itemId.Guid))
-                {
-                    if (GameSave.Instance.ArtifactEquippedDictionary.Values.Contains(itemId.Guid))
-                    {
-                        continue;
-                    }
-                 
-                    var skill = DataRegistry.Instance.ArtifactRegistry.Get(itemId.Guid);
-                    var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
+                if (!GameSave.Instance.HasItemsId(kvp.Key)) 
+                    continue;
+                
+                if (GameSave.Instance.ArtifactEquippedDictionary.Values.Contains(kvp.Key))
+                    continue;
                     
-                    slot.InitSlot(skill);
-                    slot.icon.itemIcon.onPointerEnter = OnItemPointerEnter;
-                    slot.icon.itemIcon.onPointerExit = OnItemPointerExit;
+                var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
                     
-                    inventoryItemSlots.Add(slot);
-                }
+                slot.InitSlot(kvp.Value);
+                slot.icon.itemIcon.onPointerEnter = OnItemPointerEnter;
+                slot.icon.itemIcon.onPointerExit = OnItemPointerExit;
+                    
+                inventoryItemSlots.Add(slot);
             }
             
             if (!testIds.IsNullOrEmpty())
@@ -101,7 +96,7 @@ namespace TSoft.UI.Popup.Inventory.Artifact
                 int index = -1;
                 foreach (var kvp in GameSave.Instance.ArtifactEquippedDictionary)
                 {
-                    if (slot.itemData.RegistryId.Guid == kvp.Value)
+                    if (slot.itemData.Id.Value == kvp.Value)
                     {
                         index = kvp.Key;
                         break;

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_MouseMon
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 4455d21fc82f37c43950fdb355d31360, type: 2}
+  _id:
+    _value: 49893c9431f9640fbb782407e04e52e0
+  _assetGuid: 943c8949f9310f64bb782407e04e52e0
+  _lastGeneratedAssetGuid: 943c8949f9310f64bb782407e04e52e0
   monsterPrefab: {fileID: 8936807966587024289, guid: 6d1f3bc01f63d9941818657f93b32bf7,
     type: 3}
   monsterData:

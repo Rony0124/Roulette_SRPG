@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Ogre
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 7c5df6d64eaf1b94585dfae1d838a565, type: 2}
+  _id:
+    _value: 33a4e15157eb44a48929e19b9bbb81c4
+  _assetGuid: 51e1a433eb57a4448929e19b9bbb81c4
+  _lastGeneratedAssetGuid: 51e1a433eb57a4448929e19b9bbb81c4
   monsterPrefab: {fileID: 6353896150972846667, guid: c01c98ab723743042b191ac32d7977a8,
     type: 3}
   monsterData:

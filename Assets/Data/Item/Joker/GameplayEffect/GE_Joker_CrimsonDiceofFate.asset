@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_Joker_CrimsonDiceofFate
   m_EditorClassIdentifier: 
+  guid: 5a6c82dea25414fdd87e636790cb67cc
   lifeCycle:
     begin: 4
     end: 5
-    type: 1
   gameplayEffect:
     effect:
       rid: 8436400433813258276
@@ -28,6 +28,10 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
+  hasDuration: 0
+  duration: 0
   hasUnsatisfiedEffect: 1
   unsatisfiedEffect:
     effect:
@@ -41,12 +45,16 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
   hasCondition: 1
   conditionApplier:
     rid: 8436400433813258278
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 8436400433813258276
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

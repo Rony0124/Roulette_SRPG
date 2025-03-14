@@ -1,6 +1,6 @@
 using Cysharp.Threading.Tasks;
 using TSoft.InGame.GamePlaySystem;
-using TSoft.Managers;
+using TSoft.Managers.Event;
 
 namespace TSoft.InGame.CardSystem.CE
 {

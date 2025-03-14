@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_Skill_DoubleStrike
   m_EditorClassIdentifier: 
+  guid: 5c87ce56a3a0a4838b863d51761ea4e0
   lifeCycle:
     begin: 4
     end: 5
-    type: 0
   gameplayEffect:
     effect:
       rid: 8436400439862493199
@@ -28,6 +28,10 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
+  hasDuration: 0
+  duration: 0
   hasUnsatisfiedEffect: 0
   unsatisfiedEffect:
     effect:

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace TSoft.Data
 {
-    public class ItemSO : DataSO
+    public class ItemSO : RegistryAsset
     {
         public string title;
         public string description;

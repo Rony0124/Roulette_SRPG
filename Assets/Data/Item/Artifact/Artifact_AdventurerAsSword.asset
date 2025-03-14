@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_AdventurerAsSword
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: b5036faa368cbc949b912c933c584f62, type: 2}
+  _id:
+    _value: 6e4676a88f55649f79b2d17137ff1823
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   title: 
   description: 
   image: {fileID: -2114154591, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}

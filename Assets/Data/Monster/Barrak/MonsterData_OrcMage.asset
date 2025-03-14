@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_OrcMage
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: daffc4ede5f2e3d498996e62b3e55dd2, type: 2}
+  _id:
+    _value: f7ad796076c5e4c34a264fd51d2bc638
+  _assetGuid: 6079adf7c576c3e44a264fd51d2bc638
+  _lastGeneratedAssetGuid: 6079adf7c576c3e44a264fd51d2bc638
   monsterPrefab: {fileID: 6427782549712886320, guid: 5db6557d82fdeb0459838ccfe2569365,
     type: 3}
   monsterData:

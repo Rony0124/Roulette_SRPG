@@ -1,4 +1,4 @@
-using Sirenix.OdinInspector;
+using System;
 using TSoft.Data;
 using UnityEngine;
 
@@ -18,7 +18,7 @@ namespace TSoft.Map
     {
         public Sprite sprite;
         public NodeType nodeType;
-        public DataRegistryIdSO monsterId;
+        public RegistryId monsterId;
     }
 }
 

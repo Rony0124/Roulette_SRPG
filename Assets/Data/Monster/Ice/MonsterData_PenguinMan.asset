@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_PenguinMan
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 2a5efe0b6e8cf41938884c366bcbc831, type: 2}
-  monsterPrefab: {fileID: 398719874231823862, guid: 778d8ee4c366946eabe5804bc110cf0e, type: 3}
+  _id:
+    _value: 7b50dfbb027394847866668c9c3f69fa
+  _assetGuid: bbdf507b730284947866668c9c3f69fa
+  _lastGeneratedAssetGuid: bbdf507b730284947866668c9c3f69fa
+  monsterPrefab: {fileID: 398719874231823862, guid: 778d8ee4c366946eabe5804bc110cf0e,
+    type: 3}
   monsterData:
     name: PenguinMan
     monsterType: 5

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using TCGStarter.Tweening;
@@ -76,29 +77,16 @@ namespace TSoft.InGame.Player
 
         private void LoadSaveItems()
         {
-            var artifactRegistryIds = DataRegistry.Instance.ArtifactRegistry.Ids;
-            var jokerRegistryIds = DataRegistry.Instance.JokerRegistry.Ids;
-            
-            foreach (var id in artifactRegistryIds)
+            foreach (var kvp in DataRegistry.Instance.ArtifactRegistry.assetGuidLookup
+                         .Where(kvp => GameSave.Instance.HasItemsId(kvp.Key)))
             {
-                if (!GameSave.Instance.HasItemsId(id.Guid))
-                {
-                    continue;
-                }
-
-                var artifact = DataRegistry.Instance.ArtifactRegistry.Get(id);
-                abilityContainer.currentArtifacts.Add(artifact);
+                abilityContainer.currentArtifacts.Add(kvp.Value);
             }
 
-            foreach (var id in jokerRegistryIds)
+            foreach (var kvp in  DataRegistry.Instance.JokerRegistry.assetGuidLookup
+                         .Where(kvp => GameSave.Instance.HasItemsId(kvp.Key)))
             {
-                if (!GameSave.Instance.HasItemsId(id.Guid))
-                {
-                    continue;
-                }
-                
-                var joker = DataRegistry.Instance.JokerRegistry.Get(id);
-                specialCardDB.Add(joker);
+                specialCardDB.Add(kvp.Value);
             }
         }
         

@@ -1,5 +1,6 @@
-using System;
 using System.Collections;
+using Unity.Mathematics;
+using Random = System.Random;
 
 namespace TSoft.Utils
 {

@@ -8,7 +8,6 @@ namespace TSoft.Data
     [CreateAssetMenu(fileName = "RID", menuName = "DataID/Create Registry ID", order = 0)]
     public class DataRegistryIdSO : ScriptableObject, IComparable<DataRegistryIdSO>
     {
-        [HideInInspector]
         [SerializeField]
         private byte[] guid;
 
@@ -58,15 +57,13 @@ namespace TSoft.Data
 
         public override void OnInspectorGUI()
         {
-            GUILayout.Label("GUID: " + targetInfo.Guid);
-            if (targetInfo.Guid == Guid.Empty)
-            {
-                if (GUILayout.Button("Regenerate GUID")) {
-                    targetInfo.GenerateGUID();
-                }    
-            }
+          //  base.OnInspectorGUI();
             
-            base.OnInspectorGUI();
+            GUILayout.Label("GUID: " + targetInfo.Guid);
+            
+            if (GUILayout.Button("Regenerate GUID")) {
+                targetInfo.GenerateGUID();
+            }    
         }
     }
 #endif

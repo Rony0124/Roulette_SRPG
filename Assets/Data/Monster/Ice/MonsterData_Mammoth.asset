@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Mammoth
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: c82f48dd3fc1e4cee86cf8dae1a2f115, type: 2}
-  monsterPrefab: {fileID: 2135069210704368723, guid: 8bb41e9317112431ca0dbec7bbd99b51, type: 3}
+  _id:
+    _value: 8214a68cb2c8d8a4a955577b87ec36cf
+  _assetGuid: 8ca61482c8b2a4d8a955577b87ec36cf
+  _lastGeneratedAssetGuid: 8ca61482c8b2a4d8a955577b87ec36cf
+  monsterPrefab: {fileID: 2135069210704368723, guid: 8bb41e9317112431ca0dbec7bbd99b51,
+    type: 3}
   monsterData:
     name: Mammoth
     monsterType: 5

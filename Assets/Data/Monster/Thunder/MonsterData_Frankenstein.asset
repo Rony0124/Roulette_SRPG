@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Frankenstein
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 24a837c5f5c304fe8b4e44f0e20588b5, type: 2}
-  monsterPrefab: {fileID: 5401474663388912615, guid: 22dfc7e1453514f93bb2aa71eb8765d8, type: 3}
+  _id:
+    _value: b0d56e0e9138e63419b3b1a0c77c1c64
+  _assetGuid: 0e6ed5b0389134e619b3b1a0c77c1c64
+  _lastGeneratedAssetGuid: 0e6ed5b0389134e619b3b1a0c77c1c64
+  monsterPrefab: {fileID: 5401474663388912615, guid: 22dfc7e1453514f93bb2aa71eb8765d8,
+    type: 3}
   monsterData:
     name: Frankenstein
     monsterType: 6

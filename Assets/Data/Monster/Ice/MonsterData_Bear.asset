@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Bear
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: de71abc77e8d14fb0b370872024f9470, type: 2}
-  monsterPrefab: {fileID: 2222840929348967653, guid: 1ee48ae24a4b24cd7b67db3277d64cd9, type: 3}
+  _id:
+    _value: 8a2be1911db3452468693e71b037ffd1
+  _assetGuid: 91e12b8ab31d244568693e71b037ffd1
+  _lastGeneratedAssetGuid: 91e12b8ab31d244568693e71b037ffd1
+  monsterPrefab: {fileID: 2222840929348967653, guid: 1ee48ae24a4b24cd7b67db3277d64cd9,
+    type: 3}
   monsterData:
     name: Bear
     monsterType: 5

@@ -7,15 +7,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_Artifact_RingoftheMadGambler
   m_EditorClassIdentifier: 
+  _id:
+    _value: 9756783e759f54e7da1946e8d8533a97
+  _assetGuid: 3e7856979f75e754da1946e8d8533a97
+  _lastGeneratedAssetGuid: 3e7856979f75e754da1946e8d8533a97
   lifeCycle:
     begin: 4
     end: 3
-    type: 0
   gameplayEffect:
     effect:
       rid: 8436400433813258257
@@ -28,6 +31,10 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
+  hasDuration: 0
+  duration: 0
   hasUnsatisfiedEffect: 1
   unsatisfiedEffect:
     effect:
@@ -41,12 +48,16 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
   hasCondition: 1
   conditionApplier:
     rid: 8436400433813258259
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 8436400433813258257
       type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

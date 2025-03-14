@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Smilodon
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 6fb4ff776dfb447b9ad025ee56434833, type: 2}
-  monsterPrefab: {fileID: 8116732195662238637, guid: f57c2ed45b4c8448e922db89a1d05f99, type: 3}
+  _id:
+    _value: a70f05cc7c9759243a9cf59a622034ef
+  _assetGuid: cc050fa7977c24593a9cf59a622034ef
+  _lastGeneratedAssetGuid: cc050fa7977c24593a9cf59a622034ef
+  monsterPrefab: {fileID: 8116732195662238637, guid: f57c2ed45b4c8448e922db89a1d05f99,
+    type: 3}
   monsterData:
     name: Smilodon
     monsterType: 5

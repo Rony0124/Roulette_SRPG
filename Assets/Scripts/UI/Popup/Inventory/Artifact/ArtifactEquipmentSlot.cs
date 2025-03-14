@@ -48,7 +48,7 @@ namespace TSoft.UI.Popup.Inventory.Artifact
             }
             
             //add to gamesave equipped item
-            GameSave.Instance.SaveEquippedArtifact(currentIndex, slot.itemData.RegistryId.Guid);
+            GameSave.Instance.SaveEquippedArtifact(currentIndex, slot.itemData.Id.Value);
 
             var popup = PopupContainer.Instance.GetCurrentPopup() as InventoryPopup;
 

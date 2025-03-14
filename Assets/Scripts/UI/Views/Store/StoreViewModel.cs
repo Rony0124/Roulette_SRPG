@@ -56,41 +56,9 @@ namespace TSoft.UI.Views.Store
             );
         }
 
-        private void CreateDisplay<T>(RegistrySO<T> registry, GameObject prefab, Transform parent)
+        private void CreateDisplay<T>(Registry<T> registry, GameObject prefab, Transform parent)
             where T : ItemSO
         {
-            List<Guid> GetAvailableItems()
-            {
-                var guids = new List<Guid>();
-                foreach (var itemId in registry.Ids)
-                {
-                    if (GameSave.Instance.HasItemsId(itemId.Guid))
-                        continue;
-                    
-                    guids.Add(itemId.Guid);
-                }
-                
-                return guids;
-            }
-            
-            List<int> GetUniqueNumbers(int maxNumber)
-            {
-                if(maxNumber == 0)
-                    return new List<int>();
-            
-                var uniqueNumbers = new HashSet<int>();
-                var min = Mathf.Min(maxNumber, MaxDisplayNumber);
-            
-                while (uniqueNumbers.Count < min)
-                {
-                    int number = Random.Range(0, maxNumber);
-                    
-                    uniqueNumbers.Add(number);
-                }
-
-                return uniqueNumbers.ToList();
-            }
-            
             var availableItems = GetAvailableItems();
             var uniqueNumbers = GetUniqueNumbers(availableItems.Count);
 
@@ -117,6 +85,40 @@ namespace TSoft.UI.Views.Store
 
                 storeItem.SetElement(info);
                 items.Add(storeItem);
+            }
+
+            return;
+
+            List<int> GetUniqueNumbers(int maxNumber)
+            {
+                if(maxNumber == 0)
+                    return new List<int>();
+            
+                var uniqueNumbers = new HashSet<int>();
+                var min = Mathf.Min(maxNumber, MaxDisplayNumber);
+            
+                while (uniqueNumbers.Count < min)
+                {
+                    int number = Random.Range(0, maxNumber);
+                    
+                    uniqueNumbers.Add(number);
+                }
+
+                return uniqueNumbers.ToList();
+            }
+
+            List<Guid> GetAvailableItems()
+            {
+                var guids = new List<Guid>();
+                foreach (var kvp in registry.assetGuidLookup)
+                {
+                    if (GameSave.Instance.HasItemsId(kvp.Key))
+                        continue;
+                    
+                    guids.Add(kvp.Key);
+                }
+                
+                return guids;
             }
         }
         

@@ -7,15 +7,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_Artifact_AceCrown
   m_EditorClassIdentifier: 
+  _id:
+    _value: 58a0c28c184d5f34482dc6c84fa7f6eb
+  _assetGuid: 8cc2a0584d18345f482dc6c84fa7f6eb
+  _lastGeneratedAssetGuid: 8cc2a0584d18345f482dc6c84fa7f6eb
   lifeCycle:
     begin: 4
     end: 3
-    type: 1
   gameplayEffect:
     effect:
       rid: 8506343607258054660
@@ -28,6 +31,10 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
+        magnitudeCurve:
+          rid: -2
+  hasDuration: 0
+  duration: 0
   hasUnsatisfiedEffect: 0
   unsatisfiedEffect:
     effect:

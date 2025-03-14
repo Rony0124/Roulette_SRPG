@@ -1,9 +1,6 @@
 using System;
 using TSoft.Data;
-using TSoft.Data.Registry;
-using TSoft.UI.Views.Store;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace TSoft.UI.Popup.StoreElement
@@ -39,7 +36,7 @@ namespace TSoft.UI.Popup.StoreElement
         {
             itemInfo = item;
             thumbnail.sprite = item.image;
-            id = item.RegistryId.Guid;
+            id = item.Id.Value;
         }
 
         public void OnSelect()
@@ -63,7 +60,7 @@ namespace TSoft.UI.Popup.StoreElement
                 return;
             
             GameSave.Instance.AddGold(-price);
-            GameSave.Instance.AddPossessItem(itemInfo.RegistryId.Guid);
+            GameSave.Instance.AddPossessItem(itemInfo.Id.Value);
         }
 
     }

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Spade 8
   m_EditorClassIdentifier: 
-  registryId: {fileID: 0}
+  _id:
+    _value: 4581d33d45e94488585e80fa6db8e95f
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   title: 
   description: 
   image: {fileID: 21300000, guid: da6a082efa6b6694f92fad9442f30fa9, type: 3}

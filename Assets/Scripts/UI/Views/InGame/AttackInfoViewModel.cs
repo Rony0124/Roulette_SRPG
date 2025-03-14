@@ -8,6 +8,7 @@ using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.InGame.Player;
 using TSoft.Managers;
+using TSoft.Managers.Event;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
@@ -47,11 +48,6 @@ namespace TSoft.UI.Views.InGame
                     {
                         if (Mathf.Abs(appliedModifier.modifier.Add) > float.Epsilon && info.opType == ModifierOpType.Add)
                         {
-                            if (info.attrType == GameplayAttr.BasicAttackPower)
-                            {
-                                Debug.Log("기본 공격이 몇이나 올라가는 건가요" + appliedModifier.modifier.Add);    
-                            }
-                            
                             ShowFloatingText(info.targetTransform.position, appliedModifier.modifier.Add, info.attrType);
                         }
 
@@ -77,6 +73,11 @@ namespace TSoft.UI.Views.InGame
             floatingText.SetText(value.ToString(), attr == GameplayAttr.BasicAttackPower ? Color.blue : Color.red);
             floatingText.gameObject.transform.position = position;
             floatingText.gameObject.SetActive(true);
+        }
+
+        private void OnDestroy()
+        {
+            EventManager.Instance.DmgAdderEvent.RemoveAllListener();
         }
     }
 }

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Yeti
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 4ed3ef0e0f0b54131bce7cdeae76be1b, type: 2}
-  monsterPrefab: {fileID: 1065889168440903769, guid: a6b76924f22f94a18a435334edf330fc, type: 3}
+  _id:
+    _value: cf2cdca9b3f6a2440b41a9090eb48e44
+  _assetGuid: a9dc2ccff6b344a20b41a9090eb48e44
+  _lastGeneratedAssetGuid: a9dc2ccff6b344a20b41a9090eb48e44
+  monsterPrefab: {fileID: 1065889168440903769, guid: a6b76924f22f94a18a435334edf330fc,
+    type: 3}
   monsterData:
     name: Yeti
     monsterType: 5

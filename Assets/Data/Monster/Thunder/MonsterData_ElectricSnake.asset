@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_ElectricSnake
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 3be3653ee07fd418588e6dcd6292d105, type: 2}
-  monsterPrefab: {fileID: 6596252595080144364, guid: 3380abe38b215403288f328b539d48ef, type: 3}
+  _id:
+    _value: 7c5d946a8cde5bd44aa45b5a2f31d28f
+  _assetGuid: 6a945d7cde8cd45b4aa45b5a2f31d28f
+  _lastGeneratedAssetGuid: 6a945d7cde8cd45b4aa45b5a2f31d28f
+  monsterPrefab: {fileID: 6596252595080144364, guid: 3380abe38b215403288f328b539d48ef,
+    type: 3}
   monsterData:
     name: ElectricSnake
     monsterType: 6

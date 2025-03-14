@@ -4,7 +4,7 @@ using UnityEngine;
 namespace TSoft.Data.Monster
 {
     [CreateAssetMenu(fileName = "MonsterData", menuName = "Data/Monster Data", order = 0)]
-    public class MonsterDataSO : DataSO
+    public class MonsterDataSO : RegistryAsset
     {
         [SerializeField]
         private GameObject monsterPrefab;

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_FoolishOrcsGauntlets
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: eb8c12b955c859743bfebe375411c90e, type: 2}
+  _id:
+    _value: 07b228cc7c6094e958d312e296d52a38
+  _assetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
+  _lastGeneratedAssetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
   title: 
   description: 
   image: {fileID: 590427165, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}

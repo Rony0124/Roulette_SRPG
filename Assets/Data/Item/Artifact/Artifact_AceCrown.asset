@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_AceCrown
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 8546ab327e2ef4561af7c0ddf56af4d6, type: 2}
+  _id:
+    _value: d0d18ead4985be14287635b7c8c661f0
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   title: 
   description: 
   image: {fileID: 1908340753, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}

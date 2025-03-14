@@ -28,6 +28,7 @@ namespace TSoft.UI.Views.Bootstrap
             GameSave.Instance.onGoldChanged += View.SetGoldText;
             
             View.SetGoldText(GameSave.Instance.Gold);
+            UpdateArtifactSlots();
         }
         
         private void OnOptionClicked()

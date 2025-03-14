@@ -53,7 +53,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
             }
             
             //add to gamesave equipped item
-            GameSave.Instance.SaveEquippedSkill(cardPatternType, slot.itemData.RegistryId.Guid);
+            GameSave.Instance.SaveEquippedSkill(cardPatternType, slot.itemData.Id.Value);
 
             var skillPopup = PopupContainer.Instance.GetCurrentPopup() as InventoryPopup;
 

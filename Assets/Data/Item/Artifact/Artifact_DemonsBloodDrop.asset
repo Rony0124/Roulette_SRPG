@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad3c4024a4a634a4695ea8b5486659d5, type: 3}
   m_Name: Artifact_DemonsBloodDrop
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 1c45888a2ccd4214a9571d0016be2086, type: 2}
+  _id:
+    _value: 268b690ec566d4bcd88707c5d0db67e3
+  _assetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
+  _lastGeneratedAssetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
   title: 
   description: 
   image: {fileID: 1115937622, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}
