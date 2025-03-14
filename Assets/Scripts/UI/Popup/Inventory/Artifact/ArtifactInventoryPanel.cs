@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.Utilities;
 using TSoft.Data;
+using TSoft.Data.Card;
 using TSoft.Data.Registry;
 using TSoft.Managers;
 using UnityEngine;
@@ -15,8 +16,8 @@ namespace TSoft.UI.Popup.Inventory.Artifact
         [SerializeField] private ItemInfoPopup info;
         [SerializeField] private GameObject slotPrefab;
         
-        [Header("test")] 
-        [SerializeField] private List<DataRegistryIdSO> testIds;
+        [Header("test")]
+        [SerializeField] private List<ArtifactSO> testItems;
         
         private List<InventoryItemSlot> inventoryItemSlots = new();
         public void UpdateSlots()
@@ -48,15 +49,15 @@ namespace TSoft.UI.Popup.Inventory.Artifact
                 inventoryItemSlots.Add(slot);
             }
             
-            if (!testIds.IsNullOrEmpty())
+            if (!testItems.IsNullOrEmpty())
             {
-                foreach (var id in testIds)
+                foreach (var item in testItems)
                 {
                     if (GameSave.Instance.ArtifactEquippedDictionary.Count > 0 
-                        && GameSave.Instance.ArtifactEquippedDictionary.Values.Contains(id.Guid))
+                        && GameSave.Instance.ArtifactEquippedDictionary.Values.Contains(item.Id.Value))
                         continue;
                     
-                    var skill = DataRegistry.Instance.ArtifactRegistry.Get(id.Guid);
+                    var skill = DataRegistry.Instance.ArtifactRegistry.Get(item.Id.Value);
                     var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
                     slot.InitSlot(skill);
                     inventoryItemSlots.Add(slot);

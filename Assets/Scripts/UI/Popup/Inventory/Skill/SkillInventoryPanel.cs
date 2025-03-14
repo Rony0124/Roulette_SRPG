@@ -3,6 +3,7 @@ using System.Linq;
 using Sirenix.Utilities;
 using TSoft.Data;
 using TSoft.Data.Registry;
+using TSoft.Data.Skill;
 using TSoft.InGame;
 using TSoft.Managers;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
         [SerializeField] private ItemInfoPopup info;
         
         [Header("test")] 
-        [SerializeField] private List<DataRegistryIdSO> testIds;
+        [SerializeField] private List<SkillSO> testItems;
         
         private List<InventoryItemSlot> inventoryItemSlots = new();
         
@@ -52,16 +53,16 @@ namespace TSoft.UI.Popup.Inventory.Skill
                 }
             }
             
-            if (!testIds.IsNullOrEmpty())
+            if (!testItems.IsNullOrEmpty())
             {
-                foreach (var id in testIds)
+                foreach (var item in testItems)
                 {
-                    if (GameSave.Instance.SkillEquippedDictionary.Values.Contains(id.Guid))
+                    if (GameSave.Instance.SkillEquippedDictionary.Values.Contains(item.Id.Value))
                     {
                         continue;
                     }
                     
-                    var skill = DataRegistry.Instance.SkillRegistry.Get(id.Guid);
+                    var skill = DataRegistry.Instance.SkillRegistry.Get(item.Id.Value);
                     var slot = Instantiate(slotPrefab, scrollContent.transform).GetComponent<InventoryItemSlot>();
                     slot.InitSlot(skill);
                     inventoryItemSlots.Add(slot);
