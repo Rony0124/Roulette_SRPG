@@ -1,21 +1,27 @@
 using TSoft.UI.Core;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace TSoft.UI.Views.InGame
 {
     public class GameplayView : ViewBase
     {
-        private enum ControlText
+        private enum GameplayText
         {
             EnergyAmount,
             HeartAmount,
             DeckText
         }
         
-        private enum ControlButton
+        private enum GameplayButton
         {
             ButtonDiscard,
             ButtonUse,
+        }
+        
+        private enum GameplayTransform
+        {
+            JokerStackPanel
         }
    
         //UI
@@ -25,18 +31,22 @@ namespace TSoft.UI.Views.InGame
 
         public Button DiscardButton { get; private set; }
         public Button UseButton { get; private set; }
+        public Transform JokerEffectParent { get; private set; }
         
         private void Awake()
         {
-            Bind<Button>(typeof(ControlButton));
-            Bind<TMPro.TextMeshProUGUI>(typeof(ControlText));
+            Bind<Button>(typeof(GameplayButton));
+            Bind<TMPro.TextMeshProUGUI>(typeof(GameplayText));
+            Bind<Transform>(typeof(GameplayTransform));
             
-            DiscardButton = Get<Button>((int)ControlButton.ButtonDiscard);
-            UseButton = Get<Button>((int)ControlButton.ButtonUse);
+            DiscardButton = Get<Button>((int)GameplayButton.ButtonDiscard);
+            UseButton = Get<Button>((int)GameplayButton.ButtonUse);
             
-            txtEnergy = Get<TMPro.TextMeshProUGUI>((int)ControlText.EnergyAmount);
-            txtHeart = Get<TMPro.TextMeshProUGUI>((int)ControlText.HeartAmount);
-            txtDeck = Get<TMPro.TextMeshProUGUI>((int)ControlText.DeckText);
+            txtEnergy = Get<TMPro.TextMeshProUGUI>((int)GameplayText.EnergyAmount);
+            txtHeart = Get<TMPro.TextMeshProUGUI>((int)GameplayText.HeartAmount);
+            txtDeck = Get<TMPro.TextMeshProUGUI>((int)GameplayText.DeckText);
+            
+            JokerEffectParent = Get<Transform>((int)GameplayTransform.JokerStackPanel);
         }
 
         public void SetHeartText(float currentHeart, float maxHeart)

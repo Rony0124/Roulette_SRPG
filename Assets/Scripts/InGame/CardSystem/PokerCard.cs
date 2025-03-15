@@ -1,4 +1,5 @@
 using System;
+using MoreMountains.Feedbacks;
 using TCGStarter.Tweening;
 using TMPro;
 using TSoft.Data.Card;
@@ -28,6 +29,10 @@ namespace TSoft.InGame.CardSystem
         private bool isHeld = false;
         private bool isFloating = false;
         private Vector3 basePosition = Vector3.zero;
+        
+        [Header("Feedback")]
+        public float duration = 0.7f;
+        public MMFeedbacks onJokerUseFeedback;
         
         public bool IsFloating => isFloating;
         public bool IsHeld => isHeld;

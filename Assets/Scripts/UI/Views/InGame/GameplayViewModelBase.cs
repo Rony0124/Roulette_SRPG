@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using TSoft.InGame;
+using TSoft.InGame.CardSystem;
 using TSoft.InGame.Player;
+using UnityEngine;
 
 namespace TSoft.UI.Views.InGame
 {
@@ -9,8 +12,12 @@ namespace TSoft.UI.Views.InGame
     {
         private GameplayView View => view as GameplayView;
         private GameplayModel Model => model as GameplayModel;
+        
+        [SerializeField]
+        private GameObject jokerEffectIconPrefab;
 
         private PlayerController player;
+        private List<JokerEffectIcon> jokerEffectIcons = new List<JokerEffectIcon>();
 
         private void Start()
         {
@@ -25,6 +32,7 @@ namespace TSoft.UI.Views.InGame
             //TODO 이벤트 버스로 변경
             player.onDeckChanged += OnDeckChanged;
             player.onGameReady += UpdateCardOnGameReady;
+            player.onJokerUse += CreateJokerEffectIcon;
         }
         
         private void OnPlayerHeartChanged(float oldVal, float newVal)
@@ -72,6 +80,13 @@ namespace TSoft.UI.Views.InGame
             View.SetHeartText(heartCount, maxHeartCount);
             
             player.DrawCards();
+        }
+
+        private void CreateJokerEffectIcon(PokerCard card)
+        {
+            //TODO 조커 아이콘 전체 업데이트 타이밍 추가
+            var jokerIcon = Instantiate(jokerEffectIconPrefab, View.JokerEffectParent).GetComponent<JokerEffectIcon>();
+            jokerEffectIcons.Add(jokerIcon);
         }
 
         private void OnDestroy()

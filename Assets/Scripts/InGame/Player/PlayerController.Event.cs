@@ -3,6 +3,7 @@ using System.Collections;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using TSoft.InGame.CardSystem;
+using TSoft.InGame.GamePlaySystem;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ namespace TSoft.InGame.Player
     public partial class PlayerController
     {
         public Func<PokerCard, bool> onClickCard;
+        public Action<PokerCard> onJokerUse;
         
         [Header("Visuals")]
         [SerializeField] private float cardY;
@@ -70,12 +72,16 @@ namespace TSoft.InGame.Player
         private void Card_OnStopHover(PokerCard pokerCard)
         {
             infoObject.SetActive(false);
-           // pokerCard.SetCardDetails(false);
         }
 
-        private void OnClickJoker(PokerCard pokerCard)
+        private async UniTaskVoid OnClickJoker(PokerCard pokerCard)
         {
             jokerUsedNumber++;
+            
+            pokerCard.onJokerUseFeedback?.PlayFeedbacks();
+            onJokerUse?.Invoke(pokerCard);
+
+            await UniTask.WaitForSeconds(pokerCard.duration);
             
             pokerCard.cardData.instantEffect?.effect?.ApplyEffect(director).Forget();
             
