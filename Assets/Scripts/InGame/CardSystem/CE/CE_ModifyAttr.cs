@@ -8,16 +8,19 @@ namespace TSoft.InGame.CardSystem.CE
     {
         private const int DefaultDuration = 1;
         
-        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
+        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             var gameplay = director.Player.Gameplay;
-            foreach (var appliedModifier in sourceEffect.appliedModifiers)
+            
+            EventManager.Instance.GameEvent.Raise(appliedEffect.sourceEffect.Id);
+            
+            foreach (var appliedModifier in appliedEffect.appliedModifiers)
             {
                 gameplay.attrAppliedModifiers.Add(appliedModifier);
                 EventManager.Instance.DmgAdderEvent.Raise(appliedModifier);
             }
 
-            await UniTask.WaitForSeconds(sourceEffect.sourceEffect.hasDuration ? sourceEffect.sourceEffect.duration : DefaultDuration);
+            await UniTask.WaitForSeconds(appliedEffect.sourceEffect.hasDuration ? appliedEffect.sourceEffect.duration : DefaultDuration);
             
             gameplay.UpdateAttributes();
         }

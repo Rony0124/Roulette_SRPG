@@ -6,12 +6,12 @@ using TSoft.InGame.GamePlaySystem;
 
 public class CE_RewardByDiscard : CustomEffect
 {
-    public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
+    public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
     {
         var currentGold = GameSave.Instance.Gold;
         var currentEnergy = director.Player.Gameplay.GetAttr(GameplayAttr.Energy);
         
-        foreach (var modifier in sourceEffect.sourceEffect.gameplayEffect.modifiers)
+        foreach (var modifier in appliedEffect.sourceEffect.gameplayEffect.modifiers)
         {
             if (modifier.attrType != GameplayAttr.None)
             {

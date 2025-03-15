@@ -11,7 +11,7 @@ namespace TSoft.InGame.CardSystem.CE
             await UniTask.CompletedTask;
         }
         
-        public virtual async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
+        public virtual async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             await UniTask.CompletedTask;
         }

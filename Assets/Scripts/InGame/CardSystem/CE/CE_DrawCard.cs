@@ -6,9 +6,9 @@ namespace TSoft.InGame.CardSystem.CE
 {
     public class CE_DrawCard : CustomEffect
     {
-        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
+        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
-            foreach (var modifier in sourceEffect.sourceEffect.gameplayEffect.modifiers)
+            foreach (var modifier in appliedEffect.sourceEffect.gameplayEffect.modifiers)
             {
                 var repeater = (int)modifier.gameplayMagnitude.magnitude;
                 for (var i = 0; i < repeater; i++)

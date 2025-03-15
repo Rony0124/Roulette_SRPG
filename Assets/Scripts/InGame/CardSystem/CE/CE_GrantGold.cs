@@ -5,11 +5,11 @@ namespace TSoft.InGame.CardSystem.CE
 {
     public class CE_GrantGold : CustomEffect
     {
-        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
+        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             var currentGold = GameSave.Instance.Gold;
         
-            foreach (var modifier in sourceEffect.sourceEffect.gameplayEffect.modifiers)
+            foreach (var modifier in appliedEffect.sourceEffect.gameplayEffect.modifiers)
             {
                 var magnitude = (int)modifier.gameplayMagnitude.magnitude;
             

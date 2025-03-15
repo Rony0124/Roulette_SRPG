@@ -5,7 +5,7 @@ namespace TSoft.InGame.CardSystem.CE
 {
     public class CE_ClearSelectedCard : CustomEffect
     {
-        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect sourceEffect)
+        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             var player = director.Player;
             
