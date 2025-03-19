@@ -33,6 +33,8 @@ namespace TSoft.UI.Views.InGame
         
         void Start()
         {
+            EventManager.Instance.DmgAdderEvent.RemoveAllListener();
+            
             Model.Player.onPatternSelected += OnCombinationSelected;
 
             foreach (var info in effectInfos)
@@ -68,11 +70,6 @@ namespace TSoft.UI.Views.InGame
             floatingText.SetText(value.ToString(), attr == GameplayAttr.BasicAttackPower ? Color.blue : Color.red);
             floatingText.gameObject.transform.position = position;
             floatingText.gameObject.SetActive(true);
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.Instance.DmgAdderEvent.RemoveAllListener();
         }
     }
 }

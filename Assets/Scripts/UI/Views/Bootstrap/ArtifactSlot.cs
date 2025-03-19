@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using MoreMountains.Feedbacks;
 using TSoft.Data;
 using TSoft.Data.Card;
@@ -26,10 +27,6 @@ namespace TSoft.UI.Views.Bootstrap
         private void PlayFeedbackOnUse()
         {
             feedbacks.PlayFeedbacks();
-        }
-
-        private void OnDestroy()
-        {
             EventManager.Instance.GameEvent.Unsubscribe(itemId, PlayFeedbackOnUse);
         }
     }

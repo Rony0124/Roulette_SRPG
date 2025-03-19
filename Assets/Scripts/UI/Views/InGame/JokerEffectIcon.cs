@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using MoreMountains.Feedbacks;
 using TSoft.Item;
@@ -28,12 +29,9 @@ namespace TSoft.UI.Views.InGame
             usedFeedback.PlayFeedbacks();
             await UniTask.WaitForSeconds(feedBackDuration);
             
-            Destroy(gameObject);
-        }
-
-        private void OnDestroy()
-        {
             EventManager.Instance.GameEvent.Unsubscribe(joker.info.Id, () =>  PlayFeedbackOnUse().Forget());
+            
+            Destroy(gameObject);
         }
     }
 }
