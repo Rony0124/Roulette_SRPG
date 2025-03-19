@@ -4,6 +4,7 @@ using Sirenix.Utilities;
 using TSoft.Data;
 using TSoft.Data.Card;
 using TSoft.Data.Registry;
+using TSoft.Item;
 using TSoft.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -17,7 +18,7 @@ namespace TSoft.UI.Popup.Inventory.Artifact
         [SerializeField] private GameObject slotPrefab;
         
         [Header("test")]
-        [SerializeField] private List<ArtifactSO> testItems;
+        [SerializeField] private List<ArtifactInfo> testItems;
         
         private List<InventoryItemSlot> inventoryItemSlots = new();
         public void UpdateSlots()
@@ -65,7 +66,7 @@ namespace TSoft.UI.Popup.Inventory.Artifact
             }
         }
         
-        private void OnItemPointerEnter(ItemSO itemData, Vector2 position)
+        private void OnItemPointerEnter(ItemInfo itemData, Vector2 position)
         {
             info.InitPopup(itemData);
             info.ShowPanel(position);

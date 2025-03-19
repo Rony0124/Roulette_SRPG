@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_SkelWarrior
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: d8d03022a5dde4e6c8cde608071c4384, type: 2}
-  monsterPrefab: {fileID: 7497081335543101369, guid: 000e44cb7583a4932b984dd1955c3184, type: 3}
+  _id:
+    _value: 532080fad5277c447a94722e3cae8f5b
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
+  monsterPrefab: {fileID: 7497081335543101369, guid: 000e44cb7583a4932b984dd1955c3184,
+    type: 3}
   monsterData:
     name: Skeleton Warrior
     monsterType: 3

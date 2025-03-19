@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Dullahan
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 401689ab5e4fb4521b59b695d20f499a, type: 2}
-  monsterPrefab: {fileID: 3838643292160279779, guid: fb1af0603a90c437aaed88055cd84f2d, type: 3}
+  _id:
+    _value: 8587f40270cd2ac4d8b105c4360025e7
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
+  monsterPrefab: {fileID: 3838643292160279779, guid: fb1af0603a90c437aaed88055cd84f2d,
+    type: 3}
   monsterData:
     name: Dullahan
     monsterType: 3

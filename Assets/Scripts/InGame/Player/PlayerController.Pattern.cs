@@ -20,7 +20,7 @@ namespace TSoft.InGame.Player
         {
             public CardPatternType PatternType;
             public GameplayEffectSO effect;
-            public SkillSO skill;
+            public SkillInfo skill;
           
             public void ApplyCurrentPattern(PlayerController player)
             {
@@ -31,14 +31,14 @@ namespace TSoft.InGame.Player
                     player.Gameplay.AddEffect(skill.effect);
                 
                 player.Gameplay.AddEffect(player.cardSubmitEffect);
-                player.Gameplay.AddEffect(player.ccomboEffect);
+                player.Gameplay.AddEffect(player.comboEffect);
                 
                 player.CheckPatternCombo(this);
             }
         }
         
         //test 용으로 inspector에서 편집 가능하도록 설정
-        [Header("Card Pattern")]
+        [Title("Card Pattern")]
         [SerializeField][TableList]
         private List<CardPattern> defaultCardPatterns;
         
@@ -47,7 +47,7 @@ namespace TSoft.InGame.Player
         private CardPattern currentPattern;
 
         public GameplayEffectSO cardSubmitEffect;
-        public GameplayEffectSO ccomboEffect;
+        public GameplayEffectSO comboEffect;
         
         public CardPattern CurrentPattern
         {
@@ -72,7 +72,7 @@ namespace TSoft.InGame.Player
 
         public Dictionary<CardPatternType, ParticleSystem> particleDictionary;
 
-        private void InitPattern()
+        private void InitializePattern()
         {
             if (particleDictionary is {Count: > 0})
             {

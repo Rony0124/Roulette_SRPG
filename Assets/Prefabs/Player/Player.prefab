@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1084890766169659947}
   - component: {fileID: 123563507619229904}
   - component: {fileID: 9176220145216558040}
-  - component: {fileID: 1047355927819672411}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -103,8 +102,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5b7632899c443764b87f38f4d17046db, type: 2}
   - {fileID: 11400000, guid: fad4c0acb9c75324fb67db0793e445bf, type: 2}
   specialCardDB: []
-  pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01, type: 3}
+  pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01,
+    type: 3}
   maxCardsNum: 0
+  defaultArtifacts:
+  - {fileID: 11400000, guid: ad8ed1d0854914be287635b7c8c661f0, type: 2}
   cardY: 140
   cardXSpacing: 120
   cardYSpacing: 4
@@ -144,7 +146,7 @@ MonoBehaviour:
     effect: {fileID: 11400000, guid: 7bab602625dc29743b5b1c31e79b9ba7, type: 2}
     skill: {fileID: 11400000, guid: 77a2e535ceb4f8c4c9c67a4c2a8074fe, type: 2}
   cardSubmitEffect: {fileID: 11400000, guid: 4f6f0b6ce4e1e7c4eb70b63f68400c64, type: 2}
-  ccomboEffect: {fileID: 11400000, guid: e18b9a9787b90a044b175ff9e70ee77b, type: 2}
+  comboEffect: {fileID: 11400000, guid: e18b9a9787b90a044b175ff9e70ee77b, type: 2}
 --- !u!114 &9176220145216558040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +179,6 @@ MonoBehaviour:
   - attrType: 2002
     value: 0
   attributes: []
-  attrAppliedModifiers: []
   capturedAttrAppliedModifiers: []
   defaultEffects: []
   appliedEffects_Passive: []
@@ -185,17 +186,3 @@ MonoBehaviour:
   appliedEffects_OnRoundFinished: []
   appliedEffects_OnTurnBegin: []
   appliedEffects_OnTurnFinished: []
---- !u!114 &1047355927819672411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8481043479687266652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42e7c1b60d7b2974db3c02999c27977d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultArtifacts:
-  - {fileID: 11400000, guid: ad8ed1d0854914be287635b7c8c661f0, type: 2}

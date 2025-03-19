@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Goblin
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: b0b4ae901732ebd4cba6872a3bbdb45b, type: 2}
-  monsterPrefab: {fileID: 7150042031428633884, guid: b657785cbd030b6428b06f0329e0dc4b, type: 3}
+  _id:
+    _value: 5ae8a1cfe81714dcda321f7f966ebfa8
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
+  monsterPrefab: {fileID: 7150042031428633884, guid: b657785cbd030b6428b06f0329e0dc4b,
+    type: 3}
   monsterData:
     name: Goblin
     monsterType: 2

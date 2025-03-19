@@ -1,10 +1,8 @@
 using System;
-using System.Buffers;
 using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
-using Sirenix.OdinInspector;
-using TSoft.Data.Condition;
-using TSoft.InGame.CardSystem;
+using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace TSoft.InGame.GamePlaySystem
@@ -105,7 +103,8 @@ namespace TSoft.InGame.GamePlaySystem
             }
         }
         
-        public List<AppliedGameplayEffect> defaultEffects;
+        [SerializeField]
+        private List<AppliedGameplayEffect> defaultEffects;
         
         public List<AppliedGameplayEffect> appliedEffects_Passive;
         public List<AppliedGameplayEffect> appliedEffects_OnRoundBegin;
@@ -137,18 +136,33 @@ namespace TSoft.InGame.GamePlaySystem
             switch (effect.lifeCycle.begin)
             {
                 case GameplayPolicyType.Passive:
+                    if (appliedEffects_Passive.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+                    
                     appliedEffects_Passive.Add(appliedEffect);
                     break;
                 case GameplayPolicyType.OnRoundBegin:
+                    if (appliedEffects_OnRoundBegin.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+                    
                     appliedEffects_OnRoundBegin.Add(appliedEffect);
                     break;
                 case GameplayPolicyType.OnRoundFinished:
+                    if (appliedEffects_OnRoundFinished.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+                    
                     appliedEffects_OnRoundFinished.Add(appliedEffect);
                     break;
                 case GameplayPolicyType.OnTurnBegin:
+                    if (appliedEffects_OnTurnBegin.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+
                     appliedEffects_OnTurnBegin.Add(appliedEffect);
                     break;
                 case GameplayPolicyType.OnTurnFinished:
+                    if (appliedEffects_OnTurnFinished.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+
                     appliedEffects_OnTurnFinished.Add(appliedEffect);
                     break;
             }
@@ -156,18 +170,33 @@ namespace TSoft.InGame.GamePlaySystem
             switch (effect.lifeCycle.end)
             {
                 case GameplayPolicyType.Passive:
+                    if (appliedEffects_Passive.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+                    
                     appliedEffects_Passive.Add(appliedEffect);
                     break;
                 case GameplayPolicyType.OnRoundBegin:
+                    if (appliedEffects_OnRoundBegin.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+                    
                     appliedEffects_OnRoundBegin.Add(appliedEffect);
                     break;
                 case GameplayPolicyType.OnRoundFinished:
+                    if (appliedEffects_OnRoundFinished.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+                    
                     appliedEffects_OnRoundFinished.Add(appliedEffect);
                     break;
                 case GameplayPolicyType.OnTurnBegin:
+                    if (appliedEffects_OnTurnBegin.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+                    
                     appliedEffects_OnTurnBegin.Add(appliedEffect);
                     break;
                 case GameplayPolicyType.OnTurnFinished:
+                    if (appliedEffects_OnTurnFinished.Any(appliedGameplayEffect => appliedGameplayEffect.sourceEffect.Id.Equals(effect.Id)))
+                        return;
+                    
                     appliedEffects_OnTurnFinished.Add(appliedEffect);
                     break;
             }

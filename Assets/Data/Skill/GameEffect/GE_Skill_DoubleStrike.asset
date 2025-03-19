@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_Skill_DoubleStrike
   m_EditorClassIdentifier: 
-  guid: 5c87ce56a3a0a4838b863d51761ea4e0
+  _id:
+    _value: 5c87ce56a3a0a4838b863d51761ea4e0
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   lifeCycle:
     begin: 4
     end: 5

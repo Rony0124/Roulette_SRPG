@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99767fd771a054b82956c7f3bbc4687b, type: 3}
   m_Name: Skill_DoubleStrike
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 04c1cfd76f5abd44cb058e2c47ff1587, type: 2}
+  _id:
+    _value: a858a7ceb95784cff837e769c377506e
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   title: DoubleStrike
   description: 
   image: {fileID: 81572023, guid: 305364d2eb6367541b9631526cd612a7, type: 3}
   price: 0
   effect: {fileID: 11400000, guid: 56ce875ca0a383a48b863d51761ea4e0, type: 2}
-  skillParticleObj: {fileID: 4389717307726803681, guid: 0125d6bfcd3b192478665f8c7949aff0, type: 3}
+  skillParticleObj: {fileID: 4389717307726803681, guid: 0125d6bfcd3b192478665f8c7949aff0,
+    type: 3}
   skillDuration: 2
   skillRepeater: 2

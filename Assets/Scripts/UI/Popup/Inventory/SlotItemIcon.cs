@@ -1,4 +1,5 @@
 using TSoft.Data;
+using TSoft.Item;
 using UnityEngine;
 
 namespace TSoft.UI.Popup.Inventory
@@ -8,9 +9,9 @@ namespace TSoft.UI.Popup.Inventory
         public ItemIcon itemIcon;
 
         [HideInInspector]
-        public ItemSO itemData;
+        public ItemInfo itemData;
         
-        public void SetSlotIcon(ItemSO itemData)
+        public void SetSlotIcon(ItemInfo itemData)
         {
             this.itemData = itemData;
             

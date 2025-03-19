@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Joker_TheGoblinSlySmile
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 2c1c3f2f7a86d4e4b9e6d9a7888c50fe, type: 2}
+  _id:
+    _value: 9e53ae4a0fc354ea9a4d8f50220bd936
+  _assetGuid: 4aae539ec30fea549a4d8f50220bd936
+  _lastGeneratedAssetGuid: 4aae539ec30fea549a4d8f50220bd936
   title: 
   description: 
   image: {fileID: 21300000, guid: 4eae7824c91f77b45a9085ad1748c6be, type: 3}
   price: 0
+  effect: {fileID: 0}
   number: 0
   type: 5
   instantEffect:
@@ -31,10 +35,13 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
-  effect: {fileID: 0}
+        magnitudeCurve:
+          rid: -2
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 8436400439862493185
       type: {class: CE_DrawCard, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

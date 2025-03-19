@@ -3,8 +3,6 @@ using System.Collections;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using TSoft.InGame.CardSystem;
-using TSoft.InGame.GamePlaySystem;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace TSoft.InGame.Player
@@ -12,7 +10,6 @@ namespace TSoft.InGame.Player
     public partial class PlayerController
     {
         public Func<PokerCard, bool> onClickCard;
-        public Action<PokerCard> onJokerUse;
         
         [Header("Visuals")]
         [SerializeField] private float cardY;
@@ -48,7 +45,7 @@ namespace TSoft.InGame.Player
         {
             if (pokerCard.cardData.type == CardType.Joker)
             {
-                OnClickJoker(pokerCard);
+                OnClickJoker(pokerCard).Forget();
             }
             else
             {
@@ -66,7 +63,6 @@ namespace TSoft.InGame.Player
             infoObject.SetActive(true);
             infoTitle.text = pokerCard.cardData.title;
             infoDescription.text = pokerCard.cardData.description;
-         //   pokerCard.SetCardDetails(true);
         }
         
         private void Card_OnStopHover(PokerCard pokerCard)
@@ -78,17 +74,20 @@ namespace TSoft.InGame.Player
         {
             jokerUsedNumber++;
             
-            pokerCard.onJokerUseFeedback?.PlayFeedbacks();
-            onJokerUse?.Invoke(pokerCard);
-
-            await UniTask.WaitForSeconds(pokerCard.duration);
+            pokerCard.onJokerUseFeedback.PlayFeedbacks();
+            
+            await UniTask.WaitForSeconds(pokerCard.onJokerUseFeedback.TotalDuration);
             
             pokerCard.cardData.instantEffect?.effect?.ApplyEffect(director).Forget();
             
             if (pokerCard.cardData.effect)
             {
-                gameplay.AddEffect(pokerCard.cardData.effect);
+                AddItem(pokerCard.cardData);
             }
+            
+            pokerCard.Dissolve(animationSpeed);
+                
+            Discard(pokerCard);
         }
 
         private void OnClickNormal(PokerCard pokerCard)

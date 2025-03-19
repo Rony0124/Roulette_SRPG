@@ -4,14 +4,13 @@ using UnityEngine;
 using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.InGame.Player;
+using TSoft.Item;
 
 namespace TSoft.Data.Skill
 {
     [CreateAssetMenu(fileName = "Skill", menuName = "Data/Skill", order = 2)]
-    public class SkillSO : ItemSO
+    public class SkillInfo : ItemInfo
     {
-        public GameplayEffectSO effect;
-        
         public GameObject skillParticleObj;
 
         public float skillDuration = 2.0f;

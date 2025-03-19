@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_PlagueDoctor
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: aa6d7d652dc8847169cb95d1745d2681, type: 2}
-  monsterPrefab: {fileID: 7621179977631880947, guid: bc4068dc7809f48f48e9b62cd8fd1182, type: 3}
+  _id:
+    _value: 7ee575af4c0847343952864cebd0e46f
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
+  monsterPrefab: {fileID: 7621179977631880947, guid: bc4068dc7809f48f48e9b62cd8fd1182,
+    type: 3}
   monsterData:
     name: PlagueDoctor
     monsterType: 3

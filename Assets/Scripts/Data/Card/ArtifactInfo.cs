@@ -1,11 +1,11 @@
 using TSoft.InGame.GamePlaySystem;
+using TSoft.Item;
 using UnityEngine;
 
 namespace TSoft.Data.Card
 {
     [CreateAssetMenu(fileName = "Artifact", menuName = "Data/Artifact", order = 0)]
-    public class ArtifactSO : ItemSO
+    public class ArtifactInfo : ItemInfo
     {
-        public GameplayEffectSO effect;
     }
 }

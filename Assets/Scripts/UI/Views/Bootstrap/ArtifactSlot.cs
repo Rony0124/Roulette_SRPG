@@ -1,13 +1,11 @@
-using System;
 using MoreMountains.Feedbacks;
 using TSoft.Data;
 using TSoft.Data.Card;
 using TSoft.Managers.Event;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UI.Views
+namespace TSoft.UI.Views.Bootstrap
 {
     public class ArtifactSlot : MonoBehaviour
     {
@@ -16,7 +14,7 @@ namespace UI.Views
         
         private RegistryId itemId;
         
-        public void SetSlot(ArtifactSO item)
+        public void SetSlot(ArtifactInfo item)
         {
             icon.sprite = item.image;
             icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, 1f);
@@ -27,7 +25,7 @@ namespace UI.Views
 
         private void PlayFeedbackOnUse()
         {
-            feedbacks?.PlayFeedbacks();
+            feedbacks.PlayFeedbacks();
         }
 
         private void OnDestroy()

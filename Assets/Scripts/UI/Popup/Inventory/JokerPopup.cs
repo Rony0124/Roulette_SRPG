@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TSoft.Data;
 using TSoft.Data.Registry;
+using TSoft.Item;
 using TSoft.Managers;
 using TSoft.UI.Views.Bootstrap;
 using UnityEngine;
@@ -94,7 +95,7 @@ namespace TSoft.UI.Popup.Inventory
             onPopupClose?.Invoke();
         }
 
-        private void OnJokerItemPointerEnter(ItemSO itemData, Vector2 position)
+        private void OnJokerItemPointerEnter(ItemInfo itemData, Vector2 position)
         {
             info.InitPopup(itemData);
             info.ShowPanel(position);

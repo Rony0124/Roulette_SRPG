@@ -1,6 +1,7 @@
 using DG.Tweening;
 using TMPro;
 using TSoft.Data;
+using TSoft.Item;
 using TSoft.Managers.TweenSystem;
 using UnityEngine;
 
@@ -21,7 +22,7 @@ namespace TSoft.UI.Popup.Inventory
             _originalPosition = transform.position;
         }
 
-        public void InitPopup(ItemSO itemData)
+        public void InitPopup(ItemInfo itemData)
         {
             itemTitle.text = itemData.title;
             itemDescription.text = itemData.description;

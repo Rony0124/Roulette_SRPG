@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TSoft.Data;
 using TSoft.Data.Registry;
+using TSoft.Item;
 using TSoft.Managers;
 using TSoft.UI.Popup.StoreElement;
 using TSoft.Utils;
@@ -57,7 +58,7 @@ namespace TSoft.UI.Views.Store
         }
 
         private void CreateDisplay<T>(Registry<T> registry, GameObject prefab, Transform parent)
-            where T : ItemSO
+            where T : ItemInfo
         {
             var availableItems = GetAvailableItems();
             var uniqueNumbers = GetUniqueNumbers(availableItems.Count);

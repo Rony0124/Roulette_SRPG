@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da87b6bb8a97ab1418ee42d9e5f11e68, type: 3}
   m_Name: GE_Joker_CrimsonDiceofFate
   m_EditorClassIdentifier: 
-  guid: 5a6c82dea25414fdd87e636790cb67cc
+  _id:
+    _value: 5a6c82dea25414fdd87e636790cb67cc
+  _assetGuid: de826c5a54a2fd14d87e636790cb67cc
+  _lastGeneratedAssetGuid: de826c5a54a2fd14d87e636790cb67cc
   lifeCycle:
     begin: 4
     end: 5

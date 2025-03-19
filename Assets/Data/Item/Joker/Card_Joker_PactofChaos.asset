@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Joker_PactofChaos
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 873697487c643ae4984d423bd0a9d918, type: 2}
+  _id:
+    _value: 4302d0fb4c83547ea943d203db4f42fe
+  _assetGuid: fbd00243834c7e54a943d203db4f42fe
+  _lastGeneratedAssetGuid: fbd00243834c7e54a943d203db4f42fe
   title: 
   description: 
   image: {fileID: 21300000, guid: 1092d54fd70acf94e92facb333c678fc, type: 3}
   price: 0
+  effect: {fileID: 11400000, guid: 3f06fd5600bb2e6479e509bcca492bf0, type: 2}
   number: 0
   type: 5
-  customEffect:
-    rid: -2
-  effect: {fileID: 11400000, guid: 3f06fd5600bb2e6479e509bcca492bf0, type: 2}
+  instantEffect:
+    effect:
+      rid: -2
+    modifiers: []
   references:
     version: 2
     RefIds:

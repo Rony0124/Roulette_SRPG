@@ -5,6 +5,7 @@ using TSoft.Data;
 using TSoft.Data.Registry;
 using TSoft.Data.Skill;
 using TSoft.InGame;
+using TSoft.Item;
 using TSoft.Managers;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -18,7 +19,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
         [SerializeField] private ItemInfoPopup info;
         
         [Header("test")] 
-        [SerializeField] private List<SkillSO> testItems;
+        [SerializeField] private List<SkillInfo> testItems;
         
         private List<InventoryItemSlot> inventoryItemSlots = new();
         
@@ -70,7 +71,7 @@ namespace TSoft.UI.Popup.Inventory.Skill
             }
         }
         
-        private void OnItemPointerEnter(ItemSO itemData, Vector2 position)
+        private void OnItemPointerEnter(ItemInfo itemData, Vector2 position)
         {
             info.InitPopup(itemData);
             info.ShowPanel(position);

@@ -1,4 +1,5 @@
 using TSoft.Data;
+using TSoft.Item;
 using TSoft.Managers;
 using TSoft.UI.Views;
 using UnityEngine;
@@ -14,7 +15,7 @@ namespace TSoft.UI.Popup.Inventory
         [SerializeField] protected GameObject iconPrefab;
         
         protected SlotItemIcon icon;
-        protected ItemSO item;
+        protected ItemInfo item;
         
         public virtual void UpdateIcon()
         {

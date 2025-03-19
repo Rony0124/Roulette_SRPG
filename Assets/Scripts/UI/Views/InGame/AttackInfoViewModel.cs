@@ -1,17 +1,12 @@
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
-using TSoft.Data;
 using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.InGame.Player;
-using TSoft.Managers;
 using TSoft.Managers.Event;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace TSoft.UI.Views.InGame
 {

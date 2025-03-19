@@ -12,11 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4691b67e916334f8a04d2e2326420c, type: 3}
   m_Name: Card_Joker_TheGoldenRingoftheThief
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: dbd09b97b2df2234c82cc725bb2ebfdb, type: 2}
+  _id:
+    _value: 73542f35e301b4ab4b1bc607fc951179
+  _assetGuid: 352f547301e3abb44b1bc607fc951179
+  _lastGeneratedAssetGuid: 352f547301e3abb44b1bc607fc951179
   title: 
   description: 
   image: {fileID: 21300000, guid: d55fc4ce2e81e7e4799df1f8643cb648, type: 3}
   price: 0
+  effect: {fileID: 0}
   number: 0
   type: 5
   instantEffect:
@@ -31,10 +35,13 @@ MonoBehaviour:
         magnitudeRandom:
           minValue: 0
           maxValue: 0
-  effect: {fileID: 0}
+        magnitudeCurve:
+          rid: -2
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 8436400439862493186
       type: {class: CE_GrantGold, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

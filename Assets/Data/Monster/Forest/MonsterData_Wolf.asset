@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Wolf
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 1e078e2e494af6848b1fdfd15eb8d4b4, type: 2}
-  monsterPrefab: {fileID: 6941240245831207257, guid: de6a5a30ea8f8e841be499a75959a876, type: 3}
+  _id:
+    _value: 60206ee55da554d54bcab4c4fd50d218
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
+  monsterPrefab: {fileID: 6941240245831207257, guid: de6a5a30ea8f8e841be499a75959a876,
+    type: 3}
   monsterData:
     name: Wolf
     monsterType: 2

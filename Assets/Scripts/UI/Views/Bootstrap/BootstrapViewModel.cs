@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TSoft.Data.Registry;
 using TSoft.Managers;
 using TSoft.UI.Popup.Inventory;
-using UI.Views;
 using UnityEngine;
 
 namespace TSoft.UI.Views.Bootstrap

@@ -25,7 +25,7 @@ namespace TSoft.InGame.CardSystem
         [SerializeField] private GameObject Visuals;
         [SerializeField] private GameObject HitBox;
 
-        [HideInInspector] public CardSO cardData;
+        [HideInInspector] public CardInfo cardData;
         private bool isHeld = false;
         private bool isFloating = false;
         private Vector3 basePosition = Vector3.zero;
@@ -45,7 +45,7 @@ namespace TSoft.InGame.CardSystem
             }
         }
 
-        public void SetData(CardSO card)
+        public void SetData(CardInfo card)
         {
             cardData = card;
             imgBG.sprite = card.image;

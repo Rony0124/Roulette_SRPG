@@ -1,4 +1,5 @@
 using TSoft.Data;
+using TSoft.Item;
 using UnityEngine;
 
 namespace TSoft.UI.Popup.Inventory
@@ -7,10 +8,10 @@ namespace TSoft.UI.Popup.Inventory
     {
         [SerializeField] private GameObject iconPrefab;
 
-        private ItemSO item;
+        private ItemInfo item;
         public SlotItemIcon icon { get; private set; }
         
-        public void InitSlot(ItemSO itemData)
+        public void InitSlot(ItemInfo itemData)
         {
             item = itemData;
             

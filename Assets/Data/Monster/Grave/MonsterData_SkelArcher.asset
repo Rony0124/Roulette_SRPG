@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_SkelArcher
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 8576e9d26ba8540a9b769cacec57aab1, type: 2}
-  monsterPrefab: {fileID: 3006851260391671835, guid: fc7e4cb87ed1d4760b4915554f4423a3, type: 3}
+  _id:
+    _value: b1ddc6ce6f7365a49b6ceb3c4977b6cb
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
+  monsterPrefab: {fileID: 3006851260391671835, guid: fc7e4cb87ed1d4760b4915554f4423a3,
+    type: 3}
   monsterData:
     name: Skeleton Archer
     monsterType: 3

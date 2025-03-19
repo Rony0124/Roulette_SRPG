@@ -1,5 +1,6 @@
 using System;
 using TSoft.Data;
+using TSoft.Item;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -8,15 +9,15 @@ namespace TSoft.UI.Popup.Inventory
 {
     public class ItemIcon : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public Action<ItemSO, Vector2> onPointerEnter;
+        public Action<ItemInfo, Vector2> onPointerEnter;
         public Action onPointerExit;
         
         [SerializeField] protected Image itemIcon;
         [SerializeField] protected GameObject disableImage;
         
-        protected ItemSO currentItem = default;
+        protected ItemInfo currentItem = default;
 
-        public void SetItemIcon(ItemSO item)
+        public void SetItemIcon(ItemInfo item)
         {
             currentItem = item;
 

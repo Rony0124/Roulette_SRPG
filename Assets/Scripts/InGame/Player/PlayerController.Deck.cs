@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using TSoft.Data.Card;
 using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
@@ -13,20 +14,20 @@ namespace TSoft.InGame.Player
     {
         public Action<int, int> onDeckChanged; 
         
-        [Header("Deck")]
-        [SerializeField] private List<CardSO> defaultCardDB;
-        [SerializeField] private List<CardSO> specialCardDB;
-
+        [Title("Deck")]
+        [SerializeField] private List<CardInfo> defaultCardDB;
+        [SerializeField] private List<CardInfo> testCardDB;
+        
         [Header("Game Object")]
         [SerializeField] private PokerCard pokerCardPrefab;
         
-        private Queue<CardSO> cardsOnDeck;
+        private Queue<CardInfo> cardsOnDeck;
         
         public int maxCardsNum; 
 
         private void InitializeDeck()
         {
-            List<CardSO> currentDeck = new();
+            List<CardInfo> currentDeck = new();
             cardsOnDeck = new();
             
             foreach (var card in defaultCardDB)
@@ -69,12 +70,12 @@ namespace TSoft.InGame.Player
             }
         }
         
-        private CardSO CreateRandomCard()
+        private CardInfo CreateRandomCard()
         {
             return TryDrawCard(out var card) ? card : null;
         }
 
-        private bool TryDrawCard(out CardSO card)
+        private bool TryDrawCard(out CardInfo card)
         {
             card = null;
             
@@ -88,10 +89,17 @@ namespace TSoft.InGame.Player
             return true;
         }
 
-        public void Shuffle(List<CardSO> cards)
+        public void Shuffle(List<CardInfo> cards)
         {
             cards.ShuffleList();
-
+            
+#if UNITY_EDITOR
+            foreach (var card in testCardDB)
+            {
+                cardsOnDeck.Enqueue(card);
+            }
+#endif
+            
             foreach (var card in cards)
             {
                 cardsOnDeck.Enqueue(card);
@@ -101,16 +109,6 @@ namespace TSoft.InGame.Player
         public void ShuffleCurrent()
         {
             cardsOnDeck.ToList().ShuffleList();
-        }
-
-        public void AddJoker(CardSO specialCard)
-        {
-            specialCardDB.Add(specialCard);
-        }
-        
-        public void RemoveJoker(CardSO specialCard)
-        {
-            specialCardDB.Remove(specialCard);
         }
     }
 }

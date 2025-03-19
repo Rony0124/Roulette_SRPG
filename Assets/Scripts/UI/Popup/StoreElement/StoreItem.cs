@@ -1,5 +1,6 @@
 using System;
 using TSoft.Data;
+using TSoft.Item;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +17,7 @@ namespace TSoft.UI.Popup.StoreElement
         [SerializeField] private Button buyButton;
         
         //info
-        private ItemSO itemInfo;
+        private ItemInfo itemInfo;
         private Guid id;
 
         public int Price => itemInfo.price;
@@ -32,7 +33,7 @@ namespace TSoft.UI.Popup.StoreElement
             buyButton.onClick.AddListener(OnBuyClicked);
         }
 
-        public void SetElement(ItemSO item)
+        public void SetElement(ItemInfo item)
         {
             itemInfo = item;
             thumbnail.sprite = item.image;

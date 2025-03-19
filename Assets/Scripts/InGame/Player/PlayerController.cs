@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Cysharp.Threading.Tasks;
 using Sirenix.Utilities;
 using TCGStarter.Tweening;
-using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
@@ -20,7 +18,6 @@ namespace TSoft.InGame.Player
         [SerializeField] private Transform deck;
         
         private Gameplay gameplay;
-        private AbilityContainer abilityContainer;
         
         private Vector3[] cardPositions;
         private Vector3[] cardRotations;
@@ -46,18 +43,15 @@ namespace TSoft.InGame.Player
             cardsOnHand = new List<PokerCard>();
 
             gameplay = GetComponent<Gameplay>();
-            abilityContainer = GetComponent<AbilityContainer>();
-
             gameplay.Init();
-            abilityContainer.Init();
             
-            LoadSaveItems();
+            InitializeDeck();
+            InitializePattern();
+            InitializeEquipment();
         }
 
         protected override async UniTask OnPrePlay()
         {
-            InitializeDeck();
-            InitPattern();
             onGameReady?.Invoke();
 
             await gameplay.OnRoundBegin();
@@ -73,21 +67,6 @@ namespace TSoft.InGame.Player
             await UniTask.WaitWhile(() => !CanMoveNextCycle);
             
             DiscardAll();
-        }
-
-        private void LoadSaveItems()
-        {
-            foreach (var kvp in DataRegistry.Instance.ArtifactRegistry.assetGuidLookup
-                         .Where(kvp => GameSave.Instance.HasItemsId(kvp.Key)))
-            {
-                abilityContainer.currentArtifacts.Add(kvp.Value);
-            }
-
-            foreach (var kvp in  DataRegistry.Instance.JokerRegistry.assetGuidLookup
-                         .Where(kvp => GameSave.Instance.HasItemsId(kvp.Key)))
-            {
-                specialCardDB.Add(kvp.Value);
-            }
         }
         
         public async UniTask<bool> TryUseCardsOnHand()
