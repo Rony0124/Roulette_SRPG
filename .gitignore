@@ -2,6 +2,7 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/main/Unity.gitignore
 #
+.utmp/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
@@ -59,8 +60,8 @@ sysinfo.txt
 *.apk
 *.aab
 *.unitypackage
+*.unitypackage.meta
 *.app
-*.db
 
 # Crashlytics generated file
 crashlytics-build.properties
@@ -71,21 +72,3 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
-Library/Search/transactions.db
-Library/Bee/fullprofile.json
-*.digestcache
-*.state
-Library/StateCache
-Library/Bee
-Library/Search
-Library/ArtifactDB
-Library/SourceAssetDB
-Logs
-ProjectSettings
-Library/Bee
-Library/Search
-Library
-Assembly-CSharp.csproj
-Logs
-obj/Debug
-UserSettings
