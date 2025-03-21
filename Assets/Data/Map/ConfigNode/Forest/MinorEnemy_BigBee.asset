@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 241893262, guid: e59a0a57c56874a40af27b452b1716c4, type: 3}
   nodeType: 0
-  monsterId: {fileID: 11400000, guid: 4514bbecb6f53aa44a6bd935cf38bff6, type: 2}
+  monsterData: {fileID: 11400000, guid: 15514f92a3f5b4c41b30cf6d3298b2d2, type: 2}

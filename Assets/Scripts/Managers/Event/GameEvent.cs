@@ -1,6 +1,6 @@
 using UnityEngine.Events;
 
-namespace TSoft.Managers.Event
+namespace Managers.Event
 {
     public abstract class GameEvent<T>
     {
@@ -22,11 +22,17 @@ namespace TSoft.Managers.Event
             
         public virtual void RemoveListener(UnityAction<T> action)
         {
+            if (gameEvent == null)
+                return;
+            
             gameEvent.RemoveListener(action);
         }
             
         public virtual void RemoveAllListener()
         {
+            if (gameEvent == null)
+                return;
+            
             gameEvent.RemoveAllListeners();
         }
 

@@ -40,7 +40,7 @@ namespace TSoft.InGame
         protected override void InitOnDirectorChanged()
         {
 #if UNITY_EDITOR
-            if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.Blueprint.monsterId == RegistryId.Null)
+            if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.Blueprint.monsterData.Id == RegistryId.Null)
             {
                 if (TsDevPreferences.Monster != null)
                 {
@@ -51,10 +51,7 @@ namespace TSoft.InGame
             if (monsterData != null) 
                 return;
             
-            if (DataRegistry.Instance.MonsterRegistry.TryGetValue(GameContext.Instance.CurrentNode.Blueprint.monsterId, out var monsterDataSo))
-            { 
-                monsterData = monsterDataSo;
-            }
+            monsterData = GameContext.Instance.CurrentNode.Blueprint.monsterData;
         }
         
         protected override async UniTask OnPrePlay()

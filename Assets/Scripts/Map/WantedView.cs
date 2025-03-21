@@ -33,14 +33,14 @@ namespace TSoft.Map
             this.mapNode = mapNode;
             
             var blueprint = mapNode.Blueprint;
-            if(!DataRegistry.Instance.MonsterRegistry.TryGetValue(blueprint.monsterId, out var monsterData))
+            if(!blueprint.monsterData)
                 return;
             
             if (!bgDictionary.TryGetValue(blueprint.nodeType, out var bgImage))
                 return;
             
             bg.sprite = bgImage;
-            icon.sprite = monsterData.MonsterData.monsterMontage;
+            icon.sprite = blueprint.monsterData.MonsterData.monsterMontage;
             
             var stageInfo = GameContext.Instance.currentStageInfo;
             var bounty = (stageInfo.stage + stageInfo.round + 1) * 100 *

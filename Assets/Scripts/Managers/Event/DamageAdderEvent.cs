@@ -1,3 +1,4 @@
+using Managers.Event;
 using TSoft.InGame.GamePlaySystem;
 
 namespace TSoft.Managers.Event

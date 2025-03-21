@@ -1,5 +1,6 @@
 using System;
 using TSoft.Data;
+using TSoft.Data.Monster;
 using UnityEngine;
 
 namespace TSoft.Map
@@ -18,7 +19,7 @@ namespace TSoft.Map
     {
         public Sprite sprite;
         public NodeType nodeType;
-        public RegistryId monsterId;
+        public MonsterDataSO monsterData;
     }
 }
 
