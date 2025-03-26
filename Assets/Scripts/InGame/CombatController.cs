@@ -1,5 +1,4 @@
 using System;
-using Cysharp.Threading.Tasks;
 using TSoft.Data;
 using TSoft.Data.Monster;
 using TSoft.Utils;
@@ -34,12 +33,10 @@ namespace InGame
                 }
             }
         }
-
-        private MonsterDataSO monsterData;
-        
         
         protected override void InitOnDirectorChanged()
         {
+            MonsterDataSO monsterData = null;
 #if UNITY_EDITOR
             if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.Blueprint.monsterData.Id == RegistryId.Null)
             {
@@ -53,19 +50,13 @@ namespace InGame
                 return;
             
             monsterData = GameContext.Instance.CurrentMonster;
+            
+            director.prePlayFeedback.AddListener(() => OnPrePlay(monsterData));
         }
         
-        protected override async UniTask OnPrePlay()
+        private void OnPrePlay(MonsterDataSO monsterData)
         {
             CurrentMonster = monsterData.SpawnMonster(enemySpawnPoint, Vector3.zero);
-            director.Controllers.Add(currentMonster);
-            
-            CurrentMonster.Director = director;
-            CurrentMonster.OnStageStateChanged(StageState.None, currentStageState).Forget();
-            
-            director.Controllers.Add(currentMonster);
-
-            await UniTask.CompletedTask;
         }
     }
 }

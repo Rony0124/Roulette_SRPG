@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace InGame.Player
 {
-    public partial class PlayerController : ControllerBase
+    public partial class PlayerController : MonoBehaviour
     {
         public Action onGameReady;
    
@@ -32,7 +32,7 @@ namespace InGame.Player
         
         private const int HandCountMax = 5;
         
-        protected override void InitOnDirectorChanged()
+        private void Awake()
         {
             currentPokerCardSelected = new List<PokerCard>();
             cardsOnHand = new List<PokerCard>();
@@ -45,7 +45,7 @@ namespace InGame.Player
             InitializeEquipment();
         }
 
-        protected override async UniTask OnPrePlay()
+        private async UniTask OnPrePlay()
         {
             onGameReady?.Invoke();
 
@@ -54,7 +54,7 @@ namespace InGame.Player
             await UniTask.WaitForSeconds(1);
         }
         
-        protected override async UniTask OnPostPlaySuccess()
+        private async UniTask OnPostPlaySuccess()
         {
             await gameplay.OnRoundFinished();
             
@@ -276,7 +276,7 @@ namespace InGame.Player
         }
         
 #if UNITY_EDITOR
-        void OnGUI()
+        /*void OnGUI()
         {
             var count = gameplay.attributes.Count;
             Rect rc = new Rect(400, 300, 400, 20);
@@ -288,7 +288,7 @@ namespace InGame.Player
                 GUI.Label(rc, $"{gameplay.attributes[i].attrType} : {gameplay.attributes[i].value.CurrentValue.Value}");
                 rc.y += 25;
             }
-        }
+        }*/
 #endif
     }
 }

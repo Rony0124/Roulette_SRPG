@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace InGame
 {
-    public class MonsterController : ControllerBase
+    public class MonsterController : MonoBehaviour
     {
         public Action<float> onDamaged;
         
@@ -60,10 +60,6 @@ namespace InGame
                     DamageFeedback.PlayFeedbacks();    
                 }
             }
-        }
-
-        protected override void InitOnDirectorChanged()
-        {
         }
     }
 }

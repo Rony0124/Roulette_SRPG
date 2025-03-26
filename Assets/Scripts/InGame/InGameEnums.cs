@@ -1,15 +1,18 @@
+using System;
+
 namespace InGame
 {
-    public enum StageState
+    [Serializable]
+    public enum StageState : int
     {
-        None,
-        Intro,
-        PrePlaying,         // 플레이 준비 단계
-        Playing,            // 실제 플레이 단계
-        PostPlayingSuccess,        // 타임아웃이나 클리어 등의 조건으로 플레이가 종료된 단계 (여기서 아웃트로를 선택)
-        PostPlayingFailed,
-        Outro,
-        Exit,               // 로비로 돌아간다.
+        None = 0,
+        Intro = 1,
+        PrePlaying = 2,         // 플레이 준비 단계
+        Playing = 3,            // 실제 플레이 단계
+        PostPlayingSuccess = 4,        // 타임아웃이나 클리어 등의 조건으로 플레이가 종료된 단계 (여기서 아웃트로를 선택)
+        PostPlayingFailed = 5,
+        Outro = 6,
+        Exit = 7,               // 로비로 돌아간다.
     };
 
     public enum ConditionType

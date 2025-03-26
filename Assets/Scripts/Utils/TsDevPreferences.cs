@@ -35,12 +35,15 @@ using UnityEngine;
 
                 if (overrideStagePath.Length > 0)
                     Monster = AssetDatabase.LoadAssetAtPath<MonsterDataSO>(overrideStagePath);
+                
+                overrideMonster = EditorPrefs.GetBool("overrideMonster", overrideMonster);
             }
 
             private static void SavePrefs()
             {
                 string monsterIdPath = AssetDatabase.GetAssetPath(Monster);
                 EditorPrefs.SetString("monsterIdPath", monsterIdPath);
+                EditorPrefs.SetBool("overrideMonster", overrideMonster);
             }
 
             private void OnGUI()

@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Cysharp.Threading.Tasks;
-using Newtonsoft.Json;
 using TSoft;
 using TSoft.InGame;
 using TSoft.Managers;
@@ -15,117 +10,78 @@ namespace InGame
 {
     public class InGameDirector : DirectorBase
     {
-        public Action OnPrePlay;
+        [Header("Combat")] 
+        [SerializeField] private CombatController combat;
+        public CombatController Combat => combat;
 
-        [Header("Intro")]
-        [SerializeField] private float introDuration;
-        [SerializeField] private UnityEvent introFeedback;
-        
-        [Header("PrePlay")]
-        [SerializeField] private float prePlayDuration;
-        [SerializeField] private UnityEvent prePlayFeedback;
-        
-        [Header("PostPlay")]
-        [SerializeField] private float postPlaySuccessDuration;
-        [SerializeField] private float postPlayFailDuration;
-        [SerializeField] private UnityEvent postPlaySuccessFeedback;
-        [SerializeField] private UnityEvent postPlayFailFeedback;
-        
-        public List<ControllerBase> Controllers { get; set; }
-        
+        [Header("Feedbacks")] 
+        public UnityEvent introFeedback;
+        public UnityEvent prePlayFeedback;
+        public UnityEvent postPlaySuccessFeedback;
+        public UnityEvent postPlayFailFeedback;
+        public UnityEvent outroFeedback;
+
         //life cycle
         private ObservableVar<StageState> currentStageState;
-        
+
         public StageState CurrentStageState => currentStageState.Value;
 
         protected override void OnDirectorChanged(DirectorBase oldValue, DirectorBase newValue)
         {
-            Controllers = FindObjectsOfType<ControllerBase>().ToList();
+            combat.Director = this;
             
             currentStageState = new ObservableVar<StageState>();
-            
-            currentStageState.OnValueChanged += (o, n) => OnStageStateChanged(o, n).Forget();;
+
+            currentStageState.OnValueChanged +=  OnStageStateChanged;
             
             currentStageState.Value = StageState.Intro;
-
-            foreach (var controller in Controllers)
-            {
-                controller.Director = this;
-            }
         }
-        
-        private async UniTaskVoid OnStageStateChanged(StageState oldVal, StageState newVal)
+
+        private void OnStageStateChanged(StageState oldVal, StageState newVal)
         {
             if (oldVal == newVal)
                 return;
 
             Debug.Log($"Current Stage State [{newVal}]");
 
-            if (oldVal != StageState.None)
-            {
-                //controller cycle 동기화
-                foreach (var controller in Controllers)
-                {
-                    await UniTask.WaitUntil(() => controller.CurrentStageState == oldVal);    
-                }
-            }
-            
             switch (newVal)
             {
                 case StageState.Intro:
-                    StartIntro().Forget();
+                    OnIntro();
                     break;
                 case StageState.PrePlaying:
-                    StartPrePlaying().Forget();
+                    OnPrePlay();
                     break;
                 case StageState.Playing:
                     break;
                 case StageState.PostPlayingSuccess:
-                    StartPostPlayingSuccess().Forget();
+                    OnPostPlayingSuccess();
                     break;
                 case StageState.PostPlayingFailed:
-                    StartPostPlayingFailed().Forget();
+                    OnPostPlayingFail();
                     break;
                 case StageState.Outro:
+                    OnOutro();
                     break;
                 case StageState.Exit:
+                    OnExit();
                     break;
             }
-            
-            //controller cycle 동기화
-            foreach (var controller in Controllers)
-            {
-                controller.OnStageStateChanged(oldVal, newVal).Forget();    
-            }
         }
-        
-        public void ChangeStageState(StageState stageState)
+
+        public void SetStageState(int stageStage)
         {
-            currentStageState.Value = stageState;
+            currentStageState.Value = (StageState)stageStage;
         }
 
         public void GameOver(bool isSuccess)
         {
-            Debug.Log("GameOver");
-
             if (isSuccess)
             {
-                var currentMap = GameContext.Instance.CurrentMap;
-                if (currentMap == null) 
-                    return;
-                
-                currentMap.path.Add(GameContext.Instance.CurrentNode.Node.point);
-            
-                string mapJson = JsonConvert.SerializeObject(currentMap, Formatting.Indented,
-                    new JsonSerializerSettings {ReferenceLoopHandling = ReferenceLoopHandling.Ignore});
-            
-                GameSave.Instance.SaveMap(mapJson);
-                
-                
-                ChangeStageState(StageState.PostPlayingSuccess);
+                SetStageState((int)StageState.PostPlayingSuccess);
             }else
             {
-                ChangeStageState(StageState.PostPlayingFailed);
+                SetStageState((int)StageState.PostPlayingFailed);
             }
         }
 
@@ -150,43 +106,34 @@ namespace InGame
         #region Stage
 
         //입장 인트로
-        private async UniTaskVoid StartIntro()
+        private void OnIntro()
         {
             introFeedback?.Invoke();
-            
-            await UniTask.WaitForSeconds(introDuration);
-            
-            ChangeStageState(StageState.PrePlaying);
         }
 
-        //스테이지 준비
-        private async UniTaskVoid StartPrePlaying()
+        private void OnPrePlay()
         {
             prePlayFeedback?.Invoke();
-            
-            await UniTask.WaitForSeconds(prePlayDuration);
-            
-            ChangeStageState(StageState.Playing);
         }
-        
-        //스테이지 마무리 준비 (성공)
-        private async UniTaskVoid StartPostPlayingSuccess()
+
+        private void OnPostPlayingSuccess()
         {
             postPlaySuccessFeedback?.Invoke();
-            
-            await UniTask.WaitForSeconds(postPlaySuccessDuration);
-            
-            ChangeStageState(StageState.Outro);
         }
         
-        //스테이지 마무리 준비 (실패)
-        private async UniTaskVoid StartPostPlayingFailed()
+        private void OnPostPlayingFail()
         {
-            postPlayFailFeedback?.Invoke();
-            
-            await UniTask.WaitForSeconds(postPlayFailDuration);
-            
-            ChangeStageState(StageState.Outro);
+            postPlaySuccessFeedback?.Invoke();
+        }
+
+        private void OnOutro()
+        {
+            outroFeedback?.Invoke();
+        }
+
+        private void OnExit()
+        {
+            Debug.Log("Game is Over. Exit the game");
         }
 
         #endregion

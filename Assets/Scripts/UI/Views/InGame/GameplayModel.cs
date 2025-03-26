@@ -14,13 +14,13 @@ namespace TSoft.UI.Views.InGame
         
         public PlayerController Player => player;
 
-        public ObservableVar<float> PlayerHeart => player.Gameplay.GetAttrVar(GameplayAttr.Heart);
-        public ObservableVar<float> PlayerEnergy => player.Gameplay.GetAttrVar(GameplayAttr.Energy);
+        /*public ObservableVar<float> PlayerHeart => player.Gameplay.GetAttrVar(GameplayAttr.Heart);
+        public ObservableVar<float> PlayerEnergy => player.Gameplay.GetAttrVar(GameplayAttr.Energy);*/
 
-        private void OnDestroy()
+        /*private void OnDestroy()
         {
             PlayerHeart?.Dispose();
             PlayerEnergy?.Dispose();
-        }
+        }*/
     }
 }

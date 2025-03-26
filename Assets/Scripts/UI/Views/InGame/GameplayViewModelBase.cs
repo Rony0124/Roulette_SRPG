@@ -29,8 +29,8 @@ namespace TSoft.UI.Views.InGame
             View.DiscardButton.onClick.AddListener(OnDiscardCard);
             View.UseButton.onClick.AddListener(() => OnUseCard().Forget());
             
-            Model.PlayerHeart.OnValueChanged += OnPlayerHeartChanged;
-            Model.PlayerEnergy.OnValueChanged += OnPlayerEnergyChanged;
+            /*Model.PlayerHeart.OnValueChanged += OnPlayerHeartChanged;
+            Model.PlayerEnergy.OnValueChanged += OnPlayerEnergyChanged;*/
             
             player = Model.Player;
             
@@ -42,14 +42,14 @@ namespace TSoft.UI.Views.InGame
         
         private void OnPlayerHeartChanged(float oldVal, float newVal)
         {
-            var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxHeart);
-            View.SetHeartText(newVal, maxCount);
+            /*var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxHeart);
+            View.SetHeartText(newVal, maxCount);*/
         }
         
         private void OnPlayerEnergyChanged(float oldVal, float newVal)
         {
-            var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxEnergy);
-            View.SetEnergyText(newVal, maxCount);
+            /*var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxEnergy);
+            View.SetEnergyText(newVal, maxCount);*/
         }
         
         private void OnDiscardCard()
