@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using TSoft;
 using TSoft.UI.Core;
 using TSoft.Utils;
+using UI.Views.Lobby;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -21,7 +22,7 @@ namespace UI.Page
         
         [SerializeField] private ObjectActivator activator;
         
-        void OnEnable()
+        void Awake()
         {
             Bind<Button>(typeof(UIButton));
             
@@ -37,14 +38,17 @@ namespace UI.Page
 
             await activator.ReturnActivatedCards();
             
-            SceneManager.LoadScene(Define.StageMap);
+            var view = CurrentView as GameStartView;
+            view.MoveToNextPage();
         }
         
         private async UniTaskVoid OnContinueClicked()
         {
             await activator.ReturnActivatedCards();
             
-            SceneManager.LoadScene(Define.StageMap);
+            var view = CurrentView as GameStartView;
+            view.MoveToNextPage();
+            //SceneManager.LoadScene(Define.StageMap);
         }
         
         private void OnExitClicked()

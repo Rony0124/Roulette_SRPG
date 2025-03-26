@@ -32,6 +32,11 @@ namespace UI.Views.Lobby
         {
             currentPageIndex = 0;
             currentPage = pages[0].page;
+
+            foreach (var page in pages)
+            {
+                page.page.CurrentView = this;
+            }
         }
 
         protected override void OnDeactivated()
@@ -56,6 +61,26 @@ namespace UI.Views.Lobby
             currentPage = page;
                 
             ++currentPageIndex;
+        }
+        
+        public void MoveToPrevPage()
+        {
+            if (currentPageIndex - 1 < 0)
+            {
+                Debug.Log("index out of Pages");
+                return;
+            }
+            
+            var page = pages[currentPageIndex - 1].page;
+            if (!page) 
+                return;
+            
+            currentPage.gameObject.SetActive(false);
+            
+            page.gameObject.SetActive(true);
+            currentPage = page;
+                
+            --currentPageIndex;
         }
 
         public void MoveToDesignatedPage(Page pageId)
