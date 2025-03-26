@@ -14,10 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id:
     _value: 8587f40270cd2ac4d8b105c4360025e7
-  _assetGuid: 
-  _lastGeneratedAssetGuid: 
-  monsterPrefab: {fileID: 3838643292160279779, guid: fb1af0603a90c437aaed88055cd84f2d,
-    type: 3}
+  _assetGuid: 02f48785cd70c42ad8b105c4360025e7
+  _lastGeneratedAssetGuid: 02f48785cd70c42ad8b105c4360025e7
+  monsterPrefab: {fileID: 3838643292160279779, guid: fb1af0603a90c437aaed88055cd84f2d, type: 3}
   monsterData:
     name: Dullahan
     monsterType: 3

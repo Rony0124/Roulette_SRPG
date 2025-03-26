@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_HellHound
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 99913d130ac4442bb9a7b93bdb72b1d4, type: 2}
+  _id:
+    _value: 114fbe12a8181544dae9b4e4e6dbede9
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   monsterPrefab: {fileID: 8280984792544161541, guid: 762b20dd05caf40078af98b2d4bce79d, type: 3}
   monsterData:
     name: HellHound

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_Ifrit
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: d473f394ec3c04b428f98c398ef8118e, type: 2}
+  _id:
+    _value: 54d2f2133e1f7284fbdc5c17db29d241
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   monsterPrefab: {fileID: 7241691714674148604, guid: 9c88d8745f9ff4bad9b975f974af5987, type: 3}
   monsterData:
     name: Ifrit

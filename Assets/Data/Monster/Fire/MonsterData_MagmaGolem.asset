@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_MagmaGolem
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: 636947cc252aa42d0a0652957d1b6794, type: 2}
+  _id:
+    _value: 8a5ddeb9d8b27dc4c9d66b86341659c3
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   monsterPrefab: {fileID: 4368465764259730347, guid: 736121e48cf28462faeacbab619d7a9f, type: 3}
   monsterData:
     name: MagmaGolem

@@ -1,56 +1,82 @@
+using System;
+using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using TSoft.UI.Core;
-using TSoft.Utils;
-using UnityEngine.Device;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+using UI.Page;
+using UnityEngine;
 
-namespace TSoft.UI.Views.Lobby
+namespace UI.Views.Lobby
 {
     public class GameStartView : ViewBase
     {
-        private enum UIButton
+        public enum Page
         {
-            Restart,
-            Continue,
-            Exit,
-            Option
+            GameStartPage = 0,
+            LobbyPage = 1,
         }
+        
+        [Serializable]
+        public struct PageInfo
+        {
+            public Page pageId;
+            public UIPage page;
+        }
+        
+        [TableList]
+        [SerializeField] private List<PageInfo> pages;
+        
+        private int currentPageIndex;
+        private UIPage currentPage;
         
         protected override void OnActivated()
         {
-            Bind<Button>(typeof(UIButton));
-            
-            Get<Button>((int)UIButton.Restart).gameObject.BindEvent(OnRestartClicked);
-            Get<Button>((int)UIButton.Continue).gameObject.BindEvent(OnContinueClicked);
-            Get<Button>((int)UIButton.Exit).gameObject.BindEvent(OnExitClicked);
-            Get<Button>((int)UIButton.Option).gameObject.BindEvent(OnOptionClicked);
+            currentPageIndex = 0;
+            currentPage = pages[0].page;
         }
 
         protected override void OnDeactivated()
         {
         }
-        
-        private void OnRestartClicked(PointerEventData data)
+
+        public void MoveToNextPage()
         {
-            GameSave.Instance.ClearSaveFile();
+            if (currentPageIndex + 1 > pages.Count - 1)
+            {
+                Debug.Log("index out of Pages");
+                return;
+            }
             
-            SceneManager.LoadScene(Define.StageMap);
-        }
-        
-        private void OnContinueClicked(PointerEventData data)
-        {
-            SceneManager.LoadScene(Define.StageMap);
-        }
-        
-        private void OnExitClicked(PointerEventData data)
-        {
-            Application.Quit();
-        }
-        
-        private void OnOptionClicked(PointerEventData data)
-        {
+            var page = pages[currentPageIndex + 1].page;
+            if (!page) 
+                return;
             
+            currentPage.gameObject.SetActive(false);
+                
+            page.gameObject.SetActive(true);
+            currentPage = page;
+                
+            ++currentPageIndex;
         }
+
+        public void MoveToDesignatedPage(Page pageId)
+        {
+            if ((int)pageId > pages.Count - 1)
+            {
+                Debug.Log("index out of Pages");
+                return;
+            }
+            
+            var page = pages[(int)pageId].page;
+            if (!page) 
+                return;
+            
+            currentPage.gameObject.SetActive(false);
+                
+            page.gameObject.SetActive(true);
+            currentPage = page;
+
+            currentPageIndex = (int)pageId;
+        }
+        
     }
 }

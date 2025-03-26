@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fe9ee53aa4ab842bb7e5d67504cd9a, type: 3}
   m_Name: MonsterData_FireSalamander
   m_EditorClassIdentifier: 
-  registryId: {fileID: 11400000, guid: d5517dce21c644228a1115b72d7d7977, type: 2}
+  _id:
+    _value: b60ee48e58927484c966e53da102bf81
+  _assetGuid: 
+  _lastGeneratedAssetGuid: 
   monsterPrefab: {fileID: 3005445014530275822, guid: d9217fd7854a94b19b1da1434e668516, type: 3}
   monsterData:
     name: FireSalamander

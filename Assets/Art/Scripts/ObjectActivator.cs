@@ -1,32 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ObjectActivator : MonoBehaviour
 {
-    // ¹öÆ°À» ¿¬°áÇÒ º¯¼ö
+    // ï¿½ï¿½Æ°ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public Button yourButton;
-    // È°¼ºÈ­ÇÒ ¿ÀºêÁ§Æ®µéÀ» ¹è¿­·Î ¼³Á¤
+    // È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public GameObject[] objectsToActivate;
-    // ÇöÀç È°¼ºÈ­ÇÒ ¿ÀºêÁ§Æ®ÀÇ ÀÎµ¦½º¸¦ ÃßÀûÇÏ´Â º¯¼ö
+    // ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
     private int currentIndex = 0;
 
     void Start()
     {
-        // ¹öÆ° Å¬¸¯ ½Ã ActivateNextObject ÇÔ¼ö È£Ãâ
+        // ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ ActivateNextObject ï¿½Ô¼ï¿½ È£ï¿½ï¿½
         yourButton.onClick.AddListener(() => StartCoroutine(ActivateNextObject()));
     }
 
-    // ¹öÆ° Å¬¸¯ ½Ã ÇÏ³ª¾¿ ¿ÀºêÁ§Æ®¸¦ È°¼ºÈ­ÇÏ´Â ÄÚ·çÆ¾
+    // ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½ ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½Ï´ï¿½ ï¿½Ú·ï¿½Æ¾
     IEnumerator ActivateNextObject()
     {
-        // ¾ÆÁ÷ È°¼ºÈ­ÇÒ ¿ÀºêÁ§Æ®°¡ ÀÖ´Ù¸é
+        // ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ö´Ù¸ï¿½
         if (currentIndex < objectsToActivate.Length)
         {
-            objectsToActivate[currentIndex].SetActive(true);  // ÇöÀç ÀÎµ¦½º ¿ÀºêÁ§Æ® È°¼ºÈ­
-            currentIndex++;  // ´ÙÀ½ ¿ÀºêÁ§Æ®·Î ÀÌµ¿
-            yield return new WaitForSeconds(0.5f);  // 0.5ÃÊ ´ë±â
+            objectsToActivate[currentIndex].SetActive(true);  // ï¿½ï¿½ï¿½ï¿½ ï¿½Îµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® È°ï¿½ï¿½È­
+            currentIndex++;  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½Ìµï¿½
+            yield return new WaitForSeconds(0.5f);  // 0.5ï¿½ï¿½ ï¿½ï¿½ï¿½
         }
+    }
+
+    public async UniTask ReturnActivatedCards()
+    {
+        float duration = objectsToActivate[0].GetComponent<ActivatedCard>().FeelDuration;
+        bool shouldWait = false;
+        foreach (var obj in objectsToActivate)
+        {
+            if (obj.activeSelf)
+            {
+                shouldWait = true;
+                var activatedCard = obj.GetComponent<ActivatedCard>();
+                activatedCard.MoveFeedback();
+            }
+        }
+
+        if(shouldWait)
+            await UniTask.WaitForSeconds(duration + 0.5f);
     }
 }

@@ -88,11 +88,77 @@ MonoBehaviour:
   QuantizedSequence:
   - Line:
     - Timestamp: 0
+      ID: 0
+    - Timestamp: 0.2
+      ID: 0
+    - Timestamp: 0.4
+      ID: 0
+    - Timestamp: 0.6
       ID: -1
+    - Timestamp: 0.8
+      ID: 0
+    - Timestamp: 1
+      ID: -1
+    - Timestamp: 1.2
+      ID: 0
+    - Timestamp: 1.4
+      ID: -1
+    - Timestamp: 1.6
+      ID: 0
+    - Timestamp: 1.8000001
+      ID: 0
+    - Timestamp: 2
+      ID: 0
+    - Timestamp: 2.2
+      ID: -1
+    - Timestamp: 2.4
+      ID: 0
+    - Timestamp: 2.6000001
+      ID: -1
+    - Timestamp: 2.8
+      ID: 0
+    - Timestamp: 3
+      ID: -1
+  - Line:
+    - Timestamp: 0
+      ID: 1
+    - Timestamp: 0.2
+      ID: 1
+    - Timestamp: 0.4
+      ID: -1
+    - Timestamp: 0.6
+      ID: -1
+    - Timestamp: 0.8
+      ID: 1
+    - Timestamp: 1
+      ID: -1
+    - Timestamp: 1.2
+      ID: -1
+    - Timestamp: 1.4
+      ID: -1
+    - Timestamp: 1.6
+      ID: 1
+    - Timestamp: 1.8000001
+      ID: 1
+    - Timestamp: 2
+      ID: -1
+    - Timestamp: 2.2
+      ID: -1
+    - Timestamp: 2.4
+      ID: 1
+    - Timestamp: 2.6000001
+      ID: -1
+    - Timestamp: 2.8
+      ID: -1
+    - Timestamp: 3
+      ID: -1
+  - Line:
+    - Timestamp: 0
+      ID: 2
     - Timestamp: 0.2
       ID: -1
     - Timestamp: 0.4
-      ID: -1
+      ID: 2
     - Timestamp: 0.6
       ID: -1
     - Timestamp: 0.8
@@ -104,7 +170,40 @@ MonoBehaviour:
     - Timestamp: 1.4
       ID: -1
     - Timestamp: 1.6
+      ID: 2
+    - Timestamp: 1.8000001
       ID: -1
+    - Timestamp: 2
+      ID: 2
+    - Timestamp: 2.2
+      ID: -1
+    - Timestamp: 2.4
+      ID: -1
+    - Timestamp: 2.6000001
+      ID: -1
+    - Timestamp: 2.8
+      ID: -1
+    - Timestamp: 3
+      ID: -1
+  - Line:
+    - Timestamp: 0
+      ID: 3
+    - Timestamp: 0.2
+      ID: -1
+    - Timestamp: 0.4
+      ID: -1
+    - Timestamp: 0.6
+      ID: -1
+    - Timestamp: 0.8
+      ID: 3
+    - Timestamp: 1
+      ID: -1
+    - Timestamp: 1.2
+      ID: -1
+    - Timestamp: 1.4
+      ID: -1
+    - Timestamp: 1.6
+      ID: 3
     - Timestamp: 1.8000001
       ID: -1
     - Timestamp: 2
@@ -112,7 +211,7 @@ MonoBehaviour:
     - Timestamp: 2.2
       ID: -1
     - Timestamp: 2.4
-      ID: -1
+      ID: 3
     - Timestamp: 2.6000001
       ID: -1
     - Timestamp: 2.8
@@ -133,11 +232,176 @@ MonoBehaviour:
     - Timestamp: 1
       ID: -1
     - Timestamp: 1.2
-      ID: -1
+      ID: 4
     - Timestamp: 1.4
       ID: -1
     - Timestamp: 1.6
       ID: -1
+    - Timestamp: 1.8000001
+      ID: -1
+    - Timestamp: 2
+      ID: -1
+    - Timestamp: 2.2
+      ID: -1
+    - Timestamp: 2.4
+      ID: -1
+    - Timestamp: 2.6000001
+      ID: -1
+    - Timestamp: 2.8
+      ID: 4
+    - Timestamp: 3
+      ID: -1
+  - Line:
+    - Timestamp: 0
+      ID: -1
+    - Timestamp: 0.2
+      ID: -1
+    - Timestamp: 0.4
+      ID: 5
+    - Timestamp: 0.6
+      ID: 5
+    - Timestamp: 0.8
+      ID: -1
+    - Timestamp: 1
+      ID: -1
+    - Timestamp: 1.2
+      ID: 5
+    - Timestamp: 1.4
+      ID: 5
+    - Timestamp: 1.6
+      ID: -1
+    - Timestamp: 1.8000001
+      ID: -1
+    - Timestamp: 2
+      ID: 5
+    - Timestamp: 2.2
+      ID: 5
+    - Timestamp: 2.4
+      ID: -1
+    - Timestamp: 2.6000001
+      ID: -1
+    - Timestamp: 2.8
+      ID: 5
+    - Timestamp: 3
+      ID: 5
+  - Line:
+    - Timestamp: 0
+      ID: -1
+    - Timestamp: 0.2
+      ID: -1
+    - Timestamp: 0.4
+      ID: 6
+    - Timestamp: 0.6
+      ID: -1
+    - Timestamp: 0.8
+      ID: -1
+    - Timestamp: 1
+      ID: -1
+    - Timestamp: 1.2
+      ID: 6
+    - Timestamp: 1.4
+      ID: -1
+    - Timestamp: 1.6
+      ID: -1
+    - Timestamp: 1.8000001
+      ID: -1
+    - Timestamp: 2
+      ID: 6
+    - Timestamp: 2.2
+      ID: -1
+    - Timestamp: 2.4
+      ID: -1
+    - Timestamp: 2.6000001
+      ID: -1
+    - Timestamp: 2.8
+      ID: 6
+    - Timestamp: 3
+      ID: -1
+  - Line:
+    - Timestamp: 0
+      ID: 7
+    - Timestamp: 0.2
+      ID: 7
+    - Timestamp: 0.4
+      ID: -1
+    - Timestamp: 0.6
+      ID: 7
+    - Timestamp: 0.8
+      ID: -1
+    - Timestamp: 1
+      ID: -1
+    - Timestamp: 1.2
+      ID: 7
+    - Timestamp: 1.4
+      ID: 7
+    - Timestamp: 1.6
+      ID: 7
+    - Timestamp: 1.8000001
+      ID: 7
+    - Timestamp: 2
+      ID: -1
+    - Timestamp: 2.2
+      ID: 7
+    - Timestamp: 2.4
+      ID: -1
+    - Timestamp: 2.6000001
+      ID: -1
+    - Timestamp: 2.8
+      ID: 7
+    - Timestamp: 3
+      ID: 7
+  - Line:
+    - Timestamp: 0
+      ID: 8
+    - Timestamp: 0.2
+      ID: 8
+    - Timestamp: 0.4
+      ID: -1
+    - Timestamp: 0.6
+      ID: -1
+    - Timestamp: 0.8
+      ID: -1
+    - Timestamp: 1
+      ID: -1
+    - Timestamp: 1.2
+      ID: -1
+    - Timestamp: 1.4
+      ID: -1
+    - Timestamp: 1.6
+      ID: 8
+    - Timestamp: 1.8000001
+      ID: 8
+    - Timestamp: 2
+      ID: -1
+    - Timestamp: 2.2
+      ID: -1
+    - Timestamp: 2.4
+      ID: 8
+    - Timestamp: 2.6000001
+      ID: -1
+    - Timestamp: 2.8
+      ID: -1
+    - Timestamp: 3
+      ID: -1
+  - Line:
+    - Timestamp: 0
+      ID: 9
+    - Timestamp: 0.2
+      ID: -1
+    - Timestamp: 0.4
+      ID: -1
+    - Timestamp: 0.6
+      ID: -1
+    - Timestamp: 0.8
+      ID: -1
+    - Timestamp: 1
+      ID: -1
+    - Timestamp: 1.2
+      ID: -1
+    - Timestamp: 1.4
+      ID: -1
+    - Timestamp: 1.6
+      ID: 9
     - Timestamp: 1.8000001
       ID: -1
     - Timestamp: 2
@@ -156,9 +420,9 @@ MonoBehaviour:
     - Timestamp: 0
       ID: -1
     - Timestamp: 0.2
-      ID: -1
+      ID: 10
     - Timestamp: 0.4
-      ID: -1
+      ID: 10
     - Timestamp: 0.6
       ID: -1
     - Timestamp: 0.8
@@ -172,273 +436,9 @@ MonoBehaviour:
     - Timestamp: 1.6
       ID: -1
     - Timestamp: 1.8000001
-      ID: -1
+      ID: 10
     - Timestamp: 2
-      ID: -1
-    - Timestamp: 2.2
-      ID: -1
-    - Timestamp: 2.4
-      ID: -1
-    - Timestamp: 2.6000001
-      ID: -1
-    - Timestamp: 2.8
-      ID: -1
-    - Timestamp: 3
-      ID: -1
-  - Line:
-    - Timestamp: 0
-      ID: -1
-    - Timestamp: 0.2
-      ID: -1
-    - Timestamp: 0.4
-      ID: -1
-    - Timestamp: 0.6
-      ID: -1
-    - Timestamp: 0.8
-      ID: -1
-    - Timestamp: 1
-      ID: -1
-    - Timestamp: 1.2
-      ID: -1
-    - Timestamp: 1.4
-      ID: -1
-    - Timestamp: 1.6
-      ID: -1
-    - Timestamp: 1.8000001
-      ID: -1
-    - Timestamp: 2
-      ID: -1
-    - Timestamp: 2.2
-      ID: -1
-    - Timestamp: 2.4
-      ID: -1
-    - Timestamp: 2.6000001
-      ID: -1
-    - Timestamp: 2.8
-      ID: -1
-    - Timestamp: 3
-      ID: -1
-  - Line:
-    - Timestamp: 0
-      ID: -1
-    - Timestamp: 0.2
-      ID: -1
-    - Timestamp: 0.4
-      ID: -1
-    - Timestamp: 0.6
-      ID: -1
-    - Timestamp: 0.8
-      ID: -1
-    - Timestamp: 1
-      ID: -1
-    - Timestamp: 1.2
-      ID: -1
-    - Timestamp: 1.4
-      ID: -1
-    - Timestamp: 1.6
-      ID: -1
-    - Timestamp: 1.8000001
-      ID: -1
-    - Timestamp: 2
-      ID: -1
-    - Timestamp: 2.2
-      ID: -1
-    - Timestamp: 2.4
-      ID: -1
-    - Timestamp: 2.6000001
-      ID: -1
-    - Timestamp: 2.8
-      ID: -1
-    - Timestamp: 3
-      ID: -1
-  - Line:
-    - Timestamp: 0
-      ID: -1
-    - Timestamp: 0.2
-      ID: -1
-    - Timestamp: 0.4
-      ID: -1
-    - Timestamp: 0.6
-      ID: -1
-    - Timestamp: 0.8
-      ID: -1
-    - Timestamp: 1
-      ID: -1
-    - Timestamp: 1.2
-      ID: -1
-    - Timestamp: 1.4
-      ID: -1
-    - Timestamp: 1.6
-      ID: -1
-    - Timestamp: 1.8000001
-      ID: -1
-    - Timestamp: 2
-      ID: -1
-    - Timestamp: 2.2
-      ID: -1
-    - Timestamp: 2.4
-      ID: -1
-    - Timestamp: 2.6000001
-      ID: -1
-    - Timestamp: 2.8
-      ID: -1
-    - Timestamp: 3
-      ID: -1
-  - Line:
-    - Timestamp: 0
-      ID: -1
-    - Timestamp: 0.2
-      ID: -1
-    - Timestamp: 0.4
-      ID: -1
-    - Timestamp: 0.6
-      ID: -1
-    - Timestamp: 0.8
-      ID: -1
-    - Timestamp: 1
-      ID: -1
-    - Timestamp: 1.2
-      ID: -1
-    - Timestamp: 1.4
-      ID: -1
-    - Timestamp: 1.6
-      ID: -1
-    - Timestamp: 1.8000001
-      ID: -1
-    - Timestamp: 2
-      ID: -1
-    - Timestamp: 2.2
-      ID: -1
-    - Timestamp: 2.4
-      ID: -1
-    - Timestamp: 2.6000001
-      ID: -1
-    - Timestamp: 2.8
-      ID: -1
-    - Timestamp: 3
-      ID: -1
-  - Line:
-    - Timestamp: 0
-      ID: -1
-    - Timestamp: 0.2
-      ID: -1
-    - Timestamp: 0.4
-      ID: -1
-    - Timestamp: 0.6
-      ID: -1
-    - Timestamp: 0.8
-      ID: -1
-    - Timestamp: 1
-      ID: -1
-    - Timestamp: 1.2
-      ID: -1
-    - Timestamp: 1.4
-      ID: -1
-    - Timestamp: 1.6
-      ID: -1
-    - Timestamp: 1.8000001
-      ID: -1
-    - Timestamp: 2
-      ID: -1
-    - Timestamp: 2.2
-      ID: -1
-    - Timestamp: 2.4
-      ID: -1
-    - Timestamp: 2.6000001
-      ID: -1
-    - Timestamp: 2.8
-      ID: -1
-    - Timestamp: 3
-      ID: -1
-  - Line:
-    - Timestamp: 0
-      ID: -1
-    - Timestamp: 0.2
-      ID: -1
-    - Timestamp: 0.4
-      ID: -1
-    - Timestamp: 0.6
-      ID: -1
-    - Timestamp: 0.8
-      ID: -1
-    - Timestamp: 1
-      ID: -1
-    - Timestamp: 1.2
-      ID: -1
-    - Timestamp: 1.4
-      ID: -1
-    - Timestamp: 1.6
-      ID: -1
-    - Timestamp: 1.8000001
-      ID: -1
-    - Timestamp: 2
-      ID: -1
-    - Timestamp: 2.2
-      ID: -1
-    - Timestamp: 2.4
-      ID: -1
-    - Timestamp: 2.6000001
-      ID: -1
-    - Timestamp: 2.8
-      ID: -1
-    - Timestamp: 3
-      ID: -1
-  - Line:
-    - Timestamp: 0
-      ID: -1
-    - Timestamp: 0.2
-      ID: -1
-    - Timestamp: 0.4
-      ID: -1
-    - Timestamp: 0.6
-      ID: -1
-    - Timestamp: 0.8
-      ID: -1
-    - Timestamp: 1
-      ID: -1
-    - Timestamp: 1.2
-      ID: -1
-    - Timestamp: 1.4
-      ID: -1
-    - Timestamp: 1.6
-      ID: -1
-    - Timestamp: 1.8000001
-      ID: -1
-    - Timestamp: 2
-      ID: -1
-    - Timestamp: 2.2
-      ID: -1
-    - Timestamp: 2.4
-      ID: -1
-    - Timestamp: 2.6000001
-      ID: -1
-    - Timestamp: 2.8
-      ID: -1
-    - Timestamp: 3
-      ID: -1
-  - Line:
-    - Timestamp: 0
-      ID: -1
-    - Timestamp: 0.2
-      ID: -1
-    - Timestamp: 0.4
-      ID: -1
-    - Timestamp: 0.6
-      ID: -1
-    - Timestamp: 0.8
-      ID: -1
-    - Timestamp: 1
-      ID: -1
-    - Timestamp: 1.2
-      ID: -1
-    - Timestamp: 1.4
-      ID: -1
-    - Timestamp: 1.6
-      ID: -1
-    - Timestamp: 1.8000001
-      ID: -1
-    - Timestamp: 2
-      ID: -1
+      ID: 10
     - Timestamp: 2.2
       ID: -1
     - Timestamp: 2.4
