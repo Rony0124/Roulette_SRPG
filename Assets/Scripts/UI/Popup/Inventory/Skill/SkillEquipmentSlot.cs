@@ -1,3 +1,4 @@
+using InGame;
 using TSoft.Data.Registry;
 using TSoft.InGame;
 using TSoft.Managers;

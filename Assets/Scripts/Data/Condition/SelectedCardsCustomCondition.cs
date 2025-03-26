@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using InGame;
 using TSoft.InGame;
 using UnityEngine;
 

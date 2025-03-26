@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using InGame;
 using Sirenix.OdinInspector;
 using TSoft.Data.Monster;
 using TSoft.InGame;

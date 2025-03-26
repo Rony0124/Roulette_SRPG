@@ -1,4 +1,5 @@
 using System;
+using InGame;
 using TSoft.Utils;
 
 namespace TSoft.InGame.GamePlaySystem

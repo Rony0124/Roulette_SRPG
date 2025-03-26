@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using InGame;
 using TMPro;
 using TSoft.InGame.CardSystem;
 using UnityEngine;

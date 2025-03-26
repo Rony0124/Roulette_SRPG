@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using InGame;
 using TSoft.InGame.Player;
 using UnityEngine;
 

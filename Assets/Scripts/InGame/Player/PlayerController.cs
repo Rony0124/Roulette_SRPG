@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using InGame;
 using Sirenix.Utilities;
 using TCGStarter.Tweening;
 using TSoft.InGame.CardSystem;

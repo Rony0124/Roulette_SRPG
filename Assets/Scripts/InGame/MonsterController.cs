@@ -4,9 +4,9 @@ using TSoft.Data.Monster;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
-namespace TSoft.InGame
+namespace InGame
 {
-    public class MonsterController : MonoBehaviour
+    public class MonsterController : ControllerBase
     {
         public Action<float> onDamaged;
         
@@ -60,6 +60,10 @@ namespace TSoft.InGame
                     DamageFeedback.PlayFeedbacks();    
                 }
             }
+        }
+
+        protected override void InitOnDirectorChanged()
+        {
         }
     }
 }

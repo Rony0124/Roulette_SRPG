@@ -1,93 +1,93 @@
 using System;
 using TSoft.Core;
+using TSoft.Data.Monster;
 using TSoft.InGame;
 using TSoft.Map;
 using TSoft.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace TSoft
+public class GameContext : Singleton<GameContext>
 {
-    public class GameContext : Singleton<GameContext>
+    public struct StageInfo
     {
-        public struct StageInfo
-        {
-            public int stage;
-            public int round;
-        }
+        public int stage;
+        public int round;
+    }
         
-        private DirectorBase currentDirector;
+    private DirectorBase currentDirector;
 
-        public DirectorBase CurrentDirector
+    public DirectorBase CurrentDirector
+    {
+        get => currentDirector;
+        set
         {
-            get => currentDirector;
-            set
+            if (value != currentDirector)
             {
-                if (value != currentDirector)
-                {
-                    var oldDirName = currentDirector ? currentDirector.GetType().ToString() : "null";
-                    Debug.Log($"local director has changed - old dir : {oldDirName} new dir : {value.GetType()}");
+                var oldDirName = currentDirector ? currentDirector.GetType().ToString() : "null";
+                Debug.Log($"local director has changed - old dir : {oldDirName} new dir : {value.GetType()}");
                     
-                    OnDirectorChanged?.Invoke(currentDirector, value);
-                }
+                OnDirectorChanged?.Invoke(currentDirector, value);
+            }
                
-                currentDirector = value;
-            }
+            currentDirector = value;
         }
+    }
         
-        public delegate void OnLocalDirectorChanged(DirectorBase previousValue, DirectorBase newValue);
+    public delegate void OnLocalDirectorChanged(DirectorBase previousValue, DirectorBase newValue);
         
-        public OnLocalDirectorChanged OnDirectorChanged;
+    public OnLocalDirectorChanged OnDirectorChanged;
 
-        private MapNode currentNode;
-        public MapNode CurrentNode
+    private MapNode currentNode;
+    public MapNode CurrentNode
+    {
+        get => currentNode;
+        set
         {
-            get => currentNode;
-            set
+            if (currentNode != value)
             {
-                if (currentNode != value)
-                {
-                    OnCurrentNodeChanged(value);    
-                }
-
-                currentNode = value;
+                OnCurrentNodeChanged(value);    
             }
+
+            currentNode = value;
         }
-        
-        public Map.Map CurrentMap { get; set; }
+    }
 
-        public StageInfo currentStageInfo;
-
-        public double currentBounty;
+    public MonsterDataSO CurrentMonster { get; set; }
         
-        private void OnCurrentNodeChanged(MapNode node)
+    public TSoft.Map.Map CurrentMap { get; set; }
+
+    public StageInfo currentStageInfo;
+
+    public double currentBounty;
+        
+    private void OnCurrentNodeChanged(MapNode node)
+    {
+        switch (node.Blueprint.nodeType)
         {
-            switch (node.Blueprint.nodeType)
-            {
-                case NodeType.MinorEnemy:
-                    currentStageInfo.round++;
+            case NodeType.MinorEnemy:
+                currentStageInfo.round++;
                     
-                    SceneManager.LoadScene(Define.InGame);
-                    break;
-                case NodeType.EliteEnemy:
-                    currentStageInfo.round++;
+                SceneManager.LoadScene(Define.InGame);
+                break;
+            case NodeType.EliteEnemy:
+                currentStageInfo.round++;
                     
-                    SceneManager.LoadScene(Define.InGame);
-                    break;
-                case NodeType.Boss:
-                    currentStageInfo.round++;
+                SceneManager.LoadScene(Define.InGame);
+                break;
+            case NodeType.Boss:
+                currentStageInfo.round++;
                     
-                    SceneManager.LoadScene(Define.InGame);
-                    break;
-                case NodeType.Treasure:
-                    break;
-                case NodeType.Store:
+                SceneManager.LoadScene(Define.InGame);
+                break;
+            case NodeType.Treasure:
+                break;
+            case NodeType.Store:
                     
-                    SceneManager.LoadScene(Define.StageMap);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+                SceneManager.LoadScene(Define.StageMap);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
         }
     }
 }

@@ -2,19 +2,22 @@ using System;
 using Cysharp.Threading.Tasks;
 using TSoft.Data;
 using TSoft.Data.Monster;
-using TSoft.Data.Registry;
-using TSoft.UI.Views.InGame;
+using TSoft.InGame;
+using TSoft.InGame.Player;
 using TSoft.Utils;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace TSoft.InGame
+namespace InGame
 {
     public class CombatController : ControllerBase
     {
         public Action<MonsterController> OnMonsterSpawn;
-        
-        [SerializeField] private float gameFinishDuration;
+
+        [Header("Player")] 
+        [SerializeField] private PlayerController player;
+
+        [Header("Enemy")] 
+        [SerializeField] private Transform enemySpawnPoint;
         
         //monster
         private MonsterController currentMonster;
@@ -34,15 +37,14 @@ namespace TSoft.InGame
         }
 
         private MonsterDataSO monsterData;
-
-        public UnityEvent onGameFinish;
+        
         
         protected override void InitOnDirectorChanged()
         {
 #if UNITY_EDITOR
             if (GameContext.Instance.CurrentNode == null || GameContext.Instance.CurrentNode.Blueprint.monsterData.Id == RegistryId.Null)
             {
-                if (TsDevPreferences.Monster != null)
+                if (TsDevPreferences.Monster != null && TsDevPreferences.overrideMonster)
                 {
                     monsterData = TsDevPreferences.Monster;
                 }
@@ -51,14 +53,20 @@ namespace TSoft.InGame
             if (monsterData != null) 
                 return;
             
-            monsterData = GameContext.Instance.CurrentNode.Blueprint.monsterData;
+            monsterData = GameContext.Instance.CurrentMonster;
         }
         
         protected override async UniTask OnPrePlay()
         {
-            CurrentMonster = monsterData.SpawnMonster(transform, Vector3.zero);
+            CurrentMonster = monsterData.SpawnMonster(enemySpawnPoint, Vector3.zero);
+            director.Controllers.Add(currentMonster);
             
-            await UniTask.WaitForSeconds(1);
+            CurrentMonster.Director = director;
+            CurrentMonster.OnStageStateChanged(StageState.None, currentStageState).Forget();
+            
+            director.Controllers.Add(currentMonster);
+
+            await UniTask.CompletedTask;
         }
     }
 }

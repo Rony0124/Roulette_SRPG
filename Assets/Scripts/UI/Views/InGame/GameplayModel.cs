@@ -1,4 +1,5 @@
 using System;
+using InGame;
 using TSoft.InGame;
 using TSoft.InGame.Player;
 using TSoft.Utils;

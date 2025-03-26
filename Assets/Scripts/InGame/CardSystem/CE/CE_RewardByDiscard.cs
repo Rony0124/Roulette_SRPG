@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using InGame;
 using TSoft;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem.CE;

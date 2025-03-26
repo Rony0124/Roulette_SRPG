@@ -1,6 +1,4 @@
-using System;
-
-namespace TSoft.InGame
+namespace InGame
 {
     public enum StageState
     {

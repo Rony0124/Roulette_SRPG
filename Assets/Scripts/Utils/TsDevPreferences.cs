@@ -13,7 +13,7 @@ using UnityEngine;
             string[] toolbarStrings = {"InGame", "StageMap", "Lobby" };
         
             public static MonsterDataSO Monster;
-            public static int monsterHp;
+            public static bool overrideMonster;
         
             private static bool prefsLoaded = false;
         
@@ -77,6 +77,7 @@ using UnityEngine;
             {
                 GUILayout.Label("Monster", EditorStyles.boldLabel);
                 Monster = EditorGUILayout.ObjectField(new GUIContent("Monster Id", "몬스터 id 값 설정"), Monster, typeof(MonsterDataSO), false) as MonsterDataSO;
+                overrideMonster = EditorGUILayout.Toggle(new GUIContent("Override Monster", "테스트 몬스터로 바꿀지 설정"), overrideMonster);
             }
         
             private void OnGUI_Stage()

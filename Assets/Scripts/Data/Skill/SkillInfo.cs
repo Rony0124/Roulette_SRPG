@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using InGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using TSoft.InGame;

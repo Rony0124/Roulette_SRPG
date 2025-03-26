@@ -1,34 +1,46 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
+using TSoft;
+using TSoft.InGame;
 using TSoft.Managers;
 using TSoft.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using PlayerController = TSoft.InGame.Player.PlayerController;
 
-namespace TSoft.InGame
+namespace InGame
 {
     public class InGameDirector : DirectorBase
     {
         public Action OnPrePlay;
+
+        [Header("Intro")]
+        [SerializeField] private float introDuration;
+        [SerializeField] private UnityEvent introFeedback;
         
-        //game play
-        private PlayerController player;
-        private CombatController combat;
+        [Header("PrePlay")]
+        [SerializeField] private float prePlayDuration;
+        [SerializeField] private UnityEvent prePlayFeedback;
+        
+        [Header("PostPlay")]
+        [SerializeField] private float postPlaySuccessDuration;
+        [SerializeField] private float postPlayFailDuration;
+        [SerializeField] private UnityEvent postPlaySuccessFeedback;
+        [SerializeField] private UnityEvent postPlayFailFeedback;
+        
+        public List<ControllerBase> Controllers { get; set; }
         
         //life cycle
         private ObservableVar<StageState> currentStageState;
-        
-        public PlayerController Player => player;
-        public MonsterController CurrentMonster => combat.CurrentMonster;
         
         public StageState CurrentStageState => currentStageState.Value;
 
         protected override void OnDirectorChanged(DirectorBase oldValue, DirectorBase newValue)
         {
-            player = FindObjectOfType<PlayerController>();
-            combat = FindObjectOfType<CombatController>();
+            Controllers = FindObjectsOfType<ControllerBase>().ToList();
             
             currentStageState = new ObservableVar<StageState>();
             
@@ -36,8 +48,10 @@ namespace TSoft.InGame
             
             currentStageState.Value = StageState.Intro;
 
-            combat.Director = this;
-            player.Director = this;
+            foreach (var controller in Controllers)
+            {
+                controller.Director = this;
+            }
         }
         
         private async UniTaskVoid OnStageStateChanged(StageState oldVal, StageState newVal)
@@ -50,8 +64,10 @@ namespace TSoft.InGame
             if (oldVal != StageState.None)
             {
                 //controller cycle 동기화
-                await UniTask.WaitUntil(() => combat.CurrentStageState == oldVal);
-                await UniTask.WaitUntil(() => player.CurrentStageState == oldVal);    
+                foreach (var controller in Controllers)
+                {
+                    await UniTask.WaitUntil(() => controller.CurrentStageState == oldVal);    
+                }
             }
             
             switch (newVal)
@@ -76,8 +92,11 @@ namespace TSoft.InGame
                     break;
             }
             
-            player.OnStageStateChanged(oldVal, newVal).Forget();
-            combat.OnStageStateChanged(oldVal, newVal).Forget();
+            //controller cycle 동기화
+            foreach (var controller in Controllers)
+            {
+                controller.OnStageStateChanged(oldVal, newVal).Forget();    
+            }
         }
         
         public void ChangeStageState(StageState stageState)
@@ -113,10 +132,10 @@ namespace TSoft.InGame
         public void GameFinishSuccess()
         {
             PopupContainer.Instance.ClosePopupUI();
-            
+            //TODO 보상 시스템 제대로 만들자
             GameSave.Instance.AddGold((int)GameContext.Instance.currentBounty);
             
-            SceneManager.LoadScene(Define.StageMap);
+            SceneManager.LoadScene(Define.Lobby);
         }
 
         public void GameFinishFail()
@@ -133,7 +152,9 @@ namespace TSoft.InGame
         //입장 인트로
         private async UniTaskVoid StartIntro()
         {
-            await UniTask.WaitForSeconds(3);
+            introFeedback?.Invoke();
+            
+            await UniTask.WaitForSeconds(introDuration);
             
             ChangeStageState(StageState.PrePlaying);
         }
@@ -141,9 +162,9 @@ namespace TSoft.InGame
         //스테이지 준비
         private async UniTaskVoid StartPrePlaying()
         {
-            OnPrePlay?.Invoke();
+            prePlayFeedback?.Invoke();
             
-            await UniTask.WaitForSeconds(1);
+            await UniTask.WaitForSeconds(prePlayDuration);
             
             ChangeStageState(StageState.Playing);
         }
@@ -151,17 +172,19 @@ namespace TSoft.InGame
         //스테이지 마무리 준비 (성공)
         private async UniTaskVoid StartPostPlayingSuccess()
         {
-            await UniTask.WaitForSeconds(1);
+            postPlaySuccessFeedback?.Invoke();
             
-            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.Win);
+            await UniTask.WaitForSeconds(postPlaySuccessDuration);
+            
+            ChangeStageState(StageState.Outro);
         }
         
         //스테이지 마무리 준비 (실패)
         private async UniTaskVoid StartPostPlayingFailed()
         {
-            PopupContainer.Instance.ShowPopupUI(PopupContainer.PopupType.GameOver);
+            postPlayFailFeedback?.Invoke();
             
-            await UniTask.WaitForSeconds(1);
+            await UniTask.WaitForSeconds(postPlayFailDuration);
             
             ChangeStageState(StageState.Outro);
         }

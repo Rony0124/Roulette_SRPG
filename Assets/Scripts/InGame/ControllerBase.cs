@@ -1,11 +1,11 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace TSoft.InGame
+namespace InGame
 {
     public abstract class ControllerBase : MonoBehaviour
     {
-        //life cycle 동기화 flag
+        //stage cycle 동기화 flag
         protected StageState currentStageState;
         //director
         protected InGameDirector director;

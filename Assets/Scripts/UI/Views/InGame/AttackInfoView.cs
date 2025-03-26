@@ -1,3 +1,4 @@
+using InGame;
 using TSoft.InGame;
 using TSoft.UI.Core;
 using UnityEngine;

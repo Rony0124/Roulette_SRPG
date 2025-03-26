@@ -1,3 +1,4 @@
+using InGame;
 using Sirenix.OdinInspector;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem.CE;

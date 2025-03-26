@@ -1,3 +1,4 @@
+using InGame;
 using TSoft.InGame;
 
 namespace TSoft.UI.Views.InGame
