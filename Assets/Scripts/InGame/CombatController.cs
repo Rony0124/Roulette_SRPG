@@ -13,6 +13,7 @@ namespace InGame
 
         [Header("Player")] 
         [SerializeField] private PlayerController player;
+        public PlayerController Player => player;
 
         [Header("Enemy")] 
         [SerializeField] private Transform enemySpawnPoint;
@@ -23,18 +24,17 @@ namespace InGame
         public MonsterController CurrentMonster
         {
             get => currentMonster;
-            set
+            private set
             {
-                if (value != null)
-                {
-                    OnMonsterSpawn?.Invoke(value);
-                    
-                    currentMonster = value;
-                }
+                if (value == null) 
+                    return;
+                
+                OnMonsterSpawn?.Invoke(value);
+                currentMonster = value;
             }
         }
-        
-        protected override void InitOnDirectorChanged()
+
+        protected override void OnDirectorChanged()
         {
             MonsterDataSO monsterData = null;
 #if UNITY_EDITOR
@@ -46,16 +46,13 @@ namespace InGame
                 }
             }
 #endif
-            if (monsterData != null) 
+            if (monsterData != null)
+            {
+                CurrentMonster = monsterData.SpawnMonster(enemySpawnPoint, Vector3.zero);
                 return;
+            }
             
             monsterData = GameContext.Instance.CurrentMonster;
-            
-            director.prePlayFeedback.AddListener(() => OnPrePlay(monsterData));
-        }
-        
-        private void OnPrePlay(MonsterDataSO monsterData)
-        {
             CurrentMonster = monsterData.SpawnMonster(enemySpawnPoint, Vector3.zero);
         }
     }

@@ -12,11 +12,11 @@ namespace InGame
             get => director;
             set
             {
-                InitOnDirectorChanged();
+                OnDirectorChanged();
                 director = value;
             }
         }
 
-        protected abstract void InitOnDirectorChanged();
+        protected abstract void OnDirectorChanged();
     }
 }

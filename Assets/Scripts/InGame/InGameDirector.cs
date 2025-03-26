@@ -1,4 +1,7 @@
+using Cysharp.Threading.Tasks;
 using TSoft;
+using TSoft.Data;
+using TSoft.Data.Monster;
 using TSoft.InGame;
 using TSoft.Managers;
 using TSoft.Utils;
@@ -31,7 +34,6 @@ namespace InGame
             combat.Director = this;
             
             currentStageState = new ObservableVar<StageState>();
-
             currentStageState.OnValueChanged +=  OnStageStateChanged;
             
             currentStageState.Value = StageState.Intro;
@@ -68,10 +70,28 @@ namespace InGame
                     break;
             }
         }
-
+        
         public void SetStageState(int stageStage)
         {
             currentStageState.Value = (StageState)stageStage;
+        }
+        
+        private async UniTaskVoid IntroAsync()
+        {
+            //TODO 타임라인을 깔수도 있다. 현재는 몬스터의 인트로 피드백이 끝날때까지 기다리는 방식
+            await UniTask.WaitUntil(() => combat.CurrentMonster != null);
+            await combat.CurrentMonster.OnIntro();
+            
+            currentStageState.Value = StageState.PrePlaying;
+        }
+
+        private async UniTaskVoid PrePlayAsync()
+        {
+            //TODO 몬스터, 플레이어 카드 및 아이템 소환
+            var player = combat.Player;
+            await player.OnPrePlay();
+            
+            currentStageState.Value = StageState.Playing;
         }
 
         public void GameOver(bool isSuccess)
@@ -109,11 +129,13 @@ namespace InGame
         private void OnIntro()
         {
             introFeedback?.Invoke();
+            IntroAsync().Forget();
         }
 
         private void OnPrePlay()
         {
             prePlayFeedback?.Invoke();
+            PrePlayAsync().Forget();
         }
 
         private void OnPostPlayingSuccess()

@@ -36,7 +36,7 @@ namespace TSoft.UI.Views.InGame
             
             //TODO 이벤트 버스로 변경
             player.onDeckChanged += OnDeckChanged;
-            player.onGameReady += UpdateCardOnGameReady;
+           // player.onGameReady += UpdateCardOnGameReady;
             player.onJokerChanged += UpdateJokerEffectIcon;
         }
         
@@ -83,8 +83,6 @@ namespace TSoft.UI.Views.InGame
             
             View.SetEnergyText(energyCount, maxEnergyCount);
             View.SetHeartText(heartCount, maxHeartCount);
-            
-            player.DrawCards();
         }
 
         private void UpdateJokerEffectIcon()
@@ -109,7 +107,7 @@ namespace TSoft.UI.Views.InGame
         private void OnDestroy()
         {
             player.onDeckChanged -= OnDeckChanged;
-            player.onGameReady -= UpdateCardOnGameReady;
+         //   player.onGameReady -= UpdateCardOnGameReady;
         }
     }
 }

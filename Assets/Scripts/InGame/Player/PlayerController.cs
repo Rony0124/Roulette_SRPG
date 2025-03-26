@@ -11,8 +11,6 @@ namespace InGame.Player
 {
     public partial class PlayerController : MonoBehaviour
     {
-        public Action onGameReady;
-   
         [Header("Positions")]
         [SerializeField] private Transform hand;
         [SerializeField] private Transform deck;
@@ -45,13 +43,11 @@ namespace InGame.Player
             InitializeEquipment();
         }
 
-        private async UniTask OnPrePlay()
+        public async UniTask OnPrePlay()
         {
-            onGameReady?.Invoke();
-
             await gameplay.OnRoundBegin();
-            
-            await UniTask.WaitForSeconds(1);
+            DrawCards();
+            await UniTask.WaitForSeconds(0.5f);
         }
         
         private async UniTask OnPostPlaySuccess()
@@ -150,129 +146,6 @@ namespace InGame.Player
             DiscardSelectedCards();
             
             return true;
-        }
-
-        private void DiscardSelectedCards()
-        {
-            foreach (var card in currentPokerCardSelected)
-            {
-                card.Dissolve(animationSpeed);
-                
-                Discard(card);
-            }
-            
-            currentPokerCardSelected.Clear();
-        }
-
-        public void Discard(PokerCard pokerCard)
-        {
-            pokerCard.ClearEvents();
-            RemoveCardFromHand(pokerCard);
-            
-            pokerCard.PositionCard(0, 0, animationSpeed);
-            pokerCard.Discard(animationSpeed);
-            
-            Destroy(pokerCard.gameObject, 3);
-        }
-        
-        private void DiscardAll()
-        {
-            List<PokerCard> cards = new(cardsOnHand);
-            foreach (var cardOnHand in cards)
-            {
-                if(cardOnHand == null)
-                    continue;
-                
-                Discard(cardOnHand);
-            }
-            
-            cardsOnHand.Clear();
-        }
-
-        public void RetrieveAllCards()
-        {
-            List<PokerCard> cards = new(cardsOnHand);
-            foreach (var cardOnHand in cards)
-            {
-                if(cardOnHand == null)
-                    continue;
-                
-                cardsOnDeck.Enqueue(cardOnHand.cardData);
-                
-                Discard(cardOnHand);
-            }
-            
-            cardsOnHand.Clear();
-        }
-        
-        private void RemoveCardFromHand(PokerCard pokerCard)
-        {
-            cardsOnHand.Remove(pokerCard);
-            ArrangeHand(animationSpeed / 2f);
-        }
-        
-        public void AddCard(PokerCard pokerCard)
-        {
-            cardsOnHand.Add(pokerCard);
-            
-            pokerCard.gameObject.transform.SetParent(hand);
-            pokerCard.transform.localPosition = deck.transform.localPosition;
-            pokerCard.transform.localScale = Vector3.one;
-
-            ArrangeHand(animationSpeed);
-            StartCoroutine(ListenCardEvents(pokerCard));
-        }
-
-        private void ArrangeHand(float duration)
-        {
-            cardPositions = new Vector3[cardsOnHand.Count];
-            cardRotations = new Vector3[cardsOnHand.Count];
-            float xspace = cardXSpacing / 2;
-            float yspace = 0;
-            float angle = cardAngle;
-            int mid = cardsOnHand.Count / 2;
-
-            if (cardsOnHand.Count % 2 == 1)
-            {
-                cardPositions[mid] = new Vector3(0, 0, 0);
-                cardRotations[mid] = new Vector3(0, 0, 0);
-
-                RelocateCard(cardsOnHand[mid], 0, 0, 0, duration);
-                mid++;
-                xspace = cardXSpacing;
-                yspace = -cardYSpacing;
-            }
-
-            for (int i = mid; i < cardsOnHand.Count; i++)
-            {
-                cardPositions[i] = new Vector3(xspace, yspace, 0);
-                cardRotations[i] = new Vector3(0, 0, -angle);
-                cardPositions[cardsOnHand.Count - i - 1] = new Vector3(-xspace, yspace, 0);
-                cardRotations[cardsOnHand.Count - i - 1] = new Vector3(0, 0, angle);
-
-                RelocateCard(cardsOnHand[i], xspace, yspace, -angle, duration);
-                RelocateCard(cardsOnHand[cardsOnHand.Count - i - 1], -xspace, yspace, angle, duration);
-
-                xspace += cardXSpacing;
-                yspace -= cardYSpacing;
-                yspace *= 1.5f;
-                angle += cardAngle;
-            }
-        }
-        
-        private void RelocateCard(PokerCard card, float x, float y, float angle, float duration)
-        {
-            PositionCard(card, x, y, duration);
-            RotateCard(card, angle, duration);
-        }
-        
-        private void PositionCard(PokerCard card, float x, float y, float duration)
-        {
-            card.transform.TweenMove(new Vector3(x, cardY + y, 0), duration);
-        }
-        private void RotateCard(PokerCard card, float angle, float duration)
-        {
-            card.transform.TweenRotate(new Vector3(0, 0, angle), duration);
         }
         
 #if UNITY_EDITOR
