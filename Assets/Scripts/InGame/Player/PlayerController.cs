@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using InGame;
 using Sirenix.Utilities;
 using TCGStarter.Tweening;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
-namespace TSoft.InGame.Player
+namespace InGame.Player
 {
     public partial class PlayerController : ControllerBase
     {
@@ -18,8 +17,6 @@ namespace TSoft.InGame.Player
         [SerializeField] private Transform hand;
         [SerializeField] private Transform deck;
         
-        private Gameplay gameplay;
-        
         private Vector3[] cardPositions;
         private Vector3[] cardRotations;
     
@@ -28,10 +25,7 @@ namespace TSoft.InGame.Player
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
         
-        public List<PokerCard> CurrentPokerCardSelected => currentPokerCardSelected;
-        
-        public bool CanMoveNextCycle { get; set; }
-        
+        private Gameplay gameplay;
         public Gameplay Gameplay =>  gameplay;
 
         private bool isSubmitting;
@@ -65,7 +59,6 @@ namespace TSoft.InGame.Player
             await gameplay.OnRoundFinished();
             
             await UniTask.WaitForSeconds(2);
-            await UniTask.WaitWhile(() => !CanMoveNextCycle);
             
             DiscardAll();
         }
@@ -101,7 +94,7 @@ namespace TSoft.InGame.Player
             DiscardSelectedCards();
             
             //스킬 플레이
-            await currentPattern.skill.PlaySkill(this, director.CurrentMonster);
+            //await currentPattern.skill.PlaySkill(this, director.CurrentMonster);
             
             //turn finished 이팩트 추가
             await gameplay.OnTurnFinished();
@@ -120,7 +113,7 @@ namespace TSoft.InGame.Player
 
         private bool CheckGameOver()
         {
-            var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
+            /*var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
             if (director.CurrentMonster.IsDead)
             {
                 if (currentHeart > 0)
@@ -136,7 +129,7 @@ namespace TSoft.InGame.Player
                     director.GameOver(false);
                     return true;
                 }
-            }
+            }*/
 
             return false;
         }

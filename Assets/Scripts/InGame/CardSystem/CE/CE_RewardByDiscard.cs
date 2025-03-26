@@ -7,7 +7,7 @@ using TSoft.InGame.GamePlaySystem;
 
 public class CE_RewardByDiscard : CustomEffect
 {
-    public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
+    /*public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
     {
         var currentGold = GameSave.Instance.Gold;
         var currentEnergy = director.Player.Gameplay.GetAttr(GameplayAttr.Energy);
@@ -38,5 +38,5 @@ public class CE_RewardByDiscard : CustomEffect
         GameSave.Instance.SetGold(currentGold);
         
         await UniTask.CompletedTask;
-    }
+    }*/
 }

@@ -6,14 +6,14 @@ namespace TSoft.InGame.CardSystem.CE
 {
     public class CE_EnhanceCardOnHand : CustomEffect
     {
-        public override async UniTask ApplyEffect(InGameDirector director)
+        /*public override async UniTask ApplyEffect(InGameDirector director)
         {
             var player = director.Player;
             player.isSelectingCardOnHand = true;
             player.onClickCard = TryClickCard;
             
             await UniTask.CompletedTask;
-        }
+        }*/
 
         private bool TryClickCard(PokerCard card)
         {

@@ -8,8 +8,8 @@ using TSoft.Data;
 using TSoft.Data.Card;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem;
-using TSoft.InGame.Player;
 using UnityEngine;
+using PlayerController = InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {

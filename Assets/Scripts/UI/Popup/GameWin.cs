@@ -34,6 +34,7 @@ namespace TSoft.UI.Popup
             director = FindObjectOfType<InGameDirector>();
         }
 
+        /*
         protected override void OnActivated()
         {
             base.OnActivated();
@@ -47,6 +48,7 @@ namespace TSoft.UI.Popup
             base.OnDeactivated();
             director.Player.CanMoveNextCycle = true;
         }
+        */
 
         private void OnButtonClicked(PointerEventData data)
         {

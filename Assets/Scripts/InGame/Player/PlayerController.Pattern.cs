@@ -1,16 +1,14 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using InGame;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
+using TSoft;
 using TSoft.Data.Registry;
 using TSoft.Data.Skill;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
-namespace TSoft.InGame.Player
+namespace InGame.Player
 {
     public partial class PlayerController
     {
@@ -23,7 +21,7 @@ namespace TSoft.InGame.Player
             public GameplayEffectSO effect;
             public SkillInfo skill;
           
-            public void ApplyCurrentPattern(PlayerController player)
+            public void ApplyCurrentPattern(global::InGame.Player.PlayerController player)
             {
                 if (effect)
                     player.Gameplay.AddEffect(effect);

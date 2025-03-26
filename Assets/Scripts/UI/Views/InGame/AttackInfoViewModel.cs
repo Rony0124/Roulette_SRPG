@@ -5,9 +5,9 @@ using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
-using TSoft.InGame.Player;
 using TSoft.Managers.Event;
 using UnityEngine;
+using PlayerController = InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {

@@ -28,13 +28,13 @@ namespace TSoft.UI.Popup
         protected override void OnActivated()
         {
             base.OnActivated();
-            director.Player.CanMoveNextCycle = false;
+         //   director.Player.CanMoveNextCycle = false;
         }
 
         protected override void OnDeactivated()
         {
             base.OnDeactivated();
-            director.Player.CanMoveNextCycle = true;
+            //director.Player.CanMoveNextCycle = true;
         }
 
         private void OnButtonClicked(PointerEventData data)

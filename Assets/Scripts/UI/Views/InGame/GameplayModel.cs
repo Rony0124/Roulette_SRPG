@@ -1,9 +1,9 @@
 using System;
 using InGame;
 using TSoft.InGame;
-using TSoft.InGame.Player;
 using TSoft.Utils;
 using UnityEngine;
+using PlayerController = InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {

@@ -7,11 +7,12 @@ namespace Data.Condition
     {
         public override bool Interpret(ConditionApplier applier)
         {
-            var player = applier.director.Player;
+            return false;
+            /*var player = applier.director.Player;
             if(player == null)
                 return false;
 
-            return player.JokerUsedNumber > 0;
+            return player.JokerUsedNumber > 0;*/
         }
     }
 }

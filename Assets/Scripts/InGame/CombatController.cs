@@ -2,10 +2,9 @@ using System;
 using Cysharp.Threading.Tasks;
 using TSoft.Data;
 using TSoft.Data.Monster;
-using TSoft.InGame;
-using TSoft.InGame.Player;
 using TSoft.Utils;
 using UnityEngine;
+using PlayerController = InGame.Player.PlayerController;
 
 namespace InGame
 {

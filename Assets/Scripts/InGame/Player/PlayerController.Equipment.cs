@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
+using TSoft;
 using TSoft.Data.Card;
 using TSoft.Data.Registry;
 using TSoft.Item;
 using TSoft.Utils;
 using UnityEngine;
 
-namespace TSoft.InGame.Player
+namespace InGame.Player
 {
     public partial class PlayerController
     {

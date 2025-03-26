@@ -1,6 +1,6 @@
 using TSoft.Data;
-using TSoft.InGame.Player;
 using UnityEngine;
+using PlayerController = InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {

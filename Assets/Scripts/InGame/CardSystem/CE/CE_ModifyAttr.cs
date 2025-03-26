@@ -9,6 +9,7 @@ namespace TSoft.InGame.CardSystem.CE
     {
         private const int DefaultDuration = 1;
         
+        /*
         public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             var gameplay = director.Player.Gameplay;
@@ -24,6 +25,6 @@ namespace TSoft.InGame.CardSystem.CE
             await UniTask.WaitForSeconds(appliedEffect.sourceEffect.hasDuration ? appliedEffect.sourceEffect.duration : DefaultDuration);
             
             gameplay.UpdateAttributes();
-        }
+        }*/
     }
 }

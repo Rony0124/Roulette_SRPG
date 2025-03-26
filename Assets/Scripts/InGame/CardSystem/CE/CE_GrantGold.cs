@@ -6,7 +6,7 @@ namespace TSoft.InGame.CardSystem.CE
 {
     public class CE_GrantGold : CustomEffect
     {
-        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
+        /*public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             var currentGold = GameSave.Instance.Gold;
         
@@ -31,6 +31,6 @@ namespace TSoft.InGame.CardSystem.CE
             GameSave.Instance.SetGold(currentGold);
         
             await UniTask.CompletedTask;
-        }
+        }*/
     }
 }

@@ -48,10 +48,11 @@ namespace TSoft.InGame.GamePlaySystem
     {
         public override float CalculateCurve(InGameDirector director)
         {
-            var player = director.Player;
+            return 0;
+            /*var player = director.Player;
             var combo = player.previousPatterns.Count;
-            
-            return magnitudeCurve.Evaluate(combo);
+
+            return magnitudeCurve.Evaluate(combo);*/
         }
     }
 }
