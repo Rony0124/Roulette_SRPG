@@ -13,6 +13,8 @@ public class ObjectActivator : MonoBehaviour
     // 현재 활성화할 오브젝트의 인덱스를 추적하는 변수
     private int currentIndex = 0;
 
+    [SerializeField] private float returnCardDurationOffset;
+
     void Start()
     {
         // 버튼 클릭 시 ActivateNextObject 함수 호출
@@ -48,6 +50,6 @@ public class ObjectActivator : MonoBehaviour
         }
 
         if(shouldWait)
-            await UniTask.WaitForSeconds(duration + 0.5f);
+            await UniTask.WaitForSeconds(duration + returnCardDurationOffset);
     }
 }

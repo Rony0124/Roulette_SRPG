@@ -1,11 +1,7 @@
 using Cysharp.Threading.Tasks;
 using TSoft;
-using TSoft.UI.Core;
-using TSoft.Utils;
 using UI.Views.Lobby;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace UI.Page
