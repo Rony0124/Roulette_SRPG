@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class ObjectActivator : MonoBehaviour
@@ -12,7 +13,8 @@ public class ObjectActivator : MonoBehaviour
     public GameObject[] objectsToActivate;
     // 현재 활성화할 오브젝트의 인덱스를 추적하는 변수
     private int currentIndex = 0;
-
+    
+    [SerializeField] private UnityEvent returnFeedback;
     [SerializeField] private float returnCardDurationOffset;
 
     void Start()
@@ -49,6 +51,8 @@ public class ObjectActivator : MonoBehaviour
             }
         }
 
+        returnFeedback?.Invoke();
+        
         if(shouldWait)
             await UniTask.WaitForSeconds(duration + returnCardDurationOffset);
     }
