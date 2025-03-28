@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CardsUI_Card_Dia_3
       objectReference: {fileID: 0}
+    - target: {fileID: 498126691606189705, guid: 240a337ceee7afc49a0d19baa5762dfb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1634956194515898463, guid: 240a337ceee7afc49a0d19baa5762dfb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
