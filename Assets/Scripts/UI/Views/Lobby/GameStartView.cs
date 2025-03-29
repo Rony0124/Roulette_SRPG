@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using TSoft.UI.Core;
 using UI.Page;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace UI.Views.Lobby
 {
@@ -25,28 +26,53 @@ namespace UI.Views.Lobby
         [TableList]
         [SerializeField] private List<PageInfo> pages;
         
+        [SerializeField] private UnityEvent onPageChangedFeedback; 
+        
         private int currentPageIndex;
         private UIPage currentPage;
+
+        private int CurrentPageIndex
+        {
+            get => currentPageIndex;
+            set
+            {
+                if (currentPageIndex == value || value < 0 || value >= pages.Count)
+                    return;
+                
+                OnCurrentPageChanged();
+                currentPageIndex = value;
+            }
+        }
         
         protected override void OnActivated()
         {
-            currentPageIndex = 0;
+            CurrentPageIndex = 0;
             currentPage = pages[0].page;
+
+            foreach (var page in pages)
+            {
+                page.page.CurrentView = this;
+            }
         }
 
         protected override void OnDeactivated()
         {
         }
 
+        private void OnCurrentPageChanged()
+        {
+            onPageChangedFeedback?.Invoke();
+        }
+
         public void MoveToNextPage()
         {
-            if (currentPageIndex + 1 > pages.Count - 1)
+            if (CurrentPageIndex + 1 > pages.Count - 1)
             {
                 Debug.Log("index out of Pages");
                 return;
             }
             
-            var page = pages[currentPageIndex + 1].page;
+            var page = pages[CurrentPageIndex + 1].page;
             if (!page) 
                 return;
             
@@ -55,7 +81,27 @@ namespace UI.Views.Lobby
             page.gameObject.SetActive(true);
             currentPage = page;
                 
-            ++currentPageIndex;
+            ++CurrentPageIndex;
+        }
+        
+        public void MoveToPrevPage()
+        {
+            if (CurrentPageIndex - 1 < 0)
+            {
+                Debug.Log("index out of Pages");
+                return;
+            }
+            
+            var page = pages[CurrentPageIndex - 1].page;
+            if (!page) 
+                return;
+            
+            currentPage.gameObject.SetActive(false);
+            
+            page.gameObject.SetActive(true);
+            currentPage = page;
+                
+            --CurrentPageIndex;
         }
 
         public void MoveToDesignatedPage(Page pageId)
@@ -75,7 +121,7 @@ namespace UI.Views.Lobby
             page.gameObject.SetActive(true);
             currentPage = page;
 
-            currentPageIndex = (int)pageId;
+            CurrentPageIndex = (int)pageId;
         }
         
     }
