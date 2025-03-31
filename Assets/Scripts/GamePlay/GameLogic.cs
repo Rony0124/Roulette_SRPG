@@ -132,12 +132,110 @@ namespace HF.GamePlay
             resolveQueue.ResolveAll(0.2f);
         }
         
+        public void StartNextTurn()
+        {
+            if (gameData.state == GameState.GameEnded)
+                return;
+
+            gameData.current_player = (gameData.current_player + 1) % gameData.settings.nb_players;
+
+            if (gameData.current_player == gameData.first_player)
+                gameData.turn_count++;
+
+            CheckForWinner();
+            StartTurn();
+        }
+        
         public void StartMainPhase()
         {
             if (gameData.state == GameState.GameEnded)
                 return;
 
             gameData.phase = GamePhase.Main;
+        }
+        
+        public void EndTurn()
+        {
+            if (gameData.state == GameState.GameEnded)
+                return;
+            
+            if (gameData.phase != GamePhase.Main)
+                return;
+
+            gameData.selector = SelectorType.None;
+            gameData.phase = GamePhase.EndTurn;
+
+            //Reduce status effects with duration
+            foreach (Player aplayer in gameData.players)
+            {
+                //aplayer.ReduceStatusDurations();
+                /*foreach (Card card in aplayer.cards_board)
+                    card.ReduceStatusDurations();
+                foreach (Card card in aplayer.cards_equip)
+                    card.ReduceStatusDurations();*/
+            }
+
+            //End of turn abilities
+            Player player = gameData.GetActivePlayer();
+            //TriggerPlayerCardsAbilityType(player, AbilityTrigger.EndOfTurn);
+
+            //onTurnEnd?.Invoke();
+            //RefreshData();
+
+            resolveQueue.AddCallback(StartNextTurn);
+            resolveQueue.ResolveAll(0.2f);
+        }
+        
+        //End game with winner
+        public void EndGame(int winner)
+        {
+            if (gameData.state != GameState.GameEnded)
+            {
+                gameData.state = GameState.GameEnded;
+                gameData.phase = GamePhase.None;
+                gameData.selector = SelectorType.None;
+                gameData.current_player = winner; //Winner player
+                resolveQueue.Clear();
+                Player player = gameData.GetPlayer(winner);
+               // onGameEnd?.Invoke(player);
+              //  RefreshData();
+            }
+        }
+        
+        //Progress to the next step/phase 
+        public void NextStep()
+        {
+            if (gameData.state == GameState.GameEnded)
+                return;
+
+            //CancelSelection();
+
+            //Add to resolve queue in case its still resolving
+            resolveQueue.AddCallback(EndTurn);
+            resolveQueue.ResolveAll();
+        }
+        
+        private void CheckForWinner()
+        {
+            int count_alive = 0;
+            Player alive = null;
+            foreach (Player player in gameData.players)
+            {
+                /*if (!player.IsDead())
+                {
+                    alive = player;
+                    count_alive++;
+                }*/
+            }
+
+            if (count_alive == 0)
+            {
+                EndGame(-1); //Everyone is dead, Draw
+            }
+            else if (count_alive == 1)
+            {
+                EndGame(alive.player_id); //Player win
+            }
         }
         
         private void ClearTurnData()

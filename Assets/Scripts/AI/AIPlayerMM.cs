@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using HF.GamePlay;
-using MoreMountains.Tools;
 using UnityEngine;
 
 namespace HF.AI
@@ -83,7 +80,18 @@ namespace HF.AI
                 return;
             
             //TODO action 정의해주기
+            if (action.type == GameAction.EndTurn)
+            {
+                EndTurn();
+            }
         }
-
+        
+        private void EndTurn()
+        {
+            if (CanPlay())
+            {
+                gameplay.EndTurn();
+            }
+        }
     }
 }

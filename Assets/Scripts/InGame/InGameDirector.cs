@@ -136,6 +136,15 @@ namespace HF.InGame
             //Start Game
             gameplay.StartGame();
         }
+        
+        public void EndTurn(int playerId)
+        {
+            Player player = gameData.GetPlayer(playerId);
+            if (player != null && gameData.IsPlayerTurn(player))
+            {
+                gameplay.NextStep();
+            }
+        }
 
         public void GameOver(bool isSuccess)
         {
