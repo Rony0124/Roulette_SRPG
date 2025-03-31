@@ -1,3 +1,4 @@
+using HF.InGame;
 using InGame;
 using TSoft.InGame;
 using TSoft.Utils;

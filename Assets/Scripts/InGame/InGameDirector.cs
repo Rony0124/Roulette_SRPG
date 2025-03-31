@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
+using InGame;
 using TSoft;
-using TSoft.Data;
-using TSoft.Data.Monster;
 using TSoft.InGame;
 using TSoft.Managers;
 using TSoft.Utils;
@@ -9,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace InGame
+namespace HF.InGame
 {
     public class InGameDirector : DirectorBase
     {

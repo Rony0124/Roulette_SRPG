@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using HF.InGame;
 using InGame;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem;
