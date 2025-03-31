@@ -145,11 +145,14 @@ namespace HF.AI
             bool can_attack_player = HasAction(action_list, GameAction.AttackPlayer);
             bool can_end = !can_attack_player && !is_full_mana && data.selector == SelectorType.None;*/
             
-            /*if (action_list.Count == 0 || can_end)
+            if (action_list.Count == 0 || true)
             {
-                AIAction actiont = CreateAction(GameAction.EndTurn);
-                action_list.Add(actiont);
-            }*/
+                AIAction logAction = CreateAction(GameAction.Log);
+                
+                AIAction action = CreateAction(GameAction.EndTurn);
+                action_list.Add(action);
+                action_list.Add(logAction);
+            }
 
             //Remove actions with low score
             FilterActions(data, node, action_list);
@@ -363,12 +366,17 @@ namespace HF.AI
             if (action.type == GameAction.CancelSelect)
             {
                 game_logic.CancelSelection();
+            }*/
+            
+            if (action.type == GameAction.Log)
+            {
+                gameLogic.Log();
             }
 
             if (action.type == GameAction.EndTurn)
             {
-                game_logic.EndTurn();
-            }*/
+                gameLogic.EndTurn();
+            }
         }
         
         private void AddActions(List<AIAction> actions, Game data, NodeState node, ushort type)

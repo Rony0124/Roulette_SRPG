@@ -76,9 +76,11 @@ namespace HF.AI
            
            public int CalculateActionSort(Game data, AIAction order)
            {
-               /*if (order.type == GameAction.EndTurn)
+               if (order.type == GameAction.EndTurn)
                    return 0; //End turn can always be performed, 0 means any order
-               if (data.selector != SelectorType.None)
+               if (order.type == GameAction.Log)
+                   return 1; //End turn can always be performed, 0 means any order
+               /*if (data.selector != SelectorType.None)
                    return 0; //Selector actions not affected by sorting
 
                Card card = data.GetCard(order.card_uid);

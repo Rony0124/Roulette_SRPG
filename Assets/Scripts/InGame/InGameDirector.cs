@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using HF.AI;
@@ -26,6 +27,7 @@ namespace HF.InGame
         //test
         public static PlayerSettings ai_settings = PlayerSettings.DefaultAI;
         private List<AIPlayer> aiList = new ();                //List of all AI players
+        public Queue<AIAction> queuedAction = new();
 
         [Header("Feedbacks")] 
         public UnityEvent introFeedback;
@@ -85,7 +87,20 @@ namespace HF.InGame
                     break;
             }
         }
-        
+
+        //TODO 턴변경 시스템 추가
+        private void Update()
+        {
+            //Update game logic
+            gameplay.Update(Time.deltaTime);
+            
+            //Update AI
+            foreach (AIPlayer ai in aiList)
+            {
+                ai.Update();
+            }
+        }
+
         public void SetStageState(int stageStage)
         {
             currentStageState.Value = (StageState)stageStage;
@@ -142,6 +157,7 @@ namespace HF.InGame
             Player player = gameData.GetPlayer(playerId);
             if (player != null && gameData.IsPlayerTurn(player))
             {
+                Debug.Log("move to next step");
                 gameplay.NextStep();
             }
         }

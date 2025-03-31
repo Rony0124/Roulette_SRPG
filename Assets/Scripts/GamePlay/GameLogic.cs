@@ -1,4 +1,5 @@
 using HF.Utils;
+using UnityEngine;
 
 namespace HF.GamePlay
 {
@@ -29,6 +30,11 @@ namespace HF.GamePlay
             resolveQueue.SetData(game);
         }
         
+        public  void Update(float delta)
+        {
+            resolveQueue.Update(delta);
+        }
+        
         public void StartGame()
         {
             if (gameData.state == GameState.GameEnded)
@@ -39,7 +45,9 @@ namespace HF.GamePlay
             gameData.first_player = random.NextDouble() < 0.5 ? 0 : 1;
             gameData.current_player = gameData.first_player;
             gameData.turn_count = 1;
-
+            
+            Debug.Log("first player - " + gameData.current_player);
+            
             //Init each players
             foreach (Player player in gameData.players)
             {
@@ -82,6 +90,8 @@ namespace HF.GamePlay
 
             ClearTurnData();
             gameData.phase = GamePhase.StartTurn;
+            
+            Debug.Log("current gameDataPhase - " + gameData.phase);
             /*RefreshData();
             onTurnStart?.Invoke();*/
 
@@ -132,7 +142,7 @@ namespace HF.GamePlay
             resolveQueue.ResolveAll(0.2f);
         }
         
-        public void StartNextTurn()
+        public void StartNextTurn() 
         {
             if (gameData.state == GameState.GameEnded)
                 return;
@@ -141,6 +151,8 @@ namespace HF.GamePlay
 
             if (gameData.current_player == gameData.first_player)
                 gameData.turn_count++;
+            
+            Debug.Log("next turn invoke - 2");
 
             CheckForWinner();
             StartTurn();
@@ -152,6 +164,14 @@ namespace HF.GamePlay
                 return;
 
             gameData.phase = GamePhase.Main;
+            
+            Debug.Log("current gameDataPhase - " + gameData.phase);
+        }
+
+        public void Log()
+        {
+            Debug.Log("game logic test for this turn!");
+            resolveQueue.ResolveAll(0.2f);
         }
         
         public void EndTurn()
@@ -181,6 +201,7 @@ namespace HF.GamePlay
 
             //onTurnEnd?.Invoke();
             //RefreshData();
+            Debug.Log("next turn invoke - 1");
 
             resolveQueue.AddCallback(StartNextTurn);
             resolveQueue.ResolveAll(0.2f);

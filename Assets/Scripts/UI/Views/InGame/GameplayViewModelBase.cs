@@ -2,12 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using HF.InGame;
 using InGame;
 using Sirenix.Utilities;
-using TSoft.Data;
-using TSoft.Data.Card;
-using TSoft.InGame;
-using TSoft.InGame.CardSystem;
 using UnityEngine;
 using PlayerController = InGame.Player.PlayerController;
 
@@ -62,6 +59,15 @@ namespace TSoft.UI.Views.InGame
         
         private async UniTaskVoid OnUseCard()
         {
+            Debug.Log("End turn" + 0);
+            var dir = GameContext.Instance.CurrentDirector as InGameDirector;
+            if (dir != null)
+            {
+                dir.EndTurn(0);
+            }
+               
+            return;
+            
             var result = await player.TryUseCardsOnHand();
             if (!result)
                 return;
