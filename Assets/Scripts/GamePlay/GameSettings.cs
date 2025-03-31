@@ -9,7 +9,6 @@ namespace HF.GamePlay
         Solo = 0,
         Multiplayer = 10,
     }
-
     
     [System.Serializable]
     public class GameSettings : INetworkSerializable
@@ -20,6 +19,11 @@ namespace HF.GamePlay
         public int nb_players;
         
         public GameType game_type = GameType.Solo; 
+        
+        public virtual bool IsOffline()
+        {
+            return game_type == GameType.Solo;
+        }
         
         public virtual void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
         {
@@ -44,4 +48,6 @@ namespace HF.GamePlay
             }
         }
     }
+    
+    
 }

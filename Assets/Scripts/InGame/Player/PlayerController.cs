@@ -47,6 +47,7 @@ namespace InGame.Player
         {
             await gameplay.OnRoundBegin();
             DrawCards();
+            
             await UniTask.WaitForSeconds(0.5f);
         }
         

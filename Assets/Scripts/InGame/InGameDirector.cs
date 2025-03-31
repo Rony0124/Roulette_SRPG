@@ -1,12 +1,17 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using HF.AI;
+using HF.GamePlay;
 using InGame;
 using TSoft;
 using TSoft.InGame;
 using TSoft.Managers;
 using TSoft.Utils;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using PlayerSettings = HF.GamePlay.PlayerSettings;
 
 namespace HF.InGame
 {
@@ -15,6 +20,12 @@ namespace HF.InGame
         [Header("Combat")] 
         [SerializeField] private CombatController combat;
         public CombatController Combat => combat;
+
+        private Game gameData; 
+        private GameLogic gameplay;
+        //test
+        public static PlayerSettings ai_settings = PlayerSettings.DefaultAI;
+        private List<AIPlayer> aiList = new ();                //List of all AI players
 
         [Header("Feedbacks")] 
         public UnityEvent introFeedback;
@@ -34,6 +45,10 @@ namespace HF.InGame
             
             currentStageState = new ObservableVar<StageState>();
             currentStageState.OnValueChanged +=  OnStageStateChanged;
+
+            //TODO test
+            gameData = new Game("userTest", 2);
+            gameplay = new GameLogic(gameData);
             
             currentStageState.Value = StageState.Intro;
         }
@@ -54,6 +69,7 @@ namespace HF.InGame
                     OnPrePlay();
                     break;
                 case StageState.Playing:
+                    OnPlay();
                     break;
                 case StageState.PostPlayingSuccess:
                     OnPostPlayingSuccess();
@@ -86,11 +102,39 @@ namespace HF.InGame
 
         private async UniTaskVoid PrePlayAsync()
         {
+            if (gameData.state == GameState.GameEnded)
+                return;
+            
+            GameStart();
+            
             //TODO 몬스터, 플레이어 카드 및 아이템 소환
             var player = combat.Player;
             await player.OnPrePlay();
             
             currentStageState.Value = StageState.Playing;
+        }
+
+        private void GameStart()
+        {
+            Debug.Log("Game start");
+            //TODO test 현재 offline으로 연결되었다는 가정하에 플레이
+            SetPlayerSettingsAI(0, ai_settings);
+            
+            //Setup AI
+            foreach (Player player in gameData.players)
+            {
+                if (player.is_ai)
+                {
+                    AIPlayer ai_gameplay = AIPlayer.Create(AIType.MiniMax, gameplay, player.player_id);
+                    aiList.Add(ai_gameplay);
+                    
+                    if(ai_gameplay != null)
+                        Debug.Log("AI Created");
+                }
+            }
+
+            //Start Game
+            gameplay.StartGame();
         }
 
         public void GameOver(bool isSuccess)
@@ -121,6 +165,24 @@ namespace HF.InGame
             
             SceneManager.LoadScene(Define.Lobby);
         }
+        
+        private void SetPlayerSettingsAI(int player_id, PlayerSettings psettings)
+        {
+            if (gameData.state != GameState.Connecting)
+                return; //Cant send setting if game already started
+
+            Player player = gameData.GetOpponentPlayer(player_id);
+            if (player is { ready: false })
+            {
+                player.is_ai = true;
+                player.ready = true;
+
+                //SetPlayerDeck(player.player_id, player.username, psettings.deck);
+                //RefreshAll();
+            }
+            
+            Debug.Log("Set AI Opponent");
+        }
 
         #region Stage
 
@@ -135,6 +197,11 @@ namespace HF.InGame
         {
             prePlayFeedback?.Invoke();
             PrePlayAsync().Forget();
+        }
+
+        private void OnPlay()
+        {
+            
         }
 
         private void OnPostPlayingSuccess()

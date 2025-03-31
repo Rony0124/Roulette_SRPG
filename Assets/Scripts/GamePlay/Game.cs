@@ -90,6 +90,12 @@ namespace HF.GamePlay
             return null;
         }
         
+        public Player GetActivePlayer()
+        {
+            return GetPlayer(current_player);
+        }
+
+        
         public Player GetOpponentPlayer(int id)
         {
             int oid = id == 0 ? 1 : 0;
