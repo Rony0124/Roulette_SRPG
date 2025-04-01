@@ -14,19 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id:
     _value: 82d328f4a39784d84bdd900b024c395e
-  _assetGuid: 
-  _lastGeneratedAssetGuid: 
+  _assetGuid: f428d38297a3d8844bdd900b024c395e
+  _lastGeneratedAssetGuid: f428d38297a3d8844bdd900b024c395e
   title: 
   description: 
   image: {fileID: 21300000, guid: 9302d42f098e67c41a201e19aa1d27d0, type: 3}
   price: 0
+  effect: {fileID: 0}
   number: 3
   type: 2
   instantEffect:
     effect:
       rid: -2
     modifiers: []
-  effect: {fileID: 0}
   references:
     version: 2
     RefIds:

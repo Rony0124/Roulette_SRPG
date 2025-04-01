@@ -15,7 +15,6 @@ namespace HF.Data.Card
    
         [Header("Stats")]
         public CardType type;
-        [ShowIf("type", CardType.None)]
         public int number;
     }
 }

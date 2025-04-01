@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e7828fcf56fca44a82a5c891a16f7b, type: 3}
+  m_Name: Card_Diamond_7
+  m_EditorClassIdentifier: 
+  _id:
+    _value: b89435217ce014c42823a5ecda6cdb85
+  _assetGuid: 213594b8e07cc4142823a5ecda6cdb85
+  _lastGeneratedAssetGuid: 213594b8e07cc4142823a5ecda6cdb85
+  title: 
+  artUI: {fileID: 0}
+  artInGame: {fileID: 21300000, guid: fd33bc056f8a8474893abf3c5ac74730, type: 3}
+  type: 1
+  number: 7

@@ -6636,6 +6636,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1428561474}
+  - component: {fileID: 1428561475}
   m_Layer: 0
   m_Name: EnemyHandArea
   m_TagString: Untagged
@@ -6658,6 +6659,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1381961117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1428561475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1428561473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b2ed5a23f54fa544a19846ed42a684c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1436983471
 GameObject:
   m_ObjectHideFlags: 0
@@ -8206,6 +8219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2014418788}
+  - component: {fileID: 2014418789}
   m_Layer: 0
   m_Name: PlayerHandArea
   m_TagString: Untagged
@@ -8228,6 +8242,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1381961117}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2014418789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014418787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4449c9f681f23ff4f8b93ce7ff9286f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  card_prefab: {fileID: 0}
+  card_area: {fileID: 0}
+  card_spacing: 100
+  card_angle: 10
+  card_offset_y: 10
 --- !u!1 &2083823960
 GameObject:
   m_ObjectHideFlags: 0
