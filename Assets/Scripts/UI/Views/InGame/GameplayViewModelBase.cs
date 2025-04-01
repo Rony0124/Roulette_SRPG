@@ -6,7 +6,7 @@ using HF.InGame;
 using InGame;
 using Sirenix.Utilities;
 using UnityEngine;
-using PlayerController = InGame.Player.PlayerController;
+using PlayerController = HF.InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {
@@ -63,7 +63,7 @@ namespace TSoft.UI.Views.InGame
             var dir = GameContext.Instance.CurrentDirector as InGameDirector;
             if (dir != null)
             {
-                dir.EndTurn(0);
+                dir.Combat.EndTurn(0);
             }
                
             return;

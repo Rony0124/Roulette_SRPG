@@ -1,3 +1,4 @@
+using HF.Data.Card;
 using TSoft.Data.Card;
 using UnityEngine;
 

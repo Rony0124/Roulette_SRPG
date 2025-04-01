@@ -156,6 +156,7 @@ namespace HF.GamePlay
         public static void CloneHash(HashSet<string> source, HashSet<string> dest)
         {
             dest.Clear();
+            
             foreach (string str in source)
                 dest.Add(str);
         }

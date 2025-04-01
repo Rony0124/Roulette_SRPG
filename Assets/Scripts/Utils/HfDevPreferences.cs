@@ -3,17 +3,18 @@ using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-    namespace TSoft.Utils
+    namespace HF.Utils
     {
-        public class TsDevPreferences : EditorWindow
+        public class HfDevPreferences : EditorWindow
         {
-            public static TsDevPreferences Instance;
+            public static HfDevPreferences Instance;
         
             int toolbarInt = 0;
             string[] toolbarStrings = {"InGame", "StageMap", "Lobby" };
         
             public static MonsterDataSO Monster;
             public static bool overrideMonster;
+            public static bool Ai;
         
             private static bool prefsLoaded = false;
         
@@ -26,7 +27,7 @@ using UnityEngine;
             [MenuItem("Window/DevPreferences")]
             public static void ShowWindow()
             {
-                Instance = GetWindow<TsDevPreferences>("DevPreferences");
+                Instance = GetWindow<HfDevPreferences>("DevPreferences");
             }
 
             private static void LoadPrefs()
@@ -37,13 +38,16 @@ using UnityEngine;
                     Monster = AssetDatabase.LoadAssetAtPath<MonsterDataSO>(overrideStagePath);
                 
                 overrideMonster = EditorPrefs.GetBool("overrideMonster", overrideMonster);
+                Ai = EditorPrefs.GetBool("Ai", Ai);
             }
 
             private static void SavePrefs()
             {
                 string monsterIdPath = AssetDatabase.GetAssetPath(Monster);
                 EditorPrefs.SetString("monsterIdPath", monsterIdPath);
+                
                 EditorPrefs.SetBool("overrideMonster", overrideMonster);
+                EditorPrefs.SetBool("Ai", Ai);
             }
 
             private void OnGUI()
@@ -81,6 +85,7 @@ using UnityEngine;
                 GUILayout.Label("Monster", EditorStyles.boldLabel);
                 Monster = EditorGUILayout.ObjectField(new GUIContent("Monster Id", "몬스터 id 값 설정"), Monster, typeof(MonsterDataSO), false) as MonsterDataSO;
                 overrideMonster = EditorGUILayout.Toggle(new GUIContent("Override Monster", "테스트 몬스터로 바꿀지 설정"), overrideMonster);
+                Ai = EditorGUILayout.Toggle(new GUIContent("Ai", "Ai mode"), Ai);
             }
         
             private void OnGUI_Stage()

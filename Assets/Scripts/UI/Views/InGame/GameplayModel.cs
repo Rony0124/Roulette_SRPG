@@ -3,7 +3,7 @@ using InGame;
 using TSoft.InGame;
 using TSoft.Utils;
 using UnityEngine;
-using PlayerController = InGame.Player.PlayerController;
+using PlayerController = HF.InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {

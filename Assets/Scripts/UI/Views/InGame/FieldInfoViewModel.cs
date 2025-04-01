@@ -10,7 +10,7 @@ namespace TSoft.UI.Views.InGame
 
       private void Start()
       {
-         Model.Combat.OnMonsterSpawn += OnMonsterSpawn;
+       // Model.Combat.OnMonsterSpawn += OnMonsterSpawn;
       }
 
       private void OnMonsterSpawn(MonsterController monsterController)
@@ -26,8 +26,8 @@ namespace TSoft.UI.Views.InGame
 
       private void OnMonsterDamaged(float oldValue, float newValue)
       {
-         var maxHp = Model.Combat.CurrentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
-         View.SetMonsterHpText(newValue, maxHp);
+         /*var maxHp = Model.Combat.CurrentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
+         View.SetMonsterHpText(newValue, maxHp);*/
       }
    }
 }

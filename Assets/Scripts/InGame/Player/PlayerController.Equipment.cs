@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using HF.Data.Card;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TSoft;
@@ -11,7 +12,7 @@ using TSoft.Item;
 using TSoft.Utils;
 using UnityEngine;
 
-namespace InGame.Player
+namespace HF.InGame.Player
 {
     public partial class PlayerController
     {

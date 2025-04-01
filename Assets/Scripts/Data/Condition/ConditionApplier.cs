@@ -7,7 +7,7 @@ using TSoft.InGame;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
-using PlayerController = InGame.Player.PlayerController;
+using PlayerController = HF.InGame.Player.PlayerController;
 
 namespace TSoft.Data.Condition
 {

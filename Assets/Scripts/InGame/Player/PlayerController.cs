@@ -1,16 +1,21 @@
-using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using HF.AI;
+using InGame;
 using Sirenix.Utilities;
-using TCGStarter.Tweening;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
-namespace InGame.Player
+namespace HF.InGame.Player
 {
     public partial class PlayerController : MonoBehaviour
     {
+        [Header("AI")] 
+        [SerializeField] private bool isAI;
+
+        private AIPlayer aiPlayer;
+        
         [Header("Positions")]
         [SerializeField] private Transform hand;
         [SerializeField] private Transform deck;

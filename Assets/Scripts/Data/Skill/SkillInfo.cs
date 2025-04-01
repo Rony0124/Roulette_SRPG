@@ -5,7 +5,7 @@ using UnityEngine;
 using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Item;
-using PlayerController = InGame.Player.PlayerController;
+using PlayerController = HF.InGame.Player.PlayerController;
 
 namespace TSoft.Data.Skill
 {

@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
+using InGame;
 using TMPro;
 using TSoft.InGame.CardSystem;
 using UnityEngine;
 
-namespace InGame.Player
+namespace HF.InGame.Player
 {
     public partial class PlayerController
     {
@@ -114,7 +115,7 @@ namespace InGame.Player
             }
             else
             {
-                if(currentPokerCardSelected.Count >= PlayerController.HandCountMax)
+                if(currentPokerCardSelected.Count >= HF.InGame.Player.PlayerController.HandCountMax)
                     return;
                 
                 pokerCard.SetVisualsPosition(Vector3.up * 100);

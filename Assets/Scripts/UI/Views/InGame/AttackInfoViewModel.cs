@@ -7,7 +7,7 @@ using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Managers.Event;
 using UnityEngine;
-using PlayerController = InGame.Player.PlayerController;
+using PlayerController = HF.InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {

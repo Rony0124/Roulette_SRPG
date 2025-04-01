@@ -1,12 +1,10 @@
 using InGame;
 using Sirenix.OdinInspector;
-using TSoft.InGame;
-using TSoft.InGame.CardSystem.CE;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Item;
 using UnityEngine;
 
-namespace TSoft.Data.Card
+namespace HF.Data.Card
 {
     [CreateAssetMenu(fileName = "Card", menuName = "Data/Card", order = 0)]
     public class CardInfo : ItemInfo

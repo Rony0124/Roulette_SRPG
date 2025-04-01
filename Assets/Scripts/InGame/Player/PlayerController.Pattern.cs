@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using InGame;
 using Sirenix.OdinInspector;
 using TSoft;
 using TSoft.Data.Registry;
@@ -8,7 +9,7 @@ using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
-namespace InGame.Player
+namespace HF.InGame.Player
 {
     public partial class PlayerController
     {
@@ -21,7 +22,7 @@ namespace InGame.Player
             public GameplayEffectSO effect;
             public SkillInfo skill;
           
-            public void ApplyCurrentPattern(global::InGame.Player.PlayerController player)
+            public void ApplyCurrentPattern(global::HF.InGame.Player.PlayerController player)
             {
                 if (effect)
                     player.Gameplay.AddEffect(effect);

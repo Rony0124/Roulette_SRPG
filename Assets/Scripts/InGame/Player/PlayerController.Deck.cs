@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HF.Data.Card;
+using InGame;
 using Sirenix.OdinInspector;
 using TCGStarter.Tweening;
 using TSoft;
@@ -10,7 +12,7 @@ using TSoft.InGame.CardSystem;
 using TSoft.Utils;
 using UnityEngine;
 
-namespace InGame.Player
+namespace HF.InGame.Player
 {
     public partial class PlayerController
     {

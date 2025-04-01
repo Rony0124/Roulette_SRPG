@@ -1,16 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HF.InGame;
 using InGame;
 using Sirenix.OdinInspector;
 using TSoft.Data.Monster;
-using TSoft.InGame;
 using TSoft.UI.Core;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
-namespace TSoft.UI.Views.InGame
+namespace HF.UI.Views.InGame
 {
     public class BackgroundView : ViewBase
     {
@@ -41,7 +40,7 @@ namespace TSoft.UI.Views.InGame
             
             bg = Get<Image>((int)BgImage.Background);
             
-            combat.OnMonsterSpawn += SetBackground;
+            //combat.OnMonsterSpawn += SetBackground;
         }
 
         private void SetBackground(MonsterController monsterController)

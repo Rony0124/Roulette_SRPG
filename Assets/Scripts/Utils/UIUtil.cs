@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace TSoft.Utils
+namespace HF.Utils
 {
     public static class UIUtil
     {

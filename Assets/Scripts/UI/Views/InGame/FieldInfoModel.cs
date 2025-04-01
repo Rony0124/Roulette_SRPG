@@ -1,3 +1,4 @@
+using HF.InGame;
 using InGame;
 using TSoft;
 using TSoft.InGame;
@@ -12,7 +13,7 @@ public class FieldInfoModel : ModelBase
 
     private void OnDestroy()
     {
-        combat.OnMonsterSpawn = null;
-        combat.CurrentMonster.GamePlay.GetAttrVar(GameplayAttr.Heart)?.Dispose();
+        /*combat.OnMonsterSpawn = null;
+        combat.CurrentMonster.GamePlay.GetAttrVar(GameplayAttr.Heart)?.Dispose();*/
     }
 }
