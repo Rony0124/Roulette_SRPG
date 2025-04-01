@@ -1,30 +1,27 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace TSoft.Core
+namespace HF.Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        private static object @lock = new();
-        
         private static T instance;
         public static T Instance {
-            get {
-                if (instance == null && Time.timeScale != 0) {
-                    lock (@lock)
+            get
+            {
+                if (instance == null)
+                {
+                    instance = FindObjectOfType<T> ();
+                    
+                    if (instance != null)
+                        return instance;
+                    
+                    var obj = new GameObject
                     {
-                        instance = FindObjectOfType(typeof(T)) as T;
-
-                        if (instance == null) {
-                            var singletonObject = new GameObject();
-                            instance = singletonObject.AddComponent<T>();
-
-                            singletonObject.name = typeof(T).Name;
-                        }
-                    }
+                        name = typeof(T).Name
+                    };
+                    
+                    instance = obj.AddComponent<T> ();
                 }
-                
                 return instance;
             }
         }
@@ -32,6 +29,21 @@ namespace TSoft.Core
         private void OnApplicationQuit()
         {
             Time.timeScale = 0;
+        }
+        
+        protected virtual void Awake ()
+        {
+            InitializeSingleton();		
+        }
+        
+        protected virtual void InitializeSingleton()
+        {
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+
+            instance = this as T;
         }
     }
 }
