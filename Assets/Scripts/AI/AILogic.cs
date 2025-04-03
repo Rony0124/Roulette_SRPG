@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading;
 using HF.GamePlay;
 using HF.Utils;
+using InGame;
+using TSoft.InGame.CardSystem;
 using UnityEngine;
 using UnityEngine.Profiling;
 
@@ -114,7 +116,7 @@ namespace HF.AI
             {
                 if (data.selector == SelectorType.None)
                 {
-                    /*//Play card
+                    //Play card
                     for (int c = 0; c < player.cards_hand.Count; c++)
                     {
                         Card card = player.cards_hand[c];
@@ -122,17 +124,14 @@ namespace HF.AI
                     }
 
                     //Action on board
-                    for (int c = 0; c < player.cards_board.Count; c++)
+                    /*for (int c = 0; c < player.cards_board.Count; c++)
                     {
                         Card card = player.cards_board[c];
                         AddActions(action_list, data, node, GameAction.Attack, card);
                         AddActions(action_list, data, node, GameAction.AttackPlayer, card);
                         AddActions(action_list, data, node, GameAction.CastAbility, card);
                         //AddActions(action_list, data, node, GameAction.Move, card);        //Uncomment to consider move actions
-                    }
-
-                    if (player.hero != null)
-                        AddActions(action_list, data, node, GameAction.CastAbility, player.hero);*/
+                    }*/
                 }
                 else
                 {
@@ -145,13 +144,10 @@ namespace HF.AI
             bool can_attack_player = HasAction(action_list, GameAction.AttackPlayer);
             bool can_end = !can_attack_player && !is_full_mana && data.selector == SelectorType.None;*/
             
-            if (action_list.Count == 0 || true)
+            if (action_list.Count == 0)
             {
-                AIAction logAction = CreateAction(GameAction.Log);
-                
                 AIAction action = CreateAction(GameAction.EndTurn);
                 action_list.Add(action);
-                action_list.Add(logAction);
             }
 
             //Remove actions with low score
@@ -367,11 +363,6 @@ namespace HF.AI
             {
                 game_logic.CancelSelection();
             }*/
-            
-            if (action.type == GameAction.Log)
-            {
-                gameLogic.Log();
-            }
 
             if (action.type == GameAction.EndTurn)
             {
@@ -379,7 +370,7 @@ namespace HF.AI
             }
         }
         
-        private void AddActions(List<AIAction> actions, Game data, NodeState node, ushort type)
+        private void AddActions(List<AIAction> actions, Game data, NodeState node, ushort type, Card card)
         {
            //TODO action별 삽입 정의
         }
@@ -439,11 +430,187 @@ namespace HF.AI
             }
             return path;
         }
-
         
         public void ClearMemory()
         {
             System.GC.Collect(); //Free memory from AI
+        }
+
+        public static void CalculateCardPatterns(List<Card> targetCards)
+        {
+            if (targetCards == null || targetCards.Count == 0)
+                return;
+            
+            var grade = new bool[10];
+            var gradeNumberCombined = new int[10];
+            
+            grade[(int)CardPatternType.None] = true;
+            grade[(int)CardPatternType.HighCard] = true;
+            
+            int[] suits = new int[5];
+            int[] numbers = new int[15];
+            int[] suitsNumberCombined = new int[5]; 
+            
+            for(int i=0; i< targetCards.Count; i++) {
+                Card card = targetCards[i];
+                // 카드 숫자에 따른 count
+                numbers[card.Data.number]++;
+                // Ace의 경우 
+                if(card.Data.number == 1)
+                    numbers[14]++;
+                
+                // 카드 모양에 따른 count
+                switch (card.Data.type) {
+                    case CardType.Spade:
+                        suits[1]++;
+                        suitsNumberCombined[1] += card.Data.number; 
+                        break;
+                    case CardType.Diamond:
+                        suits[2]++;
+                        suitsNumberCombined[2] += card.Data.number;
+                        break;
+                    case CardType.Club:
+                        suits[3]++;
+                        suitsNumberCombined[3] += card.Data.number;
+                        break;
+                    case CardType.Heart:
+                        suits[4]++;
+                        suitsNumberCombined[4] += card.Data.number;
+                        break;
+                }
+            }
+
+            int biggestNumber = 0;
+            for (int i = 14; i >= 0; i--)
+            {
+                if (numbers[i] > 0)
+                {
+                    biggestNumber = i;
+                    break;
+                }
+            }
+
+            gradeNumberCombined[(int)CardPatternType.HighCard] = biggestNumber;
+            
+            bool isStraight = false;
+            // Ace를 1, 14로 처리해서 연속된 구간 확인
+            for(int i=1; i<=10; i++){
+                int temp = 0;
+                // 5개의 연속 구간 확인
+                for(int j=i; j<i+5; j++){
+                    if(numbers[j] != 1) 
+                        break;
+                    
+                    temp++;
+                    gradeNumberCombined[5] += j;
+                }
+                
+                if(temp == 5) 
+                    isStraight = true;
+            }
+            
+            if(isStraight)
+                grade[5] = true;
+            
+            bool isFlush = false;
+            for(int i=1; i<5; i++) {
+                if (suits[i] == 5)
+                {
+                    isFlush = true;
+                    gradeNumberCombined[6] = suitsNumberCombined[i];
+                }
+            }
+            
+            if(isFlush) 
+                grade[6] = true;
+            
+            
+            // [9] Straight Flush (같은 무늬의 연속된 숫자 5개가 존재)
+            if (isFlush && isStraight)
+            {
+                grade[9] = true;
+                gradeNumberCombined[9] = gradeNumberCombined[5];
+            }
+            
+            int pairCnt = 0;
+            int tripleCnt = 0;
+            int[] pairNumbers = new int[3];
+            int tripleNumber = 0;
+            // Ace를 1로 단일 숫자로 처리해서 확인 (14 의미 제외)
+            for(int i=1; i<14; i++) {
+                // [7] 4 Card (네 개의 같은 숫자가 존재)
+                if (numbers[i] == 4)
+                {
+                    grade[8] = true;
+                    gradeNumberCombined[8] = i * 4;
+                }
+ 
+                // 같은 숫자가 2개
+                if (numbers[i] == 2)
+                {
+                    ++pairCnt;
+
+                    pairNumbers[pairCnt] = i * 2;
+                } 
+                // 같은 숫자가 3개
+                else if (numbers[i] == 3)
+                {
+                    tripleCnt++;
+                    tripleNumber = i;
+                }
+            }
+            
+            // [1] 1 Pair (같은 숫자가 한 쌍 존재)
+            if (pairCnt == 1)
+            {
+                grade[2] = true;
+                gradeNumberCombined[2] = pairNumbers[1];
+            }
+                
+            // [2] 2 Pair (각기 같은 숫자가 두 쌍 존재)
+            if (pairCnt == 2)
+            {
+                grade[3] = true;
+                gradeNumberCombined[3] = pairNumbers[1] + pairNumbers[2];
+            }
+            
+            // [3] Triple (세 개의 같은 숫자가 존재)
+            if (tripleCnt == 1)
+            {
+                grade[4] = true;
+                gradeNumberCombined[4] = tripleNumber;
+            }
+            
+            // [6] Full House (Triple과 Pair가 함께 존재)
+            if (tripleCnt == 1 && pairCnt == 1)
+            {
+                grade[7] = true;
+                gradeNumberCombined[7] = pairNumbers[1] + tripleNumber;
+            }
+            
+            for (int i = 9; i >= 0; i--)
+            {
+                /*if (i == 0)
+                {
+                    break; 
+                }
+                
+                if (grade[i])
+                {
+                    // 현재 패턴 설정
+                    CurrentPattern = cardPatterns.Find(pattern => pattern.PatternType == (CardPatternType)i);
+                    
+                    foreach (var modifier in cardSubmitEffect.gameplayEffect.modifiers)
+                    {
+                        if (modifier.attrType != GameplayAttr.BasicAttackPower)
+                            continue;
+                        
+                        modifier.gameplayMagnitude.magnitude = gradeNumberCombined[i];
+                    }
+                    
+                    break;
+                }*/
+            }
         }
 
     }

@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using HF.API;
-using HF.Data;
 using HF.Data.Card;
 using HF.InGame;
 using HF.Utils;
