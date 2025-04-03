@@ -55,14 +55,12 @@ namespace HF.Utils
         
         public virtual void ResolveAll()
         {
-            Debug.Log("resolving -1");
             if (isResolving)
                 return;
-            Debug.Log("resolving -2");
+           
             isResolving = true;
             while (CanResolve())
             {
-                Debug.Log("resolving -3");
                 Resolve();
             }
             isResolving = false;
@@ -70,10 +68,8 @@ namespace HF.Utils
         
         public void Resolve()
         {
-            Debug.Log("resolving -4");
             if (callbackQueue.Count > 0)
             {
-                Debug.Log("resolving -5");
                 CallbackQueueElement elem = callbackQueue.Dequeue();
                 callbackElemPool.Dispose(elem);
                 elem.callback.Invoke();

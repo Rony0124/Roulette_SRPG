@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameplayData
   m_EditorClassIdentifier: 
   test_deck:
-  - cards:
+    cards:
     - {fileID: 11400000, guid: c55b3084cd9c0da4b9dd863938b19564, type: 2}
     - {fileID: 11400000, guid: f11c749d1dc8e7549b1c6ee20b1ba42b, type: 2}
     - {fileID: 11400000, guid: 92b4526d343f04c4dbbdaab1571e4080, type: 2}
@@ -29,7 +29,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: f204c3bc8e6715b4da1ce3e48c231b6a, type: 2}
     artifacts: []
   test_deck_ai:
-  - cards:
+    cards:
     - {fileID: 11400000, guid: c55b3084cd9c0da4b9dd863938b19564, type: 2}
     - {fileID: 11400000, guid: f11c749d1dc8e7549b1c6ee20b1ba42b, type: 2}
     - {fileID: 11400000, guid: 92b4526d343f04c4dbbdaab1571e4080, type: 2}

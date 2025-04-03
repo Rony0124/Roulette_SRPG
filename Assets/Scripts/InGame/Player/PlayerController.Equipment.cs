@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using HF.Data.Card;
+using HF.GamePlay;
+using HF.Item;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using TSoft;
@@ -57,9 +59,9 @@ namespace HF.InGame.Player
             switch (itemData)
             {
                 case ArtifactInfo:
-                    var artifact = new Artifact(itemData);
+                    /*var artifact = new Artifact(itemData);
                     
-                    CurrentEquippedArtifacts.Add(artifact);
+                    CurrentEquippedArtifacts.Add(artifact);*/
                     break;
                 case CardInfo:
                     var joker = new Joker(itemData);
@@ -77,7 +79,7 @@ namespace HF.InGame.Player
             switch (args.ListChangedType)
             {
                 case ListChangedType.ItemAdded :
-                    gameplay.AddEffect(CurrentEquippedArtifacts[args.NewIndex].info.effect);
+                  //  gameplay.AddEffect(CurrentEquippedArtifacts[args.NewIndex].info.effect);
                     break;
                 case ListChangedType.ItemDeleted :
                     break;

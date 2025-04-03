@@ -1,4 +1,6 @@
-namespace TSoft.Item
+using TSoft.Item;
+
+namespace HF.Item
 {
     public class Artifact : ItemBase<int>
     {

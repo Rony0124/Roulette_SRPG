@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using HF.AI;
-using HF.API;
 using HF.Data;
 using HF.Data.Card;
 using HF.GamePlay;
@@ -20,8 +19,11 @@ namespace HF.InGame
         private GameLogic gameplay;
         
         private List<AIPlayer> aiList = new ();
-        
+
+        public Game GameData => gameData;
+        //temp
         public static int OwnerPlayerId = 0;
+        public static int MaxCardCapacity = 9;
         public static PlayerSettings AISettings = PlayerSettings.DefaultAI;
 
         protected override void OnDirectorChanged()
@@ -80,19 +82,19 @@ namespace HF.InGame
             }
         }
         
-        //일단 deck만 설정 해준다고 하자
-        public void SetPlayerSettings(int playerID, DeckData deck)
+        private void SetPlayerSettings(int playerID, DeckData deck)
         {
             if (gameData.state != GameState.Connecting)
                 return;
 
             var player = gameData.GetPlayer(playerID);
-            if (player is { ready: false })
-            {
-                player.is_ai = false;
-                player.ready = true;
-               // SetPlayerDeck(player, deck);
-            }
+            if (player is not { ready: false }) 
+                return;
+            
+            player.is_ai = false;
+            player.ready = true;
+                
+            SetPlayerDeck(player, deck);
         }
         
         private void SetPlayerSettingsAI(int playerID, DeckData deck)
@@ -101,48 +103,22 @@ namespace HF.InGame
                 return;
 
             var player = gameData.GetOpponentPlayer(playerID);
-            if (player is { ready: false })
-            {
-                player.is_ai = true;
-                player.ready = true;
-
-               // SetPlayerDeck(player, deck);
-            }
+            if (player is not { ready: false })
+                return;
             
-            Debug.Log("Set AI Opponent");
+            player.is_ai = true;
+            player.ready = true;
+
+            SetPlayerDeck(player, deck);
         }
         
-        /*public void SetPlayerDeck(GamePlay.Player player, DeckData deck)
+        private void SetPlayerDeck(GamePlay.Player player, DeckData deck)
         {
-            player.cards_all.Clear();
-            player.cards_deck.Clear();
+            if (player == null)
+                return;
             
-            foreach (var artifact in deck.artifacts)
-            {
-                if (artifact != null)
-                {
-                    Card acard = Card.Create(icard, variant, player);
-                    player.cards_deck.Add(acard);
-                }
-            }
-
-            foreach (UserCardData card in deck.cards)
-            {
-                CardData icard = CardData.Get(card.tid);
-                VariantData variant = VariantData.Get(card.variant);
-                if (icard != null && variant != null)
-                {
-                    for (int i = 0; i < card.quantity; i++)
-                    {
-                        Card acard = Card.Create(icard, variant, player);
-                        player.cards_deck.Add(acard);
-                    }
-                }
-            }
-
-            //Shuffle deck
-            ShuffleDeck(player.cards_deck);
-        }*/
+            gameplay.SetPlayerDeck(player, deck);
+        }
 
     }
 }

@@ -1,9 +1,14 @@
+using System.Collections.Generic;
+using HF.API;
+using HF.Data;
+using HF.Data.Card;
+using HF.InGame;
 using HF.Utils;
 using UnityEngine;
 
 namespace HF.GamePlay
 {
-    public sealed class GameLogic
+    public class GameLogic
     {
         private Game gameData;
         
@@ -46,14 +51,9 @@ namespace HF.GamePlay
             gameData.current_player = gameData.first_player;
             gameData.turn_count = 1;
             
-            Debug.Log("first player - " + gameData.current_player);
-            
             //Init each players
             foreach (Player player in gameData.players)
             {
-                //Puzzle level deck
-                //DeckPuzzleData pdeck = DeckPuzzleData.Get(player.deck);
-
                 //Hp / mana
                 /*player.hp_max = pdeck != null ? pdeck.start_hp : GameplayData.Get().hp_start;
                 player.hp = player.hp_max;
@@ -61,8 +61,7 @@ namespace HF.GamePlay
                 player.mana = player.mana_max;*/
 
                 //Draw starting cards
-               // int dcards = pdeck != null ? pdeck.start_cards : GameplayData.Get().cards_start;
-               // DrawCard(player, dcards);
+                DrawCard(player, CombatController.MaxCardCapacity);
 
                 /*//Add coin second player
                 bool is_random = level == null || level.first_player == LevelFirst.Random;
@@ -100,7 +99,7 @@ namespace HF.GamePlay
             //Cards draw
             if (gameData.turn_count > 1 || player.player_id != gameData.first_player)
             {
-               // DrawCard(player, GameplayData.Get().cards_per_turn);
+                DrawCard(player, CombatController.MaxCardCapacity - player.cards_hand.Count);
             }
 
             //Mana 
@@ -115,9 +114,6 @@ namespace HF.GamePlay
             //Player poison
             if (player.HasStatus(StatusType.Poisoned))
                 player.hp -= player.GetStatusValue(StatusType.Poisoned);
-
-            if (player.hero != null)
-                player.hero.Refresh();
 
             //Refresh Cards and Status Effects
             for (int i = player.cards_board.Count - 1; i >= 0; i--)
@@ -151,8 +147,6 @@ namespace HF.GamePlay
 
             if (gameData.current_player == gameData.first_player)
                 gameData.turn_count++;
-            
-            Debug.Log("next turn invoke - 2");
 
             CheckForWinner();
             StartTurn();
@@ -164,13 +158,10 @@ namespace HF.GamePlay
                 return;
 
             gameData.phase = GamePhase.Main;
-            
-            Debug.Log("current gameDataPhase - " + gameData.phase);
         }
 
         public void Log()
         {
-            Debug.Log("game logic test for this turn!");
             resolveQueue.ResolveAll(0.2f);
         }
         
@@ -201,7 +192,6 @@ namespace HF.GamePlay
 
             //onTurnEnd?.Invoke();
             //RefreshData();
-            Debug.Log("next turn invoke - 1");
 
             resolveQueue.AddCallback(StartNextTurn);
             resolveQueue.ResolveAll(0.2f);
@@ -279,5 +269,70 @@ namespace HF.GamePlay
         {
             return gameData;
         }
+        
+         //--- Setup ------
+
+        //Set deck using a Deck in Resources
+        public void SetPlayerDeck(Player player, DeckData deck)
+        {
+            player.cards_all.Clear();
+            player.cards_deck.Clear();
+
+            foreach (CardData card in deck.cards)
+            {
+                if (card != null)
+                {
+                    Card acard = Card.Create(card, player);
+                    player.cards_deck.Add(acard);
+                }
+            }
+
+            ShuffleDeck(player.cards_deck);
+        }
+
+        //Set deck using custom deck in save file or database
+        /*public void SetPlayerDeck(Player player, UserDeckData deck)
+        {
+            player.cards_all.Clear();
+            player.cards_deck.Clear();
+
+            foreach (UserCardData card in deck.cards)
+            {
+                CardData icard = CardData.Get(card.tid);
+                if (icard != null)
+                {
+                    Card acard = Card.Create(icard, player);
+                    player.cards_deck.Add(acard);
+                }
+            }
+
+            //Shuffle deck
+            ShuffleDeck(player.cards_deck);
+        }*/
+        
+        public virtual void DrawCard(Player player, int nb = 1)
+        {
+            for (int i = 0; i < nb; i++)
+            {
+                if (player.cards_deck.Count > 0 && player.cards_hand.Count < CombatController.MaxCardCapacity)
+                {
+                    Card card = player.cards_deck[0];
+                    player.cards_deck.RemoveAt(0);
+                    player.cards_hand.Add(card);
+                }
+            }
+        }
+        
+        public virtual void ShuffleDeck(List<Card> cards)
+        {
+            for (int i = 0; i < cards.Count; i++)
+            {
+                Card temp = cards[i];
+                int randomIndex = random.Next(i, cards.Count);
+                cards[i] = cards[randomIndex];
+                cards[randomIndex] = temp;
+            }
+        }
+
     }
 }
