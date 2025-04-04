@@ -57,6 +57,9 @@ namespace HF.GamePlay
             gameData.current_player = gameData.first_player;
             gameData.turn_count = 1;
             
+            Debug.Log($"GameLogic : game start");
+            Debug.Log($"GameLogic : current player - {gameData.current_player}");
+            
             //Init each players
             foreach (Player player in gameData.players)
             {
@@ -75,7 +78,7 @@ namespace HF.GamePlay
             ClearTurnData();
             gameData.phase = GamePhase.StartTurn;
             
-            Debug.Log("current gameDataPhase - " + gameData.phase);
+            Debug.Log($"GameLogic : Start Turn");
             /*RefreshData();
             onTurnStart?.Invoke();*/
 
@@ -127,12 +130,19 @@ namespace HF.GamePlay
         {
             if (gameData.state == GameState.GameEnded)
                 return;
+            
+            Debug.Log($"GameLogic : Start Next Turn");
 
             gameData.current_player = (gameData.current_player + 1) % gameData.settings.nb_players;
+            
+            Debug.Log($"GameLogic : current player {gameData.current_player}");
 
             if (gameData.current_player == gameData.first_player)
+            {
                 gameData.turn_count++;
-
+                Debug.Log($"GameLogic : Start Next Turn [Turn Count increased {gameData.turn_count}]");
+            }
+            
             CheckForWinner();
             StartTurn();
         }
@@ -143,15 +153,14 @@ namespace HF.GamePlay
                 return;
 
             gameData.phase = GamePhase.Main;
-        }
-
-        public void Log()
-        {
-            resolveQueue.ResolveAll(0.2f);
+            
+            Debug.Log($"GameLogic : current phase = main");
         }
         
         public void EndTurn()
         {
+            Debug.Log($"GameLogic : End Turn");
+            
             if (gameData.state == GameState.GameEnded)
                 return;
             
@@ -217,11 +226,11 @@ namespace HF.GamePlay
             Player alive = null;
             foreach (Player player in gameData.players)
             {
-                /*if (!player.IsDead())
+                if (!player.IsDead())
                 {
                     alive = player;
                     count_alive++;
-                }*/
+                }
             }
 
             if (count_alive == 0)
@@ -336,6 +345,8 @@ namespace HF.GamePlay
         
         public void DrawCard(Player player, int nb = 1)
         {
+            Debug.Log($"GameLogic : Draw Card - {player.player_id}");
+            
             for (int i = 0; i < nb; i++)
             {
                 if (player.cards_deck.Count > 0 && player.cards_hand.Count < CombatController.MaxCardCapacity)
@@ -367,6 +378,7 @@ namespace HF.GamePlay
         {
             if (gameData.CanAttackTarget(attacker, target))
             {
+                Debug.Log("Attack Target lol");
                 /*if (!is_ai_predict)
                     player.AddHistory(GameAction.Attack, attacker, target);*/
 
@@ -377,6 +389,9 @@ namespace HF.GamePlay
                 TriggerCardAbilityType(AbilityTrigger.OnBeforeDefend, target, attacker);
                 TriggerSecrets(AbilityTrigger.OnBeforeAttack, attacker);
                 TriggerSecrets(AbilityTrigger.OnBeforeDefend, target);*/
+
+                var pattern = attacker.currentPattern;
+                attacker.RemovePattern(pattern);
 
                 //Resolve attack
                 resolveQueue.AddAttack(attacker, target, ResolveAttack);
@@ -417,6 +432,7 @@ namespace HF.GamePlay
             CheckForWinner();
 
             resolveQueue.ResolveAll(0.2f);
+            NextStep();
         }
         
         public virtual void DamagePlayer(Player attacker, Player target, int value)

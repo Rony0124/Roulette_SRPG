@@ -66,9 +66,12 @@ namespace HF.InGame
                 {
                     AIPlayer ai_gameplay = AIPlayer.Create(AIType.MiniMax, gameplay, player.player_id);
                     aiList.Add(ai_gameplay);
+                    
+                    Debug.Log($"{gameObject.name} : ai created");
                 }
             }
 
+            Debug.Log($"{gameObject.name} : game start");
             //Start Game
             gameplay.StartGame();
         }

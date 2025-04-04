@@ -25,11 +25,6 @@ namespace HF.Core
                 return instance;
             }
         }
-
-        private void OnApplicationQuit()
-        {
-            Time.timeScale = 0;
-        }
         
         protected virtual void Awake ()
         {

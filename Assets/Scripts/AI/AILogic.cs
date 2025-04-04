@@ -56,6 +56,8 @@ namespace HF.AI
         {
             if (running)
                 return;
+            
+            Debug.Log("AI Player 1 - AI Run");
 
             originalData = Game.CloneNew(data);        //Clone game data to keep original data unaffected
             gameLogic.ClearResolve();                 //Clear temp memory
@@ -68,11 +70,11 @@ namespace HF.AI
             running = true;
 
             //Uncomment these lines to run on separate thread (and comment Execute()), better for production so it doesn't freeze the UI while calculating the AI
-            aiThread = new Thread(Execute);
-            aiThread.Start();
+            /*aiThread = new Thread(Execute);
+            aiThread.Start();*/
 
             //Uncomment this line to run on main thread (and comment the thread one), better for debuging since you will be able to use breakpoints, profiler and Debug.Log
-            //Execute();
+            Execute();
         }
         
         public void Stop()
@@ -84,6 +86,7 @@ namespace HF.AI
         
         private void Execute()
         {
+            Debug.Log("AI Player 2 - AI Execute");
             //Create first node
             firstNode = CreateNode(null, null, aiPlayerId, 0, 0);
             firstNode.hvalue = heuristic.CalculateHeuristic(originalData, firstNode);
@@ -107,6 +110,7 @@ namespace HF.AI
           //Add list of all possible orders and search in all of them
         private void CalculateNode(Game data, NodeState node)
         {
+            Debug.Log("AI Player 3 - 노드 계산");
             Profiler.BeginSample("Add Actions");
             Player player = data.GetPlayer(data.current_player);
             List<AIAction> action_list = listPool.Create();
@@ -122,6 +126,7 @@ namespace HF.AI
                         Card card = player.cards_hand[c];
                         if (card.Data.type == CardType.Joker)
                         {
+                            Debug.Log("AI Player 4 - 조커 액션 추가");
                             AddJokerActions(action_list, data, node, GameAction.PlayJoker, card);    
                         }
                     }
@@ -141,7 +146,9 @@ namespace HF.AI
                             maxPattern = player.cards_pattern[i];
                         }
                     }
-                    
+
+                    string t = maxPattern == null ? "null" : maxPattern.patternType.ToString();
+                    Debug.Log($"AI Player 4 - 패턴 액션 추가 {t}");
                     AddPatternActions(action_list, data, node, GameAction.PlayPattern, maxPattern);
 
                     //Action on board
@@ -167,6 +174,7 @@ namespace HF.AI
             
             if (action_list.Count == 0 || can_end)
             {
+                Debug.Log($"AI Player 4 - 패턴 end turn 추가");
                 AIAction action = CreateAction(GameAction.EndTurn);
                 action_list.Add(action);
             }
@@ -244,7 +252,7 @@ namespace HF.AI
 
             //Execute move and update data
             Profiler.BeginSample("Execute AIAction");
-            DoAIAction(ndata, action, player_id);
+            //DoAIAction(ndata, action, player_id);
             Profiler.EndSample();
 
             //Update depth

@@ -1,3 +1,4 @@
+using System;
 using Cysharp.Threading.Tasks;
 using HF.GamePlay;
 using UnityEngine;
@@ -24,6 +25,7 @@ namespace HF.AI
 
             if (!isPlaying && game_data.IsPlayerTurn(player))
             {
+                Debug.Log("AI Player - AI Turn 시작");
                 isPlaying = true;
                 AiTurn().Forget();
             }
@@ -79,19 +81,46 @@ namespace HF.AI
             if (!CanPlay())
                 return;
             
+            Debug.Log("Execute AI Action: " + action.type);
+            
+            if (action.type == GameAction.PlayJoker)
+            {
+                PlayJoker(action.card_uid);
+            }
+
+            if (action.type == GameAction.PlayPattern)
+            {
+                PlayPattern(action.pattern);
+            }
+            
             //TODO action 정의해주기
             if (action.type == GameAction.EndTurn)
             {
                 EndTurn();
             }
         }
+
+        private void PlayJoker(Guid cardId)
+        {
+            
+            Debug.Log($"Ai player : player joker");
+           // gameplay.PlayCard(a);
+        }
+
+        private void PlayPattern(CardPattern pattern)
+        {
+            Debug.Log($"Ai player : player pattern");
+            var gameData = gameplay.GetGameData();
+            var attacker = gameData.GetActivePlayer();
+            attacker.currentPattern = pattern;
+            var target = gameData.GetOpponentPlayer(attacker.player_id);
+            gameplay.AttackTarget(attacker, target);
+        }
         
         private void EndTurn()
         {
-            if (CanPlay())
-            {
-                gameplay.EndTurn();
-            }
+            Debug.Log($"Ai player : End Turn");
+            gameplay.EndTurn();
         }
     }
 }

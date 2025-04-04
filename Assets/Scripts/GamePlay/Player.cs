@@ -2,14 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using InGame;
+using UnityEngine;
 
 namespace HF.GamePlay
 {
-    [Serializable]
     public class CardPattern
     {
         public CardPatternType patternType;
-        public List<Card> cards;
+        public List<Card> cards = new();
     }
     
     [Serializable]
@@ -57,6 +57,16 @@ namespace HF.GamePlay
             }
             return null;
         }
+
+        public void RemovePattern(CardPattern pattern)
+        {
+            foreach (var card in pattern.cards)
+            {
+                RemoveCardFromAllGroups(card);
+            }
+            
+            cards_pattern.Clear();
+        }
         
         public virtual void RemoveCardFromAllGroups(Card card)
         {
@@ -74,6 +84,26 @@ namespace HF.GamePlay
                 return true;
             
             return false;
+        }
+        
+        //Clone all player variables into another var, used mostly by the AI when building a prediction tree
+        public static void Clone(Player source, Player dest)
+        {
+            dest.player_id = source.player_id;
+            dest.is_ai = source.is_ai;
+
+            dest.hp = source.hp;
+            dest.hp_max = source.hp_max;
+            dest.mana = source.mana;
+            dest.mana_max = source.mana_max;
+           
+            dest.cards_pattern = source.cards_pattern;
+            dest.currentPattern = source.currentPattern;
+            
+            Card.CloneDict(source.cards_all, dest.cards_all);
+            Card.CloneListRef(dest.cards_all, source.cards_hand, dest.cards_hand);
+            Card.CloneListRef(dest.cards_all, source.cards_deck, dest.cards_deck);
+            Card.CloneListRef(dest.cards_all, source.cards_discard, dest.cards_discard);
         }
 
         public void CalculateCardPatternsOnHand()
@@ -250,6 +280,8 @@ namespace HF.GamePlay
                         patternType = type,
                         cards = patternCardsDict.TryGetValue(type, out var value) ? value : new List<Card>()
                     };
+                    
+                    Debug.Log($"가능한 패턴 추가 + {type} , count {pattern.cards.Count}");
                     cards_pattern.Add(pattern);
                     /*CurrentPattern = cardPatterns.Find(p => p.PatternType == type);
                     CurrentPatternCards = patternCardsDict.TryGetValue(type, out var value) ? value : new List<Card>();*/

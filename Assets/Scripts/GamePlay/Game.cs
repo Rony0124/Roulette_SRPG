@@ -106,7 +106,15 @@ namespace HF.GamePlay
             return state == GameState.GameEnded;
         }
         
-        public virtual bool CanPlayCard(Card card)
+        public bool CanPlayCard(Card card)
+        {
+            if (card == null)
+                return false;
+            
+            return true;
+        }
+        
+        public bool CanPlayPattern(CardPattern card)
         {
             if (card == null)
                 return false;
@@ -151,8 +159,8 @@ namespace HF.GamePlay
                     dest.players[i] = new Player(i);
             }
 
-            /*for (int i = 0; i < source.players.Length; i++)
-                Player.Clone(source.players[i], dest.players[i]);*/
+            for (int i = 0; i < source.players.Length; i++)
+                Player.Clone(source.players[i], dest.players[i]);
 
             dest.selector = source.selector;
             dest.selector_player_id = source.selector_player_id;
