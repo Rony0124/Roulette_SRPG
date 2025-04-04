@@ -10484,7 +10484,7 @@ MonoBehaviour:
         NewText: Hello World
         RevealMode: 0
         DurationMode: 0
-        IntervalBetweenReveals: 0.01
+        IntervalBetweenReveals: 0.1
         RevealDuration: 1
         OnReveal:
           m_PersistentCalls:
@@ -12048,7 +12048,7 @@ MonoBehaviour:
         NewText: Hello World
         RevealMode: 0
         DurationMode: 0
-        IntervalBetweenReveals: 0.01
+        IntervalBetweenReveals: 0.1
         RevealDuration: 1
         OnReveal:
           m_PersistentCalls:
@@ -22764,7 +22764,7 @@ MonoBehaviour:
         NewText: Hello World
         RevealMode: 0
         DurationMode: 0
-        IntervalBetweenReveals: 0.01
+        IntervalBetweenReveals: 0.1
         RevealDuration: 1
         OnReveal:
           m_PersistentCalls:
