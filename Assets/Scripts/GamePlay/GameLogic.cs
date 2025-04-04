@@ -3,11 +3,19 @@ using HF.Data.Card;
 using HF.InGame;
 using HF.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace HF.GamePlay
 {
     public class GameLogic
     {
+        public UnityAction<Card> onCardPlayed;
+        
+        public UnityAction<Player, Player> onAttackStart;
+        public UnityAction<Player, Player> onAttackEnd;
+        
+        public UnityAction<Player, int> onPlayerDamaged;
+        
         private Game gameData;
         
         private ResolveQueue resolveQueue;
@@ -52,32 +60,11 @@ namespace HF.GamePlay
             //Init each players
             foreach (Player player in gameData.players)
             {
-                //Hp / mana
-                /*player.hp_max = pdeck != null ? pdeck.start_hp : GameplayData.Get().hp_start;
-                player.hp = player.hp_max;
-                player.mana_max = pdeck != null ? pdeck.start_mana : GameplayData.Get().mana_start;
-                player.mana = player.mana_max;*/
-
                 //Draw starting cards
                 DrawCard(player, CombatController.MaxCardCapacity);
-
-                /*//Add coin second player
-                bool is_random = level == null || level.first_player == LevelFirst.Random;
-                if (is_random && player.player_id != game_data.first_player && GameplayData.Get().second_bonus != null)
-                {
-                    Card card = Card.Create(GameplayData.Get().second_bonus, VariantData.GetDefault(), player);
-                    player.cards_hand.Add(card);
-                }*/
             }
-
-            //Start state
-            /*RefreshData();
-            onGameStart?.Invoke();*/
-
-            /*if(should_mulligan)
-                GoToMulligan();
-            else*/
-                StartTurn();
+            
+            StartTurn();
         }
         
         public void StartTurn()
@@ -308,7 +295,46 @@ namespace HF.GamePlay
             ShuffleDeck(player.cards_deck);
         }*/
         
-        public virtual void DrawCard(Player player, int nb = 1)
+        public void PlayCard(Card card)
+        {
+            if (gameData.CanPlayCard(card))
+            {
+                Player player = gameData.GetActivePlayer();
+
+                //Play card
+                player.RemoveCardFromAllGroups(card);
+
+                //Add to board
+                CardData icard = card.Data;
+
+                //History
+                /*if (!is_ai_predict && !icard.IsSecret())
+                    player.AddHistory(GameAction.PlayCard, card);*/
+
+                //Update ongoing effects
+                /*gameData.last_played = card.uid;
+                UpdateOngoing();*/
+
+                //Trigger abilities
+                /*if (card.CardData.IsDynamicManaCost())
+                {
+                    GoToSelectorCost(card);
+                }
+                else
+                {
+                    TriggerSecrets(AbilityTrigger.OnPlayOther, card); //After playing card
+                    TriggerCardAbilityType(AbilityTrigger.OnPlay, card);
+                    TriggerOtherCardsAbilityType(AbilityTrigger.OnPlayOther, card);
+                }*/
+
+               // RefreshData();
+
+                onCardPlayed?.Invoke(card);
+                resolveQueue.ResolveAll(0.3f);
+            }
+        }
+        
+        public void DrawCard(Player player, int nb = 1)
         {
             for (int i = 0; i < nb; i++)
             {
@@ -319,9 +345,14 @@ namespace HF.GamePlay
                     player.cards_hand.Add(card);
                 }
             }
+
+            if (player.is_ai)
+            {
+                player.CalculateCardPatternsOnHand();
+            }
         }
         
-        public virtual void ShuffleDeck(List<Card> cards)
+        public void ShuffleDeck(List<Card> cards)
         {
             for (int i = 0; i < cards.Count; i++)
             {
@@ -331,6 +362,75 @@ namespace HF.GamePlay
                 cards[randomIndex] = temp;
             }
         }
+        
+        public void AttackTarget(Player attacker, Player target)
+        {
+            if (gameData.CanAttackTarget(attacker, target))
+            {
+                /*if (!is_ai_predict)
+                    player.AddHistory(GameAction.Attack, attacker, target);*/
 
+                //gameData.last_target = target.uid;
+
+                //Trigger before attack abilities
+                /*TriggerCardAbilityType(AbilityTrigger.OnBeforeAttack, attacker, target);
+                TriggerCardAbilityType(AbilityTrigger.OnBeforeDefend, target, attacker);
+                TriggerSecrets(AbilityTrigger.OnBeforeAttack, attacker);
+                TriggerSecrets(AbilityTrigger.OnBeforeDefend, target);*/
+
+                //Resolve attack
+                resolveQueue.AddAttack(attacker, target, ResolveAttack);
+                resolveQueue.ResolveAll();
+            }
+        }
+        
+        private void ResolveAttack(Player attacker, Player target)
+        {
+            onAttackStart?.Invoke(attacker, target);
+
+            /*attacker.RemoveStatus(StatusType.Stealth);
+            UpdateOngoing();
+            */
+
+            resolveQueue.AddAttack(attacker, target, ResolveAttackHit);
+            resolveQueue.ResolveAll(0.3f);
+        }
+        
+        private void ResolveAttackHit(Player attacker, Player target)
+        {
+            DamagePlayer(attacker, target, attacker.GetAttack());
+
+            //Save attack and exhaust
+            /*if (!skip_cost)
+                ExhaustBattle(attacker);*/
+
+            //Recalculate bonus
+            /*UpdateOngoing();
+
+            if (game_data.IsOnBoard(attacker))
+                TriggerCardAbilityType(AbilityTrigger.OnAfterAttack, attacker, target);
+
+            TriggerSecrets(AbilityTrigger.OnAfterAttack, attacker);*/
+
+            onAttackEnd?.Invoke(attacker, target);
+          //  RefreshData();
+            CheckForWinner();
+
+            resolveQueue.ResolveAll(0.2f);
+        }
+        
+        public virtual void DamagePlayer(Player attacker, Player target, int value)
+        {
+            //Damage player
+            target.hp -= value;
+            target.hp = Mathf.Clamp(target.hp, 0, target.hp_max);
+
+            //Lifesteal
+            /*Player aplayer = gameData.GetPlayer(attacker.player_id);
+            if (attacker.HasStatus(StatusType.LifeSteal))
+                aplayer.hp += value;*/
+
+            onPlayerDamaged?.Invoke(target, value);
+        }
     }
 }

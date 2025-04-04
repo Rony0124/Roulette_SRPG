@@ -8,8 +8,10 @@ namespace HF.Utils
     public class ResolveQueue
     {
         private Pool<CallbackQueueElement> callbackElemPool = new ();
+        private Pool<AttackQueueElement> attack_elem_pool = new ();
         
         private Queue<CallbackQueueElement> callbackQueue = new ();
+        private Queue<AttackQueueElement> attack_queue = new ();
         
         private Game gameData;
         private bool isResolving = false;
@@ -27,7 +29,7 @@ namespace HF.Utils
             gameData = data;
         }
         
-        public virtual void Update(float delta)
+        public void Update(float delta)
         {
             if (resolveDelay > 0f)
             {
@@ -37,7 +39,7 @@ namespace HF.Utils
             }
         }
         
-        public virtual void AddCallback(Action callback)
+        public void AddCallback(Action callback)
         {
             if (callback != null)
             {
@@ -47,13 +49,25 @@ namespace HF.Utils
             }
         }
         
-        public virtual void ResolveAll(float delay)
+        public void AddAttack(Player attacker, Player target, Action<Player, Player> callback)
+        {
+            if (attacker != null && target != null)
+            {
+                AttackQueueElement elem = attack_elem_pool.Create();
+                elem.attacker = attacker;
+                elem.target = target;
+                elem.callback = callback;
+                attack_queue.Enqueue(elem);
+            }
+        }
+        
+        public void ResolveAll(float delay)
         {
             SetDelay(delay);
             ResolveAll();  //Resolve now if no delay
         }
         
-        public virtual void ResolveAll()
+        public void ResolveAll()
         {
             if (isResolving)
                 return;
@@ -109,5 +123,12 @@ namespace HF.Utils
     public class CallbackQueueElement
     {
         public Action callback;
+    }
+    
+    public class AttackQueueElement
+    {
+        public Player attacker;
+        public Player target;
+        public Action<Player, Player> callback;
     }
 }

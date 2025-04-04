@@ -106,6 +106,25 @@ namespace HF.GamePlay
             return state == GameState.GameEnded;
         }
         
+        public virtual bool CanPlayCard(Card card)
+        {
+            if (card == null)
+                return false;
+            
+            return true;
+        }
+        
+        public virtual bool CanAttackTarget(Player attacker, Player target, bool skip_cost = false)
+        {
+            if (attacker == null || target == null)
+                return false;
+
+            if (attacker.player_id == target.player_id)
+                return false; //Cant attack same player
+
+            return true;
+        }
+        
         public static Game CloneNew(Game source)
         {
             Game game = new Game();

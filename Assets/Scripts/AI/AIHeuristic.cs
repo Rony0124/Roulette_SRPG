@@ -1,9 +1,13 @@
 using HF.GamePlay;
+using InGame;
 
 namespace HF.AI
 {
     public class AIHeuristic
     {
+        public int joker_value = 15;
+        public int pattern_value = 10;
+        
         private int aiPlayerId;
         private int heuristicModifier = 10; //Randomize heuristic for lower level ai, set 10 for some randomness
         private System.Random aiRan;
@@ -21,17 +25,29 @@ namespace HF.AI
             return CalculateHeuristic(data, node, aiPlayer, oPlayer);
         }
         
-           public int CalculateHeuristic(Game data, NodeState node, Player aiPlayer, Player oPlayer)
+        public int CalculateHeuristic(Game data, NodeState node, Player aiPlayer, Player oPlayer)
         {
             int score = 0;
-
+            
             //Victories
-            /*if (aiplayer.IsDead())
+            if (aiPlayer.IsDead())
                 score += -100000 + node.tdepth * 1000; //Add node depth to seek surviving longest
-            if (oplayer.IsDead())
-                score += 100000 - node.tdepth * 1000; //Reduce node depth to seek fastest win*/
+            if (oPlayer.IsDead())
+                score += 100000 - node.tdepth * 1000; //Reduce node depth to seek fastest win
 
             //Board state
+            score += aiPlayer.cards_pattern.Count * pattern_value;
+
+            int aiJokerCount = 0;
+            foreach (var card in aiPlayer.cards_hand)
+            {
+                if (card.Data.type == CardType.Joker)
+                    aiJokerCount++;
+            }
+
+            score += aiJokerCount * joker_value;
+            
+            
             /*score += aiplayer.cards_board.Count * board_card_value;
             score += aiplayer.cards_equip.Count * board_card_value;
             score += aiplayer.cards_secret.Count * secret_card_value;
@@ -46,7 +62,7 @@ namespace HF.AI
             score -= oplayer.kill_count * kill_value;
             score -= oplayer.hp * player_hp_value;
 
-
+            
             foreach (Card card in aiplayer.cards_board)
             {
                 score += card.GetAttack() * card_attack_value;
@@ -70,89 +86,56 @@ namespace HF.AI
 
             if (heuristic_modifier > 0)
                 score += random_gen.Next(-heuristic_modifier, heuristic_modifier);*/
+            
+            if (heuristicModifier > 0)
+                score += aiRan.Next(-heuristicModifier, heuristicModifier);
 
             return score;
         }
            
-           public int CalculateActionSort(Game data, AIAction order)
-           {
-               if (order.type == GameAction.EndTurn)
-                   return 0; //End turn can always be performed, 0 means any order
-               /*if (data.selector != SelectorType.None)
-                   return 0; //Selector actions not affected by sorting
+       public int CalculateActionSort(Game data, AIAction order)
+       {
+           if (order.type == GameAction.EndTurn)
+               return 0; //End turn can always be performed, 0 means any order
+           if (data.selector != SelectorType.None)
+               return 0; //Selector actions not affected by sorting
 
-               Card card = data.GetCard(order.card_uid);
-               Card target = order.target_uid != null ? data.GetCard(order.target_uid) : null;
-               bool is_spell = card != null && !card.CardData.IsBoardCard();*/
+           var att = data.GetActivePlayer();
+           var target = data.GetOpponentPlayer(att.player_id);
 
-               int type_sort = 0;
-               /*if (order.type == GameAction.PlayCard && is_spell)
-                   type_sort = 1; //Play Spells first
-               if (order.type == GameAction.CastAbility)
-                   type_sort = 2; //Card Abilities second
-               if (order.type == GameAction.Move)
-                   type_sort = 3; //Move third
-               if (order.type == GameAction.Attack)
-                   type_sort = 4; //Attacks fourth
-               if (order.type == GameAction.AttackPlayer)
-                   type_sort = 5; //Player attacks fifth
-               if (order.type == GameAction.PlayCard && !is_spell)
-                   type_sort = 7; //Play Characters last
+           int type_sort = 0;
+           if (order.type == GameAction.PlayJoker)
+               type_sort = 1; //Play Spells first
+           if (order.type == GameAction.PlayPattern)
+               type_sort = 2; //Player attacks second
 
-               int card_sort = card != null ? (card.Hash % 100) : 0;
-               int target_sort = target != null ? (target.Hash % 100) : 0;
-               int sort = type_sort * 10000 + card_sort * 100 + target_sort + 1;*/
-               return 0;
-           }
+           /*int card_sort = att != null ? (att.Hash % 100) : 0;
+           int target_sort = target != null ? (target.Hash % 100) : 0;*/
+           int sort = type_sort * 10000;
+           return sort;
+       }
            
         //This calculates the score of an individual action, instead of the board state
         //When too many actions are possible in a single node, only the ones with best action score will be evaluated
         //Make sure to return a positive value
         public int CalculateActionScore(Game data, AIAction order)
         {
-            /*if (order.type == GameAction.EndTurn)
+            if (order.type == GameAction.EndTurn)
                 return 0; //Other orders are better
 
-            if (order.type == GameAction.CancelSelect)
-                return 0; //Other orders are better
-
-            if (order.type == GameAction.CastAbility)
+            if (order.type == GameAction.PlayJoker)
             {
                 return 200;
             }
 
-            if (order.type == GameAction.Attack)
+            if (order.type == GameAction.PlayPattern)
             {
-                Card card = data.GetCard(order.card_uid);
-                Card target = data.GetCard(order.target_uid);
-                int ascore = card.GetAttack() >= target.GetHP() ? 300 : 100; //Are you killing the card?
-                int oscore = target.GetAttack() >= card.GetHP() ? -200 : 0; //Are you getting killed?
-                return ascore + oscore + target.GetAttack() * 5;            //Always better to get rid of high-attack cards
+                var att = data.GetActivePlayer();
+                var target = data.GetOpponentPlayer(att.player_id);
+                int ascore = att.GetAttack() >= target.hp ? 500 : 200;
+                return ascore + (att.GetAttack() * 10) - target.hp;      
             }
-            if (order.type == GameAction.AttackPlayer)
-            {
-                Card card = data.GetCard(order.card_uid);
-                Player player = data.GetPlayer(order.target_player_id);
-                int ascore = card.GetAttack() >= player.hp ? 500 : 200;     //Are you killing the player?
-                return ascore + (card.GetAttack() * 10) - player.hp;        //Always better to inflict more damage
-            }
-            if (order.type == GameAction.PlayCard)
-            {
-                Player player = data.GetPlayer(ai_player_id);
-                Card card = data.GetCard(order.card_uid);
-                if (card.CardData.IsBoardCard())
-                    return 200 + (card.GetMana() * 5) - (30 * player.cards_board.Count); //High cost cards are better to play, better to play when not a lot of cards in play
-                else if (card.CardData.IsEquipment())
-                    return 200 + (card.GetMana() * 5) - (30 * player.cards_equip.Count);
-                else
-                    return 200 + (card.GetMana() * 5);
-            }
-
-            if (order.type == GameAction.Move)
-            {
-                return 100;
-            }*/
-
+            
             return 100; //Other actions are better than End/Cancel
         }
     }

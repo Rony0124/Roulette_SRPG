@@ -1,3 +1,4 @@
+using System;
 using HF.GamePlay;
 
 namespace HF.AI
@@ -6,9 +7,12 @@ namespace HF.AI
     {
         public ushort type;
         
+        public Guid card_uid;
         public int score;     //Score to determine which orders get cut and ignored
         public int sort;     //Orders must be executed in sort order
         public bool valid;
+
+        public CardPattern pattern;
 
         public AIAction() { }
         public AIAction(ushort t) { type = t; }

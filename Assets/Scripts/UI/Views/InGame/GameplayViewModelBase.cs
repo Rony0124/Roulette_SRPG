@@ -59,11 +59,10 @@ namespace TSoft.UI.Views.InGame
         
         private async UniTaskVoid OnUseCard()
         {
-            Debug.Log("End turn" + 0);
             var dir = GameContext.Instance.CurrentDirector as InGameDirector;
             if (dir != null)
             {
-                dir.Combat.EndTurn(0);
+                dir.Combat.EndTurn(CombatController.OwnerPlayerId);
             }
                
             return;
