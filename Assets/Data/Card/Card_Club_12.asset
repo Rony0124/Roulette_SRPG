@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e7828fcf56fca44a82a5c891a16f7b, type: 3}
+  m_Name: Card_Club_12
+  m_EditorClassIdentifier: 
+  _id:
+    _value: 2fc87b46c7ced7040b1d252a5ea1989a
+  _assetGuid: 467bc82fcec704d70b1d252a5ea1989a
+  _lastGeneratedAssetGuid: 467bc82fcec704d70b1d252a5ea1989a
+  title: 
+  artUI: {fileID: 0}
+  artInGame: {fileID: 21300000, guid: 0a6e3c6c40df41940ad2fb925fb0688c, type: 3}
+  type: 2
+  number: 12

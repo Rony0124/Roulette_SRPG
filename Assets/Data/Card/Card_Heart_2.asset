@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e7828fcf56fca44a82a5c891a16f7b, type: 3}
+  m_Name: Card_Heart_2
+  m_EditorClassIdentifier: 
+  _id:
+    _value: c87367ed2d14aec4ea48795c49285025
+  _assetGuid: ed6773c8142dc4aeea48795c49285025
+  _lastGeneratedAssetGuid: ed6773c8142dc4aeea48795c49285025
+  title: 
+  artUI: {fileID: 0}
+  artInGame: {fileID: 21300000, guid: 8dfedddf2799c7b4d82bed3b2f9bd03c, type: 3}
+  type: 4
+  number: 2

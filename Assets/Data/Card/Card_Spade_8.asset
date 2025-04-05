@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e7828fcf56fca44a82a5c891a16f7b, type: 3}
+  m_Name: Card_Spade_8
+  m_EditorClassIdentifier: 
+  _id:
+    _value: 90f0c5dfd1366d44188dac8d843b8b56
+  _assetGuid: dfc5f09036d1446d188dac8d843b8b56
+  _lastGeneratedAssetGuid: dfc5f09036d1446d188dac8d843b8b56
+  title: 
+  artUI: {fileID: 0}
+  artInGame: {fileID: 21300000, guid: da6a082efa6b6694f92fad9442f30fa9, type: 3}
+  type: 3
+  number: 8
