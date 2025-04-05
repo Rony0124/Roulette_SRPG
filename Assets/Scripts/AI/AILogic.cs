@@ -252,7 +252,7 @@ namespace HF.AI
 
             //Execute move and update data
             Profiler.BeginSample("Execute AIAction");
-            //DoAIAction(ndata, action, player_id);
+            DoAIAction(ndata, action, player_id);
             Profiler.EndSample();
 
             //Update depth
