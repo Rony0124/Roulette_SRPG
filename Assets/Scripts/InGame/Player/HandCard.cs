@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using HF.GamePlay;
 using UnityEngine;
 
 namespace HF.InGame.Player
@@ -44,9 +43,6 @@ namespace HF.InGame.Player
             if (dir == null)
                 return;
             
-            if(dir.Combat.GameData == null)
-                return;
-            
             Vector2 target_position = deck_position;
             current_rotate = new Vector3(0f, 0f, deck_angle);
             
@@ -54,12 +50,12 @@ namespace HF.InGame.Player
             card_transform.localRotation = Quaternion.Slerp(card_transform.localRotation, Quaternion.Euler(current_rotate), Time.deltaTime * move_speed);
         }
         
-        public void SetCard(Card card)
+        /*public void SetCard(Card card)
         {
             uid = card.uid;
             card_sprite.sprite = card.Data.artInGame;
             // card_ui.SetCard(card);
-        }
+        }*/
         
         public void Kill()
         {

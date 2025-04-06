@@ -59,14 +59,6 @@ namespace TSoft.UI.Views.InGame
         
         private async UniTaskVoid OnUseCard()
         {
-            var dir = GameContext.Instance.CurrentDirector as InGameDirector;
-            if (dir != null)
-            {
-                dir.Combat.EndTurn(CombatController.OwnerPlayerId);
-            }
-               
-            return;
-            
             var result = await player.TryUseCardsOnHand();
             if (!result)
                 return;

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using HF.GamePlay;
 using UnityEngine;
 
 namespace HF.InGame.Player
@@ -17,18 +16,11 @@ namespace HF.InGame.Player
             var dir = GameContext.Instance.CurrentDirector as InGameDirector;
             if (dir == null)
                 return;
-            
-            if(dir.Combat.GameData == null)
-                return;
-            
-            int player_id = CombatController.OwnerPlayerId;
-            Game data = dir.Combat.GameData;
-            GamePlay.Player player = data.GetPlayer(player_id);
 
             last_destroyed_timer += Time.deltaTime;
 
             //Add new cards
-            foreach (Card card in player.cards_hand)
+            /*foreach (Card card in player.cards_hand)
             {
                 if (!HasCard(card.uid))
                     SpawnNewCard(card);
@@ -99,10 +91,10 @@ namespace HF.InGame.Player
                     cards[mid+i -1].deck_position = new Vector2(-xOffset, yOffset);
                     cards[mid+i -1].deck_angle = cardAngle;
                 }
-            }
+            }*/
         }
         
-        public void SpawnNewCard(Card card)
+        /*public void SpawnNewCard(Card card)
         {
             GameObject card_obj = Instantiate(card_prefab, card_area.transform);
             card_obj.GetComponent<HandCard>().SetCard(card);
@@ -115,6 +107,6 @@ namespace HF.InGame.Player
             HandCard card = HandCard.Get(card_uid);
             bool just_destroyed = card_uid == last_destroyed && last_destroyed_timer < 0.7f;
             return card != null || just_destroyed;
-        }
+        }*/
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using HF.AI;
 using InGame;
 using Sirenix.Utilities;
 using TSoft.InGame.CardSystem;
@@ -11,11 +10,6 @@ namespace HF.InGame.Player
 {
     public partial class PlayerController : MonoBehaviour
     {
-        [Header("AI")] 
-        [SerializeField] private bool isAI;
-
-        private AIPlayer aiPlayer;
-        
         [Header("Positions")]
         [SerializeField] private Transform hand;
         [SerializeField] private Transform deck;
