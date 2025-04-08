@@ -45,7 +45,7 @@ namespace TSoft.InGame.CardSystem
         {
             if (isFloating)
             {
-                HandleFloating();
+              //  HandleFloating();
             }
         }
 
@@ -77,8 +77,8 @@ namespace TSoft.InGame.CardSystem
         private void HandleFloating()
         {
             Visuals.transform.localPosition = Vector3.Lerp(
-                basePosition, basePosition + Vector3.up * 0.2f,
-                Mathf.SmoothStep(0, 1, Mathf.PingPong(Time.time, 1)));
+                basePosition, basePosition + Vector3.up * 0.1f,
+                Mathf.SmoothStep(0, 1, Mathf.PingPong(Time.time, 0.8f)));
         }
 
         public void Discard(float animationSpeed)

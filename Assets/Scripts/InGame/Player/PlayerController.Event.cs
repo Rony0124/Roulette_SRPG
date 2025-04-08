@@ -118,7 +118,7 @@ namespace TSoft.InGame.Player
                 if(currentPokerCardSelected.Count >= HandCountMax)
                     return;
                 
-                pokerCard.SetVisualsPosition(Vector3.up * 100);
+                pokerCard.SetVisualsPosition(Vector3.up * 0.05f);
                 RotateCard(pokerCard, 0, 0);
                 pokerCard.SetFloating(true);
                 
