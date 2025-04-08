@@ -1,5 +1,6 @@
 using System;
 using TSoft.Core;
+using TSoft.Data.Monster;
 using TSoft.InGame;
 using TSoft.Map;
 using TSoft.Utils;
@@ -38,23 +39,8 @@ namespace TSoft
         public delegate void OnLocalDirectorChanged(DirectorBase previousValue, DirectorBase newValue);
         
         public OnLocalDirectorChanged OnDirectorChanged;
-
-        private MapNode currentNode;
-        public MapNode CurrentNode
-        {
-            get => currentNode;
-            set
-            {
-                if (currentNode != value)
-                {
-                    OnCurrentNodeChanged(value);    
-                }
-
-                currentNode = value;
-            }
-        }
         
-        public Map.Map CurrentMap { get; set; }
+        public MonsterDataSO CurrentMonster { get; set; }
 
         public StageInfo currentStageInfo;
 

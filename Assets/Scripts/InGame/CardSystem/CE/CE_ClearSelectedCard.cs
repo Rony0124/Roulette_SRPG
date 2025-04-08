@@ -7,7 +7,7 @@ namespace TSoft.InGame.CardSystem.CE
     {
         public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
-            var player = director.Player;
+            var player = director.Combat.Player;
             
             //카드 삭제
             foreach (var selectedCard in player.CurrentPokerCardSelected)

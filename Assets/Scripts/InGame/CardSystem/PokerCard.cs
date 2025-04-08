@@ -9,8 +9,7 @@ using UnityEngine.UI;
 
 namespace TSoft.InGame.CardSystem
 {
-    public class PokerCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler,
-    IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
+     public class PokerCard : MonoBehaviour
     {
         public event Action<PokerCard> OnHover;
         public event Action<PokerCard> OnStopHover;
@@ -19,16 +18,21 @@ namespace TSoft.InGame.CardSystem
         public event Action<PokerCard> OnRelease;
 
         [Header("Card Details")]
-        [SerializeField] private Image imgBG;
+        [SerializeField] private SpriteRenderer imgBG;
         
         [Header("System Helpers")]
         [SerializeField] private GameObject Visuals;
-        [SerializeField] private GameObject HitBox;
+
 
         [HideInInspector] public CardInfo cardData;
         private bool isHeld = false;
         private bool isFloating = false;
         private Vector3 basePosition = Vector3.zero;
+
+        [Header("UI")] 
+        [SerializeField] private GameObject cardInfoUI;
+        [SerializeField] private TextMeshProUGUI cardName;
+        [SerializeField] private TextMeshProUGUI cardDescription;
         
         [Header("Feedback")]
         public float duration = 0.7f;
@@ -53,11 +57,11 @@ namespace TSoft.InGame.CardSystem
 
         public void Dissolve(float animationSpeed)
         {
-            HitBox.SetActive(false);
+         //   HitBox.SetActive(false);
             
-            imgBG.TweenFade(0f, animationSpeed, false);
-            imgBG.transform.TweenScale(Vector3.one * 1.2f, animationSpeed, false);
-
+            //imgBG.TweenFade(0f, animationSpeed, false);
+            imgBG.transform.TweenScale(Vector3.one * 0.2f, animationSpeed, false);
+            transform.TweenMoveY(300, 1f, false);
             Visuals.transform.TweenMoveY(300, 1f, false);
         }
 
@@ -73,13 +77,13 @@ namespace TSoft.InGame.CardSystem
         private void HandleFloating()
         {
             Visuals.transform.localPosition = Vector3.Lerp(
-                basePosition, basePosition + Vector3.up * 7,
+                basePosition, basePosition + Vector3.up * 0.2f,
                 Mathf.SmoothStep(0, 1, Mathf.PingPong(Time.time, 1)));
         }
 
         public void Discard(float animationSpeed)
         {
-            HitBox.SetActive(false);
+         //   HitBox.SetActive(false);
             transform.TweenScale(Vector3.zero, animationSpeed, false);
         }
 
@@ -90,34 +94,39 @@ namespace TSoft.InGame.CardSystem
             basePosition = newPos;
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        public void OnMouseOver()
         {
             if (isHeld)
                 return;
             
             OnHover?.Invoke(this);
+            
+            cardInfoUI.gameObject.SetActive(true);
+            cardName.text = cardData.title;
+            cardDescription.text = cardData.description;
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public void OnMouseExit()
         {
             if (isHeld)
                 return;
             
             OnStopHover?.Invoke(this);
+            cardInfoUI.gameObject.SetActive(false);
         }
 
-        public void OnPointerClick(PointerEventData eventData)
+        public void OnMouseUpAsButton()
         {
             OnClick?.Invoke(this);
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnMouseDown()
         {
             OnHold?.Invoke(this);
             isHeld = true;
         }
 
-        public void OnPointerUp(PointerEventData eventData)
+        public void OnMouseUp()
         {
             OnRelease?.Invoke(this);
             isHeld = false;
@@ -134,7 +143,7 @@ namespace TSoft.InGame.CardSystem
 
         private void OnDestroy()
         {
-            imgBG.TweenKill();
+            //imgBG.TweenKill();
             gameObject.transform.TweenKillAll();
             Visuals.transform.TweenKillAll();
         }
@@ -146,6 +155,11 @@ namespace TSoft.InGame.CardSystem
         public void RotateCard(float angle, float duration)
         {
             transform.TweenRotate(new Vector3(0, 0, angle), duration);
+        }
+
+        public void SetCardOrder(int order)
+        {
+            imgBG.sortingOrder = order;
         }
     }
 }

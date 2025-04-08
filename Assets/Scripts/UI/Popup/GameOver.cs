@@ -24,18 +24,6 @@ namespace TSoft.UI.Popup
             director = FindObjectOfType<InGameDirector>();
         }
 
-        protected override void OnActivated()
-        {
-            base.OnActivated();
-            director.Player.CanMoveNextCycle = false;
-        }
-
-        protected override void OnDeactivated()
-        {
-            base.OnDeactivated();
-            director.Player.CanMoveNextCycle = true;
-        }
-
         private void OnButtonClicked(PointerEventData data)
         {
             director.GameFinishFail();

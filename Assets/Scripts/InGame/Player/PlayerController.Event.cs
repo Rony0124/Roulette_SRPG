@@ -77,8 +77,9 @@ namespace TSoft.InGame.Player
             pokerCard.onJokerUseFeedback.PlayFeedbacks();
             
             await UniTask.WaitForSeconds(pokerCard.onJokerUseFeedback.TotalDuration);
-            
-            pokerCard.cardData.instantEffect?.effect?.ApplyEffect(director).Forget();
+
+            var dir = GameContext.Instance.CurrentDirector as InGameDirector;
+            pokerCard.cardData.instantEffect?.effect?.ApplyEffect(dir).Forget();
             
             if (pokerCard.cardData.effect)
             {

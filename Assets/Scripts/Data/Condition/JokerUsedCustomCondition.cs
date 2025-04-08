@@ -7,7 +7,7 @@ namespace Data.Condition
     {
         public override bool Interpret(ConditionApplier applier)
         {
-            var player = applier.director.Player;
+            var player = applier.director.Combat.Player;
             if(player == null)
                 return false;
 

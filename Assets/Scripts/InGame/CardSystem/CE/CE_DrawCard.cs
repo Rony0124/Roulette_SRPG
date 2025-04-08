@@ -13,7 +13,7 @@ namespace TSoft.InGame.CardSystem.CE
                 var repeater = (int)modifier.gameplayMagnitude.magnitude;
                 for (var i = 0; i < repeater; i++)
                 {
-                    director.Player.DrawCards();
+                    director.Combat.Player.DrawCards();
                 }
             }
             

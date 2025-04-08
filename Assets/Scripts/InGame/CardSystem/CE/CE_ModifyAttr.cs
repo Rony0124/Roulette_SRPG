@@ -10,7 +10,7 @@ namespace TSoft.InGame.CardSystem.CE
         
         public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
-            var gameplay = director.Player.Gameplay;
+            var gameplay = director.Combat.Player.Gameplay;
             
             EventManager.Instance.GameEvent.Raise(appliedEffect.sourceEffect.Id);
             

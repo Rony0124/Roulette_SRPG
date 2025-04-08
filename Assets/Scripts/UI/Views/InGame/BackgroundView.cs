@@ -13,8 +13,6 @@ namespace TSoft.UI.Views.InGame
 {
     public class BackgroundView : ViewBase
     {
-        public Action<MonsterType> OnMonsterSpawn;
-        
         private enum BgImage
         {
             Background

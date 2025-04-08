@@ -87,8 +87,7 @@ namespace TSoft.Map
         private static void EnterNode(MapNode mapNode)
         {
             Debug.Log("Entering node: " + mapNode.Node.blueprintName + " of type: " + mapNode.Node.nodeType);
-
-            GameContext.Instance.CurrentNode = mapNode;
+            
         }
 
         private void PlayWarningThatNodeCannotBeAccessed()

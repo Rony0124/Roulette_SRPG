@@ -47,7 +47,7 @@ namespace TSoft.InGame.GamePlaySystem
     {
         public override float CalculateCurve(InGameDirector director)
         {
-            var player = director.Player;
+            var player = director.Combat.Player;
             var combo = player.previousPatterns.Count;
             
             return magnitudeCurve.Evaluate(combo);

@@ -25,7 +25,7 @@ namespace TSoft.UI.Views.InGame
 
       private void OnMonsterDamaged(float oldValue, float newValue)
       {
-         var maxHp = Model.Combat.CurrentMonster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
+         var maxHp = Model.Combat.Monster.GamePlay.GetAttr(GameplayAttr.MaxHeart);
          View.SetMonsterHpText(newValue, maxHp);
       }
    }

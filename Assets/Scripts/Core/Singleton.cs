@@ -28,6 +28,21 @@ namespace TSoft.Core
                 return instance;
             }
         }
+        
+        protected virtual void Awake ()
+        {
+            InitializeSingleton();		
+        }
+
+        protected virtual void InitializeSingleton()
+        {
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+
+            instance = this as T;
+        }
 
         private void OnApplicationQuit()
         {
