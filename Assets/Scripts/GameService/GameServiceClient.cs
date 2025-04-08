@@ -2,7 +2,7 @@ using System;
 
 namespace HF.GameService
 {
-    public abstract class GameServiceClient : GameService
+    public abstract class GameServiceClient : TSoft.GameService.GameService
     {
         public Action<ServerInfo> OnServerFound;
     

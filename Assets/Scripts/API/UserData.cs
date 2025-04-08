@@ -1,6 +1,7 @@
 using System;
 using HF.Data.Card;
 using HF.Utils;
+using TSoft.Data.Card;
 using Unity.Netcode;
 
 namespace HF.API

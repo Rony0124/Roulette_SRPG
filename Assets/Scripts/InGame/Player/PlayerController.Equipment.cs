@@ -6,14 +6,14 @@ using HF.Data.Card;
 using HF.Item;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using TSoft;
 using TSoft.Data.Card;
 using TSoft.Data.Registry;
 using TSoft.Item;
+using TSoft.Save;
 using TSoft.Utils;
 using UnityEngine;
 
-namespace HF.InGame.Player
+namespace TSoft.InGame.Player
 {
     public partial class PlayerController
     {

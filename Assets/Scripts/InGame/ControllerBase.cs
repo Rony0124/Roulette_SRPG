@@ -1,8 +1,6 @@
-using Cysharp.Threading.Tasks;
-using HF.InGame;
 using UnityEngine;
 
-namespace InGame
+namespace TSoft.InGame
 {
     public abstract class ControllerBase : MonoBehaviour
     {

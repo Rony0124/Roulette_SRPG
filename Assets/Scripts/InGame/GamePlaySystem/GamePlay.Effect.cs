@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using HF.InGame;
-using InGame;
-using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace TSoft.InGame.GamePlaySystem
@@ -89,7 +86,7 @@ namespace TSoft.InGame.GamePlaySystem
                 }
                 else
                 {
-                    //await effect.ApplyEffect(inGameDirector, this);    
+                    await effect.ApplyEffect(inGameDirector, this);    
                 }
             }
 
@@ -100,7 +97,7 @@ namespace TSoft.InGame.GamePlaySystem
                 var inGameDirector = GameContext.Instance.CurrentDirector as InGameDirector;
                 if (inGameDirector)
                 {
-                   // await effect.UnapplyEffect(inGameDirector, this);
+                    await effect.UnapplyEffect(inGameDirector, this);
                 }
             }
         }

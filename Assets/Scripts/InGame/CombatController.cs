@@ -1,9 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using TSoft.Core;
-using TSoft.Data;
 using TSoft.Data.Monster;
-using TSoft.Data.Registry;
 using TSoft.InGame.Player;
 using TSoft.Utils;
 using UnityEngine;
@@ -49,7 +47,7 @@ namespace TSoft.InGame
 #if UNITY_EDITOR
             if (GameContext.Instance.CurrentMonster == null)
             {
-                if (TsDevPreferences.Monster != null)
+                if (TsDevPreferences.Monster != null && TsDevPreferences.overrideMonster)
                 {
                     monsterData = TsDevPreferences.Monster;
                 }

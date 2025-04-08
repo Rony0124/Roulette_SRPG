@@ -1,19 +1,18 @@
 using Cysharp.Threading.Tasks;
-using InGame;
 using UnityEngine;
 
 namespace TSoft.InGame.CardSystem.CE
 {
     public class CE_EnhanceCardOnHand : CustomEffect
     {
-        /*public override async UniTask ApplyEffect(InGameDirector director)
+        public override async UniTask ApplyEffect(InGameDirector director)
         {
             var player = director.Combat.Player;
             player.isSelectingCardOnHand = true;
             player.onClickCard = TryClickCard;
             
             await UniTask.CompletedTask;
-        }*/
+        }
 
         private bool TryClickCard(PokerCard card)
         {

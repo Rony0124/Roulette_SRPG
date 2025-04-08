@@ -1,15 +1,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HF.InGame;
-using InGame;
 using Sirenix.OdinInspector;
 using TSoft.Data.Monster;
+using TSoft.InGame;
 using TSoft.UI.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace HF.UI.Views.InGame
+namespace TSoft.UI.Views.InGame
 {
     public class BackgroundView : ViewBase
     {

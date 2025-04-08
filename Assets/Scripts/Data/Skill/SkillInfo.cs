@@ -1,11 +1,10 @@
 using Cysharp.Threading.Tasks;
-using InGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Item;
-using PlayerController = HF.InGame.Player.PlayerController;
+using PlayerController = TSoft.InGame.Player.PlayerController;
 
 namespace TSoft.Data.Skill
 {

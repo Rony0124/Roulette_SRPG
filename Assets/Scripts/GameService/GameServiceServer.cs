@@ -2,7 +2,7 @@ using System;
 
 namespace HF.GameService
 {
-    public abstract class GameServiceServer : GameService
+    public abstract class GameServiceServer : TSoft.GameService.GameService
     {
         protected long createdTime;
     

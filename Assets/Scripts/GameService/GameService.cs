@@ -1,8 +1,7 @@
-using HF.Core;
 using TSoft.Core;
 using Unity.Netcode;
 
-namespace HF.GameService
+namespace TSoft.GameService
 {
     public abstract class GameService : Singleton<GameService>
     {

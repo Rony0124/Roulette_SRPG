@@ -170,9 +170,9 @@ MonoBehaviour:
   pokerCardPrefab: {fileID: 1675807730085212202, guid: 0d7493a324a386f40987d42508287d01, type: 3}
   maxCardsNum: 0
   defaultArtifacts: []
-  cardY: 1
-  cardXSpacing: 1
-  cardYSpacing: 0.2
+  cardY: 0.2
+  cardXSpacing: 0.2
+  cardYSpacing: 0.01
   cardAngle: 1.6
   animationSpeed: 0.3
   infoHeight: 1

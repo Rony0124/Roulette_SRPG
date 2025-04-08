@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id:
     _value: 654c209f0452742a19679477d424e757
-  _assetGuid: 
-  _lastGeneratedAssetGuid: 
+  _assetGuid: 9f204c6552042a7419679477d424e757
+  _lastGeneratedAssetGuid: 9f204c6552042a7419679477d424e757
   lifeCycle:
     begin: 4
     end: 3

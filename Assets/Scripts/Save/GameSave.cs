@@ -1,17 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using HF.Core;
-using InGame;
 using Sirenix.Utilities;
 using TSoft.Core;
-using TSoft.Data.Registry;
-using TSoft.Data.Skill;
 using TSoft.InGame;
 using UnityEngine;
 
-namespace TSoft
+namespace TSoft.Save
 {
     public class GameSave : Singleton<GameSave>
     {

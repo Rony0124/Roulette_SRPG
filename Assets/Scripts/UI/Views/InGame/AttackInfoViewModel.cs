@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using InGame;
 using MoreMountains.Feedbacks;
 using Sirenix.OdinInspector;
 using TSoft.InGame;
 using TSoft.InGame.GamePlaySystem;
 using TSoft.Managers.Event;
 using UnityEngine;
-using PlayerController = HF.InGame.Player.PlayerController;
+using PlayerController = TSoft.InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {

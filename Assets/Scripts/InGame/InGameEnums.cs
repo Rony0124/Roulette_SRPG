@@ -1,6 +1,6 @@
 using System;
 
-namespace InGame
+namespace TSoft.InGame
 {
     [Serializable]
     public enum StageState : int

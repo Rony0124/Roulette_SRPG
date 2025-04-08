@@ -3,11 +3,11 @@ using UnityEditor;
 using UnityEngine;
 
 #if UNITY_EDITOR
-    namespace HF.Utils
+    namespace TSoft.Utils
     {
-        public class HfDevPreferences : EditorWindow
+        public class TsDevPreferences : EditorWindow
         {
-            public static HfDevPreferences Instance;
+            public static TsDevPreferences Instance;
         
             int toolbarInt = 0;
             string[] toolbarStrings = {"InGame", "StageMap", "Lobby" };
@@ -27,7 +27,7 @@ using UnityEngine;
             [MenuItem("Window/DevPreferences")]
             public static void ShowWindow()
             {
-                Instance = GetWindow<HfDevPreferences>("DevPreferences");
+                Instance = GetWindow<TsDevPreferences>("DevPreferences");
             }
 
             private static void LoadPrefs()

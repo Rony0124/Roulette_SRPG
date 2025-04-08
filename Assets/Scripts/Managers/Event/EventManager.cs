@@ -1,8 +1,4 @@
-using System.Collections.Generic;
-using HF.Core;
 using TSoft.Core;
-using TSoft.Data;
-using UnityEngine.Events;
 
 namespace TSoft.Managers.Event
 {

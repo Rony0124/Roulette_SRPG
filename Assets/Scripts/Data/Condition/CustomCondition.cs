@@ -1,5 +1,4 @@
 using System;
-using InGame;
 using Sirenix.OdinInspector;
 using TSoft.InGame;
 using UnityEngine;

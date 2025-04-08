@@ -1,4 +1,5 @@
 using System;
+using TSoft.Data.Card;
 
 namespace HF.Data.Card
 {

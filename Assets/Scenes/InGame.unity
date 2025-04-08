@@ -7313,10 +7313,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 1381961117}
     m_Modifications:
     - target: {fileID: 123563507619229904, guid: 4cf780e446bc9e944852b8711555d1ab, type: 3}
-      propertyPath: cardY
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 123563507619229904, guid: 4cf780e446bc9e944852b8711555d1ab, type: 3}
       propertyPath: infoTitle
       value: 
       objectReference: {fileID: 138315742}
@@ -7324,14 +7320,6 @@ PrefabInstance:
       propertyPath: infoObject
       value: 
       objectReference: {fileID: 515593275}
-    - target: {fileID: 123563507619229904, guid: 4cf780e446bc9e944852b8711555d1ab, type: 3}
-      propertyPath: cardXSpacing
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 123563507619229904, guid: 4cf780e446bc9e944852b8711555d1ab, type: 3}
-      propertyPath: cardYSpacing
-      value: 0.01
-      objectReference: {fileID: 0}
     - target: {fileID: 123563507619229904, guid: 4cf780e446bc9e944852b8711555d1ab, type: 3}
       propertyPath: infoDescription
       value: 

@@ -27,11 +27,6 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 5c5cda7837f7bf447b36282ab7a26eb6
-    m_Address: Assets/Data/Registry/CardBackDataRegistry.asset
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 67117722a812a2e46ab8cb8eafbf5f5e
     m_Address: IngameDebugConsole
     m_ReadOnly: 0

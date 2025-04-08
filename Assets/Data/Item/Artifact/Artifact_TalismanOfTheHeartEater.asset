@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id:
     _value: 2a843963391f24adaa535c1ad1d69c34
-  _assetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
-  _lastGeneratedAssetGuid: 0e698b2666c5bcd4d88707c5d0db67e3
+  _assetGuid: 6339842a1f39ad24aa535c1ad1d69c34
+  _lastGeneratedAssetGuid: 6339842a1f39ad24aa535c1ad1d69c34
   title: 
   description: 
   image: {fileID: -180404796, guid: 16b7ff99611d5be4a9fce54686bdd2fe, type: 3}

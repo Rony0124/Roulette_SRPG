@@ -21,9 +21,9 @@ MonoBehaviour:
     end: 3
   gameplayEffect:
     effect:
-      rid: 8436400433813258273
+      rid: 3961255810935816192
     modifiers:
-    - attrType: 0
+    - attrType: 2000
       modifierOp: 2
       gameplayMagnitude:
         magnitudeType: 0
@@ -48,6 +48,6 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 8436400433813258273
-      type: {class: CE_RewardByDiscard, ns: , asm: Assembly-CSharp}
+    - rid: 3961255810935816192
+      type: {class: CE_ModifyAttr, ns: TSoft.InGame.CardSystem.CE, asm: Assembly-CSharp}
       data: 

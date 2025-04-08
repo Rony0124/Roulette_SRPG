@@ -6,6 +6,7 @@ using TSoft.Data.Card;
 using TSoft.Data.Registry;
 using TSoft.Item;
 using TSoft.Managers;
+using TSoft.Save;
 using UnityEngine;
 using UnityEngine.EventSystems;
 

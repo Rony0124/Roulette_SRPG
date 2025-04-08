@@ -1,5 +1,4 @@
 using System;
-using HF.Core;
 using TSoft.Core;
 using TSoft.Data.Monster;
 using TSoft.InGame;

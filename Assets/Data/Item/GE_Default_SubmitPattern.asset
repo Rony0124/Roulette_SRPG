@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _id:
     _value: 6c0b6f4fe1e4c4e7eb70b63f68400c64
-  _assetGuid: 
-  _lastGeneratedAssetGuid: 
+  _assetGuid: 4f6f0b6ce4e1e7c4eb70b63f68400c64
+  _lastGeneratedAssetGuid: 4f6f0b6ce4e1e7c4eb70b63f68400c64
   lifeCycle:
     begin: 4
     end: 5
@@ -27,7 +27,7 @@ MonoBehaviour:
       modifierOp: 1
       gameplayMagnitude:
         magnitudeType: 0
-        magnitude: 8
+        magnitude: 9
         magnitudeRandom:
           minValue: 0
           maxValue: 0

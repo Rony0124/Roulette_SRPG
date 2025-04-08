@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using HF.InGame;
-using InGame;
 using TSoft.InGame;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
-using PlayerController = HF.InGame.Player.PlayerController;
+using PlayerController = TSoft.InGame.Player.PlayerController;
 
 namespace TSoft.Data.Condition
 {
@@ -27,14 +25,14 @@ namespace TSoft.Data.Condition
             this.director = director;
             this.appliedEffect = appliedEffect;
 
-            /*if (context.Evaluate(this))
+            if (context.Evaluate(this))
             {
                 await appliedEffect.sourceEffect.gameplayEffect.effect.ApplyEffect(director, this.appliedEffect);
             }
             else if (appliedEffect.sourceEffect.hasUnsatisfiedEffect)
             {
                 await appliedEffect.sourceEffect.unsatisfiedEffect.effect.ApplyEffect(director, this.appliedEffect);
-            }*/
+            }
         }
     }
     
@@ -44,7 +42,7 @@ namespace TSoft.Data.Condition
         private PokerCard currentCheckingCard;
         public PokerCard CurrentCheckingCard => currentCheckingCard;
         
-        /*public override async UniTask CheckConditionEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
+        public override async UniTask CheckConditionEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             this.director = director;
             this.appliedEffect = appliedEffect;
@@ -66,7 +64,7 @@ namespace TSoft.Data.Condition
 
                 await UniTask.Delay(10);
             }
-        }*/
+        }
     }
     
     [Serializable]
@@ -79,7 +77,7 @@ namespace TSoft.Data.Condition
         private List<PokerCard> currentCards;
         public List<PokerCard> CurrentCards => currentCards;
         
-        /*public override async UniTask CheckConditionEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
+        public override async UniTask CheckConditionEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
             this.director = director;
             this.appliedEffect = appliedEffect;
@@ -95,6 +93,6 @@ namespace TSoft.Data.Condition
             {
                 await appliedEffect.sourceEffect.unsatisfiedEffect.effect.ApplyEffect(director, this.appliedEffect);
             }
-        }*/
+        }
     }
 }

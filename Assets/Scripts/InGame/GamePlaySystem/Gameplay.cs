@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using InGame;
 using UnityEngine;
 
 namespace TSoft.InGame.GamePlaySystem

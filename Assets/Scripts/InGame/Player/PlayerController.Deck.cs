@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using HF.Data.Card;
 using Sirenix.OdinInspector;
 using TCGStarter.Tweening;
 using TSoft.Data.Card;
 using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
+using TSoft.Save;
 using TSoft.Utils;
 using UnityEngine;
 

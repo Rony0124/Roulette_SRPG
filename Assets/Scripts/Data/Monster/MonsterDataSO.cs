@@ -1,4 +1,3 @@
-using InGame;
 using TSoft.InGame;
 using UnityEngine;
 

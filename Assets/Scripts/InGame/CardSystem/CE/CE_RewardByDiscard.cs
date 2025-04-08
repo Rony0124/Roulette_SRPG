@@ -1,42 +1,42 @@
 using Cysharp.Threading.Tasks;
-using InGame;
-using TSoft;
-using TSoft.InGame;
-using TSoft.InGame.CardSystem.CE;
 using TSoft.InGame.GamePlaySystem;
+using TSoft.Save;
 
-public class CE_RewardByDiscard : CustomEffect
+namespace TSoft.InGame.CardSystem.CE
 {
-    /*public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
+    public class CE_RewardByDiscard : CustomEffect
     {
-        var currentGold = GameSave.Instance.Gold;
-        var currentEnergy = director.Combat.Player.Gameplay.GetAttr(GameplayAttr.Energy);
-        
-        foreach (var modifier in appliedEffect.sourceEffect.gameplayEffect.modifiers)
+        public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
         {
-            if (modifier.attrType != GameplayAttr.None)
+            var currentGold = GameSave.Instance.Gold;
+            var currentEnergy = director.Combat.Player.Gameplay.GetAttr(GameplayAttr.Energy);
+        
+            foreach (var modifier in appliedEffect.sourceEffect.gameplayEffect.modifiers)
             {
-                continue;
-            }
+                if (modifier.attrType != GameplayAttr.None)
+                {
+                    continue;
+                }
 
-            var magnitude = (int)currentEnergy * (int)modifier.gameplayMagnitude.magnitude;
+                var magnitude = (int)currentEnergy * (int)modifier.gameplayMagnitude.magnitude;
             
-            switch (modifier.modifierOp)
-            {
-                case ModifierOpType.Add:
-                    currentGold += magnitude;
-                    break;
-                case ModifierOpType.Multiply:
-                    currentGold *= magnitude;
-                    break;
-                case ModifierOpType.Divide:
-                    currentGold /= magnitude;
-                    break;
+                switch (modifier.modifierOp)
+                {
+                    case ModifierOpType.Add:
+                        currentGold += magnitude;
+                        break;
+                    case ModifierOpType.Multiply:
+                        currentGold *= magnitude;
+                        break;
+                    case ModifierOpType.Divide:
+                        currentGold /= magnitude;
+                        break;
+                }
             }
+        
+            GameSave.Instance.SetGold(currentGold);
+        
+            await UniTask.CompletedTask;
         }
-        
-        GameSave.Instance.SetGold(currentGold);
-        
-        await UniTask.CompletedTask;
-    }*/
+    }
 }

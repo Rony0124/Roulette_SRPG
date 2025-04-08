@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using InGame;
 using UnityEngine.Serialization;
 
 namespace TSoft.InGame.GamePlaySystem

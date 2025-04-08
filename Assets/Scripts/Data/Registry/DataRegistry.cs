@@ -1,8 +1,5 @@
-using Cysharp.Threading.Tasks;
-using HF.Data.Registry;
 using TSoft.Core;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
 namespace TSoft.Data.Registry
 {
@@ -21,14 +18,11 @@ namespace TSoft.Data.Registry
         private JokerRegistry jokerRegistry;
         [SerializeField]
         private SkillRegistry skillRegistry;
-        [SerializeField] 
-        private CardBackDataRegistry cardBackDataRegistry;
         
         public MonsterRegistry MonsterRegistry => monsterRegistry;
         public ArtifactRegistry ArtifactRegistry => artifactRegistry;
         public JokerRegistry JokerRegistry => jokerRegistry;
         public SkillRegistry SkillRegistry => skillRegistry;
-        public CardBackDataRegistry CardBackDataRegistry => cardBackDataRegistry;
 
         /*public async UniTask Load()
         {

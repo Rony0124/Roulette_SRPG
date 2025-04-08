@@ -1,6 +1,6 @@
-using InGame;
 using Sirenix.OdinInspector;
 using TSoft.Data;
+using TSoft.InGame;
 using UnityEngine;
 
 namespace HF.Data.Card
