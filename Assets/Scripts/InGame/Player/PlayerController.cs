@@ -1,12 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
-using InGame;
 using Sirenix.Utilities;
+using TCGStarter.Tweening;
 using TSoft.InGame.CardSystem;
 using TSoft.InGame.GamePlaySystem;
 using UnityEngine;
 
-namespace HF.InGame.Player
+namespace TSoft.InGame.Player
 {
     public partial class PlayerController : MonoBehaviour
     {
@@ -21,6 +22,7 @@ namespace HF.InGame.Player
         [SerializeField]
         private List<PokerCard> cardsOnHand;
         private List<PokerCard> currentPokerCardSelected;
+        public List<PokerCard> CurrentPokerCardSelected => currentPokerCardSelected;
         
         private Gameplay gameplay;
         public Gameplay Gameplay =>  gameplay;
@@ -42,12 +44,13 @@ namespace HF.InGame.Player
             InitializeEquipment();
         }
 
-        public async UniTask OnPrePlay()
+        public async UniTask GameStart()
         {
             await gameplay.OnRoundBegin();
-            DrawCards();
             
-            await UniTask.WaitForSeconds(0.5f);
+            Debug.Log("player game Start");
+            
+            DrawCards();
         }
         
         private async UniTask OnPostPlaySuccess()
@@ -58,78 +61,68 @@ namespace HF.InGame.Player
             
             DiscardAll();
         }
-        
-        public async UniTask<bool> TryUseCardsOnHand()
-        {
-            if (isSubmitting)
-                return false;
-            
-            var currentHeart = gameplay.GetAttr(GameplayAttr.Heart, false);
-            if (currentHeart <= 0)
-                return false;
-            
-            //손에 들고 있는 카드가 없다면 false
-            if (currentPokerCardSelected.IsNullOrEmpty())
-                return false;
-            
-            isSubmitting = true;
-            
-            //하트 사용
-            --currentHeart;
-            gameplay.SetAttr(GameplayAttr.Heart, currentHeart, false);
-            
-            gameplay.CaptureCurrentAttributeModifiers();
-            
-            //현재 패턴에 해당하는 이팩트 추가
-            currentPattern.ApplyCurrentPattern(this);
-            
-            //turn begin 이팩트 추가
-            await gameplay.OnTurnBegin();
-            
-            //카드 삭제
-            DiscardSelectedCards();
-            
-            //스킬 플레이
-            //await currentPattern.skill.PlaySkill(this, director.CurrentMonster);
-            
-            //turn finished 이팩트 추가
-            await gameplay.OnTurnFinished();
-            
-            gameplay.ResetAttributeModifiers();
-            
-            isSubmitting = false;
-            
-            jokerUsedNumber = 0;
 
-            if (CheckGameOver())
+        public bool CanPlay()
+        {
+            if (CombatController.Instance.phase != GamePhase.Main)
+                return false;
+
+            if (CombatController.Instance.currentTurn != 0)
+                return false;
+            
+            if (isSubmitting)
                 return false;
             
             return true;
         }
 
-        private bool CheckGameOver()
+        public async UniTask<bool> TryUseCardsOnHand()
         {
-            /*var currentHeart = gameplay.GetAttr(GameplayAttr.Heart);
-            if (director.CurrentMonster.IsDead)
-            {
-                if (currentHeart > 0)
-                {
-                    director.GameOver(true);
-                    return true;
-                }
-            }
-            else
-            {
-                if (currentHeart <= 0 || cardsOnHand.Count <= 0)
-                {
-                    director.GameOver(false);
-                    return true;
-                }
-            }*/
+            if (!CanPlay())
+                return false;
 
-            return false;
+            var currentHeart = gameplay.GetAttr(GameplayAttr.Heart, false);
+            if (currentHeart <= 0)
+                return false;
+
+            //손에 들고 있는 카드가 없다면 false
+            if (currentPokerCardSelected.IsNullOrEmpty())
+                return false;
+
+            isSubmitting = true;
+
+            //하트 사용
+            --currentHeart;
+            gameplay.SetAttr(GameplayAttr.Heart, currentHeart, false);
+
+            gameplay.CaptureCurrentAttributeModifiers();
+
+            //현재 패턴에 해당하는 이팩트 추가
+            currentPattern.ApplyCurrentPattern(this);
+
+            //turn begin 이팩트 추가
+            await gameplay.OnTurnBegin();
+
+            //카드 삭제
+            DiscardSelectedCards();
+
+            //스킬 플레이
+            await currentPattern.skill.PlaySkill(this, CombatController.Instance.Monster);
+
+            //turn finished 이팩트 추가
+            await gameplay.OnTurnFinished();
+
+            gameplay.ResetAttributeModifiers();
+
+            isSubmitting = false;
+
+            jokerUsedNumber = 0;
+
+            CombatController.Instance.EndTurn().Forget();
+
+            return true;
         }
-        
+
         public bool TryDiscardSelectedCard()
         {
             var currentEnergy = gameplay.GetAttr(GameplayAttr.Energy);

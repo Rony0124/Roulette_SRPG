@@ -1,12 +1,11 @@
 using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
-using InGame;
 using TMPro;
 using TSoft.InGame.CardSystem;
 using UnityEngine;
 
-namespace HF.InGame.Player
+namespace TSoft.InGame.Player
 {
     public partial class PlayerController
     {
@@ -78,8 +77,9 @@ namespace HF.InGame.Player
             pokerCard.onJokerUseFeedback.PlayFeedbacks();
             
             await UniTask.WaitForSeconds(pokerCard.onJokerUseFeedback.TotalDuration);
-            
-       //     pokerCard.cardData.instantEffect?.effect?.ApplyEffect(director).Forget();
+
+            var dir = GameContext.Instance.CurrentDirector as InGameDirector;
+            pokerCard.cardData.instantEffect?.effect?.ApplyEffect(dir).Forget();
             
             if (pokerCard.cardData.effect)
             {
@@ -115,10 +115,10 @@ namespace HF.InGame.Player
             }
             else
             {
-                if(currentPokerCardSelected.Count >= HF.InGame.Player.PlayerController.HandCountMax)
+                if(currentPokerCardSelected.Count >= HandCountMax)
                     return;
                 
-                pokerCard.SetVisualsPosition(Vector3.up * 100);
+                pokerCard.SetVisualsPosition(Vector3.up * 0.05f);
                 RotateCard(pokerCard, 0, 0);
                 pokerCard.SetFloating(true);
                 

@@ -51,8 +51,10 @@ namespace TSoft
         private static readonly string MapKey = "map";
         
         
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
+            
             easySaveSettings = new ES3Settings(ES3.EncryptionType.AES, "IAmCheater");
             easySaveSettings.compressionType = ES3.CompressionType.Gzip;
             easySaveSettings.path = "GameSave/GameSave.bin";

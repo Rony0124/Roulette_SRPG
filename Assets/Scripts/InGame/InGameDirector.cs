@@ -1,16 +1,13 @@
 using Cysharp.Threading.Tasks;
-using InGame;
-using TSoft;
-using TSoft.InGame;
 using TSoft.Managers;
 using TSoft.Utils;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-namespace HF.InGame
+namespace TSoft.InGame
 {
-    public class InGameDirector : DirectorBase
+   public class InGameDirector : DirectorBase
     {
         [Header("Combat")] 
         [SerializeField] private CombatController combat;
@@ -24,18 +21,14 @@ namespace HF.InGame
         public UnityEvent outroFeedback;
 
         //life cycle
-        private ObservableVar<StageState> currentStageState;
-
-        public StageState CurrentStageState => currentStageState.Value;
+        public ObservableVar<StageState> CurrentStageState;
 
         protected override void OnDirectorChanged(DirectorBase oldValue, DirectorBase newValue)
         {
+            CurrentStageState = new ObservableVar<StageState>();
+            CurrentStageState.OnValueChanged +=  OnStageStateChanged;
+            
             combat.Director = this;
-            
-            currentStageState = new ObservableVar<StageState>();
-            currentStageState.OnValueChanged +=  OnStageStateChanged;
-            
-            currentStageState.Value = StageState.Intro;
         }
 
         private void OnStageStateChanged(StageState oldVal, StageState newVal)
@@ -73,24 +66,24 @@ namespace HF.InGame
 
         public void SetStageState(int stageStage)
         {
-            currentStageState.Value = (StageState)stageStage;
+            CurrentStageState.Value = (StageState)stageStage;
         }
         
         private async UniTaskVoid IntroAsync()
         {
-            //TODO 타임라인을 깔수도 있다. 현재는 몬스터의 인트로 피드백이 끝날때까지 기다리는 방식
+            //TODO 타임라인을 깔수도 있다.
             await UniTask.Delay(100);
             
-            currentStageState.Value = StageState.PrePlaying;
+            CurrentStageState.Value = StageState.PrePlaying;
         }
 
         private async UniTaskVoid PrePlayAsync()
         {
-            Combat.GameStart();
+            await Combat.GameStart();
             
-            //TODO 몬스터, 플레이어 카드 및 아이템 소환
+            await UniTask.Delay(1000);
             
-            currentStageState.Value = StageState.Playing;
+            CurrentStageState.Value = StageState.Playing;
         }
 
         public void GameOver(bool isSuccess)
@@ -139,7 +132,7 @@ namespace HF.InGame
 
         private void OnPlay()
         {
-            
+            Combat.StartTurn().Forget();
         }
 
         private void OnPostPlayingSuccess()

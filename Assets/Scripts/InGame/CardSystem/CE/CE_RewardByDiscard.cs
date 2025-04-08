@@ -10,7 +10,7 @@ public class CE_RewardByDiscard : CustomEffect
     /*public override async UniTask ApplyEffect(InGameDirector director, Gameplay.AppliedGameplayEffect appliedEffect)
     {
         var currentGold = GameSave.Instance.Gold;
-        var currentEnergy = director.Player.Gameplay.GetAttr(GameplayAttr.Energy);
+        var currentEnergy = director.Combat.Player.Gameplay.GetAttr(GameplayAttr.Energy);
         
         foreach (var modifier in appliedEffect.sourceEffect.gameplayEffect.modifiers)
         {

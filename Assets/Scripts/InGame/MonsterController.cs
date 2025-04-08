@@ -3,12 +3,12 @@ using Cysharp.Threading.Tasks;
 using MoreMountains.Feedbacks;
 using TSoft.Data.Monster;
 using TSoft.InGame.GamePlaySystem;
+using TSoft.InGame.Player;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace InGame
+namespace TSoft.InGame
 {
-    public class MonsterController : MonoBehaviour
+  public class MonsterController : MonoBehaviour
     {
         public Action<float> onDamaged;
         
@@ -45,6 +45,13 @@ namespace InGame
             IntroFeedback.PlayFeedbacks();
 
             await UniTask.WaitForSeconds(IntroFeedback.TotalDuration);
+        }
+
+        public void AttackPlayer(PlayerController player)
+        {
+            Debug.Log("Attacking player");
+            
+            CombatController.Instance.EndTurn().Forget();
         }
 
         public void TakeDamage(int damage, bool ignoreFeedback = false)

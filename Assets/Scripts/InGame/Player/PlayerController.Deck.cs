@@ -1,20 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using HF.Data.Card;
-using InGame;
 using Sirenix.OdinInspector;
 using TCGStarter.Tweening;
-using TSoft;
 using TSoft.Data.Card;
 using TSoft.Data.Registry;
 using TSoft.InGame.CardSystem;
 using TSoft.Utils;
 using UnityEngine;
 
-namespace HF.InGame.Player
+namespace TSoft.InGame.Player
 {
-    public partial class PlayerController
+     public partial class PlayerController
     {
         public Action<int, int> onDeckChanged; 
         
@@ -215,6 +212,9 @@ namespace HF.InGame.Player
 
                 RelocateCard(cardsOnHand[i], xspace, yspace, -angle, duration);
                 RelocateCard(cardsOnHand[cardsOnHand.Count - i - 1], -xspace, yspace, angle, duration);
+                
+                cardsOnHand[cardsOnHand.Count - i - 1].SetCardOrder(cardsOnHand.Count - i - 1);
+                cardsOnHand[i].SetCardOrder(i);
 
                 xspace += cardXSpacing;
                 yspace -= cardYSpacing;

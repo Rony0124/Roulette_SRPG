@@ -49,7 +49,7 @@ namespace TSoft.Data.Condition
             this.director = director;
             this.appliedEffect = appliedEffect;
 
-            var currentSelectedCards = director.Player.CurrentPokerCardSelected;
+            var currentSelectedCards = director.Combat.Player.CurrentPokerCardSelected;
 
             foreach (var selectedCard in currentSelectedCards)
             {
@@ -84,8 +84,8 @@ namespace TSoft.Data.Condition
             this.director = director;
             this.appliedEffect = appliedEffect;
 
-            currentPattern = director.Player.CurrentPattern;
-            currentCards = director.Player.CurrentPokerCardSelected;
+            currentPattern = director.Combat.Player.CurrentPattern;
+            currentCards = director.Combat.Player.CurrentPokerCardSelected;
             
             if (context.Evaluate(this))
             {

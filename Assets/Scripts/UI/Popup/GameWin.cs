@@ -1,5 +1,3 @@
-using HF.InGame;
-using InGame;
 using TMPro;
 using TSoft.InGame;
 using TSoft.Utils;
@@ -34,22 +32,6 @@ namespace TSoft.UI.Popup
             
             director = FindObjectOfType<InGameDirector>();
         }
-
-        /*
-        protected override void OnActivated()
-        {
-            base.OnActivated();
-            director.Player.CanMoveNextCycle = false;
-
-            goldText.text = GameContext.Instance.currentBounty.ToString();
-        }
-
-        protected override void OnDeactivated()
-        {
-            base.OnDeactivated();
-            director.Player.CanMoveNextCycle = true;
-        }
-        */
 
         private void OnButtonClicked(PointerEventData data)
         {

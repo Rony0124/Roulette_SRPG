@@ -1,5 +1,67 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2035390655017480391
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 892969719392947503}
+  m_Layer: 0
+  m_Name: Deck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &892969719392947503
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2035390655017480391}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084890766169659947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6749839506795875585
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6323637481821791317}
+  m_Layer: 0
+  m_Name: Hand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6323637481821791317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6749839506795875585}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084890766169659947}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8481043479687266652
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +92,9 @@ Transform:
   m_LocalPosition: {x: 0.8150512, y: -4.023719, z: 1.6224421}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6323637481821791317}
+  - {fileID: 892969719392947503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -7.334, y: 25.526, z: -1.391}
 --- !u!114 &123563507619229904
@@ -45,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726abe02b78b87547acf83a6cf262879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hand: {fileID: 0}
-  deck: {fileID: 0}
+  hand: {fileID: 6323637481821791317}
+  deck: {fileID: 892969719392947503}
   cardsOnHand: []
   defaultCardDB:
   - {fileID: 11400000, guid: 3ffda229b8ef3a641ba239f6771972fa, type: 2}
@@ -101,18 +165,17 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 945d46152171d324ca9c0543bc1528bf, type: 2}
   - {fileID: 11400000, guid: 5b7632899c443764b87f38f4d17046db, type: 2}
   - {fileID: 11400000, guid: fad4c0acb9c75324fb67db0793e445bf, type: 2}
-  specialCardDB: []
-  pokerCardPrefab: {fileID: 7077379988836161706, guid: 0d7493a324a386f40987d42508287d01,
-    type: 3}
+  testCardDB:
+  - {fileID: 11400000, guid: 586cb4b3ced792c4abe76ea567bb50c1, type: 2}
+  pokerCardPrefab: {fileID: 1675807730085212202, guid: 0d7493a324a386f40987d42508287d01, type: 3}
   maxCardsNum: 0
-  defaultArtifacts:
-  - {fileID: 11400000, guid: ad8ed1d0854914be287635b7c8c661f0, type: 2}
-  cardY: 140
-  cardXSpacing: 120
-  cardYSpacing: 4
+  defaultArtifacts: []
+  cardY: 1
+  cardXSpacing: 1
+  cardYSpacing: 0.2
   cardAngle: 1.6
   animationSpeed: 0.3
-  infoHeight: 430
+  infoHeight: 1
   infoObject: {fileID: 0}
   infoTitle: {fileID: 0}
   infoDescription: {fileID: 0}

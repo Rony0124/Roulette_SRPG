@@ -8,7 +8,7 @@ namespace TSoft.InGame.CardSystem.CE
     {
         /*public override async UniTask ApplyEffect(InGameDirector director)
         {
-            var player = director.Player;
+            var player = director.Combat.Player;
             player.isSelectingCardOnHand = true;
             player.onClickCard = TryClickCard;
             

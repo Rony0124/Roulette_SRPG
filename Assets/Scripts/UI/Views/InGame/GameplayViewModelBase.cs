@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
-using HF.InGame;
-using InGame;
 using Sirenix.Utilities;
+using TSoft.Data;
+using TSoft.Data.Card;
+using TSoft.InGame;
+using TSoft.InGame.CardSystem;
+using TSoft.InGame.Player;
 using UnityEngine;
-using PlayerController = HF.InGame.Player.PlayerController;
 
 namespace TSoft.UI.Views.InGame
 {
@@ -26,8 +28,8 @@ namespace TSoft.UI.Views.InGame
             View.DiscardButton.onClick.AddListener(OnDiscardCard);
             View.UseButton.onClick.AddListener(() => OnUseCard().Forget());
             
-            /*Model.PlayerHeart.OnValueChanged += OnPlayerHeartChanged;
-            Model.PlayerEnergy.OnValueChanged += OnPlayerEnergyChanged;*/
+            Model.PlayerHeart.OnValueChanged += OnPlayerHeartChanged;
+            Model.PlayerEnergy.OnValueChanged += OnPlayerEnergyChanged;
             
             player = Model.Player;
             
@@ -39,14 +41,14 @@ namespace TSoft.UI.Views.InGame
         
         private void OnPlayerHeartChanged(float oldVal, float newVal)
         {
-            /*var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxHeart);
-            View.SetHeartText(newVal, maxCount);*/
+            var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxHeart);
+            View.SetHeartText(newVal, maxCount);
         }
         
         private void OnPlayerEnergyChanged(float oldVal, float newVal)
         {
-            /*var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxEnergy);
-            View.SetEnergyText(newVal, maxCount);*/
+            var maxCount = player.Gameplay.GetAttr(GameplayAttr.MaxEnergy);
+            View.SetEnergyText(newVal, maxCount);
         }
         
         private void OnDiscardCard()
@@ -80,6 +82,8 @@ namespace TSoft.UI.Views.InGame
             
             View.SetEnergyText(energyCount, maxEnergyCount);
             View.SetHeartText(heartCount, maxHeartCount);
+            
+            player.DrawCards();
         }
 
         private void UpdateJokerEffectIcon()
@@ -104,7 +108,7 @@ namespace TSoft.UI.Views.InGame
         private void OnDestroy()
         {
             player.onDeckChanged -= OnDeckChanged;
-         //   player.onGameReady -= UpdateCardOnGameReady;
+          //  player.onGameReady -= UpdateCardOnGameReady;
         }
     }
 }

@@ -38,7 +38,7 @@ namespace TSoft.UI.Views.InGame
             
             Model.Player.onPatternSelected += OnCombinationSelected;
 
-            foreach (var info in effectInfos)
+            /*foreach (var info in effectInfos)
             {
                 void UnityAction(AppliedModifier appliedModifier)
                 {
@@ -57,7 +57,7 @@ namespace TSoft.UI.Views.InGame
                 }
                 
                 EventManager.Instance.DmgAdderEvent.AddEvent(UnityAction);
-            }
+            }*/
         }
 
         private void OnCombinationSelected(PlayerController.CardPattern pattern)

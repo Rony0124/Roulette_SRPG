@@ -14,6 +14,15 @@ namespace InGame
         Outro = 6,
         Exit = 7,               // 로비로 돌아간다.
     };
+    
+    [Serializable]
+    public enum GamePhase
+    {
+        None = 0,
+        StartTurn = 10, //Start of turn resolution
+        Main = 20,      //Main play phase
+        EndTurn = 30,   //End of turn resolutions
+    }
 
     public enum ConditionType
     {

@@ -1,5 +1,3 @@
-using HF.InGame;
-using InGame;
 using TSoft.InGame;
 using TSoft.Utils;
 using UnityEngine;
@@ -24,18 +22,6 @@ namespace TSoft.UI.Popup
             Get<Button>((int)PopupButton.ButtonConfirm).gameObject.BindEvent(OnButtonClicked);
             
             director = FindObjectOfType<InGameDirector>();
-        }
-
-        protected override void OnActivated()
-        {
-            base.OnActivated();
-         //   director.Player.CanMoveNextCycle = false;
-        }
-
-        protected override void OnDeactivated()
-        {
-            base.OnDeactivated();
-            //director.Player.CanMoveNextCycle = true;
         }
 
         private void OnButtonClicked(PointerEventData data)

@@ -1,6 +1,4 @@
 using System;
-using HF.InGame;
-using InGame;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -49,11 +47,10 @@ namespace TSoft.InGame.GamePlaySystem
     {
         public override float CalculateCurve(InGameDirector director)
         {
-            return 0;
-            /*var player = director.Player;
+            var player = director.Combat.Player;
             var combo = player.previousPatterns.Count;
-
-            return magnitudeCurve.Evaluate(combo);*/
+            
+            return magnitudeCurve.Evaluate(combo);
         }
     }
 }

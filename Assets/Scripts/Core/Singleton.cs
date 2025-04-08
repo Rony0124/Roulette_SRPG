@@ -1,27 +1,30 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 
-namespace HF.Core
+namespace TSoft.Core
 {
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
+        private static object @lock = new();
+        
         private static T instance;
         public static T Instance {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = FindObjectOfType<T> ();
-                    
-                    if (instance != null)
-                        return instance;
-                    
-                    var obj = new GameObject
+            get {
+                if (instance == null && Time.timeScale != 0) {
+                    lock (@lock)
                     {
-                        name = typeof(T).Name
-                    };
-                    
-                    instance = obj.AddComponent<T> ();
+                        instance = FindObjectOfType(typeof(T)) as T;
+
+                        if (instance == null) {
+                            var singletonObject = new GameObject();
+                            instance = singletonObject.AddComponent<T>();
+
+                            singletonObject.name = typeof(T).Name;
+                        }
+                    }
                 }
+                
                 return instance;
             }
         }
@@ -30,7 +33,7 @@ namespace HF.Core
         {
             InitializeSingleton();		
         }
-        
+
         protected virtual void InitializeSingleton()
         {
             if (!Application.isPlaying)
@@ -39,6 +42,11 @@ namespace HF.Core
             }
 
             instance = this as T;
+        }
+
+        private void OnApplicationQuit()
+        {
+            Time.timeScale = 0;
         }
     }
 }
