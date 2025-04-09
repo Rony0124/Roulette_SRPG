@@ -2671,7 +2671,7 @@ MonoBehaviour:
     - rid: 1257793515429560328
       type: {class: MMF_ChromaticAberration_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
       data:
-        Active: 1
+        Active: 0
         UniqueID: 344875130
         Label: Chromatic Aberration URP
         ChannelMode: 0
@@ -2785,7 +2785,7 @@ MonoBehaviour:
     - rid: 1257793515429560329
       type: {class: MMF_LensDistortion_URP, ns: MoreMountains.FeedbacksForThirdParty, asm: MoreMountains.Tools}
       data:
-        Active: 1
+        Active: 0
         UniqueID: -665254165
         Label: Lens Distortion URP
         ChannelMode: 0
