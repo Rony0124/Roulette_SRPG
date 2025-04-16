@@ -21,7 +21,7 @@ namespace TSoft.InGame.Player
             public GameplayEffectSO effect;
             public SkillInfo skill;
           
-            public void ApplyCurrentPattern(global::TSoft.InGame.Player.PlayerController player)
+            public void ApplyCurrentPattern(PlayerController player)
             {
                 if (effect)
                     player.Gameplay.AddEffect(effect);

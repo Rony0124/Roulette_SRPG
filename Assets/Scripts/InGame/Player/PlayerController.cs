@@ -73,7 +73,36 @@ namespace TSoft.InGame.Player
             if (isSubmitting)
                 return false;
             
+            var currentHeart = gameplay.GetAttr(GameplayAttr.Heart, false);
+            if (currentHeart <= 0)
+                return false;
+
+            //손에 들고 있는 카드가 없다면 false
+            if (currentPokerCardSelected.IsNullOrEmpty())
+                return false;
+            
             return true;
+        }
+
+        public async UniTask LocateCardOnSubmit()
+        {
+            if (!CanPlay())
+                return;
+            
+            if (currentPokerCardSelected.IsNullOrEmpty())
+                return;
+            
+            isSubmitting = true;
+
+            var xOffset = -1f;
+            for (var i = 0; i < currentPokerCardSelected.Count; i++)
+            {
+                PositionCard(currentPokerCardSelected[i],xOffset + i * 0.35f, 0.5f, 0.2f);
+
+                await UniTask.Delay(200);
+            }
+            
+            await UniTask.Delay(500);
         }
 
         public async UniTask<bool> TryUseCardsOnHand()
@@ -82,19 +111,11 @@ namespace TSoft.InGame.Player
                 return false;
 
             var currentHeart = gameplay.GetAttr(GameplayAttr.Heart, false);
-            if (currentHeart <= 0)
-                return false;
-
-            //손에 들고 있는 카드가 없다면 false
-            if (currentPokerCardSelected.IsNullOrEmpty())
-                return false;
-
-            isSubmitting = true;
 
             //하트 사용
             --currentHeart;
             gameplay.SetAttr(GameplayAttr.Heart, currentHeart, false);
-
+            
             gameplay.CaptureCurrentAttributeModifiers();
 
             //현재 패턴에 해당하는 이팩트 추가

@@ -61,6 +61,7 @@ namespace TSoft.UI.Views.InGame
         
         private async UniTaskVoid OnUseCard()
         {
+            await player.LocateCardOnSubmit();
             var result = await player.TryUseCardsOnHand();
             if (!result)
                 return;
